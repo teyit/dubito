@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Cases extends Model
+{
+    protected $table = 'cases';
+
+
+    protected $fillable = ['title','topic_id','created_at','updated_at'];
+
+
+    public function topic(){
+      return $this->belongsTo(Topic::class);
+    }
+
+}
