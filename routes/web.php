@@ -1,6 +1,9 @@
 <?php
 
 
+Route::get("/",function(){
+    return 'Dubito';
+});
 
 
 Route::group(['namespace' => 'Admin'], function () {

@@ -8264,7 +8264,7 @@ canvas {
 }
 @media (-webkit-min-device-pixel-ratio: 2), (-o-min-device-pixel-ratio: 2/1), (min-resolution: 192dpi) {
   .be-top-header .navbar-header .navbar-brand {
-    background-image: url("../img/logo-xx.png");
+      /*background-image: url("../img/logo-xx.png");*/
     background-size: 102px 27px;
   }
 }

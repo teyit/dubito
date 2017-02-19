@@ -3,6 +3,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><span class="mdi mdi-close"></span></button>
+                <h3 class="modal-title">Add New Case</h3>
+
             </div>
             <div class="modal-body">
                 <div class="text-center">
@@ -14,7 +16,7 @@
                             </div>
 
                            <div class="form-group">
-                               <label class="col-sm-12 control-label">Select Topic</label>
+                               <label>Select Topic</label>
                                <select name="topic_id" class="form-control">
                                 @foreach($topics as $topic)
                                        <option value="{{$topic->id}}">{{$topic->title}}</option>
@@ -24,7 +26,7 @@
                            </div>
                             <div class="form-group">
                                 <button type="button" data-dismiss="modal" class="btn btn-space btn-default">Cancel</button>
-                                <button  type="submit"  class="btn btn-space btn-success add-case">Add Case</button>
+                                <button  type="submit"  class="btn btn-space btn-primary add-case">Add Case</button>
                             </div>
                         </form>
                     </div>
