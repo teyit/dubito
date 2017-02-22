@@ -15,17 +15,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="panel panel-default panel-table">
-                        <div class="panel-heading">Tag List
-                        </div>
-                        <div class="panel-body">
-                           @include("_list")
-                        </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 

@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 class CategoryController extends Controller
 {
 
+    public function index(){
+
+        $categories = Category::all();
+        return view("category.index",compact("categories"));
+    }
 
      public function create(){
      $categories = Category::all();
@@ -18,7 +23,7 @@ class CategoryController extends Controller
     public function store(Request $request){
         $store = $request->all();
         Category::create($store);
-        return redirect("/categories/create");
+        return redirect("/categories");
     }
     
 
@@ -30,10 +35,9 @@ class CategoryController extends Controller
     }
 
     public function update($id,Request $request){
-
        $category = Category::find($id);
        $category->update($request->all());
-       return redirect("/categories/create");
+       return redirect("/categories");
     }
 
 
@@ -41,6 +45,6 @@ class CategoryController extends Controller
 
         $category = Category::find($id);
         $category->delete();
-        return redirect("/categories/create");
+        return redirect("/categories");
     }
 }

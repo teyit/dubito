@@ -19,7 +19,7 @@
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">
                 <div class="input-group xs-mb-15">
-                    <select name="case_id" required class="form-control report-cases-edit">
+                    <select name="case_id" required class="form-control report-cases">
                         @foreach($cases as $case)
                             @if($case->id == $report->case_id)
                                 <option value="{{$case->id}}" selected>{{$case->title}}</option>
@@ -35,7 +35,6 @@
             </div>
         </div>
 
-        <hr>
 
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
@@ -45,25 +44,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Category</label>
-            <div class="col-sm-6">
-                <div class="input-group xs-mb-15">
-                    <select name="category_id" required class="form-control report-categories-edit">
-                        @foreach($categories as $category)
-                            @if($category->id == $report->reportfiles[0]->report_id)
-                                <option value="{{$category->id}}"selected>{{$category->title}}</option>
-                            @else
-                                <option value="{{$category->id}}">{{$category->title}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <div class="input-group-btn">
-                        <button data-toggle="modal"  data-target="#category-modal"  type="button" class="btn  btn-space btn-success md-trigger">Add New Category</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label"></label>
@@ -75,7 +55,8 @@
         </div>
 
     </form>
-@else
+    <hr>
+    @else
 
     <form action="{{ route("reports.store")}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
         {{csrf_field()}}
@@ -96,8 +77,8 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">
-                <div class="input-group xs-mb-15">
-                    <select name="case_id" required class="form-control report-cases-create">
+                <div class="input-group xs-mb-16">
+                    <select name="case_id" required class="form-control report-cases">
                         @foreach($cases as $case)
                         <option value="{{$case->id}}">{{$case->title}}</option>
                         @endforeach
@@ -109,7 +90,7 @@
             </div>
         </div>
 
-        <hr>
+
 
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
@@ -119,21 +100,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Category</label>
-            <div class="col-sm-6">
-                <div class="input-group xs-mb-15">
-                    <select name="category_id" required class="form-control report-categories-create">
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->title}}</option>
-                        @endforeach
-                    </select>
-                    <div class="input-group-btn">
-                        <button data-toggle="modal"  data-target="#category-modal"  type="button" class="btn  btn-space btn-success md-trigger">Add New Category</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="col-sm-3 control-label"></label>
@@ -145,6 +111,7 @@
         </div>
 
     </form>
+
 
 @endif
 

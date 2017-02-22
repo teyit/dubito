@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
+    public function index(){
+        $tags = Tag::latest()->get();
+        return view('tag.index',compact('tags'));
+    }
     public function create(){
         $type = 'create';
         $tags = Tag::latest()->get();
@@ -16,7 +20,7 @@ class TagController extends Controller
     
     public function store(Request $request){
          Tag::create($request->all());
-         return redirect("/tags/create");
+         return redirect("/tags");
     }
 
     public function edit($id,Request $request){
@@ -29,12 +33,12 @@ class TagController extends Controller
     public function update($id, Request $request){
        $tag = Tag::find($id);
        $tag->update($request->all());
-       return redirect("/tags/create");
+       return redirect("/tags");
     }
 
     public function destroy($id){
         $tag = Tag::find($id);
         $tag->delete();
-        return redirect("/tags/create");
+        return redirect("/tags");
     }
 }

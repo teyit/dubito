@@ -17,6 +17,7 @@ class CreateCaseTable extends Migration
             $table->increments('id');
             $table->string("title");
             $table->integer("topic_id");
+            $table->integer("category_id");
             $table->timestamps();
         });
     }

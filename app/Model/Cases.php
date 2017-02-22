@@ -9,7 +9,7 @@ class Cases extends Model
     protected $table = 'cases';
 
 
-    protected $fillable = ['title','topic_id','created_at','updated_at'];
+    protected $fillable = ['title','topic_id','category_id','created_at','updated_at'];
 
 
     public function topic(){

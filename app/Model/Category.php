@@ -11,4 +11,9 @@ class Category extends Model
 
     protected $fillable = ['title','created_at','updated_at'];
 
+
+
+    public function cases(){
+        return $this->hasMany('App\Model\Cases','category_id','id');
+    }
 }

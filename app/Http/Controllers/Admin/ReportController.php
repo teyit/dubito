@@ -10,8 +10,7 @@ use App\Model\Topic;
 use App\Model\ReportFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Filesystem;
+
 
 class ReportController extends Controller
 {
@@ -19,7 +18,9 @@ class ReportController extends Controller
 
     public function index(){
 
-        dd("index");
+        $reports = Report::latest()->get();
+
+        return view('report.index',compact('reports'));
     }
 
 
@@ -39,27 +40,32 @@ class ReportController extends Controller
             'source' => $request->input('source')
         ]);
 
-        $files = $request->file("report_files");
-        $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
-
-        $results = [];
-        foreach ($files as $index => $file) {
-            $results[$index]['file_url'] = $file->storeAs(
-            $filePrefix, $file->getClientOriginalName(),'s3'
-          );
-            $results[$index]['file_type'] = $file->getMimeType();
-        }
 
 
-        foreach ($results as $index => $result) {
-            ReportFile::create([
+        if($request->hasFile('report_files')){
+
+            $files = $request->file("report_files");
+            $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
+
+            $results = [];
+            foreach ($files as $index => $file) {
+                $results[$index]['file_url'] = $file->storeAs(
+                    $filePrefix, $file->getClientOriginalName(),'s3'
+                );
+                $results[$index]['file_type'] = $file->getMimeType();
+            }
+
+
+            foreach ($results as $index => $result) {
+                ReportFile::create([
                     'report_id' => $report->id,
-                    'category_id' => $request->input('category_id'),
                     'file_url' => $result['file_url'],
                     'file_type' => $result['file_type']
-            ]);
-        }
+                ]);
+            }
 
+
+        }
         return redirect("/reports");
 
     }
@@ -73,4 +79,25 @@ class ReportController extends Controller
         $is_edit = true;
         return view("report.edit",compact('report','topics','cases','categories','is_edit'));
     }
+
+    public function show($id){
+        return $id;
+    }
+
+    public function update($id,Request $request){
+
+        $report = Report::find($id);
+
+        $report->update([
+            'title' => $request->input('title'),
+            'case_id' => $request->input('case_id'),
+            'source' => $request->input('source')
+        ]);
+
+
+
+    }
+
+
+
 }
