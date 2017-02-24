@@ -81,7 +81,8 @@ class ReportController extends Controller
     }
 
     public function show($id){
-        return $id;
+        $report = Report::with('reportfiles')->find($id);
+        return view('report.show',compact('report'));
     }
 
     public function update($id,Request $request){
@@ -94,8 +95,15 @@ class ReportController extends Controller
             'source' => $request->input('source')
         ]);
 
+    }
 
+    //report file status
+    public function status($id,Request $request){
 
+       $file  =  ReportFile::find($id);
+       $file->status = $file->status == 1 ? 0 : 1;
+       $file->save();
+        return redirect('reports/'.$file->report_id);
     }
 
 

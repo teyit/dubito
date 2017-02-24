@@ -116,5 +116,5 @@
 @endif
 
 
-@include("report._case_modal_form")
-@include("report._category_modal_form")
+@include("report.partials._case_modal_form")
+@include("report.partials._category_modal_form")
