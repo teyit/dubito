@@ -43,4 +43,4 @@
 @endsection
 
 @include('category.partials.create_modal')
-@include('category.partials.edit_modal',['categories'=>$categories])
+@include('category.partials.edit_modal')

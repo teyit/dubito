@@ -1,11 +1,10 @@
 
-@foreach($categories as $category)
-<div id="category-edit-{{$category->id}}" tabindex="-1" role="dialog" style="" class="modal fade">
+<div id="category-edit-" tabindex="-1" role="dialog" style="" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><span class="mdi mdi-close"></span></button>
-                <h3 class="modal-title">Add New Case</h3>
+                <h3 class="modal-title">Add New Cagetory</h3>
 
             </div>
             <div class="modal-body">
@@ -29,5 +28,3 @@
         </div>
     </div>
 </div>
-
-@endforeach
