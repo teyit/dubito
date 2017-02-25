@@ -28,23 +28,27 @@ class CategoryController extends Controller
     
 
     public function edit($id){
-        
-        $categories = Category::all();
-        $category = Category::find($id);
-        return view("category.edit",compact('category','categories'));
+
+        return Category::find($id);
+        //return view("category.edit",compact('category','categories'));
     }
 
     public function update($id,Request $request){
        $category = Category::find($id);
        $category->update($request->all());
-       return redirect("/categories");
+       return 'true';
     }
 
 
     public function destroy($id){
 
         $category = Category::find($id);
+
+        if($category->cases->count() > 0 ){
+            return  'is_case';
+        }
+
         $category->delete();
-        return redirect("/categories");
+        return 'true';
     }
 }

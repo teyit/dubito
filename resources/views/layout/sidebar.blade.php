@@ -5,41 +5,25 @@
                 <div class="left-sidebar-content">
                     <ul class="sidebar-elements">
                         <li class="divider">Menu</li>
+
+
                         <li class="active"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Reports</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="ui-alerts.html">Facebook</a></li>
-                                <li><a href="ui-buttons.html">Twitter</a></li>
-                                <li><a href="ui-buttons.html">Whatsapp</a></li>
-                                <li><a href="ui-buttons.html">Email</a></li>
-                                <li><a href="{{url('reports')}}">Other</a></li>
 
-                            </ul>
-                        </li>
+                        <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>
 
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Topic</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="{{url("/topics/")}}">Topics</a></li>
-                            </ul>
-                        </li>
 
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Categories</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="{{url("/categories/")}}">Categories</a></li>
-                            </ul>
-                        </li>
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Tags</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="{{url("/tags")}}">Tags</a></li>
-                            </ul>
-                        </li>
+                        <li><a href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
 
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>Cases</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="{{url("/cases")}}">Cases</a></li>
-                            </ul>
-                        </li>
+
+                        <li><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i>Categories</a></li>
+
+
+                        <li><a href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i> Tags</a></li>
+
+
+                        <li><a href="{{url("/cases")}}"><i class="icon mdi mdi-case-check"></i>Cases</a></li>
+
                     </ul>
                 </div>
             </div>

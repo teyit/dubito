@@ -14,6 +14,9 @@
 <script src="{{url("assets/lib/jqvmap/maps/jquery.vmap.world.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/app-dashboard.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/dubito.js")}}" type="text/javascript"></script>
+
+@yield('script')
+
 <script type="text/javascript">
     $(document).ready(function(){
         //initialize the javascript
@@ -21,5 +24,7 @@
 //        App.dashboard();
     });
 </script>
+
+
 </body>
 </html>

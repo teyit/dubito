@@ -34,25 +34,30 @@ class CaseController extends Controller
 
 
     public function edit($id){
+
+        $case = Cases::find($id);
         $categories = Category::latest()->get();
         $topics = Topic::latest()->get();
-        $cases = Cases::latest()->get();
-        $case = Cases::find($id);
-        return view("case.edit",compact('cases','case','topics','categories'));
+
+        return [
+            'case' => $case,
+            'categories' => $categories,
+            'topics' => $topics
+        ];
     }
 
     public function update($id,Request $request){
 
         $case = Cases::find($id);
         $case->update($request->all());
-        return redirect($this->redirect);
+        return 'true';
     }
 
 
     public function destroy($id){
         $case = Cases::find($id);
         $case->delete();
-        return redirect($this->redirect);
+        return 'true';
     }
     
 }

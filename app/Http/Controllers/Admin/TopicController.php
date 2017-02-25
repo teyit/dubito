@@ -27,15 +27,13 @@ class TopicController extends Controller
     
 
     public function edit($id){
-        $topics = Topic::all();
-        $topic =  Topic::find($id);
-        return view("topic.edit",compact('topic','topics'));
+        return Topic::find($id);
     }
 
     public function update($id,Request $request){
        $topic = Topic::find($id);
        $topic->update($request->all());
-       return redirect("/topics/");
+       return 'true';
     }
 
 

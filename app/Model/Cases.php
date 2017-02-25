@@ -16,4 +16,8 @@ class Cases extends Model
       return $this->belongsTo(Topic::class);
     }
 
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
 }

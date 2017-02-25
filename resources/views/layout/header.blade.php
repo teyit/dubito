@@ -17,4 +17,5 @@
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/jqvmap/jqvmap.min.css")}}"/>
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css")}}"/>
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
+    <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
 </head>

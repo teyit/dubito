@@ -1,5 +1,5 @@
-<div id="tag-edit-{{$tag->id}}" tabindex="-1" role="dialog" style="" class="modal fade">
-    <div class="modal-dialog">
+<div id="edit-tag-modal" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in">
+    <div class="modal-dialog custom-width">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><span class="mdi mdi-close"></span></button>
@@ -7,23 +7,65 @@
 
             </div>
             <div class="modal-body">
-                <div class="text-center">
-                    <div class="xs-mt-50">
-                        <form method="post" action="{{route("tags.update",$tag->id)}}">
+
+                        <form id="edit-tag-form" method="post">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
-                            <div class="form-group xs-pt-10">
+                            <div class="form-group">
                                 <label>Title</label>
-                                <input type="text" name="title" value="{{$tag->title or ""}}" required placeholder="Enter category title" class="form-control">
+                                <input type="text" name="title"  id="edit-tag-title" required placeholder="Enter tag title" class="form-control">
                             </div>
-                            <div class="form-group xs-pt-10">
-                                <button type="submit" class="btn btn-space btn-primary">Edit</button>
+                            <div class="form-group pull-right">
+                                <button type="submit" class="btn btn-space btn-primary">Update</button>
                             </div>
                         </form>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer"></div>
         </div>
     </div>
 </div>
+
+
+
+@section('script')
+    @parent
+    <script>
+        $(function(){
+            $(document).on('click',".tag-edit-btn",function () {
+                var id = $(this).data('id');
+                console.log(id);
+                $.getJSON("/tags/" + id + "/edit", function( data ) {
+                    console.log(data);
+                    $("#edit-tag-title").val(data.title);
+                    $("#edit-tag-modal").data('id',data.id);
+                    $('#edit-tag-modal').modal({
+                        show: 'true',
+                        keyboard: false
+                    });
+                });
+                $("#edit-tag-form").submit(function(event){
+                    var id = $("#edit-tag-modal").data('id');
+                    var title = $('#edit-tag-title').val();
+                    event.preventDefault();
+
+                    $.ajax({
+                        method:"PUT",
+                        url: 'tags/' + id,
+                        data: {
+                            _token: $('#_token').val(),
+                            title: title
+                        },
+                        success:function(data){
+                            if(data == 'true'){
+                                window.location.href = '/tags';
+                            }
+
+                        }
+                    })
+                });
+
+            });
+
+        });
+    </script>
+@endsection

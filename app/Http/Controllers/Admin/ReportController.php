@@ -97,6 +97,16 @@ class ReportController extends Controller
 
     }
 
+
+    public function destroy($id){
+        $report = Report::find($id);
+
+        $report->delete();
+
+        return redirect('/reports');
+
+    }
+
     //report file status
     public function status($id,Request $request){
 
@@ -105,6 +115,8 @@ class ReportController extends Controller
        $file->save();
         return redirect('reports/'.$file->report_id);
     }
+
+
 
 
 

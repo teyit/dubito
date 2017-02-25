@@ -1,4 +1,10 @@
 $(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 
     // getCases();
     // getCategories();
@@ -17,6 +23,7 @@ $(function(){
            success: function(data){
               if(data == true){
                  getCases();
+                 $('.success-message').text("Case was added successfuly");
               }
            },
            error: function(data){

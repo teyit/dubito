@@ -9,24 +9,33 @@
         <table class="table">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Title</th>
                 <th>Topic</th>
-                <th class="actions">Edit</th>
-                <th class="actions">Delete</th>
+                <th>Category</th>
+                <th>Created at</th>
+                <th class="actions"></th>
+                {{--<th class="actions">Delete</th>--}}
             </tr>
             </thead>
             <tbody>
             @foreach($cases as $case)
                 <tr>
+                    <td>{{$case->id}}</td>
                     <td>{{$case->title}}</td>
                     <td>{{$case->topic->title}}</td>
-                    <td class="actions"><a href="{{route("cases.edit",$case->id)}}" class="icon"><i class="mdi mdi-edit"></i></a></td>
+                    <td>{{$case->category->title or ""}}</td>
+                    <td>{{$case->created_at}}</td>
+                    {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
                     <td class="actions">
-                        <form method="post" action="{{route("cases.destroy",$case->id)}}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button class="btn btn-danger btn-xs"><i class="mdi mdi-delete"></i></button>
-                        </form>
+                        <div class="btn-group btn-space">
+                            <button type="button" class="btn btn-default">View Reports</button>
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a class="case-edit-btn" href="javascript:;" data-id="{{$case->id}}" >Edit</a></li>
+                                <li><a class="case-delete" data-id="{{$case->id}}" href="javascript:;">Delete</a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -39,3 +48,30 @@
 @endsection
 
 @include('case.partials.create_modal')
+@include('case.partials.edit_modal')
+
+
+@section('script')
+
+    <script>
+
+        $(function(){
+            $('.case-delete').on('click',function(){
+                if(!confirm('Are you sure that want to delete ? ')){
+                    return false;
+                }
+                var id =  $(this).data('id');
+                $.ajax({
+                    method:"DELETE",
+                    url:"/cases/"+id,
+                    data:{_token:$("#_token").val()},
+                    success:function(data){
+                        if(data == 'true'){
+                            window.location.reload();
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+@endsection

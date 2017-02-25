@@ -20,7 +20,7 @@
                 <tr>
                     <td>{{$topic->title}}</td>
                     <td>{{$topic->created_at}}</td>
-                    <td class="actions"><a href="{{route("topics.edit",$topic->id)}}" class="icon"><i class="mdi mdi-edit"></i></a></td>
+                    <td class="actions"><a class="topic-edit-btn icon" data-id="{{$topic->id}}" href="javascript:;" ><i class="mdi mdi-edit"></i></a></td>
                     <td class="actions">
                         <form method="post" action="{{route("topics.destroy",$topic->id)}}">
                             {{ csrf_field() }}
@@ -39,3 +39,4 @@
 @endsection
 
 @include('topic.partials.create_modal')
+@include('topic.partials.edit_modal')

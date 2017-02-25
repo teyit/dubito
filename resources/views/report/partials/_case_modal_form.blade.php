@@ -37,6 +37,8 @@
                                         </select>
                             </div>
 
+                            <div class="success-message" style="display: none;"></div>
+
                             <div class="form-group">
                                 <button type="button" data-dismiss="modal" class="btn btn-space btn-default">Cancel</button>
                                 <button  type="submit"  class="btn btn-space btn-primary add-case">Add Case</button>

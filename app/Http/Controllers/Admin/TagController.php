@@ -24,21 +24,18 @@ class TagController extends Controller
     }
 
     public function edit($id,Request $request){
-        $type  = 'edit';
-        $tag = Tag::find($id);
-        $tags = Tag::latest()->get();
-        return view("tag.edit",compact('tag','tags','type'));
+        return Tag::find($id);
     }
     
     public function update($id, Request $request){
        $tag = Tag::find($id);
        $tag->update($request->all());
-       return redirect("/tags");
+       return 'true';
     }
 
     public function destroy($id){
         $tag = Tag::find($id);
         $tag->delete();
-        return redirect("/tags");
+        return 'true';
     }
 }
