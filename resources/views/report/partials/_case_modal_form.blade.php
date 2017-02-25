@@ -1,4 +1,4 @@
-<div id="mod-success" tabindex="-1" role="dialog" style="" class="modal fade">
+<div id="mod-success" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,8 +7,7 @@
 
             </div>
             <div class="modal-body">
-                <div class="text-center">
-                    <div class="xs-mt-50">
+
                         <form action="" method="post" id="case-form-ajax">
                             {{csrf_field()}}
                             <div class="form-group">
@@ -40,12 +39,11 @@
                             <div class="success-message" style="display: none;"></div>
 
                             <div class="form-group">
-                                <button type="button" data-dismiss="modal" class="btn btn-space btn-default">Cancel</button>
+                                <button type="button" data-dismiss="modal" class="btn btn-space btn-default">Close</button>
                                 <button  type="submit"  class="btn btn-space btn-primary add-case">Add Case</button>
                             </div>
                         </form>
-                    </div>
-                </div>
+
             </div>
             <div class="modal-footer"></div>
         </div>

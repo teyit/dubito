@@ -95,6 +95,8 @@ class ReportController extends Controller
             'source' => $request->input('source')
         ]);
 
+        return redirect('/reports');
+
     }
 
 
