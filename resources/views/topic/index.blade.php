@@ -9,24 +9,29 @@
         <table class="table">
             <thead>
             <tr>
+                <th>ID</th>
                 <th>Title</th>
+                <th>Case Count</th>
                 <th>Created At</th>
-                <th class="actions">Edit</th>
-                <th class="actions">Delete</th>
+                <th class="actions"></th>
             </tr>
             </thead>
             <tbody>
             @foreach($topics as $topic)
                 <tr>
+                    <td>{{$topic->id}}</td>
                     <td>{{$topic->title}}</td>
+                    <td>{{$topic->cases->count()}}</td>
                     <td>{{$topic->created_at}}</td>
-                    <td class="actions"><a class="topic-edit-btn icon" data-id="{{$topic->id}}" href="javascript:;" ><i class="mdi mdi-edit"></i></a></td>
                     <td class="actions">
-                        <form method="post" action="{{route("topics.destroy",$topic->id)}}">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button class="btn btn-danger btn-xs"><i class="mdi mdi-delete"></i></button>
-                        </form>
+                        <div class="btn-group btn-space">
+                            <button type="button" class="btn btn-default">View Reports</button>
+                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a class="topic-edit-btn" href="javascript:;" data-id="{{$topic->id}}" >Edit</a></li>
+                                <li><a class="topic-delete" data-id="{{$topic->id}}" href="javascript:;">Delete</a></li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             @endforeach
@@ -40,3 +45,33 @@
 
 @include('topic.partials.create_modal')
 @include('topic.partials.edit_modal')
+
+
+@section('script')
+
+    <script>
+
+        $(function(){
+            $('.topic-delete').on('click',function(){
+                if(!confirm('Are you sure that want to delete ? ')){
+                    return false;
+                }
+                var id =  $(this).data('id');
+                $.ajax({
+                    method:"DELETE",
+                    url:"/topics/"+id,
+                    data:{_token:$("#_token").val()},
+                    success:function(data){
+
+                        console.log(data);
+                        if(data == 'true'){
+                            window.location.reload();
+                        }else if(data == 'is_case'){
+                            alert('this topic cannot be delete !');
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+@endsection

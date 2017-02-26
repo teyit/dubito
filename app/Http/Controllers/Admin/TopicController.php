@@ -39,8 +39,12 @@ class TopicController extends Controller
 
     public function destroy($id){
         $topic = Topic::find($id);
+        if($topic->cases->count() > 0){
+            return 'is_case';
+        }
+
         $topic ->delete();
-        return redirect("/topics/");
+        return 'true';
     }
 }
 

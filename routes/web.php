@@ -2,7 +2,7 @@
 
 
 Route::get("/",function(){
-    return 'Dubito';
+    return redirect('/reports');
 });
 
 
