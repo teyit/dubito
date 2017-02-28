@@ -15,6 +15,16 @@
 <script src="{{url("assets/js/app-dashboard.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/dubito.js")}}" type="text/javascript"></script>
 
+
+<script src="{{url('assets/lib/datatables/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.html5.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.flash.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.print.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.colVis.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js')}}" type="text/javascript"></script>
+
 @yield('script')
 
 <script type="text/javascript">

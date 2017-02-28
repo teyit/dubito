@@ -3,6 +3,18 @@
 <div class="main-content container-fluid report-modal">
     <div class="row">
         <div class="col-md-8">
+            @foreach($reports as $report)
+                <div class="panel panel-flat">
+                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">{{substr($report->description,0,250)}}</a></div>
+                    <div class="panel-body">
+                        {{$report->description}}
+                    </div>
+                    <div class="panel-footer">
+                        {{$report->created_at}}
+                        &nbsp; {{$report->channel}}
+                    </div>
+                </div>            
+            @endforeach
             @for($i=0;$i<10;$i++)
                 <div class="panel panel-flat">
                     <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
