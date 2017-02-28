@@ -1,58 +1,16 @@
 @extends('layout.app')
 @section('content')
-<div class="main-content container-fluid">
+<div class="main-content container-fluid report-modal">
     <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-8">
+        <div class="col-md-8">
+            @for($i=0;$i<10;$i++)
                 <div class="panel panel-flat">
                     <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
                     <div class="panel-body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at atque dolor, ducimus eum exercitationem facilis iste laborum magni nulla officiis, quam temporibus totam! Alias ipsum officia quam sed voluptatibus!
                     </div>
                 </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium commodi deserunt doloremque enim fugit nemo nesciunt quidem, veniam? Consequatur eaque enim et eveniet iste modi, nemo odio quo tempore. Earum.
-                    </div>
-                </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab adipisci, aut commodi consequatur, dolores ea error eum fugit hic iure laboriosam obcaecati quaerat quasi quis quod, rerum sed voluptatem voluptatibus.
-                    </div>
-                </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus animi assumenda cumque dignissimos ducimus eius esse id in nemo non quaerat ratione rem sequi sunt temporibus unde, vel vero.
-                    </div>
-                </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias amet asperiores assumenda enim error esse explicabo, facere itaque odio, officia provident saepe sed sit tempora totam! Cupiditate maiores praesentium repellat!
-                    </div>
-                </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A at delectus inventore labore necessitatibus praesentium quasi quis, rerum suscipit ut veritatis, voluptas? Consequatur deleniti distinctio eaque nam sequi tenetur veritatis?
-                    </div>
-                </div>
-
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                    </div>
-                </div>
-            </div>
-
+            @endfor
         </div>
     </div>
 </div>

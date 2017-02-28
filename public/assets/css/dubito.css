@@ -19,6 +19,8 @@
 .modal.right .modal-content {
     height: 100%;
     overflow-y: auto;
+    margin-top:0px !important;
+    padding-top:20px;
 }
 
 .modal.left .modal-body,
@@ -62,5 +64,6 @@
     border-bottom-color: #EEEEEE;
     background-color: #FAFAFA;
 }
+
 
 
