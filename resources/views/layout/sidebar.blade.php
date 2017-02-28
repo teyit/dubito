@@ -12,17 +12,14 @@
 
                         <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>
 
+                        <li><a href="{{url("/cases")}}"><i class="icon mdi mdi-case-check"></i>Cases</a></li>
 
                         <li><a href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
 
-
                         <li><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i>Categories</a></li>
-
 
                         <li><a href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i> Tags</a></li>
 
-
-                        <li><a href="{{url("/cases")}}"><i class="icon mdi mdi-case-check"></i>Cases</a></li>
 
                     </ul>
                 </div>
