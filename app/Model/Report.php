@@ -13,10 +13,7 @@ class Report extends Model
     protected $fillable = ['title','case_id','source','created_at','updated_at'];
 
 
-    public function getCreatedAtAttribute($date)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
-    }
+
 
 
     public function reportfiles(){

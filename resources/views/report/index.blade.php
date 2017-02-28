@@ -5,13 +5,24 @@
         <div class="col-md-8">
             @foreach($reports as $report)
                 <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">{{substr($report->description,0,250)}}</a></div>
+                    <div class="panel-heading">
+                    <a data-toggle="modal" data-target="#myModal2" href="">
+                        <b><span>@</span>{{$report->account_name}}</b> - {{substr($report->description,0,50)}}... 
+                        <div class="tools">
+                            
+                        </div>
+                    </a></div>
                     <div class="panel-body">
                         {{$report->description}}
                     </div>
-                    <div class="panel-footer">
-                        {{$report->created_at}}
-                        &nbsp; {{$report->channel}}
+                    <div class="panel-footer clearfix">
+                        {{$report->created_at->diffForHumans()}} / {{$report->source}}
+                        <div class="tools">
+                         <button class="btn btn-space btn-success btn-sm"><i class="icon icon-left mdi mdi-cloud-done"></i> Assign to a case</button>
+                         <button class="btn btn-space btn-danger btn-sm"><i class="icon icon-left mdi mdi-cloud-done"></i> Archive</button>
+                         &nbsp;
+                        </div>
+                        
                     </div>
                 </div>            
             @endforeach

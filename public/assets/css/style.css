@@ -6214,6 +6214,10 @@ button.list-group-item-danger.active:focus {
   border-bottom-right-radius: 2px;
   border-bottom-left-radius: 2px;
 }
+.panel-footer .tools{
+  float:right;
+  
+}
 .panel > .list-group,
 .panel > .panel-collapse > .list-group {
   margin-bottom: 0;

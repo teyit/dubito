@@ -20,7 +20,9 @@ class ReportController extends Controller
 
         $reports = Report::latest()->get();
 
-        return view('report.index',compact('reports'));
+        return view('report.index',[
+            'reports' => $reports
+        ]);
     }
 
 
