@@ -44,9 +44,9 @@
         </div>
     </div>
 </div>
-@endsection
 @include('topic.partials.create_modal')
 @include('topic.partials.edit_modal')
+@endsection
 @section('script')
     <script>
         $(function(){

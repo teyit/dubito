@@ -49,9 +49,9 @@
         </div>
     </div>
 </div>
-@endsection
 @include('case.partials.create_modal')
 @include('case.partials.edit_modal')
+@endsection
 @section('script')
     <script>
         $(function(){

@@ -55,9 +55,9 @@
         </div>
     </div>
 </div>
-@endsection
 @include('category.partials.create_modal')
 @include('category.partials.edit_modal')
+@endsection
 @section('script')
 <script>
     $(function(){

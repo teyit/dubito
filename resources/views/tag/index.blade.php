@@ -46,9 +46,9 @@
 		</div>
 	</div>
 </div>
-@endsection
 @include('tag.partials.create_modal')
 @include('tag.partials.edit_modal')
+@endsection
 @section('script')
 <script>
     $(function(){
