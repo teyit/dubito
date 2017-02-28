@@ -2,7 +2,7 @@
 
     <div class="panel-heading">Tag List &nbsp; <button  data-toggle="modal"  data-target="#tag-create" class="btn btn-success">Add Tag</button>
     </div>
-
+    <div class="panel-body">
     <table class="table">
     <thead>
     <tr>
@@ -35,6 +35,7 @@
 
     </tbody>
 </table>
+</div>
 </div>
 
 @include('tag.partials.create_modal')
