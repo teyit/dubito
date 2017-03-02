@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-
+use App\Model\Report;
+use App\Model\ReportFile;
 class MessageController extends Controller
 {
 
@@ -15,8 +16,27 @@ class MessageController extends Controller
      */
     public function facebook(Request $request)
     {
+
         foreach($request->get('entry') as $e){
-	        $e['id'];
+            foreach($e['messaging'] as $m){
+                $r = new Report;
+                $r->source = 'facebook';
+                $r->external_message_id = $m['message']['mid'];
+                $r->external_user_id = $m['sender']['id'];
+                $r->text = $m['message']['text'];
+                $r->account_name = 'Placeholder';
+                $r->status = 'not_resulted';
+                $r->save();
+                foreach($m['attachments'] as $a){
+                    $rf = new ReportFile;
+                    $rf->report_id = $r->id;
+                    $rf->file_url = $a['type'];
+                    $rf->file_type = $a['file']['url'];
+                    $rf->save();
+                }
+
+            }
+
         }
         return "OK";
     }
