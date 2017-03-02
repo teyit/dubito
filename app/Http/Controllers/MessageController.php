@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -15,7 +15,8 @@ class MessageController extends Controller
      */
     public function facebook(Request $request)
     {
-        return $request->get('hub_challenge');
+        Log::info('app.requests', ['request' => $request->all(), 'response' => $response->getContent()]);
+        return "OK";
     }
     public function twitter()
     {
