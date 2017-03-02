@@ -7,13 +7,13 @@
                 <div class="panel panel-flat">
                     <div class="panel-heading">
                     <a data-toggle="modal" data-target="#myModal2" href="">
-                        <b><span>@</span>{{$report->account_name}}</b> - {{substr($report->description,0,50)}}... 
+                        <b><span>@</span>{{$report->account_name}}</b>
                         <div class="tools">
                             
                         </div>
                     </a></div>
                     <div class="panel-body">
-                        {{$report->description}}
+                        {{$report->text}}
                     </div>
                     <div class="panel-footer clearfix">
                         {{$report->created_at->diffForHumans()}} / {{$report->source}}
@@ -26,14 +26,6 @@
                     </div>
                 </div>            
             @endforeach
-            @for($i=0;$i<10;$i++)
-                <div class="panel panel-flat">
-                    <div class="panel-heading"><a data-toggle="modal" data-target="#myModal2" href="">IŞİD'li Ebu Hanzala’nın Ankara’da konferans vereceği iddiası doğru mu ?</a></div>
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at atque dolor, ducimus eum exercitationem facilis iste laborum magni nulla officiis, quam temporibus totam! Alias ipsum officia quam sed voluptatibus!
-                    </div>
-                </div>
-            @endfor
         </div>
     </div>
 </div>
