@@ -19,7 +19,11 @@ class MessageController extends Controller
 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
-                $r = new Report;
+                $report = Report::where('external_message_id',$m['message']['mid'])->first();
+                if($report){
+                    return "PASS";
+                }
+                $r = new Report();
                 $r->source = 'facebook';
                 $r->external_user_id = $m['sender']['id'];
                 $r->external_message_id = $m['message']['mid'];
