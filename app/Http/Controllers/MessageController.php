@@ -27,12 +27,14 @@ class MessageController extends Controller
                 $r->account_name = 'Placeholder';
                 $r->status = 'not_resulted';
                 $r->save();
-                foreach($m['message']['attachments'] as $a){
-                    $rf = new ReportFile;
-                    $rf->report_id = $r->id;
-                    $rf->file_url = $a['type'];
-                    $rf->file_type = $a['payload']['url'];
-                    $rf->save();
+                if(isset($m['message']['attachments'])){
+                    foreach($m['message']['attachments'] as $a){
+                        $rf = new ReportFile;
+                        $rf->report_id = $r->id;
+                        $rf->file_url = $a['type'];
+                        $rf->file_type = $a['payload']['url'];
+                        $rf->save();
+                    }
                 }
 
             }
