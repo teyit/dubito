@@ -23,9 +23,11 @@ class MessageController extends Controller
                 $r->source = 'facebook';
                 $r->external_user_id = $m['sender']['id'];
                 $r->external_message_id = $m['message']['mid'];
-                $r->text = $m['message']['text'];
                 $r->account_name = 'Placeholder';
                 $r->status = 'not_resulted';
+                if(isset($m['message']['text'])){
+                    $r->text = $m['message']['text'];
+                }
                 $r->save();
                 if(isset($m['message']['attachments'])){
                     foreach($m['message']['attachments'] as $a){
@@ -35,7 +37,7 @@ class MessageController extends Controller
                         $rf->file_type = $a['payload']['url'];
                         $rf->save();
                     }
-                }
+                }els
 
             }
 
