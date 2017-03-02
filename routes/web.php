@@ -23,4 +23,5 @@ Auth::routes();
 Route::any('/messages/facebook', 'MessageController@facebook');
 Route::any('/messages/twitter', 'MessageController@twitter');
 
+
 Route::get('/home', 'HomeController@index');

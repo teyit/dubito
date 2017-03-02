@@ -15,7 +15,9 @@ class MessageController extends Controller
      */
     public function facebook(Request $request)
     {
-        Log::info('app.requests', ['request' => $request->all(), 'response' => $response->getContent()]);
+        foreach($request->get('entry') as $e){
+	        $e['id'];
+        }
         return "OK";
     }
     public function twitter()
