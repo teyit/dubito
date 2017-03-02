@@ -13,9 +13,9 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function facebook()
+    public function facebook(Request $request)
     {
-        return "OK";
+        return $request->get('hub.challenge');
     }
     public function twitter()
     {
