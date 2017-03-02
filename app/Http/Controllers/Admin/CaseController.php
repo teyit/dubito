@@ -46,6 +46,11 @@ class CaseController extends Controller
         ];
     }
 
+    public function show($id){
+        $case = Cases::find($id);
+        return view('case.show',compact('case'));
+    }
+
     public function update($id,Request $request){
 
         $case = Cases::find($id);

@@ -20,4 +20,9 @@ class Cases extends Model
         return $this->belongsTo(Category::class);
     }
 
+
+    public function reports(){
+        return $this->hasMany('App\Model\Report','case_id','id');
+    }
+
 }
