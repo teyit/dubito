@@ -31,7 +31,7 @@ class MessageController extends Controller
                     $rf = new ReportFile;
                     $rf->report_id = $r->id;
                     $rf->file_url = $a['type'];
-                    $rf->file_type = $a['file']['url'];
+                    $rf->file_type = $a['payload']['url'];
                     $rf->save();
                 }
 
