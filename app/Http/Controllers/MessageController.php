@@ -21,13 +21,13 @@ class MessageController extends Controller
             foreach($e['messaging'] as $m){
                 $r = new Report;
                 $r->source = 'facebook';
-                $r->external_message_id = $m['message']['mid'];
                 $r->external_user_id = $m['sender']['id'];
+                $r->external_message_id = $m['message']['mid'];
                 $r->text = $m['message']['text'];
                 $r->account_name = 'Placeholder';
                 $r->status = 'not_resulted';
                 $r->save();
-                foreach($m['attachments'] as $a){
+                foreach($m['message']['attachments'] as $a){
                     $rf = new ReportFile;
                     $rf->report_id = $r->id;
                     $rf->file_url = $a['type'];
