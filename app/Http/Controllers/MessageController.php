@@ -37,7 +37,7 @@ class MessageController extends Controller
                         $rf->file_type = $a['payload']['url'];
                         $rf->save();
                     }
-                }els
+                }
 
             }
 
