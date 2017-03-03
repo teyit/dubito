@@ -5,16 +5,15 @@
         <div class="col-md-8">
             @foreach($reports as $report)
                 <div class="panel panel-flat">
-                    <div class="panel-heading">
-                    <a data-toggle="modal" data-target="#myModal2" href="">
-                        <b><span>@</span>{{$report->account_name}}</b>
-                        <div class="tools">
-                            
+                    <div class="timeline-content">
+                        <div class="timeline-avatar"><img src="{{$report->account_picture}}" alt="{{$report->account_name}}" class="circle"></div>
+                        <div class="timeline-header">
+                            <!--<span class="timeline-time">4:34 PM</span>-->
+                            <span class="timeline-autor">{{$report->account_name}}</span>
+                            <p class="timeline-activity">{{$report->text}}</p>
                         </div>
-                    </a></div>
-                    <div class="panel-body">
-                        {{$report->text}}
                     </div>
+
                     <div class="panel-footer clearfix">
                         {{$report->created_at->diffForHumans()}} / {{$report->source}}
                         <div class="tools">

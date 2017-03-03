@@ -20,7 +20,7 @@ class MessageController extends Controller
 
         try {
             // Returns a `Facebook\FacebookResponse` object
-            $response = $fb->get('/' . $user_id . '?fields=first_name,last_name,profile_pic,locale,timezone,gender', $page_access_token);
+            $response = $fb->get('/' . $user_id . '?fields=first_name,last_name,profile_pic', $page_access_token);
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -31,9 +31,7 @@ class MessageController extends Controller
 
         return $response->getGraphUser();
     }
-    public function test(){
-        dd($this->facebookUser('1672136149469483'));
-    }
+
     public function facebook(Request $request)
     {
 
@@ -49,8 +47,8 @@ class MessageController extends Controller
                 $r->source = 'facebook';
                 $r->external_user_id = $m['sender']['id'];
                 $r->external_message_id = $m['message']['mid'];
-                $r->account_name = $facebook_user->getFirstName();
-                $r->account_picture= $facebook_user->getPicture();
+                $r->account_name = $facebook_user->getFirstName() .' '. $facebook_user->getLastName();
+                $r->account_picture = $facebook_user->getPicture()->getUrl();
                 $r->status = 'not_resulted';
                 if(isset($m['message']['text'])){
                     $r->text = $m['message']['text'];

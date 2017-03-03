@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::any('/messages/facebook', 'MessageController@facebook');
 Route::any('/messages/twitter', 'MessageController@twitter');
-Route::any('/messages/test', 'MessageController@test');
+
 
 
 Route::get('/home', 'HomeController@index');
