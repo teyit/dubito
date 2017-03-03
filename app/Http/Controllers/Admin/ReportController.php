@@ -18,7 +18,7 @@ class ReportController extends Controller
 
     public function index(){
 
-        $reports = Report::latest()->get();
+        $reports = Report::with('images')->latest()->get();
 
         return view('report.index',[
             'reports' => $reports

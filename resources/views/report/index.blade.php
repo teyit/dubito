@@ -13,6 +13,11 @@
                             <div><p class="timeline-autor">{{$report->account_name}}</p></div>
                             <p class="timeline-activity">{{$report->text}}</p>
                         </div>
+                        <div class="timeline-gallery">
+                            @foreach($report->images as $f)
+                                <img src="{{$f->file_url}}" alt="Thumbnail" class="gallery-thumbnail">
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="panel-footer clearfix">

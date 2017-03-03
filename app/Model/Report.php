@@ -15,7 +15,10 @@ class Report extends Model
 
 
 
-
+    public function images(){
+        return $this->hasMany('App\Model\ReportFile','report_id','id');
+        //TODO WHERE.
+    }
     public function reportfiles(){
         return $this->hasMany('App\Model\ReportFile','report_id','id');
     }
