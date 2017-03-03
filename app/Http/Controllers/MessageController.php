@@ -40,8 +40,7 @@ class MessageController extends Controller
     public function facebook(Request $request)
     {
 
-        dd($this->getFacebookUser('1672136149469483'));
-
+ 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
                 $report = Report::where('external_message_id',$m['message']['mid'])->first();

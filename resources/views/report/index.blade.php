@@ -3,13 +3,14 @@
 <div class="main-content container-fluid report-modal">
     <div class="row">
         <div class="col-md-8">
+
             @foreach($reports as $report)
                 <div class="panel panel-flat">
                     <div class="timeline-content">
                         <div class="timeline-avatar"><img src="{{$report->account_picture}}" alt="{{$report->account_name}}" class="circle"></div>
                         <div class="timeline-header">
                             <!--<span class="timeline-time">4:34 PM</span>-->
-                            <span class="timeline-autor">{{$report->account_name}}</span>
+                            <div><p class="timeline-autor">{{$report->account_name}}</p></div>
                             <p class="timeline-activity">{{$report->text}}</p>
                         </div>
                     </div>
