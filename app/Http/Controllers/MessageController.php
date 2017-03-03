@@ -29,11 +29,18 @@ class MessageController extends Controller
             exit;
         }
 
-        return $response->getGraphUser();
+        $result = $response->getGraphUser()->asArray();
+
+        return [
+            'account_name' => $result['first_name'] . ' ' . $result['last_name'],
+            'account_picture' => $result['profile_pic']
+        ];
     }
 
     public function facebook(Request $request)
     {
+
+        dd($this->getFacebookUser('1672136149469483'));
 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
@@ -47,8 +54,13 @@ class MessageController extends Controller
                 $r->source = 'facebook';
                 $r->external_user_id = $m['sender']['id'];
                 $r->external_message_id = $m['message']['mid'];
-                $r->account_name = $facebook_user->getFirstName() .' '. $facebook_user->getLastName();
-                $r->account_picture = $facebook_user->getPicture()->getUrl();
+                if($facebook_user){
+                    $r->account_name = $facebook_user['account_name'];
+                    $r->account_picture = $facebook_user['account_picture'];
+                }else{
+                    $r->account_name = 'Facebook User';
+                    $r->account_picture = '';
+                }
                 $r->status = 'not_resulted';
                 if(isset($m['message']['text'])){
                     $r->text = $m['message']['text'];
