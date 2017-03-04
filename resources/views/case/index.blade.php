@@ -56,20 +56,22 @@
     <script>
         $(function(){
             $('.case-delete').on('click',function(){
-                if(!confirm('Are you sure that want to delete ? ')){
-                    return false;
-                }
-                var id =  $(this).data('id');
-                $.ajax({
-                    method:"DELETE",
-                    url:"/cases/"+id,
-                    data:{_token:$("#_token").val()},
-                    success:function(data){
-                        if(data == 'true'){
-                            window.location.reload();
-                        }
+                var that = $(this);
+                dubitoConfirm(function(result){
+                    if(result == true) {
+                        var id = that.data('id');
+                        $.ajax({
+                            method:"DELETE",
+                            url:"/cases/"+id,
+                            data:{_token:$("#_token").val()},
+                            success:function(data){
+                                if(data == 'true'){
+                                    window.location.reload();
+                                }
+                            }
+                        })
                     }
-                })
+                    });
             });
         });
     </script>

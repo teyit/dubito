@@ -116,3 +116,24 @@ function getCategories(){
         });
     });
 }
+
+
+function dubitoConfirm(callback){
+    var confirmCancel = $('.confirm-cancel');
+    var confirmDelete = $('.confirm-delete');
+    $('.confirm-delete-modal').modal({ show: true});
+
+    $(confirmCancel).on('click',function(){
+        //console.log('cancel');
+        $('.confirm-delete-modal').modal('hide');
+        callback(false);
+
+
+    });
+    $(confirmDelete).on('click',function(){
+        //console.log('delete');
+        $('.confirm-delete-modal').modal('hide');
+        callback(true);
+
+    });
+}
