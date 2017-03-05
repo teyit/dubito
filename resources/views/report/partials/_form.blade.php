@@ -3,9 +3,9 @@
         {{csrf_field()}}
         <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
-            <label class="col-sm-3 control-label">Title</label>
+            <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
-                <input type="text" required name="title" value="{{$report->title}}" class="form-control">
+                <textarea type="text" required name="text" value="{{$report->title}}" class="form-control"></textarea>
             </div>
         </div>
 
@@ -62,9 +62,9 @@
         {{csrf_field()}}
 
         <div class="form-group">
-            <label class="col-sm-3 control-label">Title</label>
+            <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
-                <input type="text" required name="title" value="" class="form-control">
+                <textarea type="text" required name="text" value="" class="form-control"></textarea>
             </div>
         </div>
 

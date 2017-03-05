@@ -37,12 +37,10 @@ class ReportController extends Controller
     public function store(Request $request){
 
         $report = Report::create([
-           'title' => $request->input('title'),
+           'text' => $request->input('text'),
             'case_id' => $request->input('case_id'),
             'source' => $request->input('source')
         ]);
-
-
 
         if($request->hasFile('report_files')){
 
@@ -91,13 +89,9 @@ class ReportController extends Controller
 
         $report = Report::find($id);
 
-        $report->update([
-            'title' => $request->input('title'),
-            'case_id' => $request->input('case_id'),
-            'source' => $request->input('source')
-        ]);
+        $report->update($request->all());
 
-        return redirect('/reports');
+        return 'true';
 
     }
 

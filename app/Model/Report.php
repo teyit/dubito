@@ -10,9 +10,7 @@ class Report extends Model
     protected $table = 'reports';
 
 
-    protected $fillable = ['title','case_id','source','created_at','updated_at'];
-
-
+    protected $fillable = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','created_at','updated_at'];
 
 
     public function images(){

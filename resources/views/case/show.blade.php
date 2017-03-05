@@ -28,19 +28,19 @@
                             </tr>
                             </thead>
                             <tbody>
-
+                            @foreach($case->reports as $reports)
                             <tr>
-                                @foreach($case->reports as $reports)
+
                                 <td>{{$reports->id}}</td>
                                 <td>{{$reports->source}}</td>
                                 <td>{{$reports->accound_name}}</td>
                                 <td>{{$reports->text}}</td>
                                 <td>{{$reports->status}}</td>
-                                <tq>{{$reports->created_at}}</tq>
+                                <td>{{$reports->created_at}}</td>
                                 <td>{{$reports->updated_at}}</td>
-                                @endforeach
-                            </tr>
 
+                            </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
