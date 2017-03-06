@@ -15,6 +15,7 @@ class CreateCaseTable extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
             $table->string("title");
             $table->integer("topic_id");
             $table->integer("category_id");

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Cases extends Model
@@ -23,6 +24,10 @@ class Cases extends Model
 
     public function reports(){
         return $this->hasMany('App\Model\Report','case_id','id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
 }
