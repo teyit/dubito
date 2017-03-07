@@ -20,7 +20,6 @@ class CreateReportTable extends Migration
             $table->text("description");
             $table->integer("case_id");
             $table->string("source");
-            $table->enum('status',['resulted','not_resulted']);
             $table->timestamps();
         });
     }

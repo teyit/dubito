@@ -11,7 +11,7 @@
                     <tr>
                         <td class="icon"><span class="mdi mdi-"></span></td>
                         <td class="item">Created By<span class="icon s7-portfolio"></span></td>
-                        <td>{{$case->user->name}}</td>
+                        <td>{{$case->user->name or ""}}</td>
                     </tr>
                     <tr>
                         <td class="icon"><span class="mdi mdi-date"></span></td>

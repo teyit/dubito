@@ -16,6 +16,7 @@
                                 <th>Title</th>
                                 <th>Topic</th>
                                 <th>Category</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -29,6 +30,22 @@
                                 <td>{{$case->title}}</td>
                                 <td>{{$case->topic->title}}</td>
                                 <td>{{$case->category->title or ""}}</td>
+                                <td>
+                                    @if($case->status == 'completed')
+                                        <span class="label label-success">Completed</span>
+                                    @elseif($case->status == 'in_progress')
+                                        <span class="label label-warning">In Progress</span>
+                                    @elseif($case->status == 'no_analysis')
+                                        <span class="label label-no-analysis">No Analysis</span>
+                                    @elseif($case->status == 'cancelled')
+                                        <span class="label label-danger">Cancelled</span>
+                                    @elseif($case->status == 'suspended')
+                                        <span class="label label-suspended">Suspended</span>
+                                    @elseif($case->status == 'to_be_tweeted')
+                                        <span class="label label-primary">To be Tweeted</span>
+                                    @endif
+
+                                </td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
