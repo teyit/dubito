@@ -29,5 +29,9 @@ class Cases extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    
+    public function tags(){
+        return $this->belongsToMany('App\Model\Tag','case_tag','case_id','tag_id');
+    }
 
 }

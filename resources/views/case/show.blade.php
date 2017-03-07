@@ -4,7 +4,7 @@
 
 
         <div class="user-info-list panel panel-default">
-            <div class="panel-heading panel-heading-divider"><b>{{$case->title}} </b><span class="panel-subtitle">{{$case->topic->title}} - {{$case->category->title}}</span></div>
+            <div class="panel-heading panel-heading-divider"><b>{{$case->title}} </b><span class="panel-subtitle">{{$case->topic->title}} - {{$case->category->title}} - {{implode(',',$tags)}}</span></div>
             <div class="panel-body">
                 <table class="no-border no-strip skills">
                     <tbody class="no-border-x no-border-y">
