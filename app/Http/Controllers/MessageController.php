@@ -60,7 +60,7 @@ class MessageController extends Controller
                     $r->account_name = 'Facebook User';
                     $r->account_picture = '';
                 }
-                $r->status = 'not_resulted';
+                $r->status = 'not_assigned';
                 if(isset($m['message']['text'])){
                     $r->text = $m['message']['text'];
                 }
