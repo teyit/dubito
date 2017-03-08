@@ -60,8 +60,7 @@ class MessageController extends Controller
                     $r->account_name = 'Facebook User';
                     $r->account_picture = '';
                 }
-                //TODO db ayarlandiginda status de ayarlanacak
-                $r->status = 1;
+                $r->status = 'not_assigned';
                 if(isset($m['message']['text'])){
                     $r->text = $m['message']['text'];
                 }
