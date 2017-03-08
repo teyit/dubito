@@ -23,7 +23,8 @@
                     <div class="panel-footer clearfix">
                         {{$report->created_at->diffForHumans()}} / {{$report->source}}
                         <div class="tools">
-                         <button class="btn btn-space btn-success btn-sm"><i class="icon icon-left mdi mdi-cloud-done"></i> Assign to a case</button>
+
+                            <button  data-id="{{$report->id}}"  class="btn btn-space btn-success btn-sm report-assign-case"><i class="icon icon-left mdi mdi-cloud-done"></i> Assign to a case</button>
                          <button class="btn btn-space btn-danger btn-sm"><i class="icon icon-left mdi mdi-cloud-done"></i> Archive</button>
                          &nbsp;
                         </div>
@@ -34,27 +35,34 @@
         </div>
     </div>
 </div>
-<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
-    <div class="modal-dialog custom-width" role="document">
-        <div class="modal-content">
 
-            <div class="modal-header">
-                <div class="tab-navigation">
-                    <ul role="tablist" class="nav nav-tabs nav-justified">
-                        <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" aria-expanded="true">Description</a></li>
-                        <li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" aria-expanded="false">Files</a></li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="modal-body">
-                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                </p>
-            </div>
+@include('report.partials._assign_to_case_modal')
 
-        </div><!-- modal-content -->
-    </div><!-- modal-dialog -->
-</div><!-- modal -->
+
+
+{{--<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">--}}
+    {{--<div class="modal-dialog custom-width" role="document">--}}
+        {{--<div class="modal-content">--}}
+
+            {{--<div class="modal-header">--}}
+                {{--<div class="tab-navigation">--}}
+                    {{--<ul role="tablist" class="nav nav-tabs nav-justified">--}}
+                        {{--<li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab" aria-expanded="true">Description</a></li>--}}
+                        {{--<li role="presentation" class=""><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab" aria-expanded="false">Files</a></li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            {{--<div class="modal-body">--}}
+                {{--<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.--}}
+                {{--</p>--}}
+            {{--</div>--}}
+
+        {{--</div><!-- modal-content -->--}}
+    {{--</div><!-- modal-dialog -->--}}
+{{--</div><!-- modal -->--}}
+
 
 
 {{--<div class="panel panel-default panel-table">--}}

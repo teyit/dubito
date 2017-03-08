@@ -16,7 +16,9 @@
                                 <th>Title</th>
                                 <th>Topic</th>
                                 <th>Category</th>
+                                <th>Status</th>
                                 <th>Created at</th>
+                                <th>Updated at</th>
                                 <th class="actions"></th>
                                 {{--<th class="actions">Delete</th>--}}
                             </tr>
@@ -28,11 +30,28 @@
                                 <td>{{$case->title}}</td>
                                 <td>{{$case->topic->title}}</td>
                                 <td>{{$case->category->title or ""}}</td>
+                                <td>
+                                    @if($case->status == 'completed')
+                                        <span class="label label-success">Completed</span>
+                                    @elseif($case->status == 'in_progress')
+                                        <span class="label label-warning">In Progress</span>
+                                    @elseif($case->status == 'no_analysis')
+                                        <span class="label label-no-analysis">No Analysis</span>
+                                    @elseif($case->status == 'cancelled')
+                                        <span class="label label-danger">Cancelled</span>
+                                    @elseif($case->status == 'suspended')
+                                        <span class="label label-suspended">Suspended</span>
+                                    @elseif($case->status == 'to_be_tweeted')
+                                        <span class="label label-primary">To be Tweeted</span>
+                                    @endif
+
+                                </td>
                                 <td>{{$case->created_at}}</td>
+                                <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
                                 <td class="actions">
                                     <div class="btn-group btn-space">
-                                        <button type="button" class="btn btn-default">View Reports</button>
+                                        <a href="{{route('cases.show',$case->id)}}" class="btn btn-default">View Reports</a>
                                         <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
                                         <ul role="menu" class="dropdown-menu">
                                             <li><a class="case-edit-btn" href="javascript:;" data-id="{{$case->id}}" >Edit</a></li>
@@ -56,20 +75,22 @@
     <script>
         $(function(){
             $('.case-delete').on('click',function(){
-                if(!confirm('Are you sure that want to delete ? ')){
-                    return false;
-                }
-                var id =  $(this).data('id');
-                $.ajax({
-                    method:"DELETE",
-                    url:"/cases/"+id,
-                    data:{_token:$("#_token").val()},
-                    success:function(data){
-                        if(data == 'true'){
-                            window.location.reload();
-                        }
+                var that = $(this);
+                dubitoConfirm(function(result){
+                    if(result == true) {
+                        var id = that.data('id');
+                        $.ajax({
+                            method:"DELETE",
+                            url:"/cases/"+id,
+                            data:{_token:$("#_token").val()},
+                            success:function(data){
+                                if(data == 'true'){
+                                    window.location.reload();
+                                }
+                            }
+                        })
                     }
-                })
+                    });
             });
         });
     </script>

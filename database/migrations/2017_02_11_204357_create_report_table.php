@@ -15,12 +15,14 @@ class CreateReportTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('account_name');
-            $table->string("title");
-            $table->text("description");
-            $table->integer("case_id");
-            $table->string("source");
-            $table->enum('status',['resulted','not_resulted']);
+            $table->integer('external_message_id')->nullable();
+            $table->integer('external_user_id')->nullable();
+            $table->string('account_picture')->nullable();
+            $table->string('account_name')->nullable();
+            $table->text("text")->nullable();
+            $table->integer("case_id")->nullable();
+            $table->string("source")->nullable();
+            $table->enum('status',['not_assigned','in_archived'])->default('not_assigned');
             $table->timestamps();
         });
     }

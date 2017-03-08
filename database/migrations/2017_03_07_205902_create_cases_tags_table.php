@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCaseTable extends Migration
+class CreateCasesTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCaseTable extends Migration
      */
     public function up()
     {
-        Schema::create('cases', function (Blueprint $table) {
+        Schema::create('case_tag', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->string("title");
-            $table->integer("topic_id");
-            $table->integer("category_id");
+            $table->integer('case_id');
+            $table->integer("tag_id");
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCaseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cases');
+        Schema::dropIfExists('case_tag');
     }
 }

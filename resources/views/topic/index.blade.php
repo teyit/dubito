@@ -51,24 +51,27 @@
     <script>
         $(function(){
             $('.topic-delete').on('click',function(){
-                if(!confirm('Are you sure that want to delete ? ')){
-                    return false;
-                }
-                var id =  $(this).data('id');
-                $.ajax({
-                    method:"DELETE",
-                    url:"/topics/"+id,
-                    data:{_token:$("#_token").val()},
-                    success:function(data){
+                var that = $(this);
+                dubitoConfirm(function(result){
+                    if(result == true) {
+                        var id = that.data('id');
+                        $.ajax({
+                            method:"DELETE",
+                            url:"/topics/"+id,
+                            data:{_token:$("#_token").val()},
+                            success:function(data){
 
-                        console.log(data);
-                        if(data == 'true'){
-                            window.location.reload();
-                        }else if(data == 'is_case'){
-                            alert('this topic cannot be delete !');
+                                console.log(data);
+                                if(data == 'true'){
+                                    window.location.reload();
+                                }else if(data == 'is_case'){
+                                    alert('this topic cannot be delete !');
+                                }
+                            }
+                        })
                         }
-                    }
-                })
+                    });
+
             });
         });
     </script>

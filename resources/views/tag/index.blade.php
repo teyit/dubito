@@ -25,9 +25,6 @@
 			                    <td>{{$tag->created_at}}</td>
 			                    <td>{{$tag->updated_at}}</td>
 			                    <td class="actions">
-			                        <a href="javascript:;" data-id="{{$tag->id}}" class="icon tag-edit-btn"><i class="mdi mdi-edit"></i></a>
-			                    </td>
-			                    <td class="actions">
 			                        <div class="btn-group btn-space">
 			                            <button type="button" class="btn btn-default">View Reports</button>
 			                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
@@ -51,22 +48,24 @@
 @endsection
 @section('script')
 <script>
-    $(function(){
-        $('.tag-delete').on('click',function(){
-            if(!confirm('Are you sure that want to delete ? ')){
-                return false;
-            }
-            var id =  $(this).data('id');
-            $.ajax({
-                method:"DELETE",
-                url:"/tags/"+id,
-                data:{_token:$("#_token").val()},
-                success:function(data){
-                    if(data == 'true'){
-                        window.location.reload();
-                    }
+    $(function () {
+        $('.tag-delete').on('click', function () {
+            var that = $(this);
+            dubitoConfirm(function (result) {
+                if (result == true) {
+                    var id = that.data('id');
+                    $.ajax({
+                        method: "DELETE",
+                        url: "/tags/" + id,
+                        data: {_token: $("#_token").val()},
+                        success: function (data) {
+                            if (data == 'true') {
+                                window.location.reload();
+                            }
+                        }
+                    });
                 }
-            })
+            });
         });
     });
 </script>

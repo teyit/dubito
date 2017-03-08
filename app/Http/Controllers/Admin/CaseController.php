@@ -48,7 +48,8 @@ class CaseController extends Controller
 
     public function show($id){
         $case = Cases::find($id);
-        return view('case.show',compact('case'));
+        $tags= array_pluck($case->tags()->get()->toArray(),'title');
+        return view('case.show',compact('case','tags'));
     }
 
     public function update($id,Request $request){

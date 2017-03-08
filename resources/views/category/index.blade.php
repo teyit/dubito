@@ -47,6 +47,9 @@
                                     </form>
                                 </td>-->
                             </tr>
+
+
+
                         @endforeach
                         </tbody>
                     </table>
@@ -62,23 +65,32 @@
 <script>
     $(function(){
         $('.category-delete').on('click',function(){
-            if(!confirm('Are you sure that want to delete ? ')){
-                return false;
-            }
-            var id =  $(this).data('id');
-            $.ajax({
-                method:"DELETE",
-                url:"/categories/"+id,
-                data:{_token:$("#_token").val()},
-                success:function(data){
-                    if(data == 'true'){
-                        window.location.reload();
-                    }else if(data = 'is_case'){
-                        alert('There are cases belongs to this category therefore it cannot be delete ');
-                    }
-                }
-            })
+            var that = $(this);
+            dubitoConfirm(function(result){
+                console.log(result);
+               if(result == true){
+                   console.log('aa');
+                   var id =  that.data('id');
+                    $.ajax({
+                        method:"DELETE",
+                        url:"/categories/"+id,
+                        data:{_token:$("#_token").val()},
+                        success:function(data){
+                            if(data == 'true'){
+                                window.location.reload();
+                            }else if(data = 'is_case'){
+                                alert('There are cases belongs to this category therefore it cannot be delete ');
+                            }
+                        }
+                    })
+               }
+            });
+
+//
         });
     });
 </script>
+
+
+
 @endsection

@@ -6,7 +6,7 @@ Route::get("/",function(){
 });
 
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function () {
+Route::group(['namespace' => 'Admin'], function () {
     
     Route::resource("categories",'CategoryController');
     Route::resource("topics","TopicController");

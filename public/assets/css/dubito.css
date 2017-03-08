@@ -67,3 +67,11 @@
 
 
 
+.label-suspended{
+    background:#9b59b6;
+    color:#fff;
+}
+.label-no-analysis{
+    background:#e67e22;
+    color:#fff;
+}
