@@ -5,6 +5,10 @@ Route::get("/",function(){
     return redirect('/reports');
 });
 
+Route::get("preview",function(){
+	$tags = get_meta_tags($_GET['url']);
+	dd($tags);
+});
 
 Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     
