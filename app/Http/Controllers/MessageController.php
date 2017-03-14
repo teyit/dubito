@@ -39,7 +39,6 @@ class MessageController extends Controller
 
     public function facebook(Request $request)
     {
-
  
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
@@ -48,6 +47,7 @@ class MessageController extends Controller
                     return "PASS";
                 }
                 $facebook_user = $this->getFacebookUser($m['sender']['id']);
+
 
                 $r = new Report();
                 $r->source = 'facebook';

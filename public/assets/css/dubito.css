@@ -75,3 +75,42 @@
     background:#e67e22;
     color:#fff;
 }
+
+.thread-unread{
+    font-weight: bold;
+}
+.thread-list ul {
+    line-height:31px !important;
+}
+.thread-name{
+    margin-left:20px;
+}
+.thread-count{
+    margin-top: 5px;
+}
+.thread-messages ul{
+    list-style-type: none;
+}
+.message-self{
+    text-align: right
+}
+.message-friend{
+    text-align: left;
+}
+.thread-messages > li{
+    display: block;
+    list-style: none;
+    padding: 9px 16px;
+}
+.thread-messages  li > div{
+    position: relative;
+    display: inline-block;
+    background-color: #4c8bf5;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 6px 8px;
+    border-radius: 3px;
+    white-space: normal;
+    text-align: left;
+    margin-left: 40px;
+}

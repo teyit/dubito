@@ -62,7 +62,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return redirect('login'); //TODO reenable registering
+        //return redirect('login'); //TODO reenable registering
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

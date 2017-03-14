@@ -7,6 +7,8 @@ use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Cases;
+use Illuminate\Support\Facades\Auth;
+
 class CaseController extends Controller
 {
 
@@ -27,6 +29,7 @@ class CaseController extends Controller
     }
 
     public function store(Request $request){
+        $request['user_id'] = Auth::user()->id;
         $store = $request->all();
         Cases::create($store);
         return redirect($this->redirect);
