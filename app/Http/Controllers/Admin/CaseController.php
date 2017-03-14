@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Category;
+use App\Model\Tag;
 use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -51,8 +52,10 @@ class CaseController extends Controller
 
     public function show($id){
         $case = Cases::find($id);
-        $tags= array_pluck($case->tags()->get()->toArray(),'title');
-        return view('case.show',compact('case','tags'));
+        $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
+        $allTags  = Tag::latest()->get();
+
+        return view('case.show',compact('case','selectedTags','allTags'));
     }
 
     public function update($id,Request $request){
@@ -62,6 +65,16 @@ class CaseController extends Controller
         return 'true';
     }
 
+
+
+    public function addCaseTag(Request $request,$caseID){
+
+        $case = Cases::find($caseID);
+        $tags = $request->get('tags');
+
+        $case->tags()->sync($tags);
+        return response()->json('true',200);
+    }
 
     public function destroy($id){
         $case = Cases::find($id);

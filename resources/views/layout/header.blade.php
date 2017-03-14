@@ -19,5 +19,6 @@
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
     <link rel="stylesheet" href="{{url("assets/css/dubito.css")}}" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/datatables/css/dataTables.bootstrap.min.css")}}"/>
+    <link rel="stylesheet" href="{{url('assets/lib/select2/css/select2.min.css')}}">
     <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
 </head>
