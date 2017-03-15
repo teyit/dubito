@@ -16,6 +16,7 @@ Route::get("preview",function(){
 Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     
     Route::resource("categories",'CategoryController');
+    Route::resource("messages",'MessageController');
     Route::resource("topics","TopicController");
     Route::resource("reports","ReportController");
     Route::resource("cases","CaseController");
@@ -26,10 +27,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::put('/report_files/{id}/status',['as'=>'report_files.status','uses'=>'ReportController@status']);
 });
 
-
-Route::get('messages', function(){
-    return view('messages');
-});
 
 
 Auth::routes();

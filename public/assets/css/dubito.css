@@ -75,7 +75,14 @@
     background:#e67e22;
     color:#fff;
 }
-
+.thread-avatar{
+    width:32px;
+    height:32px;
+    float:left;
+    border-radius:50%;
+    overflow:hidden;
+    background-size:cover;
+}
 .thread-unread{
     font-weight: bold;
 }
