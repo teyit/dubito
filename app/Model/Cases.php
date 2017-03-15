@@ -34,4 +34,8 @@ class Cases extends Model
         return $this->belongsToMany('App\Model\Tag','case_tag','case_id','tag_id');
     }
 
+    public function links(){
+        return $this->hasMany('App\Model\CaseLink','case_id','id');
+    }
+
 }

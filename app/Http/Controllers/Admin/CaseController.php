@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\CaseLink;
 use App\Model\Category;
 use App\Model\Tag;
 use App\Model\Topic;
@@ -51,11 +52,12 @@ class CaseController extends Controller
     }
 
     public function show($id){
+
         $case = Cases::find($id);
+        $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
-
-        return view('case.show',compact('case','selectedTags','allTags'));
+        return view('case.show',compact('case','selectedTags','allTags','links'));
     }
 
     public function update($id,Request $request){

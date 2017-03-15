@@ -20,6 +20,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::resource("reports","ReportController");
     Route::resource("cases","CaseController");
     Route::resource("tags","TagController");
+    Route::resource('cases.links',"LinkController");
     Route::post('addCaseTag/{case_id}',['as'=>'case.tag.store','uses'=>'CaseController@addCaseTag']);
 
     Route::put('/report_files/{id}/status',['as'=>'report_files.status','uses'=>'ReportController@status']);
