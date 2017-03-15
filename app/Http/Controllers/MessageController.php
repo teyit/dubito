@@ -38,7 +38,11 @@ class MessageController extends Controller
 
     public function facebook(Request $request)
     {
- 
+
+        $entries = $request->get('entry');
+        if(!is_array($entries)){
+            return "EMPTY";
+        }
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
                 $message = Message::where('external_message_id',$m['message']['mid'])->first();
