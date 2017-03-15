@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
 	public function index(){
-		$senders = Message::groupBy('sender_id,recipient_id')->get();
+		$senders = Message::groupBy('sender_id','recipient_id')->get();
 		return view('messages.index',compact('senders'));
 	}
 
