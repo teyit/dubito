@@ -58,7 +58,7 @@ class MessageController extends Controller
                 $message = new Message();
                 $message->source = 'facebook';
                 $message->sender_id = $m['sender']['id'];
-                $message->recepient_id = $m['recepient']['id'];
+                $message->recipient_id = $m['recipient']['id'];
                 $message->external_message_id = $m['message']['mid'];
                 if($facebook_user){
                     $message->account_name = $facebook_user['account_name'];
