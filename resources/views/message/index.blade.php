@@ -25,9 +25,9 @@
                 <div class="aside-nav collapse thread-list">
                     <ul class="nav">
                         @foreach($senders as $s)
-                            <li @if(2 == 4) class="active" @endif>
+                            <li @if($s->sender_id != '1672136149469483') class="active" @endif>
                                 <a href="#">
-                                    @if(2 == 4)<span class="thread-count label label-primary">8</span>@endif
+                                    @if($s->sender_id != '1672136149469483')<span class="thread-count label label-primary">8</span>@endif
                                     <div class="thread-avatar" style="background-image:url('{{$s->account_picture}}');"></div>
                                     <span class="thread-name">{{$s->account_name}}</span>
                                 </a>
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="email-list">
-            @foreach($senders as $s)
+            @foreach($messages as $s)
             <div class="email-list-item email-list-item--unread">
                 <div class="hidden email-list-actions">
                     <div class="be-checkbox">
