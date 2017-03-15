@@ -38,6 +38,9 @@ class MessageController extends Controller
 
     public function facebook(Request $request)
     {
+        if($request->has('hub_challenge')){
+            return $request->get('hub_challenge');
+        }
 
         $entries = $request->get('entry');
         if(!is_array($entries)){
