@@ -15,7 +15,7 @@ class MessageController extends Controller
             'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
             'default_graph_version' => 'v2.2',
         ]);
-        $page_access_token = 'EAADCJpukgwkBAIZB7N4ZBJb7mgif4ZCnK4H3oZAZAkUj7dZA1vteqNLCZBqZAZCu2eVEvc39ywxZByf9nE86N9RCYwjCnm4ZCmNOB4eFFjr84sYsWGoKQHtFs2CN4HOqFCtXOquDfA9vpHgCqIKgtEf8hQXcFVZBnHcLBzGo6ZBqZCpEmoQwZDZD';
+        $page_access_token = 'EAADCJpukgwkBALpz3GRcpJtVA3Maqic2reaIaGQUA9945dD4AZC7sKIRZCls4ZCxTScq8Xpq7uTBx0CKlbJ1H92geJpMrfo2sCbZA1llEsZAGE9xxlizEXwtKLKUr9I43uBA32cugWM8EV7bQwS2RzRk8r6rjGP9CPSheEIx8TgZDZD';
 
         try {
             // Returns a `Facebook\FacebookResponse` object
