@@ -109,17 +109,16 @@
     list-style: none;
     padding: 9px 16px;
 }
-.thread-messages  li > div{
+.thread-messages {
     position: relative;
     display: inline-block;
-    background-color: #4c8bf5;
-    color: #ffffff;
+
     font-size: 13px;
     padding: 6px 8px;
     border-radius: 3px;
     white-space: normal;
     text-align: left;
-    margin-left: 40px;
+    /*margin-left: 40px;*/
 }
 
 .dubito-meta{

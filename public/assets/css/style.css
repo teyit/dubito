@@ -13097,8 +13097,8 @@ li.L9 {
   background: #ffffff;
 }
 .email-list-item {
-  border-bottom: 1px solid #e6e6e6;
-  padding: 14px 20px;
+  /*border-bottom: 1px solid #e6e6e6;*/
+  padding: 4px 20px;
   display: table;
   width: 100%;
   cursor: pointer;
@@ -13108,6 +13108,7 @@ li.L9 {
 .email-list-item.email-list-item--unread {
   background-color: #ffffff;
 }
+/*
 .email-list-item.email-list-item--unread:after {
   content: '';
   display: block;
@@ -13118,6 +13119,7 @@ li.L9 {
   left: 0;
   background-color: #4285f4;
 }
+*/
 .email-list-item.email-list-item--unread .from,
 .email-list-item.email-list-item--unread .date {
   font-weight: 500;
@@ -13143,7 +13145,7 @@ li.L9 {
 }
 .email-list-detail,
 .email-list-actions {
-  vertical-align: top;
+  vertical-align: middle;
   display: table-cell;
 }
 .email-list-actions {
@@ -18057,8 +18059,8 @@ label {
 .be-checkbox input[type="radio"] + label:before,
 .be-radio input[type="radio"] + label:before {
   content: "";
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   display: inline-block;
   border: 1px solid #ccc;
   border-radius: 3px;
