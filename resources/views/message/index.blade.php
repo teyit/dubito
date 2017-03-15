@@ -88,7 +88,7 @@
                         {{$s->text}}
                         @if(!$s->files->isEmpty())
                             @foreach($s->files as $file)
-                                <a href="#"><span class="icon mdi mdi-attachment-alt"></span> {{basename($file->file_url)}}<span>(5.12 KB)</span></a>
+                                <a target="_blank" href="{{$file->file_url}}"><span class="icon mdi mdi-attachment-alt"></span> {{basename($file->file_url)}}<span>(5.12 KB)</span></a>
                             @endforeach
                         @endif
                     </div>
