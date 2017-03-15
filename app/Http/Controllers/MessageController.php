@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 use Facebook;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-use App\Model\Report;
-use App\Model\ReportFile;
+use App\Model\Message;
+use App\Model\MessageFile;
 class MessageController extends Controller
 {
 
@@ -42,33 +41,34 @@ class MessageController extends Controller
  
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
-                $report = Report::where('external_message_id',$m['message']['mid'])->first();
-                if($report){
+                $message = Message::where('external_message_id',$m['message']['mid'])->first();
+                if($message){
                     return "PASS";
                 }
                 $facebook_user = $this->getFacebookUser($m['sender']['id']);
 
 
-                $r = new Report();
-                $r->source = 'facebook';
-                $r->external_user_id = $m['sender']['id'];
-                $r->external_message_id = $m['message']['mid'];
+                $message = new Message();
+                $message->source = 'facebook';
+                $message->sender_id = $m['sender']['id'];
+                $message->recepient_id = $m['recepient']['id'];
+                $message->external_message_id = $m['message']['mid'];
                 if($facebook_user){
-                    $r->account_name = $facebook_user['account_name'];
-                    $r->account_picture = $facebook_user['account_picture'];
+                    $message->account_name = $facebook_user['account_name'];
+                    $message->account_picture = $facebook_user['account_picture'];
                 }else{
-                    $r->account_name = 'Facebook User';
-                    $r->account_picture = '';
+                    $message->account_name = 'Facebook User';
+                    $message->account_picture = '';
                 }
-                $r->status = 'not_assigned';
+
                 if(isset($m['message']['text'])){
-                    $r->text = $m['message']['text'];
+                    $message->text = $m['message']['text'];
                 }
-                $r->save();
+                $message->save();
                 if(isset($m['message']['attachments'])){
                     foreach($m['message']['attachments'] as $a){
-                        $rf = new ReportFile;
-                        $rf->report_id = $r->id;
+                        $rf = new MessageFile;
+                        $rf->message_id= $message->id;
                         $rf->file_type = $a['type'];
                         $rf->file_url = $a['payload']['url'];
                         $rf->save();
