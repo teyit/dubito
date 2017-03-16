@@ -29,7 +29,7 @@
 <script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.bootstrap.js')}}" type="text/javascript"></script>
 
 <script src="{{url('assets/lib/select2/js/select2.js')}}" type="text/javascript"></script>
-
+<script src="{{url('assets/lib/jquery.gritter/js/jquery.gritter.js')}}"></script>
 
 
 

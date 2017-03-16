@@ -5,10 +5,11 @@
 
 
 
-
         <div class="user-info-list panel panel-default">
-            <div class="panel-heading panel-heading-divider"><b>{{$case->title}} </b><span class="panel-subtitle">{{$case->topic->title}} - {{$case->category->title}}</span></div>
+            {{--<div class="panel-heading panel-heading-divider"><b>{{$case->title}} </b><span class="panel-subtitle">{{$case->topic->title}} - {{$case->category->title}}</span></div>--}}
             <div class="panel-body">
+
+
                 <table class="no-border no-strip skills">
                     <tbody class="no-border-x no-border-y">
                     <tr>
@@ -49,11 +50,65 @@
 
                             </form></td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <form id="case-description-form">
+                                    <textarea name="description" class="form-control" id="case-description">{{$case->description or ''}}</textarea>
+                                    <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
+                            </form>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
 
+        <div class="panel panel-default panel-table">
+            <div class="panel panel-default">
+
+                    <div class="panel-heading"></div>
+
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Link</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                            <th class="actions"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($links as $link)
+                            <tr>
+
+                                <td>{{$link->id}}</td>
+                                <td id="list-link-{{$link->id}}">{{$link->link}}</td>
+                                <td>{{$link->created_at}}</td>
+                                <td>{{$link->updated_at}}</td>
+                                <td>
+                                    <div class="btn-group btn-space">
+                                        <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
+                                        <ul role="menu" class="dropdown-menu">
+                                            <li><a class="link-edit-btn" href="javascript:;" data-id="{{$link->id}}" >Edit</a></li>
+                                            <li><a class="link-delete" data-id="{{$link->id}}" href="javascript:;">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+            </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
         <div class="panel panel-default panel-table">
@@ -121,7 +176,7 @@
                                                 <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
                                                 <ul role="menu" class="dropdown-menu">
                                                     <li><a class="link-edit-btn" href="javascript:;" data-id="{{$link->id}}" >Edit</a></li>
-                                                    {{--<li><a class="category-delete" data-id="{{$category->id}}" href="javascript:;">Delete</a></li>--}}
+                                                    <li><a class="link-delete" data-id="{{$link->id}}" href="javascript:;">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -155,6 +210,13 @@
                 data:{tags:tags},
                 success:function(response){
                     console.log(response);
+                    if(response){
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Tags   was updated succesfully',
+                            class_name: 'color success'
+                        });
+                    }
                 }
 
 
@@ -162,5 +224,46 @@
         });
 
 
+        $('.link-delete').on('click',function(){
+            var that = $(this);
+            dubitoConfirm(function(result){
+                console.log(result);
+                if(result == true){
+                    var id =  that.data('id');
+                    $.ajax({
+                        method:"DELETE",
+                        url:"/cases/${{$case->id}}/links/"+id,
+                        data:{_token:$("#_token").val()},
+                        success:function(data){
+                            if(data == 'true'){
+                                window.location.reload();
+                            }
+                        }
+                    })
+                }
+            });
+        });
+
+        $('#case-description-form').on('submit',function(event){
+            event.preventDefault();
+            $.ajax({
+               method:"put",
+               url:"{{route('cases.update',$case->id)}}",
+               data:$(this).serialize(),
+               success:function(response){
+                   if(response){
+                       $.gritter.add({
+                           title: 'Success',
+                           text: 'Description was added successfuly',
+                           class_name: 'color success'
+                       });
+                   }
+               }
+            });
+
+        })
+
+
     </script>
 @endsection
+

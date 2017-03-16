@@ -72,11 +72,16 @@ class CaseController extends Controller
     public function addCaseTag(Request $request,$caseID){
 
         $case = Cases::find($caseID);
-        $tags = $request->get('tags');
+        $tags = $request->input('tags');
+        if(!is_array($tags)){
+            $tags = [];
+        }
 
         $case->tags()->sync($tags);
         return response()->json('true',200);
     }
+
+
 
     public function destroy($id){
         $case = Cases::find($id);
