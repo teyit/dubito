@@ -12,7 +12,7 @@
             "fields" : 'id,share,og_object{id,title,type,updated_time,url,picture}',
             "id" : 'http://stackoverflow.com'
         }, function(response) {
-                    // Insert your code here
+           console.log(response);         // Insert your code here
         });
         FB.AppEvents.logPageView();
     };

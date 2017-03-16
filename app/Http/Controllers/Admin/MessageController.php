@@ -14,5 +14,20 @@ class MessageController extends Controller
 		$messages = Message::where('sender_id','1672136149469483')->get();
 		return view('message.index',compact('senders','messages'));
 	}
+	public function show(Request $request, $id){
+		$messages = Message::where('sender_id',$id)->get();
+		if($request->has('spf')){
+			return json_encode([
+				'title' => 'Mesajlar: ' . $messages->first()->account_name,
+				'body' => [
+					'section-thread' => view('message.thread',['messages' => $messages])->render()
+				]
+			]);
+		}else{
+			$senders = Message::groupBy('sender_id','recipient_id')->get();
+			$messages = Message::where('sender_id',$id)->get();
+			return view('message.index',compact('senders','messages'));
+		}
+	}
 
 }
