@@ -5,7 +5,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
-                <textarea type="text" required name="text" value="{{$report->title}}" class="form-control"></textarea>
+                <textarea required name="text"  class="form-control">{{$report->title}}</textarea>
             </div>
         </div>
 
@@ -34,8 +34,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
             <div class="col-sm-6">
@@ -43,8 +41,6 @@
                 <label for="file-1" class="btn-default"> <i class="mdi mdi-upload"></i><span>Browse files</span></label>
             </div>
         </div>
-
-
         <div class="form-group">
             <label class="col-sm-3 control-label"></label>
             <div class="col-sm-6">
@@ -53,21 +49,17 @@
                 </p>
             </div>
         </div>
-
     </form>
     <hr>
     @else
-
     <form action="{{ route("reports.store")}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
         {{csrf_field()}}
-
         <div class="form-group">
             <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
                 <textarea type="text" required name="text" value="" class="form-control"></textarea>
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-sm-3 control-label">Source</label>
             <div class="col-sm-6">
@@ -89,9 +81,6 @@
                 </div>
             </div>
         </div>
-
-
-
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
             <div class="col-sm-6">
@@ -99,8 +88,6 @@
                 <label for="file-1" class="btn-default"> <i class="mdi mdi-upload"></i><span>Browse files</span></label>
             </div>
         </div>
-
-
         <div class="form-group">
             <label class="col-sm-3 control-label"></label>
             <div class="col-sm-6">
@@ -109,10 +96,7 @@
                 </p>
             </div>
         </div>
-
     </form>
-
-
 @endif
 
 

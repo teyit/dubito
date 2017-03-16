@@ -7,8 +7,8 @@
         <div class="col-md-6">
             <div class="pull-right email-filters-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default">Save as a report</button>
-                    <button type="button" class="btn btn-default">Mark as a review</button>
+                    <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Save as a report</button>
+                    <button id="btn-mark-as-review" type="button" class="btn btn-default">Mark as a review</button>
                 </div>
             </div>
         </div>
@@ -18,10 +18,12 @@
     @foreach($messages as $s)
         <div class="email-list-item email-list-item--unread">
             <div class="email-list-actions">
+                @if(!$s->report_id)
                 <div class="be-checkbox">
-                    <input id="message-{{$s->id}}" type="checkbox">
+                    <input name="thread-messages[]" value="{{$s->id}}" id="message-{{$s->id}}" type="checkbox">
                     <label for="message-{{$s->id}}"></label>
                 </div>
+                @endif
             </div>
             <div class="email-list-detail">
                 <div class="thread-messages message-self">
@@ -48,3 +50,4 @@
         </div>
     @endforeach
 </div>
+@include('report.partials.assign_to_case_modal')

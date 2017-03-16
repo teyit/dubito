@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Cases;
 use App\Model\Category;
+use App\Model\Message;
 use App\Model\Report;
 use App\Model\Topic;
 
@@ -36,37 +37,48 @@ class ReportController extends Controller
 
     public function store(Request $request){
 
+        if(!$request->has('selected_messages')){
+            return "empty";
+        }
+
+
+        $messages = Message::whereIn('id',$request->get('selected_messages'))->get();
+
+
+        $text = $messages->implode('text',"\n");
+
+
         $report = Report::create([
-           'text' => $request->input('text'),
+           'text' => $text,
             'case_id' => $request->input('case_id'),
-            'source' => $request->input('source')
+            'source' => $messages->first()->source
         ]);
 
-        if($request->hasFile('report_files')){
 
-            $files = $request->file("report_files");
-            $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
 
-            $results = [];
-            foreach ($files as $index => $file) {
-                $results[$index]['file_url'] = $file->storeAs(
-                    $filePrefix, $file->getClientOriginalName(),'s3'
-                );
-                $results[$index]['file_type'] = $file->getMimeType();
+        $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
+
+        foreach($messages as $m){
+            $m->update([
+                'report_id' => $report->id
+            ]);
+            if(!$m->files->isEmpty()){
+
+                foreach($m->files as $index => $file){
+                    $file_url  = $file->storeAs($filePrefix, $file->getClientOriginalName(),'s3');
+
+
+                    ReportFile::create([
+                        'report_id' => $report->id,
+                        'file_url' => $file_url,
+                        'file_type' => $file->getMimeType()
+                    ]);
+
+                }
             }
-
-
-            foreach ($results as $index => $result) {
-                ReportFile::create([
-                    'report_id' => $report->id,
-                    'file_url' => $result['file_url'],
-                    'file_type' => $result['file_type']
-                ]);
-            }
-
-
         }
-        return redirect("/reports");
+
+        return "OK";
 
     }
 
