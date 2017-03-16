@@ -74,11 +74,18 @@ class ServiceController extends Controller
                 $message->save();
                 if(isset($m['message']['attachments'])){
                     foreach($m['message']['attachments'] as $a){
-                        $rf = new MessageFile;
-                        $rf->message_id= $message->id;
-                        $rf->file_type = $a['type'];
-                        $rf->file_url = $a['payload']['url'];
-                        $rf->save();
+
+                        if($a['type'] == 'fallback'){
+                            $message->text = $message->text . " " . $a['url'];
+                            $message->save();
+                        }else{
+                            $rf = new MessageFile;
+                            $rf->message_id= $message->id;
+                            $rf->file_type = $a['type'];
+                            $rf->file_url = $a['payload']['url'];
+                            $rf->save();
+                        }
+
                     }
                 }
 
