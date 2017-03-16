@@ -25,9 +25,9 @@
                 <div class="aside-nav collapse thread-list">
                     <ul class="nav">
                         @foreach($senders as $s)
-                            <li @if($s->sender_id != '1672136149469483') class="active" @endif>
+                            <li class="active">
                                 <a class="spf-link" href="/messages/{{$s->sender_id}}">
-                                    @if($s->sender_id != '1672136149469483')<span class="thread-count label label-primary">8</span>@endif
+                                    <span class="thread-count label label-primary">{{$s->count}}</span>
                                     <div class="thread-avatar" style="background-image:url('{{$s->account_picture}}');"></div>
                                     <span class="thread-name">{{$s->account_name}}</span>
                                 </a>
