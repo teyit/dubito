@@ -3,7 +3,7 @@
     <div class="main-content container-fluid">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading"></div>
 
@@ -40,36 +40,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6">
-
-                <div class="panel panel-default">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Evidence</div>
-                                <div class="panel-body">
-                                    <form id="case-description-form">
-                                        <div class="form-group">
-                                            <textarea name="description" class="form-control" id="case-description">{{$case->description or ''}}</textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-6"><div class="panel panel-default panel-table">
+                <div class="panel panel-default panel-table">
                     <div class="panel panel-default">
 
                         <div class="panel-heading">Links &nbsp;<button  data-toggle="modal"  data-target="#case-link-create"  class="btn btn-success btn-sm btn-link-modal" >Add Link</button>
@@ -108,8 +79,7 @@
 
                     </div>
 
-                </div></div>
-            <div class="col-md-6">
+                </div>
                 <div class="panel panel-default panel-table">
                     <div class="panel panel-default">
                         <div class="panel-heading">Reports</div>
@@ -144,14 +114,36 @@
                     </div>
 
                 </div>
-
             </div>
 
 
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Evidence</div>
+                                <div class="panel-body">
+                                    <form id="case-description-form">
+                                        <div class="form-group">
+                                            <textarea name="description" class="form-control" id="case-description">{{$case->description or ''}}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
-            </div>
+    </div>
+
 
 
 
