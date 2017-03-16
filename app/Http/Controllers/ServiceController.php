@@ -8,9 +8,7 @@ use App\Model\Message;
 use App\Model\MessageFile;
 class ServiceController extends Controller
 {
-    private function getLink($link){
 
-    }
     private function getFacebookUser($user_id){
         $fb = new Facebook\Facebook([
             'app_id' => '213471075795721',

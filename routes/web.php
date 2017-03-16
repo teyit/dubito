@@ -31,8 +31,8 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 Auth::routes();
 
-Route::any('/service/messages/facebook', 'MessageController@facebook');
-Route::any('/service/messages/twitter', 'MessageController@twitter');
+Route::any('/service/messages/facebook', 'ServiceController@facebook');
+Route::any('/service/messages/twitter', 'ServiceController@twitter');
 
 
 
