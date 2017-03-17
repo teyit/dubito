@@ -36,7 +36,8 @@ class CategoryController extends Controller
     public function update($id,Request $request){
        $category = Category::find($id);
        $category->update($request->all());
-       return 'true';
+        return response()->json('true',200);
+
     }
 
 
@@ -49,6 +50,7 @@ class CategoryController extends Controller
         }
 
         $category->delete();
-        return 'true';
+        return response()->json('true',200);
+
     }
 }

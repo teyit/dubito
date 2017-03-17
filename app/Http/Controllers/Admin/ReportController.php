@@ -103,7 +103,8 @@ class ReportController extends Controller
 
         $report->update($request->all());
 
-        return 'true';
+        return response()->json('true',200);
+
 
     }
 

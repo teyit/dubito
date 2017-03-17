@@ -64,7 +64,7 @@ class CaseController extends Controller
 
         $case = Cases::find($id);
         $case->update($request->all());
-        return 'true';
+        return response()->json('true',200);
     }
 
 
@@ -86,7 +86,8 @@ class CaseController extends Controller
     public function destroy($id){
         $case = Cases::find($id);
         $case->delete();
-        return 'true';
+        return response()->json('true',200);
+
     }
     
 }

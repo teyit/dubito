@@ -30,12 +30,14 @@ class TagController extends Controller
     public function update($id, Request $request){
        $tag = Tag::find($id);
        $tag->update($request->all());
-       return 'true';
+        return response()->json('true',200);
+
     }
 
     public function destroy($id){
         $tag = Tag::find($id);
         $tag->delete();
-        return 'true';
+        return response()->json('true',200);
+
     }
 }

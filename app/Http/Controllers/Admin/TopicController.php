@@ -33,18 +33,21 @@ class TopicController extends Controller
     public function update($id,Request $request){
        $topic = Topic::find($id);
        $topic->update($request->all());
-       return 'true';
+        return response()->json('true',200);
+
     }
 
 
     public function destroy($id){
         $topic = Topic::find($id);
         if($topic->cases->count() > 0){
-            return 'is_case';
+            return response()->json('is_case',200);
+
         }
 
         $topic ->delete();
-        return 'true';
+        return response()->json('true',200);
+
     }
 }
 
