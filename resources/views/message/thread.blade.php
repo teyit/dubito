@@ -20,8 +20,8 @@
             <div class="email-list-actions">
                 @if(!$s->report_id)
                 <div class="be-checkbox">
-                    <input name="thread-messages[]" value="{{$s->id}}" id="message-{{$s->id}}" type="checkbox">
-                    <label for="message-{{$s->id}}"></label>
+                    <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
+                    <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
                 </div>
                 @endif
             </div>

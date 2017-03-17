@@ -42,13 +42,11 @@
                 }
 
                 getCases();
+                
                 $('#report-assign-to-case').modal({
                     show: 'true',
                     keyboard: false
                 });
-
-
-                var that = $(this);
 
 
                 $("#report-assign-case-form").on('submit',function(e){
@@ -63,9 +61,19 @@
                         },
                         method : "POST",
                         success: function(result){
-                            if(result == 'true'){
-                                $(".success-message").show();
-                            }
+
+
+                           if(result){
+                               $.each(message_list,function(index,message_id){
+                                   $('#checkbox-label-'+message_id).addClass('hidden');
+                                });
+
+                               $.gritter.add({
+                                   title: 'Success',
+                                   text: 'This message was assigned as report successfuly',
+                                   class_name: 'color success'
+                               });
+                           }
                         }
                     });
 

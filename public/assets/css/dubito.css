@@ -124,3 +124,7 @@
 .dubito-meta{
     width: 20% !important;
 }
+
+.hidden{
+    display: none;
+}
