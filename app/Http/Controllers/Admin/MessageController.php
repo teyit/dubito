@@ -15,7 +15,6 @@ class MessageController extends Controller
 
         $senders = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get();
 
-//        $count = Message::selectRaw('messages.*,count(id) as count')->where('is_read',0)->groupBy('sender_id','recipient_id')->get()->count();
 
 
         $messages = Message::where('sender_id','1672136149469483')->get();
@@ -26,10 +25,11 @@ class MessageController extends Controller
 
 
 
-
-
 	public function show(Request $request, $id){
 		$messages = Message::where('sender_id',$id)->get();
+
+        Message::where('sender_id', $id)->update(['is_read' => 1]);
+
 		if($request->has('spf')){
 			return json_encode([
 				'title' => 'Mesajlar: ' . $messages->first()->account_name,
