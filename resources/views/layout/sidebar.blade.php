@@ -10,7 +10,7 @@
                         <li class="active"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
 
-                        <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>
+                        {{--<li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>--}}
 
                         <li><a href="{{url("/cases")}}"><i class="icon mdi mdi-case-check"></i>Cases</a></li>
 

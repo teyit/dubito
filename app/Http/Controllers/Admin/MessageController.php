@@ -9,11 +9,25 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
-	public function index(){
-		$senders = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get();
-		$messages = Message::where('sender_id','1672136149469483')->get();
-		return view('message.index',compact('senders','messages'));
-	}
+    public function index(){
+
+
+
+        $senders = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get();
+
+        $notReadMessages = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get()->count();
+
+
+        $messages = Message::where('sender_id','1672136149469483')->get();
+
+        return view('message.index',compact('senders','messages','notReadMessages'));
+    }
+
+
+
+
+
+
 	public function show(Request $request, $id){
 		$messages = Message::where('sender_id',$id)->get();
 		if($request->has('spf')){
