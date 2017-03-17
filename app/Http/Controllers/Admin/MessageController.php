@@ -12,9 +12,7 @@ class MessageController extends Controller
     public function index(){
 
 
-
         $senders = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get();
-
 
 
         $messages = Message::where('sender_id','1672136149469483')->get();

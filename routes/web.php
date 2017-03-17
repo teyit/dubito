@@ -2,7 +2,7 @@
 
 
 Route::get("/",function(){
-    return redirect('/reports');
+    return redirect('/messages');
 });
 
 
