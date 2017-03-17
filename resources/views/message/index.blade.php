@@ -27,7 +27,7 @@
                         @foreach($senders as $s)
                             <li class="active">
                                 <a class="spf-link" href="/messages/{{$s->sender_id}}">
-                                    <span class="thread-count label label-primary">{{$notReadMessages}}</span>
+                                    <span class="thread-count label label-primary">{{count}}</span>
                                     <div class="thread-avatar" style="background-image:url('{{$s->account_picture}}');"></div>
                                     <span class="thread-name">{{$s->account_name}}</span>
                                 </a>
