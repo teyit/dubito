@@ -58,11 +58,15 @@ class ServiceController extends Controller
             foreach($e['messaging'] as $m){
                 $message = Message::where('external_message_id',$m['message']['mid'])->first();
                 if($message){
+                    \Log::info("pass");
+
                     return "PASS";
                 }
                 $facebook_user = $this->getFacebookUser($m['sender']['id']);
 
-                \Log::info($facebook_user);
+                \Log::info("facebook user-",$facebook_user);
+
+
                 $message = new Message();
                 $message->source = 'facebook:message';
                 $message->sender_id = $m['sender']['id'];
