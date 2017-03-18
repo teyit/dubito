@@ -110,7 +110,7 @@ class ServiceController extends Controller
 
 
 
-                            \Log::info('Fileid --',$rf->id);
+                            //§\Log::info('Fileid --',$rf->id);
 
                             $message->files()->attach($rf->id);
                         }
