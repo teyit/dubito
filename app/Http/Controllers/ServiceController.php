@@ -85,12 +85,16 @@ class ServiceController extends Controller
                 }
                 $message->save();
                 if(isset($m['message']['attachments'])){
+                    \Log::info("message");
                     foreach($m['message']['attachments'] as $a){
 
                         if($a['type'] == 'fallback'){
                             $message->text = $message->text . " " . $a['url'];
                             $message->save();
                         }else{
+                            \Log::info("atachment");
+
+
 
                            $rf =  File::create(
                                 ['file_type' => $a['type'],
