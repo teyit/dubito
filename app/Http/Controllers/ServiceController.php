@@ -16,7 +16,7 @@ class ServiceController extends Controller
             'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
             'default_graph_version' => 'v2.2',
         ]);
-        $page_access_token = 'EAADCJpukgwkBALpz3GRcpJtVA3Maqic2reaIaGQUA9945dD4AZC7sKIRZCls4ZCxTScq8Xpq7uTBx0CKlbJ1H92geJpMrfo2sCbZA1llEsZAGE9xxlizEXwtKLKUr9I43uBA32cugWM8EV7bQwS2RzRk8r6rjGP9CPSheEIx8TgZDZD';
+        $page_access_token = 'EAADCJpukgwkBAE6nD3fdZBGnqwzqB1L4FMYmHeNmiZAKC9mAzGELxdfDzOZAqaL2GuwZA7W86CT6gPA6ls59iy9YMs4ZBMLHKDPefyh4bV25HP4uXdwrbRTItryqU8iE63ybiDZAImYjwMfjFoFYvOM4GrZAtsHfzNlCZA3En7bixAZDZD';
 
         try {
             // Returns a `Facebook\FacebookResponse` object
@@ -50,6 +50,9 @@ class ServiceController extends Controller
         if(!is_array($entries)){
             return "EMPTY";
         }
+
+        \Log::info($entries);
+
 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
