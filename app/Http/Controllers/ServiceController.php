@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Model\File;
 use Facebook;
 
 use Illuminate\Http\Request;
@@ -38,14 +39,18 @@ class ServiceController extends Controller
 
     public function facebook(Request $request)
     {
+        \Log::info('start');
         if($request->has('hub_challenge')){
             return $request->get('hub_challenge');
         }
 
         $entries = $request->get('entry');
+
+
         if(!is_array($entries)){
             return "EMPTY";
         }
+
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
                 $message = Message::where('external_message_id',$m['message']['mid'])->first();
@@ -54,7 +59,7 @@ class ServiceController extends Controller
                 }
                 $facebook_user = $this->getFacebookUser($m['sender']['id']);
 
-
+                \Log::info($facebook_user);
                 $message = new Message();
                 $message->source = 'facebook:message';
                 $message->sender_id = $m['sender']['id'];
@@ -79,11 +84,18 @@ class ServiceController extends Controller
                             $message->text = $message->text . " " . $a['url'];
                             $message->save();
                         }else{
-                            $rf = new MessageFile;
-                            $rf->message_id= $message->id;
+
+//                            File::create(
+//                                ['file_type' => $a['type'],
+//                                 'file_url' => $a['payload']['url'],
+//                            ]);
+
+                            $rf = new File();
                             $rf->file_type = $a['type'];
                             $rf->file_url = $a['payload']['url'];
                             $rf->save();
+
+                            //$message->files()->attach($rf->id);
                         }
 
                     }

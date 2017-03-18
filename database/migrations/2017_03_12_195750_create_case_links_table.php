@@ -16,7 +16,7 @@ class CreateCaseLinksTable extends Migration
         Schema::create('case_links', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('case_id');
-            $table->string('link');
+            $table->integer('link_id');
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Cases;
 use App\Model\Category;
+use App\Model\File;
 use App\Model\Message;
 use App\Model\Report;
 use App\Model\Topic;
@@ -18,9 +19,7 @@ class ReportController extends Controller
 
 
     public function index(){
-
         $reports = Report::with('images')->latest()->get();
-
         return view('report.index',[
             'reports' => $reports
         ]);
@@ -36,11 +35,10 @@ class ReportController extends Controller
 
 
     public function store(Request $request){
-
         if(!$request->has('selected_messages')){
             return "empty";
         }
-
+        
 
         $messages = Message::whereIn('id',$request->get('selected_messages'))->get();
 
@@ -64,21 +62,31 @@ class ReportController extends Controller
             ]);
             if(!$m->files->isEmpty()){
 
+
                 foreach($m->files as $index => $file){
-                    $file_url  = $file->storeAs($filePrefix, $file->getClientOriginalName(),'s3');
+
+                    $file_url  = $file->storeAs($filePrefix, 'testurl','s3');
 
 
-                    ReportFile::create([
-                        'report_id' => $report->id,
+                    $file = File::create([
                         'file_url' => $file_url,
                         'file_type' => $file->getMimeType()
                     ]);
+
+//                    ReportFile::create([
+//                        'report_id' => $report->id,
+//                        'file_url' => $file_url,
+//                        'file_type' => $file->getMimeType()
+//                    ]);
+
+
+                    //$report->files()->sync($file);
 
                 }
             }
         }
 
-        return "OK";
+        return response()->json("true",200);
 
     }
 
@@ -97,14 +105,15 @@ class ReportController extends Controller
         return view('report.show',compact('report'));
     }
 
+
     public function update($id,Request $request){
+
 
         $report = Report::find($id);
 
         $report->update($request->all());
 
         return response()->json('true',200);
-
 
     }
 

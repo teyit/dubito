@@ -16,8 +16,7 @@ class CreateCaseFilesTable extends Migration
         Schema::create('case_files', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('case_id');
-            $table->string('file_url');
-            $table->string('file_type');
+            $table->integer('file_id');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

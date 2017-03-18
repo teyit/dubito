@@ -8,7 +8,7 @@ class MessageFile extends Model
 {
 	protected  $table = 'message_files';
 
-	protected $fillable = ['message_id','file_url','file_type'];
+	protected $fillable = ['message_id','file_id'];
 
 
 	public function message(){

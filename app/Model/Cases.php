@@ -9,7 +9,6 @@ class Cases extends Model
 {
     protected $table = 'cases';
 
-
     protected $fillable = ['title','user_id','topic_id','description','category_id','created_at','updated_at'];
 
     protected $dates = ['created_at', 'updated_at'];
@@ -36,8 +35,18 @@ class Cases extends Model
         return $this->belongsToMany('App\Model\Tag','case_tag','case_id','tag_id');
     }
 
+//    public function links(){
+//        return $this->hasMany('App\Model\CaseLink','case_id','id');
+//    }
+
+
+    public function files(){
+        return $this->belongsToMany('App\Model\File','case_files','case_id','file_id');
+    }
+
+
     public function links(){
-        return $this->hasMany('App\Model\CaseLink','case_id','id');
+        return $this->belongsToMany('App\Model\Link','case_links','case_id','link_id');
     }
 
 }

@@ -16,7 +16,7 @@ class CreateReportLinkTabe extends Migration
         Schema::create('report_links', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('report_id');
-            $table->string('link');
+            $table->integer('link_id');
             $table->timestamps();
         });
     }

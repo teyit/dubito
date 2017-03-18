@@ -23,9 +23,23 @@ class Message extends Model
     ];
 
 
+//	public function files(){
+//		return $this->hasMany('App\Model\MessageFile','message_id','id');
+//	}
+	
+	
+	
+	
 	public function files(){
-		return $this->hasMany('App\Model\MessageFile','message_id','id');
+	    return $this->belongsToMany('App\Model\File','message_files','message_id','file_id');
 	}
+
+
+
+    public function links(){
+        return $this->belongsToMany('App\Model\Link','message_links','message_id','lnk_id');
+    }
+
 
 
     public function  unreadMessageCount($sender_id)

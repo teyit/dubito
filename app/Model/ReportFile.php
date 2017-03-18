@@ -8,7 +8,7 @@ class ReportFile extends Model
 {
     protected  $table = 'report_files';
 
-    protected $fillable = ['report_id','file_url','file_type','category_id'];
+    protected $fillable = ['report_id','file_id'];
 
 
     public function report(){
