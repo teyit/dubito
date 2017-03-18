@@ -41,12 +41,12 @@ class Cases extends Model
 
 
     public function files(){
-        return $this->belongsToMany('App\Model\File','case_files','case_id','file_id');
+        return $this->belongsToMany('App\Model\File','case_files','case_id','file_id')->withTimestamps();
     }
 
 
     public function links(){
-        return $this->belongsToMany('App\Model\Link','case_links','case_id','link_id');
+        return $this->belongsToMany('App\Model\Link','case_links','case_id','link_id')->withTimestamps();
     }
 
 }

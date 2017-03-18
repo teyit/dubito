@@ -31,13 +31,13 @@ class Message extends Model
 	
 	
 	public function files(){
-	    return $this->belongsToMany('App\Model\File','message_files','message_id','file_id');
+	    return $this->belongsToMany('App\Model\File','message_files','message_id','file_id')->withTimestamps();
 	}
 
 
 
     public function links(){
-        return $this->belongsToMany('App\Model\Link','message_links','message_id','lnk_id');
+        return $this->belongsToMany('App\Model\Link','message_links','message_id','lnk_id')->withTimestamps();
     }
 
 

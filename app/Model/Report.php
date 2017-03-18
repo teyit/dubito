@@ -30,12 +30,12 @@ class Report extends Model
 
 
     public function files(){
-        return $this->belongsToMany('App\Model\File','report_files','report_id','file_id');
+        return $this->belongsToMany('App\Model\File','report_files','report_id','file_id')->withTimestamps();
     }
 
 
     public function links(){
-        return $this->belongsToMany('App\Model\Link','report_links','report_id','link_id');
+        return $this->belongsToMany('App\Model\Link','report_links','report_id','link_id')->withTimestamps();
     }
 
 }
