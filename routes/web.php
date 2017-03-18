@@ -8,6 +8,17 @@ Route::get("/",function(){
 
 
 
+Route::get('test', function(){
+
+    $message = \App\Model\Message::find(1);
+
+    $message->files()->attach(1);
+
+    dd($message);
+
+});
+
+
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
 	dd($tags);

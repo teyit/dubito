@@ -56,7 +56,7 @@ class ServiceController extends Controller
 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m){
-                $message = Message::where('external_message_id',$m['message']['mid'])->first();
+                $message = Message::where('external_message_id',$m['message']['mid'])->where('source','facebook:message')->first();
                 if($message){
                     \Log::info("pass");
 
@@ -92,17 +92,23 @@ class ServiceController extends Controller
                             $message->save();
                         }else{
 
-//                            File::create(
+//                           $rf =  File::create(
 //                                ['file_type' => $a['type'],
 //                                 'file_url' => $a['payload']['url'],
 //                            ]);
-
+//
+//                           \Log::info('File--',$rf);
+//
                             $rf = new File();
                             $rf->file_type = $a['type'];
                             $rf->file_url = $a['payload']['url'];
                             $rf->save();
 
-                            //$message->files()->attach($rf->id);
+
+
+                            \Log::info('Fileid --',$rf->id);
+
+                            $message->files()->attach($rf->id);
                         }
 
                     }

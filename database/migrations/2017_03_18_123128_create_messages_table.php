@@ -16,7 +16,7 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('report_id');
-            $table->integer('external_message_id')->nullable();
+            $table->string('external_message_id')->nullable();
             $table->bigInteger('sender_id')->nullable();
             $table->bigInteger('recipient_id')->nullable();
             $table->string('account_picture')->nullable();
