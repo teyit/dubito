@@ -92,17 +92,17 @@ class ServiceController extends Controller
                             $message->save();
                         }else{
 
-//                           $rf =  File::create(
-//                                ['file_type' => $a['type'],
-//                                 'file_url' => $a['payload']['url'],
-//                            ]);
+                           $rf =  File::create(
+                                ['file_type' => $a['type'],
+                                 'file_url' => $a['payload']['url'],
+                            ]);
 //
 //                           \Log::info('File--',$rf);
 //
-                            $rf = new File();
-                            $rf->file_type = $a['type'];
-                            $rf->file_url = $a['payload']['url'];
-                            $rf->save();
+//                            $rf = new File();
+//                            $rf->file_type = $a['type'];
+//                            $rf->file_url = $a['payload']['url'];
+//                            $rf->save();
 
 
 
