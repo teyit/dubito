@@ -59,6 +59,7 @@
         </div>
     @endforeach
 </div>
+@include('report.partials.assign_to_case_modal')
 @section('script')
     <script>
     $(document).ready(function(){
@@ -68,4 +69,3 @@
     });
     </script>
 @endsection
-@include('report.partials.assign_to_case_modal')

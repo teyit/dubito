@@ -30,6 +30,7 @@
     </div>
 </div>
 @section('script')
+    @parent
     <script>
         $(".email-list-item").hover(function () {
             $(".view-case-btn-container ",this).removeClass('hidden')
@@ -72,6 +73,7 @@
                                 $.each(message_list,function(index,message_id){
                                     $('#checkbox-label-'+message_id).addClass('hidden');
                                 });
+                                
                                 $.gritter.add({
                                     title: 'Success',
                                     text: 'This message was assigned as report successfuly',

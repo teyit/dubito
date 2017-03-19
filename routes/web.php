@@ -8,13 +8,6 @@ Route::get("/",function(){
 
 
 
-Route::get('test', function(){
-    $aa = pathinfo('https://scontent.xx.fbcdn.net/v/t34.0-12/17391857_10212784508193353_1675430441_n.jpg?_nc_ad=z-m&oh=5c95d43bba7a219039c4e2268b42432c&oe=58CF3144');
-
-    dd($aa);
-});
-
-
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
 	dd($tags);

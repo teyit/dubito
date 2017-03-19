@@ -30,6 +30,7 @@
 
 <script src="{{url('assets/lib/select2/js/select2.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/jquery.gritter/js/jquery.gritter.js')}}"></script>
+<script src="{{url('assets/js/app-tables-datatables.js')}}" type="text/javascript"></script>
 
 
 
@@ -40,6 +41,9 @@
     $(document).ready(function(){
         //initialize the javascript
         App.init();
+
+        App.dataTables();
+
 //        App.dashboard();
     });
 </script>

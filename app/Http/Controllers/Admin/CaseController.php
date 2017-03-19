@@ -54,7 +54,10 @@ class CaseController extends Controller
 
     public function show($id){
 
-        $case = Cases::find($id);
+        $case = Cases::with('reports')->find($id);
+
+
+
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();

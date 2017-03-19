@@ -56,11 +56,15 @@ class ReportController extends Controller
 
         $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
 
+        
+        
         foreach($messages as $m){
+
             $m->update([
                 'report_id' => $report->id
             ]);
             if(!$m->files->isEmpty()){
+
                 foreach($m->files as $index => $file){
                     $report->files()->attach($file->id);
 

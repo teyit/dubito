@@ -9,7 +9,7 @@
                     <button  data-toggle="modal"  data-target="#case-create" class="btn btn-success">Add Case</button>
                 </div>
                 <div class="panel-body">
-                    <table class="table">
+                    <table id="table1" class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
