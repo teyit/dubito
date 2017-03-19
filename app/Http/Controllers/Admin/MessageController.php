@@ -9,21 +9,37 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
+    private function getSenders(){
+        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->get();
+
+        $senders = $messages->groupBy('sender_id');
+
+        foreach($senders as $key => $s){
+            $s->count = $s->where('is_read',0)->count();
+        }
+        return $senders;
+    }
+
+
+
     public function index(){
 
 
-        $senders = Message::selectRaw('messages.*,count(id) as count')->groupBy('sender_id','recipient_id')->get();
+        $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id','1672136149469483')->get();
+        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->get();
 
-        return view('message.index',compact('senders','messages','count'));
+        return view('message.index',compact('senders','messages'));
     }
 
 
 
 
 	public function show(Request $request, $id){
-		$messages = Message::where('sender_id',$id)->get();
+
+        $senders = $this->getSenders();
+        $messages = Message::where('sender_id',$id)->get();
+
 
         Message::where('sender_id', $id)->update(['is_read' => 1]);
 
@@ -35,8 +51,6 @@ class MessageController extends Controller
 				]
 			]);
 		}else{
-			$senders = Message::groupBy('sender_id','recipient_id')->get();
-			$messages = Message::where('sender_id',$id)->get();
 			return view('message.index',compact('senders','messages'));
 		}
 	}

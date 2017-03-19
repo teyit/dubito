@@ -28,10 +28,9 @@
             <div class="email-list-detail">
                 <div class="thread-messages message-self">
                     {{$s->text}}
+                    <hr />
                     @if(!$s->files->isEmpty())
                         @foreach($s->files as $file)
-
-
                             @if($file->file_type == 'image')
                                 <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" />
                             @endif
@@ -46,8 +45,27 @@
                         @endforeach
                     @endif
                 </div>
+
+
+
+            </div>
+            <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
+                @if($s->report_id)
+                <a target="_blank" href="{{route("cases.show",$s->report->cases->id)}}">
+                    <button type="button" class="btn btn-default"><i class="icon mdi mdi-case-check"></i> View case</button>
+                </a>
+                @endif
             </div>
         </div>
     @endforeach
 </div>
+@section('script')
+    <script>
+    $(document).ready(function(){
+        $(".thread-list nav li").removeClass('active');
+        $(".sender-item-{{$messages->first()->sender_id}}").addClass('active');
+        $(".sender-item-{{$messages->first()->sender_id}} .thread-count").hide();
+    });
+    </script>
+@endsection
 @include('report.partials.assign_to_case_modal')

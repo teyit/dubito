@@ -32,7 +32,7 @@ class Cases extends Model
     }
     
     public function tags(){
-        return $this->belongsToMany('App\Model\Tag','case_tag','case_id','tag_id');
+        return $this->belongsToMany('App\Model\Tag','case_tags','case_id','tag_id');
     }
 
 //    public function links(){

@@ -4722,7 +4722,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 10px 15px;
 }
 .nav > li > a:hover,
-.nav > li > a:focus {
+.nav > li > a:focus , .nav > li.active {
   text-decoration: none;
   background-color: #eeeeee;
 }
@@ -10540,6 +10540,7 @@ canvas {
 .aside-nav .nav li.active a {
   color: #4285f4;
 }
+
 .aside-nav .nav li.active a .icon {
   color: #4285f4;
 }

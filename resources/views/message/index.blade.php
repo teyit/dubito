@@ -25,11 +25,13 @@
                 <div class="aside-nav collapse thread-list">
                     <ul class="nav">
                         @foreach($senders as $s)
-                            <li class="active">
-                                <a class="spf-link" href="/messages/{{$s->sender_id}}">
-                                    <span class="thread-count label label-primary">{{$s->unreadMessageCount($s->sender_id)}}</span>
-                                    <div class="thread-avatar" style="background-image:url('{{$s->account_picture}}');"></div>
-                                    <span class="thread-name">{{$s->account_name}}</span>
+                            <li class="sender-item-{{$s->first()->sender_id}}">
+                                <a class="spf-link" href="/messages/{{$s->first()->sender_id}}">
+                                    @if($s->count > 0)
+                                    <span class="thread-count label label-primary">{{$s->count}}</span>
+                                    @endif
+                                    <div class="thread-avatar" style="background-image:url('{{$s->first()->account_picture}}');"></div>
+                                    <span class="thread-name">{{$s->first()->account_name}}</span>
                                 </a>
                             </li>
                         @endforeach

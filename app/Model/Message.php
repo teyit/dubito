@@ -22,13 +22,6 @@ class Message extends Model
         'is_read'
     ];
 
-
-//	public function files(){
-//		return $this->hasMany('App\Model\MessageFile','message_id','id');
-//	}
-	
-	
-	
 	
 	public function files(){
 	    return $this->belongsToMany('App\Model\File','message_files','message_id','file_id')->withTimestamps();
@@ -37,9 +30,12 @@ class Message extends Model
 
 
     public function links(){
-        return $this->belongsToMany('App\Model\Link','message_links','message_id','lnk_id')->withTimestamps();
+        return $this->belongsToMany('App\Model\Link','message_links','message_id','link_id')->withTimestamps();
     }
 
+    public function report(){
+        return $this->belongsTo('App\Model\Report','report_id');
+    }
 
 
     public function  unreadMessageCount($sender_id)

@@ -79,7 +79,21 @@ class CaseController extends Controller
         }
 
         $case->tags()->sync($tags);
-        return response()->json('true',200);
+        return response()->json(true,200);
+
+    }
+    
+    
+    public function caseStatusUpdate(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $status = $request->input('status');
+
+        $case->status = $status;
+        $case->save();
+
+        return response()->json(true,200);
+
+
     }
 
 
@@ -87,7 +101,8 @@ class CaseController extends Controller
     public function destroy($id){
         $case = Cases::find($id);
         $case->delete();
-        return response()->json('true',200);
+        return response()->json(true,200);
+
 
     }
     

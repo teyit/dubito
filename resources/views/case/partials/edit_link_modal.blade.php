@@ -31,7 +31,7 @@
         $(function(){
             $(document).on('click',".link-edit-btn",function () {
                 var id = $(this).data('id');
-                $.getJSON("/cases/"+ {{$case->id}} + "/links/" + id +"/edit", function(data) {
+                $.getJSON("/links/" + id +"/edit", function(data) {
 
                     $("#edit-link-modal").data('id',data.id);
 
@@ -50,7 +50,7 @@
                     var id = $("#edit-link-modal").data('id');
                     var link = $('#edit-link').val();
                     var case_id = $("#case_id").val();
-                    var url = "/cases/"+ "{{$case->id}}" + "/links/" + id;
+                    var url = "/links/" + id;
 
                     $.ajax({
                         method:"PUT",
@@ -61,6 +61,13 @@
                             case_id:case_id
                         },
                         success:function(data){
+
+                            $.gritter.add({
+                                title: 'Success',
+                                text: 'Link was updated succesfully',
+                                class_name: 'color success'
+                            });
+
                             $("#list-link-"+data.id).text(data.link);
 
                         }

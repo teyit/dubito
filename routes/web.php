@@ -9,13 +9,9 @@ Route::get("/",function(){
 
 
 Route::get('test', function(){
+    $aa = pathinfo('https://scontent.xx.fbcdn.net/v/t34.0-12/17391857_10212784508193353_1675430441_n.jpg?_nc_ad=z-m&oh=5c95d43bba7a219039c4e2268b42432c&oe=58CF3144');
 
-    $message = \App\Model\Message::find(1);
-
-    $message->files()->attach(1);
-
-    dd($message);
-
+    dd($aa);
 });
 
 
@@ -32,8 +28,11 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::resource("reports","ReportController");
     Route::resource("cases","CaseController");
     Route::resource("tags","TagController");
-    Route::resource('cases.links',"LinkController");
+    Route::resource('links',"LinkController");
     Route::post('addCaseTag/{case_id}',['as'=>'case.tag.store','uses'=>'CaseController@addCaseTag']);
+    Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
+
+
 
     Route::put('/report_files/{id}/status',['as'=>'report_files.status','uses'=>'ReportController@status']);
 });

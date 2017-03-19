@@ -31,7 +31,13 @@
 </div>
 @section('script')
     <script>
+        $(".email-list-item").hover(function () {
+            $(".view-case-btn-container ",this).removeClass('hidden')
+        },function(){
+            $(".view-case-btn-container ",this).addClass('hidden');
+        });
         $(function(){
+
             $(document).on('click',".report-assign-case",function () {
                 var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
                     return $(el).val();
@@ -42,7 +48,7 @@
                 }
 
                 getCases();
-                
+
                 $('#report-assign-to-case').modal({
                     show: 'true',
                     keyboard: false
@@ -50,6 +56,7 @@
 
 
                 $("#report-assign-case-form").on('submit',function(e){
+                    $('#report-assign-to-case').modal('hide');
                     var case_id = $("#case_id").val();
                     e.preventDefault();
                     $.ajax({
@@ -61,18 +68,16 @@
                         },
                         method : "POST",
                         success: function(result){
-
-                           if(result){
-                               $.each(message_list,function(index,message_id){
-                                   $('#checkbox-label-'+message_id).addClass('hidden');
+                            if(result){
+                                $.each(message_list,function(index,message_id){
+                                    $('#checkbox-label-'+message_id).addClass('hidden');
                                 });
-
-                               $.gritter.add({
-                                   title: 'Success',
-                                   text: 'This message was assigned as report successfuly',
-                                   class_name: 'color success'
-                               });
-                           }
+                                $.gritter.add({
+                                    title: 'Success',
+                                    text: 'This message was assigned as report successfuly',
+                                    class_name: 'color success'
+                                });
+                            }
                         }
                     });
 

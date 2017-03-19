@@ -61,32 +61,20 @@ class ReportController extends Controller
                 'report_id' => $report->id
             ]);
             if(!$m->files->isEmpty()){
-
-
                 foreach($m->files as $index => $file){
+                    $report->files()->attach($file->id);
 
-                    $file_url  = $file->storeAs($filePrefix, 'testurl','s3');
-
-
-                    $file = File::create([
-                        'file_url' => $file_url,
-                        'file_type' => $file->getMimeType()
-                    ]);
-
-//                    ReportFile::create([
-//                        'report_id' => $report->id,
-//                        'file_url' => $file_url,
-//                        'file_type' => $file->getMimeType()
-//                    ]);
-
-
-                    //$report->files()->sync($file);
+                }
+            }
+            if(!$m->links->isEmpty()){
+                foreach($m->links as $index => $link){
+                    $report->links()->attach($link->id);
 
                 }
             }
         }
 
-        return response()->json("true",200);
+        return response()->json(true,200);
 
     }
 

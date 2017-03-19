@@ -7,7 +7,7 @@
 
             </div>
             <div class="modal-body custom-width">
-                <form id = "create-link-form" method="post" action="{{route("cases.links.store",$case->id)}}">
+                <form id = "create-link-form" method="post" action="{{route("links.store")}}">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Link</label>

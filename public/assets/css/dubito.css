@@ -75,6 +75,32 @@
     background:#e67e22;
     color:#fff;
 }
+
+
+.btn-suspended{
+    background:#9b59b6;
+    color:#fff;
+    border:1px solid #9b59b6;
+}
+
+.btn-suspended:hover{
+    background:#9b59b6;
+    color:#fff;
+    border:1px solid #9b59b6;
+}
+
+.btn-no-analysis{
+    background:#e67e22;
+    color:#fff;
+    border:1px solid #e67e22;
+}
+
+.btn-no-analysis:hover{
+    background:#e67e22;
+    color:#fff;
+    border:1px solid #e67e22;
+}
+
 .thread-avatar{
     width:32px;
     height:32px;
