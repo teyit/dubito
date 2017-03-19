@@ -30,6 +30,7 @@
     </div>
 </div>
 @section('script')
+    @parent
     <script>
         $(".email-list-item").hover(function () {
             $(".view-case-btn-container ",this).removeClass('hidden')
