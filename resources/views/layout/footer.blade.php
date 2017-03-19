@@ -31,7 +31,9 @@
 <script src="{{url('assets/lib/select2/js/select2.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/jquery.gritter/js/jquery.gritter.js')}}"></script>
 <script src="{{url('assets/js/app-tables-datatables.js')}}" type="text/javascript"></script>
-
+<script src="{{url("assets/lib/jquery.magnific-popup/jquery.magnific-popup.min.js")}}" type="text/javascript"></script>
+<script src="{{url('assets/js/app-page-gallery.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/masonry/masonry.pkgd.min.js')}}" type="text/javascript"></script>
 
 
 
@@ -43,6 +45,11 @@
         App.init();
 
         App.dataTables();
+
+
+        $(window).on('load',function(){
+            App.pageGallery();
+        });
 
 //        App.dashboard();
     });

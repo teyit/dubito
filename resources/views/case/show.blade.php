@@ -85,28 +85,28 @@
                                         </div>
                                     </form>
                                 </div>
-                                {{--<div class="panel-heading">Images</div>--}}
-                                {{--<div class="panel-body">--}}
-                                    {{--<div class="gallery-container">--}}
-                                        {{--@for($i=0;$i<12;$i++)--}}
-                                        {{--<div class="item">--}}
-                                            {{--<div class="photo">--}}
-                                                {{--<div class="img"><img src="http://placehold.it/165x109?v2" alt="Gallery Image">--}}
-                                                    {{--<div class="over">--}}
-                                                        {{--<div class="info-wrapper">--}}
-                                                            {{--<div class="info">--}}
-                                                                {{--<div class="title">Boats On The Ocean</div>--}}
-                                                                {{--<div class="date">Jun 23 2016</div>--}}
-                                                                {{--<div class="func"><a href="#"><i class="icon mdi mdi-link"></i></a><a href="" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--@endfor--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
+                                <div class="panel-heading">Images</div>
+                                <div class="panel-body">
+                                    <div class="gallery-container">
+                                        @for($i=0;$i<5;$i++)
+                                        <div class="item">
+                                            <div class="photo">
+                                                <div class="img"><img src="http://placehold.it/165x109?v2" alt="Gallery Image">
+                                                    <div class="over">
+                                                        <div class="info-wrapper">
+                                                            <div class="info">
+                                                                <div class="title">Boats On The Ocean</div>
+                                                                <div class="date">Jun 23 2016</div>
+                                                                <div class="func"><a href="#"><i class="icon mdi mdi-link"></i></a><a href="" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endfor
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,22 @@
                             </div>
                             <div class="timeline-gallery">
                                 @foreach($report->files as $f)
-                                    <img src="{{$f->file_url}}" alt="Thumbnail" class="gallery-thumbnail">
+                                    <div class="gallery-container">
+                                    <div class="item">
+                                    <div class="photo">
+                                        <div class="img"><img src="{{$f->file_url}}" alt="Gallery Image">
+                                            <div class="over">
+                                                <div class="info-wrapper">
+                                                    <div class="info">
+                                                        <div class="func"><a href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{$f->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    {{--<img src="{{$f->file_url}}" alt="Thumbnail" class="gallery-thumbnail">--}}
                                 @endforeach
                             </div>
                         </div>
@@ -253,14 +268,6 @@
 
     </div>
 
-
-
-
-
-    {{--<div class="user-info-list panel panel-default">--}}
-    {{--<div class="panel-heading panel-heading-divider"><b>{{$case->title}} </b><span class="panel-subtitle">{{$case->topic->title}} - {{$case->category->title}}</span></div>--}}
-
-    {{--</div>--}}
 
 
 
