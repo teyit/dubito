@@ -233,9 +233,13 @@
                                         <div class="form-group">
                                             <textarea name="description" class="form-control" id="case-description">{{$case->description or ''}}</textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
+                                        <div class="form-group pull-right">
 
+                                            <input type="file" name="file-1" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile">
+                                            <label for="file-1" class="btn-default"> <i class="mdi mdi-attachment"></i><span>Browse files...</span></label>
+
+
+                                            <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
                                         </div>
                                     </form>
                                 </div>
