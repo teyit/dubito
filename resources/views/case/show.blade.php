@@ -88,23 +88,23 @@
                                 <div class="panel-heading">Images</div>
                                 <div class="panel-body">
                                     <div class="gallery-container">
-                                        @for($i=0;$i<5;$i++)
+                                     @foreach($case->files as $file)
                                         <div class="item">
                                             <div class="photo">
-                                                <div class="img"><img src="http://placehold.it/165x109?v2" alt="Gallery Image">
+                                                <div class="img"><img src="{{$file->file_url}}" alt="Gallery Image">
                                                     <div class="over">
                                                         <div class="info-wrapper">
                                                             <div class="info">
                                                                 <div class="title">Boats On The Ocean</div>
                                                                 <div class="date">Jun 23 2016</div>
-                                                                <div class="func"><a href="#"><i class="icon mdi mdi-link"></i></a><a href="" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                                <div class="func"><a class="remove-file-from-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{$file->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        @endfor
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                                             <div class="over">
                                                 <div class="info-wrapper">
                                                     <div class="info">
-                                                        <div class="func"><a href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{$f->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                        <div class="func"><a class="add-image-to-case" data-file-id="{{$f->id}}" href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{$f->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -200,40 +200,6 @@
                     </div>
                 @endforeach
 
-
-                {{--<div class="panel panel-default panel-table">--}}
-                    {{--<div class="panel panel-default">--}}
-                        {{--<div class="panel-heading">Reports</div>--}}
-                        {{--<div class="panel-body">--}}
-                            {{--<table class="table table-condensed table-striped">--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<th>ID</th>--}}
-                                    {{--<th>Source</th>--}}
-                                    {{--<th>Account Name</th>--}}
-                                    {{--<th>status</th>--}}
-                                    {{--<th>created_at</th>--}}
-                                    {{--<th>updated_at</th>--}}
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody>--}}
-                                {{--@foreach($case->reports as $reports)--}}
-                                    {{--<tr>--}}
-                                        {{--<td>{{$reports->id}}</td>--}}
-                                        {{--<td>{{$reports->source}}</td>--}}
-                                        {{--<td>{{$reports->accound_name}}</td>--}}
-                                        {{--<td>{{$reports->status}}</td>--}}
-                                        {{--<td>{{$reports->created_at}}</td>--}}
-                                        {{--<td>{{$reports->updated_at}}</td>--}}
-                                    {{--</tr>--}}
-                                {{--@endforeach--}}
-                                {{--</tbody>--}}
-                            {{--</table>--}}
-                        {{--</div>--}}
-
-                    {{--</div>--}}
-
-                {{--</div>--}}
             </div>
 
 
@@ -298,6 +264,56 @@
             } else if(status == 'suspended'){
                 $(".case-status-dropdown").addClass('btn-suspended');
             }
+
+            $('.add-image-to-case').on('click',function(){
+                var file_id =  $(this).data('file-id');
+                $.ajax({
+                    method:"post",
+                    url:"{{route("case.file.store",$case->id)}}",
+                    data:{_token:$("#_token").val(),file_id:file_id},
+                    success:function(response){
+                        if(!response){
+                                $.gritter.add({
+                                    title: 'Error',
+                                    text: 'this image have already was added',
+                                    class_name: 'color danger'
+                                });
+                        }else{
+                            $.gritter.add({
+                                title: 'Success',
+                                text: 'Image  was added succesfully',
+                                class_name: 'color success'
+                            });
+
+                            window.location.reload();
+                        }
+                    }
+
+                });
+
+            });
+
+        });
+
+        $('.remove-file-from-case').on('click',function(){
+            var file_id =  $(this).data('file-id');
+            $.ajax({
+                method:"post",
+                url:"{{route("case.file.remove",$case->id)}}",
+                data:{_token:$("#_token").val(),file_id:file_id},
+                success:function(response){
+                    if(response){
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Image  was removed succesfully',
+                            class_name: 'color success'
+                        });
+
+                        window.location.reload();
+                    }
+                }
+
+            });
         });
 
 
@@ -415,6 +431,8 @@
                 }
             });
         });
+
+
 
 
     </script>

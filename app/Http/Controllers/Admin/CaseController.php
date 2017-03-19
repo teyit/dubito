@@ -55,9 +55,6 @@ class CaseController extends Controller
     public function show($id){
 
         $case = Cases::with('reports')->find($id);
-
-
-
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
@@ -73,6 +70,16 @@ class CaseController extends Controller
 
 
 
+
+    public function destroy($id){
+        $case = Cases::find($id);
+        $case->delete();
+        return response()->json(true,200);
+
+
+    }
+
+
     public function addCaseTag(Request $request,$caseID){
 
         $case = Cases::find($caseID);
@@ -85,8 +92,29 @@ class CaseController extends Controller
         return response()->json(true,200);
 
     }
-    
-    
+
+    public function addCaseFile(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $file = $request->input('file_id');
+
+        if(!$case->files->contains($file)){
+           $case->files()->attach($file);
+            return response()->json(true,200);
+        }
+        return response()->json(false,200);
+
+    }
+
+
+    public function removeCaseFile(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $file = $request->input('file_id');
+        $case->files()->detach($file);
+        return response()->json(true,200);
+
+    }
+
+
     public function caseStatusUpdate(Request $request,$caseID){
         $case = Cases::find($caseID);
         $status = $request->input('status');
@@ -100,13 +128,4 @@ class CaseController extends Controller
     }
 
 
-
-    public function destroy($id){
-        $case = Cases::find($id);
-        $case->delete();
-        return response()->json(true,200);
-
-
-    }
-    
 }
