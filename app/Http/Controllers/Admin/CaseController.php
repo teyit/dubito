@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\CaseLink;
 use App\Model\Category;
+use App\Model\Evidence;
 use App\Model\Tag;
 use App\Model\Topic;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class CaseController extends Controller
         $topics = Topic::latest()->get();
         $cases = Cases::latest()->get();
         $categories = Category::latest()->get();
+
         return view("case.index",compact("cases",'topics','categories'));
     }
 
@@ -58,7 +60,9 @@ class CaseController extends Controller
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
-        return view('case.show',compact('case','selectedTags','allTags','links'));
+        $evidences = Evidence::with('files')->get();
+
+        return view('case.show',compact('case','selectedTags','allTags','links','evidences'));
     }
 
     public function update($id,Request $request){

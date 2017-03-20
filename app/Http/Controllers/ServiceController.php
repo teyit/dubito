@@ -100,17 +100,6 @@ class ServiceController extends Controller
                                 ['file_type' => $a['type'],
                                  'file_url' => $a['payload']['url'],
                             ]);
-//
-//                           \Log::info('File--',$rf);
-//
-//                            $rf = new File();
-//                            $rf->file_type = $a['type'];
-//                            $rf->file_url = $a['payload']['url'];
-//                            $rf->save();
-
-
-
-                            //§\Log::info('Fileid --',$rf->id);
 
                             $message->files()->attach($rf->id);
                         }

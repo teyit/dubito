@@ -154,3 +154,17 @@
 .hidden{
     display: none;
 }
+
+.evidence-gallery-container .item .photo .img .over .evidence-func a {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin-right: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+
+.evidence-func {
+    margin-left:10px;
+}

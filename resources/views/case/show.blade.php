@@ -91,13 +91,11 @@
                                      @foreach($case->files as $file)
                                         <div class="item">
                                             <div class="photo">
-                                                <div class="img"><img src="{{$file->file_url}}" alt="Gallery Image">
+                                                <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
                                                     <div class="over">
                                                         <div class="info-wrapper">
                                                             <div class="info">
-                                                                <div class="title">Boats On The Ocean</div>
-                                                                <div class="date">Jun 23 2016</div>
-                                                                <div class="func"><a class="remove-file-from-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{$file->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                                <div class="func"><a class="remove-file-from-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -174,7 +172,7 @@
                                             <div class="over">
                                                 <div class="info-wrapper">
                                                     <div class="info">
-                                                        <div class="func"><a class="add-image-to-case" data-file-id="{{$f->id}}" href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{$f->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                        <div class="func"><a class="add-file-to-case" data-file-id="{{$f->id}}" href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{$f->file_url}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -208,34 +206,66 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Evidence</div>
+                                <div class="panel-heading">Add New Evidence</div>
                                 <div class="panel-body">
-                                    <form id="case-description-form">
+                                    <form action="{{route("evidences.store")}}" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <textarea name="description" class="form-control" id="case-description">{{$case->description or ''}}</textarea>
+                                            <textarea name="text" required class="form-control" id="evidence-text">{{$evidence->text or ''}}</textarea>
                                         </div>
                                         <div class="form-group pull-right">
 
-                                            <input type="file" name="file-1" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile">
+                                            <input type="file" name="file[]" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile">
                                             <label for="file-1" class="btn-default"> <i class="mdi mdi-attachment"></i><span>Browse files...</span></label>
 
-
+                                            <input type="hidden" name="case_id" value="{{$case->id}}">
                                             <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-divider">Evidences<span class="panel-subtitle"></span></div>
+                    <div class="panel-body">
+                        <ul class="user-timeline">
+                            @foreach($evidences as $evidence)
+                            <li class="latest">
+                                <div class="user-timeline-description">{{$evidence->text or ''}}</div>
+                                <br>
+                                <div class="gallery-container evidence-gallery-container">
+                                    @foreach($evidence->files as $file)
+                                        <div class="item">
+                                            <div class="photo">
+                                                <div class="img"><img src="{{Storage::disk('s3')->url($file->file_url)}}" alt="Gallery Image">
+                                                    <div class="over">
+                                                        <div class="info-wrapper">
+                                                            <div class="info">
+                                                                <div class="func evidence-func"><a class="add-file-to-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-plus"></i></a><a href="{{Storage::disk('s3')->url($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </li>
+                            @endforeach
+
+                        </ul>
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
 
     </div>
-
-
-
 
 
     @include('case.partials.create_link_modal')
@@ -265,7 +295,7 @@
                 $(".case-status-dropdown").addClass('btn-suspended');
             }
 
-            $('.add-image-to-case').on('click',function(){
+            $('.add-file-to-case').on('click',function(){
                 var file_id =  $(this).data('file-id');
                 $.ajax({
                     method:"post",
