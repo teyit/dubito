@@ -10,9 +10,19 @@
                             <div class="col-md-9">
                                 <h2 style="font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}}</h2>
 
-                                <span class="md-mr-20"><span class="mdi mdi-account"></span> {{$case->user->name or ""}}</span>
+                                <span class="md-mr-40"><span class="mdi mdi-account"></span>
+                                <select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">
+                                    @foreach($users as $user)
+                                    @if($user->id == $case->user_id)
+                                            <option value="{{$user->id}}" selected>{{$user->name}}</option>
+                                    @else
+                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endif
+                                    @endforeach
+                                </select>
+                                </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title or ""}}</span>
-                                <span class="md-mr-20"><span class="mdi mdi-account"></span> {{$case->topic->title or ""}}</span>
+                                <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title or ""}}</span>
                                 <span class="md-mr-20">
                                     <div class="btn-group btn-hspace">
                                         <button type="button" data-toggle="dropdown" class="btn btn-primary case-status-dropdown case-status-dropdown">
@@ -459,6 +469,25 @@
                         });
                     }
                 }
+            });
+        });
+
+
+        $(".assign-user-to-case").on('change',function(){
+            $.ajax({
+                method:"put",
+                url:"{{route('case.user.assign',$case->id)}}",
+                data:{_token:$("#_token").val(),user_id:$(this).val()},
+                success:function(response){
+                 if(response){
+                     $.gritter.add({
+                         title: 'Success',
+                         text: 'User was assigned to case successfuly',
+                         class_name: 'color success'
+                     });
+                 }
+                }
+
             });
         });
 

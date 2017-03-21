@@ -17,6 +17,7 @@
                                 <th>Topic</th>
                                 <th>Category</th>
                                 <th>Status</th>
+                                <th>User</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -46,6 +47,7 @@
                                     @endif
 
                                 </td>
+                                <td>{{$case->user->name}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}

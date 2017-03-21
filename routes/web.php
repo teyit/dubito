@@ -1,10 +1,11 @@
 <?php
 
 
-Route::get("/",function(){
-    return redirect('/messages');
-});
+//Route::get("/",function(){
+//    return redirect('/messages');
+//});
 
+Auth::routes();
 
 
 
@@ -26,6 +27,8 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('addCaseTag/{case_id}',['as'=>'case.tag.store','uses'=>'CaseController@addCaseTag']);
     Route::post('addCaseFile/{case_id}',['as'=>'case.file.store','uses'=>'CaseController@addCaseFile']);
     Route::post('removeCaseFile/{case_id}',['as'=>'case.file.remove','uses'=>'CaseController@removeCaseFile']);
+    Route::put('assignUserToCase/{case_id}',['as'=>'case.user.assign','uses'=>'CaseController@assignUserToCase']);
+
 
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
 
@@ -35,7 +38,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
 
-Auth::routes();
 
 Route::any('/service/messages/facebook', 'ServiceController@facebook');
 Route::any('/service/messages/twitter', 'ServiceController@twitter');

@@ -168,3 +168,8 @@
 .evidence-func {
     margin-left:10px;
 }
+
+
+.assign-user-to-case{
+    display: inherit;
+}

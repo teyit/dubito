@@ -7,6 +7,7 @@ use App\Model\Category;
 use App\Model\Evidence;
 use App\Model\Tag;
 use App\Model\Topic;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Cases;
@@ -61,8 +62,8 @@ class CaseController extends Controller
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
         $evidences = Evidence::with('files')->get();
-
-        return view('case.show',compact('case','selectedTags','allTags','links','evidences'));
+        $users = User::latest()->get();
+        return view('case.show',compact('users','case','selectedTags','allTags','links','evidences'));
     }
 
     public function update($id,Request $request){
@@ -128,6 +129,14 @@ class CaseController extends Controller
 
         return response()->json(true,200);
 
+    }
+    
+    public function assignUserToCase(Request $request,$caseID){
+        $case = Cases::find($caseID);
+
+        $case->user_id = $request->input('user_id');
+        $case->save();
+        return response()->json(true,200);
 
     }
 
