@@ -8,7 +8,7 @@ class Evidence extends Model
 {
     protected $table = 'evidences';
 
-    protected $fillable = ['id','text'];
+    protected $fillable = ['id','text','case_id'];
 
 
     public function files(){

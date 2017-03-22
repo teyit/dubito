@@ -241,8 +241,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-divider">Evidences<span class="panel-subtitle"></span></div>
                     <div class="panel-body">
+
+                        @if(!$case->evidences->isEmpty())
                         <ul class="user-timeline">
-                            @foreach($evidences as $evidence)
+
+                            @foreach($case->evidences as $evidence)
                             <li class="latest">
                                 <div class="user-timeline-description">{{$evidence->text or ''}}</div>
                                 <br>
@@ -265,8 +268,8 @@
                                 </div>
                             </li>
                             @endforeach
-
                         </ul>
+                        @endif
                     </div>
                 </div>
 

@@ -35,9 +35,9 @@ class Cases extends Model
         return $this->belongsToMany('App\Model\Tag','case_tags','case_id','tag_id');
     }
 
-//    public function links(){
-//        return $this->hasMany('App\Model\CaseLink','case_id','id');
-//    }
+    public function evidences(){
+        return $this->hasMany('App\Model\Evidence','case_id','id');
+    }
 
 
     public function files(){
