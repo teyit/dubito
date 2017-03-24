@@ -28,3 +28,9 @@ function clickableLink($s){
 
 }
 
+
+function findLinkFromText($s){
+     preg_match('/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/', $s,$matches);
+
+     return $matches;
+}

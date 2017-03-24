@@ -11,7 +11,7 @@ Auth::routes();
 
 
 Route::get('/deneme', function(){
-    $aa = linkDetect('Bu haberdeki pankartı teyit etmenizi rica ederim. Gerçekten bunu yapmışlar mı? https://l.facebook.com/l.php?u=https%3A%2F%2Fgoo.gl%2F0fRwjc&h=ATNB85y2l97dHIj7MZKrDsYRZ9QXZfQBlVAsH1Win3pA_kcWedNfqiegDW73sk9qhh7W7SZ740rYDA3CzP4HDgEEr_JT_8ruBZvhcZrvoZmk&s=1&enc=');
+    $aa = findLinkFromText('Bu haberdeki pankartı teyit etmenizi rica ederim. Gerçekten bunu yapmışlar mı? https://l.facebook.com/l.php?u=https%3A%2F%2Fgoo.gl%2F0fRwjc&h=ATNB85y2l97dHIj7MZKrDsYRZ9QXZfQBlVAsH1Win3pA_kcWedNfqiegDW73sk9qhh7W7SZ740rYDA3CzP4HDgEEr_JT_8ruBZvhcZrvoZmk&s=1&enc=');
 
     dd($aa);
 });

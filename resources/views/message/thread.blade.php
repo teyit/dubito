@@ -64,6 +64,12 @@
             </div>
         </div>
     @endforeach
+
+            <div class="paginate text-center">
+                {{ $messages->links() }}
+
+            </div>
+
 </div>
 @include('report.partials.assign_to_case_modal')
 @section('script')

@@ -47,7 +47,7 @@
                                     @endif
 
                                 </td>
-                                <td>{{$case->user->name}}</td>
+                                <td>{{$case->user->name or 'Not Assigned'}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}

@@ -46,7 +46,9 @@ class MessageController extends Controller
 	public function show(Request $request, $id){
 
         $senders = $this->getSenders();
-        $messages = Message::where('sender_id',$id)->get();
+
+        $messages = Message::where('sender_id',$id)->paginate(10);
+
         $topics = Topic::latest()->get();
 
         $categories = Category::latest()->get();

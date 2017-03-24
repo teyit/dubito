@@ -25,6 +25,8 @@ class CaseController extends Controller
         $cases = Cases::latest()->get();
         $categories = Category::latest()->get();
 
+
+
         return view("case.index",compact("cases",'topics','categories'));
     }
 
