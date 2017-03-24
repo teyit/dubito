@@ -33,7 +33,7 @@
             <div class="email-list-detail">
                 <div class="thread-messages message-self">
 
-                    {{$s->text}}
+                    {!! clickableLink($s->text) !!}
                     <hr />
                     @if(!$s->files->isEmpty())
                         @foreach($s->files as $file)
