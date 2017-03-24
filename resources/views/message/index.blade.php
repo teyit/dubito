@@ -44,6 +44,7 @@
         @include('message.thread',['messages' => $messages])
     </div>
 
+@include('message.partials._case_modal_form')
 @endsection
 @section('script')
     <script src="{{asset('assets/js/nprogress.js')}}"></script>

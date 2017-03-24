@@ -20,6 +20,7 @@
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>
                     </div>
                     <div class="form-group pull-right">
+                        <button type="button" data-toggle="modal" data-target="#add-new-case" class="btn btn-space btn-success">Add New Case</button>
                         <button type="submit" class="btn btn-space btn-primary">Assign</button>
                     </div>
 

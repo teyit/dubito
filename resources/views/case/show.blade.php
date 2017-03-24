@@ -21,8 +21,10 @@
                                     @endforeach
                                 </select>
                                 </span>
-                                <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title or ""}}</span>
-                                <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title or ""}}</span>
+                                <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
+                                <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
+                                <span class="md-mr-20"><span class="mdi mdi-collection-text"></span> {{$case->reports->count()}} Reports</span>
+
                                 <span class="md-mr-20">
                                     <div class="btn-group btn-hspace">
                                         <button type="button" data-toggle="dropdown" class="btn btn-primary case-status-dropdown case-status-dropdown">

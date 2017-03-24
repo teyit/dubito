@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Category;
 use App\Model\Message;
 use App\Model\MessageFile;
+use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -29,7 +31,13 @@ class MessageController extends Controller
 
         $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->get();
 
-        return view('message.index',compact('senders','messages'));
+        $topics = Topic::latest()->get();
+
+        $categories = Category::latest()->get();
+
+
+
+        return view('message.index',compact('senders','messages','topics','categories'));
     }
 
 
@@ -39,7 +47,9 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
         $messages = Message::where('sender_id',$id)->get();
+        $topics = Topic::latest()->get();
 
+        $categories = Category::latest()->get();
 
         Message::where('sender_id', $id)->update(['is_read' => 1]);
 
@@ -51,7 +61,7 @@ class MessageController extends Controller
 				]
 			]);
 		}else{
-			return view('message.index',compact('senders','messages'));
+			return view('message.index',compact('senders','messages','topics','categories'));
 		}
 	}
 

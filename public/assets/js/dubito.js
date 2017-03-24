@@ -23,7 +23,11 @@ $(function(){
            success: function(data){
               if(data == true){
                  getCases();
-                 $('.success-message').text("Case was added successfuly");
+                  $.gritter.add({
+                      title: 'Success',
+                      text: 'Case was added successfuly',
+                      class_name: 'color success'
+                  });
               }
            },
            error: function(data){
