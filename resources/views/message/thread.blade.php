@@ -2,7 +2,12 @@
 <div class="email-inbox-header">
     <div class="row">
         <div class="col-md-6">
-            <div class="email-title"><span class="icon mdi mdi-inbox"></span> {{$messages->first()->account_name}} <span class="new-messages">({{$messages->count()}} new messages)</span>  </div>
+            <div class="email-title"><span class="icon mdi mdi-inbox"></span> {{$messages->first()->account_name}}  <span class="new-messages">
+                    @if($messages->first()->source == 'facebook:message')
+                        <span class="label label-primary">Facebook</span>
+                    @endif
+
+                </span>  </div>
         </div>
         <div class="col-md-6">
             <div class="pull-right email-filters-right">
@@ -27,6 +32,7 @@
             </div>
             <div class="email-list-detail">
                 <div class="thread-messages message-self">
+
                     {{$s->text}}
                     <hr />
                     @if(!$s->files->isEmpty())

@@ -31,7 +31,10 @@
                                     <span class="thread-count label label-primary">{{$s->count}}</span>
                                     @endif
                                     <div class="thread-avatar" style="background-image:url('{{$s->first()->account_picture}}');"></div>
-                                    <span class="thread-name">{{$s->first()->account_name}}</span>
+                                    <span class="thread-name">{{$s->first()->account_name}}
+
+                                    </span>
+
                                 </a>
                             </li>
                         @endforeach
