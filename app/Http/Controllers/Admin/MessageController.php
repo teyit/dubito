@@ -29,7 +29,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->get();
+        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(10);
 
         $topics = Topic::latest()->get();
 

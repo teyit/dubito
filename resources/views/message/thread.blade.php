@@ -65,10 +65,11 @@
         </div>
     @endforeach
 
+            @if(isset($messages) and !empty($messages))
             <div class="paginate text-center">
                 {{ $messages->links() }}
-
             </div>
+           @endif
 
 </div>
 @include('report.partials.assign_to_case_modal')
