@@ -38,7 +38,7 @@
                     @if(!$s->files->isEmpty())
                         @foreach($s->files as $file)
                             @if($file->file_type == 'image')
-                                <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" />
+                                <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
                             @endif
                             @if($file->file_type == 'video')
                                 <video data-src="{{$file->file_url}}" style="width:150px;" src="{{$file->file_url}}"></video>
@@ -69,6 +69,10 @@
 @section('script')
     <script>
     $(document).ready(function(){
+
+            $(".fancybox").fancybox();
+
+
         $(".thread-list nav li").removeClass('active');
         $(".sender-item-{{$messages->first()->sender_id}}").addClass('active');
         $(".sender-item-{{$messages->first()->sender_id}} .thread-count").hide();

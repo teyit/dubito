@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{url('assets/lib/jquery.gritter/css/jquery.gritter.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/datatables/css/dataTables.bootstrap.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/jquery.magnific-popup/magnific-popup.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css" media="screen">
 
 
     <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
