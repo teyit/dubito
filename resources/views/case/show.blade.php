@@ -10,8 +10,9 @@
                             <div class="col-md-9">
                                 <h2 style="font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}}</h2>
 
-                                <span class="md-mr-40"><span class="mdi mdi-account"></span>
-                                <a id="assign-user-case" data-title="Select group" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
+                                <span class="md-mr-20"><span class="mdi mdi-account"></span>
+                                 <b>Assign User:</b>
+                                <a id="assign-user-case" data-title="Assign user to case" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
                                     {{--@foreach($users as $user)--}}
                                     {{--@if($user->id == $case->user_id)--}}
                                             {{--<option value="{{$user->id}}" selected>{{$user->name}}</option>--}}
@@ -23,7 +24,7 @@
                                 </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
                                 <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
-                                <span class="md-mr-20"><span class="mdi mdi-collection-text"></span> {{$case->reports->count()}} Reports</span>
+                                {{--<span class="md-mr-20"><span class="mdi mdi-collection-text"></span> {{$case->reports->count()}} Reports</span>--}}
 
                                 <span class="md-mr-20">
                                     <div class="btn-group btn-hspace">
