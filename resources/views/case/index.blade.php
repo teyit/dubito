@@ -9,7 +9,7 @@
                     <button  data-toggle="modal"  data-target="#case-create" class="btn btn-success">Add Case</button>
                 </div>
                 <div class="panel-body">
-                    <table id="table1" class="table">
+                    <table id="case-datatable" class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -18,6 +18,7 @@
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th>User</th>
+                                <th>Report Count</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -48,6 +49,7 @@
 
                                 </td>
                                 <td>{{$case->user->name or 'Not Assigned'}}</td>
+                                <td>{{$case->reports->count()}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}

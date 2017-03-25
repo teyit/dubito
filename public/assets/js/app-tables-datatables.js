@@ -11,7 +11,7 @@ var App = (function () {
         "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
     } );
 
-    $("#table1").dataTable();
+    $("#case-datatable").dataTable();
 
     //Remove search & paging dropdown
     $("#table2").dataTable({

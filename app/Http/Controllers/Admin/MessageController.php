@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
     private function getSenders(){
-        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->get();
+        $messages = Message::selectRaw('messages.*')->orderBy('created_at','ASC')->get();
 
         $senders = $messages->groupBy('sender_id');
 
@@ -53,7 +53,7 @@ class MessageController extends Controller
 
         $categories = Category::latest()->get();
 
-        Message::where('sender_id', $id)->update(['is_read' => 1]);
+        Message::where('sender_id', $id)->update(['is_read' => 1])->orderBy('created_at','ASC')->get();
 
 		if($request->has('spf')){
 			return json_encode([

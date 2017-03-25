@@ -12,6 +12,8 @@ class EvidenceController extends Controller
 {
     public function store(Request $request){
 
+        return response()->json($request->file('file'));
+
        $case_id = $request->input('case_id');
        $evidence =  Evidence::create($request->all());
 
