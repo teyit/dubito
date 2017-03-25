@@ -37,6 +37,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js"></script>
 
+<script src="{{url('assets/lib/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js')}}"></script>
 
 @yield('script')
 
@@ -48,9 +49,14 @@
 
         App.dataTables();
 
+//        App.formEditable();
+
+
+
 
         $(window).on('load',function(){
             App.pageGallery();
+
         });
 
 //        App.dashboard();

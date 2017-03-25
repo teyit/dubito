@@ -89,16 +89,45 @@ $(function(){
 
 
 
+// function getUsers(callback) {
+//     var url = "/api/users/";
+//      $.ajax({
+//         type:  'GET',
+//         async: true,
+//         url:   url,
+//         dataType: "json",
+//         success:function(response){
+//             callback(response);
+//         }
+//     });
+// }
 
-function getCases(){
-    var $reportCases = $(".report-cases");
-    $.get("/api/cases", function(data){
-        $reportCases.find('option').remove();
-        $.each(data, function(index, cases) {
-            $reportCases.append('<option value="' + cases.id + '">' + cases.title + '</option>');
-        });
+
+function getUsers(callback){
+    $.get("/api/users/", function(data){
+        callback(data);
     });
 }
+
+
+
+
+
+
+
+
+
+
+// function getUsers(){
+//     var $users = $(".user-cases");
+//     $.get("/api/users", function(data){
+//         $users.find('option').remove();
+//         $.each(data, function(index, cases) {
+//             $users.append('<option value="' + cases.id + '">' + cases.title + '</option>');
+//         });
+//     });
+// }
+
 
 
 // function getCasesEdit(){
