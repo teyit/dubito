@@ -29,7 +29,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(10);
+        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(5);
 
         $topics = Topic::latest()->get();
 
@@ -47,17 +47,27 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$id)->paginate(10);
+        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC')->paginate(5);
 
         $topics = Topic::latest()->get();
 
         $categories = Category::latest()->get();
 
-        Message::where('sender_id', $id)->update(['is_read' => 1])->orderBy('created_at','ASC')->get();
+        Message::where('sender_id', $id)->update(['is_read' => 1]);
 
-		if($request->has('spf')){
+
+        $currentPage = $request->get('page',false);
+
+        if($currentPage){
+            $pageTitle = 'Mesajlar: ' . $messages->first()->account_name.'('.$currentPage.')';
+        }else{
+            $pageTitle = 'Mesajlar: ' . $messages->first()->account_name;
+        }
+
+
+        if($request->has('spf')){
 			return json_encode([
-				'title' => 'Mesajlar: ' . $messages->first()->account_name,
+				'title' => $pageTitle,
 				'body' => [
 					'section-thread' => view('message.thread',['messages' => $messages])->render()
 				]

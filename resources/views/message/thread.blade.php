@@ -1,4 +1,3 @@
-
 <div class="email-inbox-header">
     <div class="row">
         <div class="col-md-6">
@@ -12,7 +11,8 @@
         <div class="col-md-6">
             <div class="pull-right email-filters-right">
                 <div class="btn-group">
-                    <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Save as a report</button>
+                    <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Assign to a case</button>
+                    <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Archive</button>
                     <button id="btn-mark-as-review" type="button" class="btn btn-default">Mark as a review</button>
                 </div>
             </div>
@@ -65,24 +65,13 @@
         </div>
     @endforeach
 
-            @if(isset($messages) and !empty($messages))
-            <div class="paginate text-center">
-                {{ $messages->links() }}
-            </div>
-           @endif
+    @if(isset($messages) and !empty($messages))
+    <div class="paginate text-center">
+        {{ $messages->links() }}
+    </div>
+   @endif
 
 </div>
-@include('report.partials.assign_to_case_modal')
-@section('script')
-    <script>
-    $(document).ready(function(){
-
-            $(".fancybox").fancybox();
-
-
-        $(".thread-list nav li").removeClass('active');
-        $(".sender-item-{{$messages->first()->sender_id}}").addClass('active');
-        $(".sender-item-{{$messages->first()->sender_id}} .thread-count").hide();
-    });
-    </script>
-@endsection
+<script>
+    $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
+</script>

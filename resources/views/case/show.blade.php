@@ -40,6 +40,8 @@
                                                 Suspended
                                             @elseif($case->status == 'to_be_tweeted')
                                                 To be Tweeted
+                                            @elseif($case->status == 'pending')
+                                                Pending
                                             @endif
                                             <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
                                         <ul role="menu" class="dropdown-menu case-status-menu">
@@ -49,6 +51,7 @@
                                             <li><a href="#" id="cancelled">Cancelled</a></li>
                                             <li><a href="#" id="suspended">Suspended</a></li>
                                             <li><a href="#" id="to_be_tweeted">To be Tweeted</a></li>
+                                            <li><a href="#" id="pending">Pending</a></li>
                                         </ul>
                                     </div>
                                 </span>
@@ -480,7 +483,7 @@
             $(".case-status-dropdown").removeClass('btn-no-analysis');
             $(".case-status-dropdown").removeClass('btn-suspended');
 
-            if(status == 'completed'){
+           if(status == 'completed'){
                $('.case-status-dropdown').addClass('btn-success');
            }else if(status == 'cancelled'){
                $('.case-status-dropdown').addClass('btn-danger');
@@ -492,6 +495,8 @@
                $(".case-status-dropdown").addClass('btn-no-analysis');
            } else if(status == 'suspended'){
                $(".case-status-dropdown").addClass('btn-suspended');
+           }else if(status == 'pending'){
+            $(".case-status-dropdown").addClass('btn-muted');
            }
 
 

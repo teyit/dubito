@@ -45,6 +45,9 @@
                                         <span class="label label-suspended">Suspended</span>
                                     @elseif($case->status == 'to_be_tweeted')
                                         <span class="label label-primary">To be Tweeted</span>
+                                    @elseif($case->status == 'pending')
+                                        <span class="label label-muted">Pending</span>
+
                                     @endif
 
                                 </td>

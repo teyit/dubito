@@ -47,8 +47,8 @@
         @include('message.thread',['messages' => $messages])
     </div>
 
-@include('message.partials._case_modal_form')
 @endsection
+
 @section('script')
     <script src="{{asset('assets/js/nprogress.js')}}"></script>
     <link rel="stylesheet" href="{{asset('assets/css/nprogress.css')}}" />
@@ -74,6 +74,15 @@
             // Finish request and remove progress bar
             NProgress.remove();
         });
+        $("#section-thread").on('thread-change',function(sender_id){
+            $(".pagination li a").addClass('spf-link');
+            spf.dispose();
+            spf.init();
+            $(".fancybox").fancybox();
+            $(".thread-list nav li").removeClass('active');
+            $(".sender-item-" + sender_id).addClass('active');
+            $(".sender-item-" + sender_id+" .thread-count").hide();
+        });
+        $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
     </script>
 @endsection
-@include("layout.partials.facebook-sdk")

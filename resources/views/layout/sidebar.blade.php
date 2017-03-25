@@ -12,7 +12,15 @@
 
                         <li><a href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
 
-                        <li><a href="{{url("/cases")}}"><i class="icon mdi mdi-case-check"></i>Cases</a></li>
+                        <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i>Reports</a></li>
+
+                        <li class="parent">
+                            <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
+                            <ul class="sub-menu">
+                                <li><a href="{{url("/cases/ongoing")}}">Ongoing</a></li>
+                                <li><a href="{{url("/cases/archived")}}">Archived</a></li>
+                            </ul>
+                        </li>
 
                         <li><a href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
 
