@@ -20,10 +20,6 @@ class Report extends Model
     }
 
 
-//    public function reportfiles(){
-//        return $this->hasMany('App\Model\ReportFile','report_id','id');
-//    }
-
     public function case(){
         return $this->belongsTo('App\Model\Cases','case_id','id');
     }

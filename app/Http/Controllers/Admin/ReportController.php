@@ -86,7 +86,7 @@ class ReportController extends Controller
         $topics = Topic::latest()->get();
         $cases = Cases::latest()->get();
         $categories = Category::latest()->get();
-        $report = Report::with('reportfiles')->find($id);
+        $report = Report::find($id);
 
         $is_edit = true;
         return view("report.edit",compact('report','topics','cases','categories','is_edit'));

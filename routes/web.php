@@ -16,7 +16,9 @@ Route::get("preview",function(){
 });
 
 Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
-    
+
+    Route::get('case/{is_archived}',['as'=>'case.is_archived','uses'=>'CaseController@index']);
+
     Route::resource("categories",'CategoryController');
     Route::resource("messages",'MessageController');
     Route::resource("topics","TopicController");
@@ -29,7 +31,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('addCaseFile/{case_id}',['as'=>'case.file.store','uses'=>'CaseController@addCaseFile']);
     Route::post('removeCaseFile/{case_id}',['as'=>'case.file.remove','uses'=>'CaseController@removeCaseFile']);
     Route::post('assignUserToCase/{case_id}',['as'=>'case.user.assign','uses'=>'CaseController@assignUserToCase']);
-
+    Route::post('/caseSendToArchive/{case_id}',['as'=>'case.sendarchive','uses'=>'CaseController@caseSendToArchive']);
 
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
 

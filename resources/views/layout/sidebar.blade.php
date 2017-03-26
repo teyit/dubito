@@ -17,8 +17,8 @@
                         <li class="parent">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
                             <ul class="sub-menu">
-                                <li><a href="{{url("/cases/ongoing")}}">Ongoing</a></li>
-                                <li><a href="{{url("/cases/archived")}}">Archived</a></li>
+                                <li><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
+                                <li><a href="{{url("/case/archived")}}">Archived</a></li>
                             </ul>
                         </li>
 

@@ -19,6 +19,7 @@ class CreateCaseTable extends Migration
             $table->string("title");
             $table->integer("topic_id");
             $table->integer("category_id");
+            $table->enum('is_archived',['ongoing','archived']);
             $table->timestamps();
         });
     }

@@ -20,11 +20,10 @@ class CaseController extends Controller
 
 
 
-    public function index(){
+    public function index($is_archived){
         $topics = Topic::latest()->get();
-        $cases = Cases::latest()->get();
+        $cases = Cases::where('is_archived',$is_archived)->get();
         $categories = Category::latest()->get();
-
 
 
         return view("case.index",compact("cases",'topics','categories'));
@@ -140,6 +139,14 @@ class CaseController extends Controller
         $case->save();
         return response()->json(true,200);
 
+    }
+
+
+    public function caseSendToArchive(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $case->is_archived = $request->input('is_archived');
+        $case->save();
+        return response()->json(true,200);
     }
 
 

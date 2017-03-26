@@ -13,17 +13,10 @@
                                 <span class="md-mr-20"><span class="mdi mdi-account"></span>
                                  <b>Assign User:</b>
                                 <a id="assign-user-case" data-title="Assign user to case" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
-                                    {{--@foreach($users as $user)--}}
-                                    {{--@if($user->id == $case->user_id)--}}
-                                            {{--<option value="{{$user->id}}" selected>{{$user->name}}</option>--}}
-                                    {{--@else--}}
-                                            {{--<option value="{{$user->id}}">{{$user->name}}</option>--}}
-                                    {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</select>--}}
                                 </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
                                 <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
+
                                 {{--<span class="md-mr-20"><span class="mdi mdi-collection-text"></span> {{$case->reports->count()}} Reports</span>--}}
 
                                 <span class="md-mr-20">
@@ -56,6 +49,8 @@
                                         </ul>
                                     </div>
                                 </span>
+                                <span class="md-mr-20"><button {{$case->is_archived == 'archived' ? 'disabled' : ""}} class="btn btn-warning send-to-archive-btn">{{$case->is_archived == 'archived' ? 'Archived' : "Send to Archive"}}</button></span>
+
                             </div>
                             <div class="col-md-3">
                                 <div class="panel-subtitle" style="float: right;margin-top:10px;">
@@ -303,6 +298,28 @@
     <script>
 
         $(function(){
+
+            $('.send-to-archive-btn').on('click',function(){
+               var _this = $(this);
+               $.ajax({
+                  method:"post",
+                  url:'/caseSendToArchive/{{$case->id}}',
+                  data:{_token:$('#_token').val(),is_archived:"archived"},
+                  success:function(response){
+                      console.log(response);
+                      if(response){
+                          _this.attr('disabled',true);
+                          _this.text("Archived");
+                          $.gritter.add({
+                              title: 'Success',
+                              text: 'Case was send to archive successfuly',
+                              class_name: 'color success'
+                          });
+                      }
+
+                  }
+               });
+            });
 
             $('.evidence-file').on('change',function(){
                 var names = [];
