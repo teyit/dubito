@@ -173,3 +173,6 @@
 .assign-user-to-case{
     display: inherit;
 }
+.evidence-file-name {
+    list-style-type: none;
+}

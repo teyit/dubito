@@ -228,6 +228,10 @@
                                         <div class="form-group">
                                             <textarea name="text" required class="form-control" id="evidence-text">{{$evidence->text or ''}}</textarea>
                                         </div>
+                                        <div class="form-group pull-left">
+                                            <ul class="evidence-file-name">
+                                            </ul>
+                                        </div>
                                         <div class="form-group pull-right">
 
                                             <input type="file" name="file[]" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile evidence-file">
@@ -299,6 +303,22 @@
     <script>
 
         $(function(){
+
+            $('.evidence-file').on('change',function(){
+                var names = [];
+                for (var i = 0; i < $(this).get(0).files.length; ++i) {
+                    names.push($(this).get(0).files[i].name);
+                }
+
+                $('.evidence-file-name li,b').remove();
+
+                $('.evidence-file-name').append('<b>Selected Files:</b>');
+
+                $.each(names,function(index,name){
+                    $('.evidence-file-name').append('<li>'+name+'</li>');
+                })
+
+            });
 
 
             getUsers(function(result){
