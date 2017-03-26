@@ -26,7 +26,6 @@
 			                    <td>{{$tag->updated_at}}</td>
 			                    <td class="actions">
 			                        <div class="btn-group btn-space">
-			                            <button type="button" class="btn btn-default">View Reports</button>
 			                            <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
 			                            <ul role="menu" class="dropdown-menu">
 			                                <li><a class="tag-edit-btn" href="javascript:;" data-id="{{$tag->id}}" >Edit</a></li>

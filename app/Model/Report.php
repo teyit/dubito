@@ -24,7 +24,7 @@ class Report extends Model
 //        return $this->hasMany('App\Model\ReportFile','report_id','id');
 //    }
 
-    public function cases(){
+    public function case(){
         return $this->belongsTo('App\Model\Cases','case_id','id');
     }
 

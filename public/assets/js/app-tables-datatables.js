@@ -13,6 +13,8 @@ var App = (function () {
 
     $("#case-datatable").dataTable();
 
+    $("#report-datatable").dataTable();
+
     //Remove search & paging dropdown
     $("#table2").dataTable({
       pageLength: 6,
