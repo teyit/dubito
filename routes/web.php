@@ -10,6 +10,11 @@ Auth::routes();
 
 
 
+Route::get('/', function(){
+    return redirect('/home');
+});
+
+
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
 	dd($tags);

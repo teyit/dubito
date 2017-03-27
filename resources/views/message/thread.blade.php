@@ -56,7 +56,7 @@
 
             </div>
             <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
-                @if($s->report_id)
+                @if(isset($s->report->cases->id))
                 <a target="_blank" href="{{route("cases.show",$s->report->cases->id)}}">
                     <button type="button" class="btn btn-default"><i class="icon mdi mdi-case-check"></i> View case</button>
                 </a>
