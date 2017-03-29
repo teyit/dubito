@@ -6,7 +6,8 @@
 //});
 
 Auth::routes();
-
+Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
+Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
 
 
@@ -39,9 +40,10 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('/caseSendToArchive/{case_id}',['as'=>'case.sendarchive','uses'=>'CaseController@caseSendToArchive']);
 
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
-
-
     Route::put('/report_files/{id}/status',['as'=>'report_files.status','uses'=>'ReportController@status']);
+    Route::get('/dashboard',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
+
+
 });
 
 
