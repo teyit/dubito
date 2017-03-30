@@ -35,6 +35,18 @@ $(function(){
            }
        });
    });
+
+
+    function getCases(){
+        var $reportCases = $(".report-cases");
+        $.get("/api/cases", function(data){
+            $reportCases.find('option').remove();
+            $.each(data, function(index, cases) {
+                $reportCases.append('<option value="' + cases.id + '">' + cases.title + '</option>');
+            });
+        });
+    }
+
     //
     // $("#case-form-ajax-edit").on('submit',function(e){
     //

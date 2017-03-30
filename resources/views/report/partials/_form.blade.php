@@ -1,11 +1,11 @@
 @if(isset($is_edit) and  $is_edit == true)
-    <form action="{{ route('reports.update',$report->id)}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
+    <form action="{{ route('custom.update.reports',$report->id)}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
         {{csrf_field()}}
         <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
             <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
-                <textarea required name="text"  class="form-control">{{$report->title}}</textarea>
+                <textarea required name="text"  class="form-control">{{$report->text    }}</textarea>
             </div>
         </div>
 
@@ -34,6 +34,26 @@
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Status</label>
+            <div class="col-sm-6">
+                    <select name="status" required class="form-control report-cases">
+
+                        @foreach(['pending','not_assigned','in_archived'] as $status)
+                            @if($report->status == $status)
+                                <option value="{{$status}}" selected>{{$status}}</option>
+                            @else
+                                <option value="{{$status}}">{{$status}}</option>
+
+                            @endif
+                        @endforeach
+
+
+                    </select>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
             <div class="col-sm-6">
@@ -50,9 +70,34 @@
             </div>
         </div>
     </form>
+
+  @if(!$report->files->isEmpty())
+    <div class="panel-heading">Report Files</div>
     <hr>
+    <div class="panel-body">
+        <div class="gallery-container">
+            @foreach($report->files as $file)
+                <div class="item">
+                    <div class="photo">
+                        <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
+                            <div class="over">
+                                <div class="info-wrapper">
+                                    <div class="info">
+                                        <div class="func"><a class="remove-file-from-report" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    </div>
+  @endif
+
+
     @else
-    <form action="{{ route("reports.store")}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
+    <form action="{{ route("custom.store.reports")}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
         {{csrf_field()}}
         <div class="form-group">
             <label class="col-sm-3 control-label">Report</label>
@@ -76,11 +121,24 @@
                         @endforeach
                     </select>
                     <div class="input-group-btn">
-                        <button data-toggle="modal"  data-target="#mod-success"  type="button" class="btn  btn-space btn-success md-trigger">Add New Case</button>
+                        <button data-toggle="modal"  data-target="#add-new-case"  type="button" class="btn  btn-space btn-success md-trigger">Add New Case</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Status</label>
+            <div class="col-sm-6">
+                    <select name="status" required class="form-control">
+                        <option value="pending">Pending</option>
+                        <option value="not_assigned">Not Assigned</option>
+                        <option value="in_archived">In Archived</option>
+                    </select>
+            </div>
+        </div>
+
+
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
             <div class="col-sm-6">
@@ -100,5 +158,3 @@
 @endif
 
 
-@include("report.partials._case_modal_form")
-@include("report.partials._category_modal_form")

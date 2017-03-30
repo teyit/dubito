@@ -47,7 +47,11 @@
         @include('message.thread',['messages' => $messages])
     </div>
 
+
+
 @endsection
+
+
 
 @section('script')
     <script src="{{asset('assets/js/nprogress.js')}}"></script>
@@ -86,3 +90,4 @@
         $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
     </script>
 @endsection
+

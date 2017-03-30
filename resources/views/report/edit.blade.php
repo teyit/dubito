@@ -16,3 +16,32 @@
 
     </div>
 @endsection
+
+@section('script')
+
+    <script>
+
+        $('.remove-file-from-report').on('click',function(){
+            var file_id =  $(this).data('file-id');
+            $.ajax({
+                method:"post",
+                url:"{{route("report.file.remove",$report->id)}}",
+                data:{_token:$("#_token").val(),file_id:file_id},
+                success:function(response){
+                    if(response){
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Image  was removed succesfully',
+                            class_name: 'color success'
+                        });
+
+                        window.location.reload();
+                    }
+                }
+
+            });
+        });
+
+    </script>
+
+@endsection

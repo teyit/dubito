@@ -12,7 +12,7 @@
 
                                 <span class="md-mr-20"><span class="mdi mdi-account"></span>
                                  <b>Assign User:</b>
-                                <a id="assign-user-case" data-title="Assign user to case" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
+                                <a id="assign-user-case" data-title="Assign user to case" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name or ''}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
                                 </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
                                 <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>

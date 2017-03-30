@@ -75,3 +75,4 @@
 <script>
     $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
 </script>
+

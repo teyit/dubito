@@ -81,6 +81,41 @@ class ReportController extends Controller
         return response()->json(true,200);
 
     }
+    
+    
+    public function customStore(Request $request){
+
+        $report = Report::create([
+            'text' => $request->input('text'),
+            'case_id' => $request->input('case_id'),
+            'source' => $request->input('source'),
+            'status' => $request->input('status')
+        ]);
+
+
+        $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
+        if($request->hasFile('report_files')){
+            $files = $request->file('report_files');
+
+            foreach ($files as $index => $file) {
+
+                $file =  File::create([
+                    'file_url' =>$file->storeAs($filePrefix,$file->getClientOriginalName(),'s3'),
+                    'file_type' => explode('/',$file->getMimeType())[0]
+                ]);
+
+                if(!$report->files->contains($file->id)){
+                    $report->files()->attach($file->id);
+                }
+            }
+        }
+
+
+        return redirect("/reports");
+    }
+
+
+
 
     public function edit($id){
         $topics = Topic::latest()->get();
@@ -110,6 +145,34 @@ class ReportController extends Controller
     }
 
 
+    public function customUpdate(Request $request,$id){
+
+        $report = Report::find($id);
+
+        $report->update($request->all());
+
+        $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
+        if($request->hasFile('report_files')){
+            $files = $request->file('report_files');
+
+            foreach ($files as $index => $file) {
+
+                $file =  File::create([
+                    'file_url' =>$file->storeAs($filePrefix,$file->getClientOriginalName(),'s3'),
+                    'file_type' => explode('/',$file->getMimeType())[0]
+                ]);
+
+                if(!$report->files->contains($file->id)){
+                    $report->files()->attach($file->id);
+                }
+            }
+        }
+
+
+        return redirect("/reports");
+    }
+
+
     public function destroy($id){
         $report = Report::find($id);
 
@@ -129,6 +192,14 @@ class ReportController extends Controller
     }
 
 
+
+    public function removeReportFile(Request $request,$reportID){
+        $case = Report::find($reportID);
+        $file = $request->input('file_id');
+        $case->files()->detach($file);
+        return response()->json(true,200);
+
+    }
 
 
 
