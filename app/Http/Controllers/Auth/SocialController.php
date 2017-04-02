@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
@@ -32,9 +34,12 @@ class SocialController extends Controller
 
     }
 
-    public function getSocialHandle( $provider )
+    public function getSocialHandle($provider )
     {
 
+        $code = Input::get('code');
+        
+        
         if (Input::get('denied') != '') {
 
             return redirect()->to('login')
@@ -43,7 +48,15 @@ class SocialController extends Controller
 
         }
 
+
+
+
         $user = Socialite::driver( $provider )->user();
+        
+        if(isset($user->token)){
+           Session::put('google_oauth_token',$user->token);
+        }
+        
 
         $socialUser = null;
 
@@ -74,7 +87,7 @@ class SocialController extends Controller
                 $newSocialUser->email              = $email;
                 $newSocialUser->name =$user->name;
                 $newSocialUser->password = bcrypt(str_random(16));
-                $newSocialUser->token = str_random(64);
+                $newSocialUser->token = $user->token;
                 $newSocialUser->save();
 
                 $socialData = new Social;
@@ -91,6 +104,8 @@ class SocialController extends Controller
             }
 
         }
+
+
 
 
         $authUser = isset($socialUser) ? $socialUser : $newSocialUser;

@@ -11,10 +11,60 @@ Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses'
 
 
 
-Route::get('/', function(){
-    return redirect('/home');
+
+//Route::get('/', function(){
+//    return redirect('/login');
+//});
+
+
+
+Route::get('/redirect_url', function(){
+
 });
 
+
+Route::get('/test', function(){
+
+    $code = \Illuminate\Support\Facades\Session::get('code');
+    $client = new \Google_Client();
+    $client->setAuthConfig(storage_path().'/google/credential.json');
+    $client->addScope(\Google_Service_Drive::DRIVE);
+
+    $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/test';
+
+
+
+    $client->setRedirectUri($redirect_uri);
+
+    $auth_url  = $client->createAuthUrl();
+
+    dd($auth_url);
+
+    $client->authenticate($_GET['code']);
+
+    $accessToken = $client->getAccessToken();
+
+
+    $client->setAccessToken($accessToken);
+
+    $service = new \Google_Service_Drive($client);
+
+    $fileMetadata = new \Google_Service_Drive_DriveFile(array(
+        'name' =>'title',
+        'mimeType' => 'application/vnd.google-apps.document'));
+    $file = $service->files->create($fileMetadata, array(
+        'fields' => 'id'));
+
+    return $file->id;
+
+});
+
+
+
+
+Route::get('/deneme', function(){
+    return 'ddeneme';
+});
 
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
@@ -62,6 +112,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 });
 
 
+Route::any('new-google-document/{title}',['as'=>'new.google.document','uses'=>'ServiceController@newGoogleDocument']);
 
 
 Route::any('/service/messages/facebook', 'ServiceController@facebook');

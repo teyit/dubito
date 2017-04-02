@@ -8,7 +8,7 @@
                     <div class="panel-heading panel-heading-divider">
                         <div class="row">
                             <div class="col-md-9">
-                                <h2 style="font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}}</h2>
+                                <h2 style="font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}} <a target="_blank" class="btn btn-primary new-google-document" href="javascript:;">Go to Analysis</a></h2>
 
                                 <span class="md-mr-20"><span class="mdi mdi-account"></span>
                                  <b>Assign User:</b>
@@ -49,7 +49,7 @@
                                         </ul>
                                     </div>
                                 </span>
-                                <span class="md-mr-20"><button {{$case->is_archived == 'archived' ? 'disabled' : ""}} class="btn btn-warning send-to-archive-btn">{{$case->is_archived == 'archived' ? 'Archived' : "Send to Archive"}}</button></span>
+                                <span class="md-mr-20"><button data-status="{{$case->is_archived}}" class="btn btn-{{$case->is_archived == 'archived' ? 'danger' : "warning"}} case-is-archived-btn">{{$case->is_archived == 'archived' ? 'Remove Archive' : "Send to Archive"}}</button></span>
 
                             </div>
                             <div class="col-md-3">
@@ -299,22 +299,34 @@
 
         $(function(){
 
-            $('.send-to-archive-btn').on('click',function(){
+
+
+            $('.case-is-archived-btn').on('click',function(){
                var _this = $(this);
+               var status = $(this).data('status');
+               var newStatus;
+               if(status === 'archived'){
+                newStatus = 'ongoing';
+               }else{
+                newStatus = 'archived';
+               }
+               console.log(status);
                $.ajax({
                   method:"post",
                   url:'/caseSendToArchive/{{$case->id}}',
-                  data:{_token:$('#_token').val(),is_archived:"archived"},
+                  data:{_token:$('#_token').val(),is_archived:newStatus},
                   success:function(response){
                       console.log(response);
                       if(response){
-                          _this.attr('disabled',true);
-                          _this.text("Archived");
+//                          _this.attr('disabled',true);
+//                          _this.text("Remove  Archive");
                           $.gritter.add({
                               title: 'Success',
                               text: 'Case was send to archive successfuly',
                               class_name: 'color success'
                           });
+
+                          window.location.reload()
                       }
 
                   }
