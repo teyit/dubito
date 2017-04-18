@@ -8,16 +8,16 @@
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
 
-                        <form action="">
-                            <div class="form-group">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-4  text-center">
-                            <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>
-                                   Login with Google+</a>
-                            </div>
-                                <div class="col-md-4"></div>
-                            </div>
-                        </form>
+                        {{--<form action="">--}}
+                            {{--<div class="form-group">--}}
+                                {{--<div class="col-md-4"></div>--}}
+                                {{--<div class="col-md-4  text-center">--}}
+                            {{--<a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>--}}
+                                   {{--Login with Google+</a>--}}
+                            {{--</div>--}}
+                                {{--<div class="col-md-4"></div>--}}
+                            {{--</div>--}}
+                        {{--</form>--}}
 
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
