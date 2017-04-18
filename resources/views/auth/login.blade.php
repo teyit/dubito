@@ -42,15 +42,6 @@
                         </div>
                         </div>
 
-                            <div class="form-group">
-                                <div class="col-md-4"></div>
-                                <div class="col-md-6  text-center">
-                                    <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>
-                                        Login with Google+</a>
-                                </div>
-                                <div class="col-md-6"></div>
-                            </div>
-
                         <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                         <div class="checkbox">
@@ -66,12 +57,21 @@
                         <button type="submit" class="btn btn-primary">
                         Login
                         </button>
-
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                         Forgot Your Password?
                         </a>
                         </div>
+
                         </div>
+
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-6  text-center">
+                                    <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>
+                                        Login with Google+</a>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
 
                         </form>
 

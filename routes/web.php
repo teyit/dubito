@@ -25,22 +25,32 @@ Route::get('/redirect_url', function(){
 
 Route::get('/test', function(){
 
+
     $code = \Illuminate\Support\Facades\Session::get('code');
+
     $client = new \Google_Client();
     $client->setAuthConfig(storage_path().'/google/credential.json');
     $client->addScope(\Google_Service_Drive::DRIVE);
 
-    $redirect_uri = 'http://' . $_SERVER['HTTP_HOST'] . '/test';
-
+    $redirect_uri = route('social.handle','google');
 
 
     $client->setRedirectUri($redirect_uri);
 
     $auth_url  = $client->createAuthUrl();
 
-    dd($auth_url);
+    if(!$code){
+        return redirect($auth_url);
+    }
 
-    $client->authenticate($_GET['code']);
+
+
+
+    if($client->isAccessTokenExpired()){
+        \Session::forget('code');
+    }
+
+    $client->authenticate(\Session::get('code'));
 
     $accessToken = $client->getAccessToken();
 
@@ -56,6 +66,7 @@ Route::get('/test', function(){
         'fields' => 'id'));
 
     return $file->id;
+
 
 });
 
