@@ -14,11 +14,11 @@
 
                         <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i>Reports</a></li>
 
-                        <li class="parent">
+                        <li class="parent {{request()->segment(1) == 'case' ? 'open' : ''}}">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
                             <ul class="sub-menu">
-                                <li><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
-                                <li><a href="{{url("/case/archived")}}">Archived</a></li>
+                                <li class="{{request()->segment(2) == 'ongoing' ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
+                                <li class="{{request()->segment(2) == 'archived' ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archived</a></li>
                             </ul>
                         </li>
 
