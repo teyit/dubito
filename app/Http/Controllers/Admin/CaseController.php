@@ -39,7 +39,11 @@ class CaseController extends Controller
     public function store(Request $request){
         $request['user_id'] = Auth::user()->id;
         $store = $request->all();
-        Cases::create($store);
+
+        $case = Cases::create($store);
+        $case->setGoogleDocument();
+        $case->save();
+
         return redirect($this->redirect);
     }
 

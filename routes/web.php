@@ -23,59 +23,7 @@ Route::get('/redirect_url', function(){
 });
 
 
-Route::get('/test', function(){
 
-
-    $code = \Illuminate\Support\Facades\Session::get('code');
-
-    $client = new \Google_Client();
-    $client->setAuthConfig(storage_path().'/google/credential.json');
-    $client->addScope(\Google_Service_Drive::DRIVE);
-
-    $redirect_uri = route('social.handle','google');
-
-
-    $client->setRedirectUri($redirect_uri);
-
-    $auth_url  = $client->createAuthUrl();
-
-    if(!$code){
-        return redirect($auth_url);
-    }
-
-
-
-
-    if($client->isAccessTokenExpired()){
-        \Session::forget('code');
-    }
-
-    $client->authenticate(\Session::get('code'));
-
-    $accessToken = $client->getAccessToken();
-
-
-    $client->setAccessToken($accessToken);
-
-    $service = new \Google_Service_Drive($client);
-
-    $fileMetadata = new \Google_Service_Drive_DriveFile(array(
-        'name' =>'title',
-        'mimeType' => 'application/vnd.google-apps.document'));
-    $file = $service->files->create($fileMetadata, array(
-        'fields' => 'id'));
-
-    return $file->id;
-
-
-});
-
-
-
-
-Route::get('/deneme', function(){
-    return 'ddeneme';
-});
 
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
