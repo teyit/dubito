@@ -1,9 +1,9 @@
 <?php
 
 
-//Route::get("/",function(){
-//    return redirect('/messages');
-//});
+Route::get("/",function(){
+    return redirect('/login');
+});
 
 Auth::routes();
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);

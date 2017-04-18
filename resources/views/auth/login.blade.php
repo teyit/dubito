@@ -8,19 +8,11 @@
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
 
-                        {{--<form action="">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<div class="col-md-4"></div>--}}
-                                {{--<div class="col-md-4  text-center">--}}
-                            {{--<a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>--}}
-                                   {{--Login with Google+</a>--}}
-                            {{--</div>--}}
-                                {{--<div class="col-md-4"></div>--}}
-                            {{--</div>--}}
-                        {{--</form>--}}
+
 
                         <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
+
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
@@ -50,6 +42,15 @@
                         </div>
                         </div>
 
+                            <div class="form-group">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-6  text-center">
+                                    <a href="{{ route('social.redirect', ['provider' => 'google']) }}" class="btn btn-danger waves-effect waves-light btn-block google"><i class="fa fa-google" aria-hidden="true"></i>
+                                        Login with Google+</a>
+                                </div>
+                                <div class="col-md-6"></div>
+                            </div>
+
                         <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                         <div class="checkbox">
@@ -71,6 +72,7 @@
                         </a>
                         </div>
                         </div>
+
                         </form>
 
                     </div>
