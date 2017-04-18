@@ -23,27 +23,6 @@ Route::get('/redirect_url', function(){
 });
 
 
-Route::get('/test', function(){
-
-    $client = new \Google_Client();
-
-    $client->setAccessToken("ya29.GlsxBMDd-WdVRvnknio5hybhBMXBwRhZVNDQd6mBNLzgzHgdAGTARtD6PLLVenR0iu0KRcZ81fOYJsno19b9teHBcEOijiEErGok1M_18Z0z3VTIab1lxH6X1AXa");
-
-    $service = new \Google_Service_Drive($client);
-
-    $fileMetadata = new \Google_Service_Drive_DriveFile(array(
-        'name' =>'title',
-        'mimeType' => 'application/vnd.google-apps.document'));
-    $file = $service->files->create($fileMetadata, array(
-        'fields' => 'id'));
-
-    return $file->id;
-
-    //'name' => date("Y/m") . " - " . $case->id . " - " . $case->title,
-
-});
-
-
 
 
 Route::get("preview",function(){

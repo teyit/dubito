@@ -30,7 +30,7 @@ class SocialController extends Controller
 
 
 
-        return Socialite::driver( $provider )->redirect();
+        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])->redirect();
 
     }
 
@@ -82,7 +82,7 @@ class SocialController extends Controller
 
                 //There is no combination of this social id and provider, so create new one
                 $newSocialUser = new User;
-                $newSocialUser->email              = $email;
+                $newSocialUser->email = $email;
                 $newSocialUser->name =$user->name;
                 $newSocialUser->password = bcrypt(str_random(16));
                 $newSocialUser->token = $user->token;
