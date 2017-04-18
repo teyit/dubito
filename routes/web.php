@@ -25,37 +25,9 @@ Route::get('/redirect_url', function(){
 
 Route::get('/test', function(){
 
-
-    $code = \Illuminate\Support\Facades\Session::get('code');
-
     $client = new \Google_Client();
-    $client->setAuthConfig(storage_path().'/google/credential.json');
-    $client->addScope(\Google_Service_Drive::DRIVE);
 
-    $redirect_uri = route('social.handle','google');
-
-
-    $client->setRedirectUri($redirect_uri);
-
-    $auth_url  = $client->createAuthUrl();
-
-    if(!$code){
-        return redirect($auth_url);
-    }
-
-
-
-
-    if($client->isAccessTokenExpired()){
-        \Session::forget('code');
-    }
-
-    $client->authenticate(\Session::get('code'));
-
-    $accessToken = $client->getAccessToken();
-
-
-    $client->setAccessToken($accessToken);
+    $client->setAccessToken("ya29.GlsxBMDd-WdVRvnknio5hybhBMXBwRhZVNDQd6mBNLzgzHgdAGTARtD6PLLVenR0iu0KRcZ81fOYJsno19b9teHBcEOijiEErGok1M_18Z0z3VTIab1lxH6X1AXa");
 
     $service = new \Google_Service_Drive($client);
 
@@ -67,15 +39,12 @@ Route::get('/test', function(){
 
     return $file->id;
 
+    //'name' => date("Y/m") . " - " . $case->id . " - " . $case->title,
 
 });
 
 
 
-
-Route::get('/deneme', function(){
-    return 'ddeneme';
-});
 
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);

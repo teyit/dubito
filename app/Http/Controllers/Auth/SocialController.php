@@ -49,9 +49,7 @@ class SocialController extends Controller
         }
 
 
-
-
-        $user = Socialite::driver( $provider )->user();
+        $user = Socialite::driver( $provider)->scopes(['https://www.googleapis.com/auth/drive'])->user();
         
         if(isset($user->token)){
            Session::put('google_oauth_token',$user->token);

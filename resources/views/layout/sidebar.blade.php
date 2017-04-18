@@ -7,7 +7,7 @@
                         <li class="divider">Menu</li>
 
 
-                        <li class="active"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                        <li class="active"><a href="{{url("/dashboard")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
 
                         <li><a href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
