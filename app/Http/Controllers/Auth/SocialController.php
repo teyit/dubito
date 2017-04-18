@@ -49,11 +49,6 @@ class SocialController extends Controller
         }
 
 
-        if(isset($code)){
-            Session::put("code",$code);
-            return redirect('/test');
-        }
-
 
 
         $user = Socialite::driver( $provider )->user();
