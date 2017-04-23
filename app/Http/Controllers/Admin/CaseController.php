@@ -138,9 +138,8 @@ class CaseController extends Controller
     }
     
     public function assignUserToCase(Request $request,$caseID){
-        dd($request->input('pk'));
         $case = Cases::find($caseID);
-        $case->user_id = $request->input('pk');
+        $case->user_id = $request->input('value');
         $case->save();
         return response()->json(true,200);
 

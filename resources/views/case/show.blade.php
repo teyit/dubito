@@ -12,7 +12,7 @@
 
                                 <span class="md-mr-20"><span class="mdi mdi-account"></span>
                                  <b>Assign User:</b>
-                                <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id}}" data-pk="{{$case->user->id}}" data-type="select" href="#" class="editable editable-click">{{$case->user->name or ''}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
+                                <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id}}"  data-type="select" href="#" class="editable editable-click">{{$case->user->name or ''}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
                                 </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
                                 <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
@@ -376,11 +376,11 @@
                     type: 'select',
                     title: 'Select status',
                     url:"{{route('case.user.assign',$case->id)}}",
+                    pk:1,
                     source: result,
                     success:function(response,value){
                         console.log(value);
                         if(response){
-                            $(this).data('pk',value);
                             //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
                             $.gritter.add({
                                 title: 'Success',
@@ -611,25 +611,6 @@
                         });
                     }
                 }
-            });
-        });
-
-
-        $(".assign-user-to-case").on('change',function(){
-            $.ajax({
-                method:"put",
-                url:"{{route('case.user.assign',$case->id)}}",
-                data:{_token:$("#_token").val(),user_id:$(this).val()},
-                success:function(response){
-                 if(response){
-                     $.gritter.add({
-                         title: 'Success',
-                         text: 'User was assigned to case successfuly',
-                         class_name: 'color success'
-                     });
-                 }
-                }
-
             });
         });
 
