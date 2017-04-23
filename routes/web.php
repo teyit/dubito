@@ -32,7 +32,7 @@ Route::get("preview",function(){
 
 Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
-    Route::get('/dashboard',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
+    Route::get('/',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
 
     Route::get('case/{is_archived}',['as'=>'case.is_archived','uses'=>'CaseController@index']);
 

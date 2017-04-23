@@ -58,7 +58,7 @@
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
                                 <td class="actions">
                                     <div class="btn-group btn-space">
-                                        <a href="{{route('cases.show',$case->id)}}" class="btn btn-default">View Reports</a>
+                                        <a href="{{route('cases.show',$case->id)}}" class="btn btn-default">Case Reports</a>
                                         <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
                                         <ul role="menu" class="dropdown-menu">
                                             <li><a class="case-edit-btn" href="javascript:;" data-id="{{$case->id}}" >Edit</a></li>

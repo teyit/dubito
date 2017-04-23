@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\Evidence;
 use App\Model\Tag;
 use App\Model\Topic;
+use App\Traits\GoogleCreateDocumentTrait;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,8 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class CaseController extends Controller
 {
 
-    protected $redirect = 'cases';
 
+    protected $redirect = 'cases';
 
 
     public function index($is_archived){
@@ -39,12 +40,11 @@ class CaseController extends Controller
     public function store(Request $request){
         $request['user_id'] = Auth::user()->id;
         $store = $request->all();
-
         $case = Cases::create($store);
-        $case->setGoogleDocument();
         $case->save();
 
-        return redirect($this->redirect);
+        return redirect('/case/ongoing');
+
     }
 
 
@@ -63,7 +63,7 @@ class CaseController extends Controller
 
     public function show($id){
 
-        $case = Cases::with('reports','evidences')->find($id);
+        $case = Cases::with('reports','evidences','user')->find($id);
 
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
@@ -138,7 +138,7 @@ class CaseController extends Controller
     }
     
     public function assignUserToCase(Request $request,$caseID){
-
+        dd($request->input('pk'));
         $case = Cases::find($caseID);
         $case->user_id = $request->input('pk');
         $case->save();

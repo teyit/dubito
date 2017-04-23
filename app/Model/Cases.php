@@ -2,42 +2,22 @@
 
 namespace App\Model;
 
+use App\Traits\GoogleCreateDocumentTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Cases extends Model
 {
+
+    use GoogleCreateDocumentTrait;
+
+
     protected $table = 'cases';
 
     protected $fillable = ['title','user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
 
     protected $dates = ['created_at', 'updated_at'];
 
-    public function setGoogleDocument(){
-        if($this->google_document_id){
-            return $this->google_document_id;
-        }
-        $client = new \Google_Client();
-
-        $dubito_folder_id = '0B3svx2NH-juvNW81V2pzajRvRWM';
-
-        $token = User::find(15)->token; //TODO fix better.
-
-        $client->setAccessToken($token);
-
-        $service = new \Google_Service_Drive($client);
-
-        $fileMetadata = new \Google_Service_Drive_DriveFile([
-            'name' => 'Case ' . $this->id,
-            'parents' =>   [$dubito_folder_id],
-            'mimeType' => 'application/vnd.google-apps.document'
-        ]);
-        $file = $service->files->create($fileMetadata, [
-            'fields' => 'id'
-        ]);
-        $this->google_document_id = $file->id;
-        return $file->id;
-    }
     public function topic(){
       return $this->belongsTo(Topic::class);
     }

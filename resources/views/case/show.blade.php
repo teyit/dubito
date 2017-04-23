@@ -8,11 +8,11 @@
                     <div class="panel-heading panel-heading-divider">
                         <div class="row">
                             <div class="col-md-9">
-                                <h2 style="font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}} <a target="_blank" class="btn btn-primary new-google-document" href="javascript:;">Go to Analysis</a></h2>
+                                <h2 style=" font-weight: bold;margin:0px 0px 20px 0px;">{{$case->title}}@if($case->google_document_id) <a target="_blank" class="btn btn-primary new-google-document" href="https://docs.google.com/document/d/{{$case->google_document_id}}/edit">Go to Analysis</a>@endif</h2>
 
                                 <span class="md-mr-20"><span class="mdi mdi-account"></span>
                                  <b>Assign User:</b>
-                                <a id="assign-user-case" data-title="Assign user to case" data-value="1" data-pk="1" data-type="select" href="#" class="editable editable-click">{{$case->user->name or ''}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
+                                <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id}}" data-pk="{{$case->user->id}}" data-type="select" href="#" class="editable editable-click">{{$case->user->name or ''}}</a>                                {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}
                                 </span>
                                 <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
                                 <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
@@ -96,36 +96,45 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="panel-heading">Images</div>
-                                <div class="panel-body">
-                                    <div class="gallery-container">
-                                     @foreach($case->files as $file)
-                                        <div class="item">
-                                            <div class="photo">
-                                                <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
-                                                    <div class="over">
-                                                        <div class="info-wrapper">
-                                                            <div class="info">
-                                                                <div class="func"><a class="remove-file-from-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
-                                                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="panel panel-default">
+                        <div class="panel-heading">Images</div>
+                        <div class="panel-body">
+                            <div class="gallery-container">
+                                @foreach($case->files as $file)
+                                    <div class="item">
+                                        <div class="photo">
+                                            <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
+                                                <div class="over">
+                                                    <div class="info-wrapper">
+                                                        <div class="info">
+                                                            <div class="func"><a class="remove-file-from-case" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        @endforeach
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
-                        </div>
                     </div>
+
                 </div>
+
+
 
                 <div class="panel panel-default panel-table">
                     <div class="panel panel-default">
 
                         <div class="panel-heading">Links &nbsp;<button  data-toggle="modal"  data-target="#case-link-create"  class="btn btn-success btn-sm btn-link-modal" >Add Link</button>
                         </div>
+                        @if(!$links->isEmpty())
                         <table class="table table-condensed table-striped">
                             <thead>
                             <tr>
@@ -137,6 +146,7 @@
                             </tr>
                             </thead>
                             <tbody>
+
                             @foreach($links as $link)
                                 <tr>
 
@@ -155,8 +165,18 @@
                                     </td>
                                 </tr>
                             @endforeach
+
+
                             </tbody>
                         </table>
+                            @else
+
+                            <div class="alert alert-default" role="alert">
+                                There are no links in this case
+
+                            </div>
+
+                            @endif
 
                     </div>
 
@@ -355,12 +375,12 @@
                 $('#assign-user-case').editable({
                     type: 'select',
                     title: 'Select status',
-                    value: 2,
                     url:"{{route('case.user.assign',$case->id)}}",
                     source: result,
-                    success:function(response){
+                    success:function(response,value){
+                        console.log(value);
                         if(response){
-
+                            $(this).data('pk',value);
                             //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
                             $.gritter.add({
                                 title: 'Success',
@@ -529,6 +549,7 @@
                 data:$(this).serialize(),
                 success:function(response){
                     if(response){
+
                         $.gritter.add({
                             title: 'Success',
                             text: 'Description was added successfuly',

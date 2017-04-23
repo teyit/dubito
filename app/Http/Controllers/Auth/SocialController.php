@@ -109,7 +109,7 @@ class SocialController extends Controller
         $authUser = isset($socialUser) ? $socialUser : $newSocialUser;
 
         auth()->login($authUser, true);
-        return redirect('/dashboard');
+        return redirect('/');
 
 
 

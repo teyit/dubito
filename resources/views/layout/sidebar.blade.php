@@ -7,12 +7,12 @@
                         <li class="divider">Menu</li>
 
 
-                        <li class="active"><a href="{{url("/dashboard")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                        <li class="{{request()->segment(1) == '' ? "active" : ""}}"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
 
-                        <li><a href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
+                        <li class="{{request()->segment(1) == 'messages' ? "active" : ""}}" ><a  href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
 
-                        <li><a href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i>Reports</a></li>
+                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}"><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i>Reports</a></li>
 
                         <li class="parent {{request()->segment(1) == 'case' ? 'open' : ''}}">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
@@ -22,11 +22,11 @@
                             </ul>
                         </li>
 
-                        <li><a href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
+                        <li class="{{request()->segment(1) == 'topics' ? "active" : ""}}"><a  href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
 
-                        <li><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i>Categories</a></li>
+                        <li class="{{request()->segment(1) == 'categories' ? "active" : ""}} "><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i>Categories</a></li>
 
-                        <li><a href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i> Tags</a></li>
+                        <li class="{{request()->segment(1) == 'tags' ? "active" : ""}}"><a  href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i> Tags</a></li>
 
 
                     </ul>
