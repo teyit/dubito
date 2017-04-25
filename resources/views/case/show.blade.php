@@ -169,26 +169,20 @@
                                 </tr>
                             @endforeach
 
-
                             </tbody>
                         </table>
                             @else
-
                             <div class="alert alert-default" role="alert">
                                 There are no links in this case
-
                             </div>
-
                             @endif
-
                     </div>
-
                 </div>
 
                 <div class="panel-heading">Reports</div>
 
                 @foreach($case->reports as $report)
-                    <div class="panel panel-flat">
+                    <div class="panel panel-border-color panel-border-color-info">
 
                         <div class="timeline-content">
                             <div class="timeline-avatar"><img src="/assets/img/avatar1.png" alt="{{$report->account_name}}" class="circle"></div>
