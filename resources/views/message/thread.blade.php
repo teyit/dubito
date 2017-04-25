@@ -32,9 +32,7 @@
             </div>
             <div class="email-list-detail">
                 <div class="thread-messages message-self">
-
                     {!! clickableLink($s->text) !!}
-                    <hr />
                     @if(!$s->files->isEmpty())
                         @foreach($s->files as $file)
                             @if($file->file_type == 'image')
@@ -47,13 +45,9 @@
                                 <span class="icon mdi mdi-attachment-alt"></span>
                                 <a target="_blank" href="{{$file->file_url}}">{{$file->file_type}}</a>
                             @endif
-
                         @endforeach
                     @endif
                 </div>
-
-
-
             </div>
             <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
                 @if(isset($s->report->cases->id))
@@ -75,4 +69,3 @@
 <script>
     $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
 </script>
-
