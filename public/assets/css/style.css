@@ -12861,6 +12861,9 @@ li.L9 {
   margin-bottom: 20px;
   padding: 0 10px;
 }
+.latest .gallery-container .item {
+	width: 60%;
+}
 .gallery-container .item .photo {
   background: #ffffff;
 }
