@@ -1,6 +1,6 @@
 /*!
  * beagle v1.2.0 (http://foxythemes.net/themes/beagle)
- * Copyright 2014-2016 Foxy Themes all rights reserved 
+ * Copyright 2014-2016 Foxy Themes all rights reserved
  */
 
 /*------------------------------------------------------------------
@@ -6216,7 +6216,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-footer .tools{
   float:right;
-  
+
 }
 .panel > .list-group,
 .panel > .panel-collapse > .list-group {
@@ -7479,9 +7479,9 @@ button.close {
   }
 }
 /* General styles for the modal */
-/* 
+/*
 Styles for the html/body for special modal where we want 3d effects
-Note that we need a container wrapping all content on the page for the 
+Note that we need a container wrapping all content on the page for the
 perspective effects (not including the modals and the overlay).
 */
 .modal-open {
@@ -12857,7 +12857,7 @@ li.L9 {
   [Gallery]
 */
 .gallery-container .item {
-  width: 25%;
+  width: 50%;
   margin-bottom: 20px;
   padding: 0 10px;
 }
