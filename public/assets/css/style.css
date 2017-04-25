@@ -12885,6 +12885,7 @@ li.L9 {
 .gallery-container .item .photo .img .over .info-wrapper {
   display: table;
   height: 100%;
+  width: 100%;
   margin-top: 0;
   -webkit-transition: margin-top 200ms ease-in-out;
   -o-transition: margin-top 200ms ease-in-out;
@@ -12895,7 +12896,7 @@ li.L9 {
   vertical-align: middle;
   position: relative;
   top: 0;
-  left: 50%;
+  left: 0;
   text-align: center;
   color: #ffffff;
   padding: 0 10px;
