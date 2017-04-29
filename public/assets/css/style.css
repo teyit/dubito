@@ -1,6 +1,6 @@
 /*!
  * beagle v1.2.0 (http://foxythemes.net/themes/beagle)
- * Copyright 2014-2016 Foxy Themes all rights reserved 
+ * Copyright 2014-2016 Foxy Themes all rights reserved
  */
 
 /*------------------------------------------------------------------
@@ -6216,7 +6216,7 @@ button.list-group-item-danger.active:focus {
 }
 .panel-footer .tools{
   float:right;
-  
+
 }
 .panel > .list-group,
 .panel > .panel-collapse > .list-group {
@@ -7479,9 +7479,9 @@ button.close {
   }
 }
 /* General styles for the modal */
-/* 
+/*
 Styles for the html/body for special modal where we want 3d effects
-Note that we need a container wrapping all content on the page for the 
+Note that we need a container wrapping all content on the page for the
 perspective effects (not including the modals and the overlay).
 */
 .modal-open {
@@ -12857,9 +12857,12 @@ li.L9 {
   [Gallery]
 */
 .gallery-container .item {
-  width: 25%;
+  width: 50%;
   margin-bottom: 20px;
   padding: 0 10px;
+}
+.latest .gallery-container .item {
+	width: 60%;
 }
 .gallery-container .item .photo {
   background: #ffffff;
@@ -12885,7 +12888,8 @@ li.L9 {
 .gallery-container .item .photo .img .over .info-wrapper {
   display: table;
   height: 100%;
-  margin-top: -80px;
+  width: 100%;
+  margin-top: 0;
   -webkit-transition: margin-top 200ms ease-in-out;
   -o-transition: margin-top 200ms ease-in-out;
   transition: margin-top 200ms ease-in-out;
@@ -12895,6 +12899,7 @@ li.L9 {
   vertical-align: middle;
   position: relative;
   top: 0;
+  left: 0;
   text-align: center;
   color: #ffffff;
   padding: 0 10px;
@@ -13096,11 +13101,13 @@ li.L9 {
 }
 .email-list {
   background: #ffffff;
+  padding-bottom: 50px;
 }
 .email-list-item {
   /*border-bottom: 1px solid #e6e6e6;*/
-  padding: 4px 20px;
+  padding: 0 20px;
   display: table;
+  border-bottom: 1px solid #ccc;
   width: 100%;
   cursor: pointer;
   position: relative;
@@ -13148,9 +13155,12 @@ li.L9 {
 .email-list-actions {
   vertical-align: middle;
   display: table-cell;
+  padding: 10px 14px;
 }
 .email-list-actions {
   width: 40px;
+  border-right: 1px solid #ccc;
+  padding: 5px 0;
 }
 .email-list-actions .be-checkbox {
   padding: 0;
@@ -18020,7 +18030,7 @@ label {
 .be-checkbox,
 .be-radio {
   display: block;
-  line-height: 22px;
+  /* line-height: 9px; */
   margin: 0;
   padding: 7px 0;
 }
