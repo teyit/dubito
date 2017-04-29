@@ -246,8 +246,11 @@
                                         <div class="form-group pull-left">
                                             <ul class="evidence-file-name">
                                             </ul>
+
                                         </div>
                                         <div class="form-group pull-right">
+
+                                            <input type="hidden" name="case_id" value="{{$case->id}}">
 
                                             <input type="file" name="file[]" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile evidence-file">
                                             <label for="file-1" class="btn-default"> <i class="mdi mdi-attachment"></i><span>Browse files...</span></label>
@@ -392,39 +395,42 @@
                     }
                 });
 
-
             });
 
 
             $('#evidence-form-ajax').submit(function(e) { // capture submit
                 e.preventDefault();
-                var fd = new FormData(this); // XXX: Neex AJAX2
+                var fd = new FormData( $(this)[0]); // XXX: Neex AJAX2
+                fd.append("file",fd);
                 $.ajax({
                     url: $(this).attr('action'),
                     xhr: function() { // custom xhr (is the best)
-
                         var xhr = new XMLHttpRequest();
                         var total = 0;
-
                         $.each(document.getElementById('file-1').files, function(i, file) {
                             total += file.size;
                         });
                         xhr.upload.addEventListener("progress", function(evt) {
-                            // show progress like example
-                            var loaded = (evt.loaded / total).toFixed(2)*100; // percent
-                             console.log(loaded);
-//                            $('#progress').text('Uploading... ' + loaded + '%' );
-                        }, false);
 
+                            var loaded = (evt.loaded / total).toFixed(2)*100; // percent
+                            $('#progress').text('Uploading... ' + loaded + '%' );
+                        }, false);
                         return xhr;
                     },
                     type: 'post',
                     processData: false,
                     contentType: false,
                     data: fd,
-                    success: function(data) {
-                        console.log(data);
+                    success: function(response) {
+                        if(response){
+                            $.gritter.add({
+                                title: 'Success',
+                                text: 'Evidence was added succesfully',
+                                class_name: 'color success'
+                            });
+                        }
 
+                        window.location.reload()
                     }
                 });
             });

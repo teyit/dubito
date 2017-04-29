@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use Illuminate\Support\Facades\Input;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Model\Evidence;
 use App\Model\EvidenceFile;
 use App\Model\File;
@@ -12,13 +13,14 @@ class EvidenceController extends Controller
 {
     public function store(Request $request){
 
-        return response()->json($request->file('file'));
+      $case_id = $request->input('case_id');
 
-       $case_id = $request->input('case_id');
        $evidence =  Evidence::create($request->all());
 
         if($request->hasFile('file')){
             $files = $request->file('file');
+
+
 
             $filePrefix = date("Y/m/d") . '/'."files";
 
@@ -36,6 +38,6 @@ class EvidenceController extends Controller
 
         }
 
-         return redirect('/cases/'.$case_id);
+         return response()->json(true,200);
     }
 }
