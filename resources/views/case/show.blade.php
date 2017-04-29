@@ -249,6 +249,7 @@
                                         <div class="form-group pull-right">
 
                                             <input type="hidden" name="case_id" value="{{$case->id}}">
+                                            <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
 
                                             <input type="file" name="file[]" id="file-1" data-multiple-caption="{count} files selected" multiple class="inputfile evidence-file">
                                             <label for="file-1" class="btn-default"> <i class="mdi mdi-attachment"></i><span>Browse files...</span></label>
@@ -273,7 +274,7 @@
 
                             @foreach($case->evidences as $evidence)
                             <li class="latest">
-																<span class="timeline-autor">Justin Adams</span> - <span style="color:#8c8c8c;padding-left:5px;">12.03.1923</span>
+																<span class="timeline-autor">{{$evidence->user->name}}</span> - <span style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d.m.Y")}}</span>
                                 <div class="user-timeline-description">{{$evidence->text or ''}}</div>
                                 <div class="gallery-container evidence-gallery-container">
                                     @foreach($evidence->files as $file)
