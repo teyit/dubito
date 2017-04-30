@@ -3,10 +3,10 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use TwitterStreamingApi;
+
 use App\Model\Message;
 use App\Model\File;
-
+use TwitterStreamingApi;
 
 class TwitterListener extends Command
 {

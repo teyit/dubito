@@ -13149,7 +13149,7 @@ li.L9 {
   color: #737373;
 }
 .email-list-item:hover {
-  background-color: #f7f7f7;
+  /*background-color: #f7f7f7;*/
 }
 .email-list-detail,
 .email-list-actions {
