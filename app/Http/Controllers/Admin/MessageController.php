@@ -29,7 +29,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(5);
+        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(20);
 
         $topics = Topic::latest()->get();
 
@@ -47,7 +47,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC')->paginate(5);
+        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC')->paginate(20);
 
         $topics = Topic::latest()->get();
 
