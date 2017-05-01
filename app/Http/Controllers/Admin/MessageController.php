@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
     private function getSenders(){
-        $messages = Message::selectRaw('messages.*')->orderBy('created_at','ASC')->get();
+        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->get();
 
         $senders = $messages->groupBy('sender_id');
 

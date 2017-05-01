@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Libraries\Google\GoogleDocument;
 use App\Model\Cases;
 use App\Model\File;
 use Facebook;
@@ -114,17 +113,6 @@ class ServiceController extends Controller
         }
         return "OK";
     }
-    public function twitter()
-    {
-        return "OK";   
-    }
-    
-    
-    
-    public function newGoogleDocument(Request $request){
-      $title = $request->input('title');
-      $id =  GoogleDocument::createNewDocument($title);
-      return response()->json($id);
 
-    }
+
 }
