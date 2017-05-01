@@ -1,4 +1,4 @@
-<div id="add-new-case" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in">
+<div id="add-new-case" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in" style="z-index:999999 !important;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,6 +35,8 @@
                                             @endforeach
                                         </select>
                             </div>
+
+                            <input type="hidden" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
 
                             <div class="success-message" style="display: none;"></div>
 

@@ -14,6 +14,7 @@ class CaseController extends Controller
 
     public function store(Request $request){
         Cases::create($request->all());
-        return 'true';
+        return response()->json(true,200);
+
     }
 }

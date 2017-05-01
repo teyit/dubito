@@ -26,5 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.css" media="screen">
     <link rel="stylesheet" href="{{url('assets/lib/x-editable/bootstrap3-editable/css/bootstrap-editable.css')}}">
     <link rel="stylesheet" href="{{url('assets/lib/x-editable/inputs-ext/typeaheadjs/lib/typeahead.js-bootstrap.css')}}">
+    <script src="{{url("assets/lib/jquery/jquery.min.js")}}" type="text/javascript"></script>
+
     <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
 </head>

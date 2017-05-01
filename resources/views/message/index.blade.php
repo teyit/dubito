@@ -51,6 +51,9 @@
 
 @endsection
 
+@include("message.partials._case_modal_form")
+@include('report.partials.assign_to_case_modal')
+
 
 
 @section('script')
@@ -79,6 +82,7 @@
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(sender_id){
+            console.log(sender_id);
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();

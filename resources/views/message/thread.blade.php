@@ -31,7 +31,7 @@
                 @endif
             </div>
             <div class="email-list-detail">
-								<div style="color:#ddd;font-weight:700; font-size:11px; text-align:right;">12.12.2012</div>
+								<div style="color:#ddd;font-weight:700; font-size:11px; text-align:right;">{{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</div>
                 <div class="thread-messages message-self">
                     {!! clickableLink($s->text) !!}
                     @if(!$s->files->isEmpty())

@@ -9,6 +9,7 @@
 namespace App\Traits;
 
 
+use App\Model\Cases;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,11 +20,15 @@ trait GoogleCreateDocumentTrait
     {
         parent::boot();
 
-        static::created(function ($case) {
+        static::created(function (Cases $case) {
 
-            list($user, $domain) = explode('@', Auth::user()->email);
+
+            list($user, $domain) = explode('@', $case->user->email);
 
             if ($domain == 'teyit.org') {
+
+                return response()->json("aaa");
+
                 if ($case->google_document_id) {
                     return $case->google_document_id;
                 }

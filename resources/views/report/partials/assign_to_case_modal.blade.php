@@ -1,4 +1,4 @@
-<div id="report-assign-to-case" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in">
+<div id="report-assign-to-case" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in" style="z-index:999991 !important;">
     <div class="modal-dialog custom-width">
         <div class="modal-content">
             <div class="modal-header">
@@ -49,7 +49,13 @@
                     return false;
                 }
 
-                getCases();
+                var $reportCases = $(".report-cases");
+                $.get("/api/cases", function(data){
+                    $reportCases.find('option').remove();
+                    $.each(data, function(index, cases) {
+                        $reportCases.append('<option value="' + cases.id + '">' + cases.title + '</option>');
+                    });
+                });
 
                 $('#report-assign-to-case').modal({
                     show: 'true',
