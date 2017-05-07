@@ -20,7 +20,7 @@
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>
                     </div>
                     <div class="form-group pull-right">
-                        <button type="button" data-toggle="modal" data-target="#add-new-case" class="btn btn-space btn-success">Add New Case</button>
+                        <button type="button" data-toggle="modal" data-target="#add-new-case" class="btn btn-space btn-success add-new-case">Add New Case</button>
                         <button type="submit" class="btn btn-space btn-primary">Assign</button>
                     </div>
 
@@ -33,6 +33,11 @@
 @section('script')
     @parent
     <script>
+
+        $(".add-new-case").on('click',function(){
+            $('#report-assign-to-case').modal('hide');
+        });
+
         $(".email-list-item").hover(function () {
             $(".view-case-btn-container ",this).removeClass('hidden')
         },function(){
