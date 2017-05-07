@@ -94,7 +94,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Tags</div>
                                 <div class="panel-body">
                                     <form action="{{route('case.tag.store',$case->id)}}" method="post"
                                           class="form-inline select2">
@@ -111,11 +110,10 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="panel-heading">Description</div>
                                 <div class="panel-body">
                                     <form id="case-description-form">
                                         <div class="form-group">
-                                            <textarea name="description" id="description-ta" rows="6" class="form-control"
+                                            <textarea name="description" placeholder="Description" id="description-ta" rows="6" class="form-control"
                                                       id="case-description">{{$case->description or ''}}</textarea>
                                         </div>
                                         <div class="form-group pull-right">
@@ -281,7 +279,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Add New Evidence</div>
+                                <div class="panel-heading">Add New Comment</div>
                                 <div class="panel-body">
                                     <form action="{{route("evidences.store")}}" method="POST" name="evidence-form-ajax"
                                           id="evidence-form-ajax" enctype="multipart/form-data">
@@ -317,7 +315,7 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading panel-heading-divider">Evidences<span class="panel-subtitle"></span></div>
+                    <div class="panel-heading panel-heading-divider">Comments<span class="panel-subtitle"></span></div>
                     <div class="panel-body">
 
                         @if(!$case->evidences->isEmpty())

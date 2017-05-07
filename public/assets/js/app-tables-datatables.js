@@ -3,6 +3,8 @@ var App = (function () {
 
   App.dataTables = function( ){
 
+
+
     //We use this to apply style to certain elements
     $.extend( true, $.fn.dataTable.defaults, {
       dom:
@@ -11,7 +13,6 @@ var App = (function () {
         "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
     } );
 
-    $("#case-datatable").dataTable();
 
     $("#report-datatable").dataTable();
 

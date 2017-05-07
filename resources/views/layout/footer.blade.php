@@ -18,7 +18,7 @@
 <script src="{{url("assets/js/dubito.js")}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
-<script src="{{url('assets/lib/datatables/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
+<script src="{{url('https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/datatables/js/dataTables.bootstrap.min.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/datatables/plugins/buttons/js/dataTables.buttons.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/datatables/plugins/buttons/js/buttons.html5.js')}}" type="text/javascript"></script>
@@ -43,34 +43,33 @@
 <script type="text/javascript">
     $(document).ready(function(){
 
-//        // Setup - add a text input to each footer cell
-//        $('#case-datatable tfoot th').each( function () {
-//            var title = $(this).text();
-//            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-//        } );
 //
-//        // DataTable
-//        var table = $('#case-datatable').DataTable();
-//
-//        // Apply the search
-//        table.columns().every( function () {
-//            var that = this;
-//
-//            $( 'input', this.footer() ).on( 'keyup change', function () {
-//                if ( that.search() !== this.value ) {
-//                    that
-//                        .search( this.value )
-//                        .draw();
-//                }
-//            } );
-//        } );
-
-        //initialize the javascript
         App.init();
         App.dataTables();
 
 //        App.formEditable();
 
+        // Setup - add a text input to each footer cell
+        $('#case-datatable tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        } );
+
+        // DataTable
+        var table = $('#case-datatable').DataTable();
+
+        // Apply the search
+        table.columns().every( function () {
+            var that = this;
+
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                        .search( this.value )
+                        .draw();
+                }
+            } );
+        } );
 
 
 
