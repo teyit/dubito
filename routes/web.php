@@ -42,7 +42,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
 
-
     //Reports
     Route::resource("reports","ReportController");
     Route::post("custom-store-reports",['as'=>'custom.store.reports','uses'=>'ReportController@customStore']);
@@ -65,6 +64,10 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::resource("tags","TagController");
     Route::resource('links',"LinkController");
     Route::resource('evidences',"EvidenceController");
+
+    //Logs
+
+    Route::resource("logs","LogController");
 
 
 

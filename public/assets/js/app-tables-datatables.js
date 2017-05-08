@@ -16,7 +16,10 @@ var App = (function () {
 
     $("#report-datatable").dataTable();
 
-    //Remove search & paging dropdown
+    $("#activity-datatable").dataTable();
+
+
+      //Remove search & paging dropdown
     $("#table2").dataTable({
       pageLength: 6,
       dom:  "<'row be-datatable-body'<'col-sm-12'tr>>" +
