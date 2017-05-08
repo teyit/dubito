@@ -9,7 +9,8 @@ use Spatie\Activitylog\Models\Activity;
 class LogController extends Controller
 {
     public function index(){
-//        $activity = Activity::all()->last();
+        $activity = Activity::all()->last();
+
 //        $changes  = $activity->changes->toArray();
 //
 //        dd(implode(',',$changes['old']));

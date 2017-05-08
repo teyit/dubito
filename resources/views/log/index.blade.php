@@ -5,7 +5,7 @@
             <div class="col-sm-12">
                 <div class="panel panel-default panel-table">
                     <div class="panel-heading">
-                       Log Activities
+                       Activity Logs
                     </div>
                     <div class="panel-body">
                         <table id="activity-datatable" class="table">
@@ -15,9 +15,8 @@
                                 <th>Event</th>
                                 <th>Subject</th>
                                 <th>Change Fields</th>
-                                <th>Created at</th>
-                                <th>Updated at</th>
-
+                                <th>User</th>
+                                <th>Time</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,8 +37,8 @@
                                         @endif
 
                                     </td>
+                                    <td>{{$activity->causer->name}}</td>
                                     <td>{{$activity->created_at}}</td>
-                                    <td>{{$activity->updated_at}}</td>
                                 </tr>
                               @endforeach
 
