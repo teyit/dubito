@@ -19,6 +19,8 @@
                             <ul class="sub-menu">
                                 <li class="{{request()->segment(2) == 'ongoing' ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
                                 <li class="{{request()->segment(2) == 'archived' ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archived</a></li>
+                                <li class="{{request()->segment(2) == 'backlog' ? 'active' : ''}}"><a href="{{url("/case/backlog")}}">Backlog</a></li>
+
                             </ul>
                         </li>
 

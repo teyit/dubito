@@ -36,6 +36,40 @@
             });
         });
 
+        //backlog case
+        $('.case-is-backlog-btn').on('click', function () {
+            var _this = $(this);
+            var status = $(this).data('status');
+            var newStatus;
+            if (status === 'is_in_backlog') {
+                newStatus = 'ongoing';
+            } else {
+                newStatus = 'is_in_backlog';
+            }
+            console.log(status);
+            $.ajax({
+                method: "post",
+                url: '/caseSendToArchive/{{$case->id}}',
+                data: {_token: $('#_token').val(), is_archived: newStatus},
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+//                          _this.attr('disabled',true);
+//                          _this.text("Remove  Archive");
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Case was send to backlog successfuly',
+                            class_name: 'color success'
+                        });
+
+                        window.location.reload()
+                    }
+
+                }
+            });
+        });
+
+
         //Evidence input file change
         $('.evidence-file').on('change', function () {
             var names = [];

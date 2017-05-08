@@ -10,7 +10,7 @@
                             <div class="col-md-12">
                                 <div class="">
                                     <div class="row panel-heading panel-heading-divider">
-                                        <div class="col-md-8" style="padding:0">
+                                        <div class="col-md-6" style="padding:0">
                                             {{$case->title}}@if($case->google_document_id) <a target="_blank"
                                                                                               class="btn btn-primary new-google-document"
                                                                                               href="https://docs.google.com/document/d/{{$case->google_document_id}}/edit">Go
@@ -22,7 +22,7 @@
 																					<span class="mdi mdi-calendar"></span> Updated at: {{$case->updated_at}}
 																				</span>
                                         </div>
-                                        <div class="col-md-4 text-right" style="padding:0">
+                                        <div class="col-md-6 text-right" style="padding:0">
 																			<span class="">
 																				<div class="btn-group btn-hspace">
 																						<button type="button"
@@ -63,7 +63,12 @@
 																						</ul>
 																				</div></span><span class=""><button
                                                         data-status="{{$case->is_archived}}"
-                                                        class="btn btn-{{$case->is_archived == 'archived' ? 'danger' : "warning"}} case-is-archived-btn">{{$case->is_archived == 'archived' ? 'Remove Archive' : "Send to Archive"}}</button></span>
+                                                        class="btn btn-{{$case->is_archived == 'archived' ? 'danger' : "warning"}} case-is-archived-btn">{{$case->is_archived == 'archived' ? 'Remove Archive' : "Send to Archive"}}</button>
+                                            <button
+                                                    data-status="{{$case->is_archived}}"
+                                                    class="btn btn-{{$case->is_archived == 'is_in_backlog' ? 'danger' : "default"}} case-is-backlog-btn">{{$case->is_archived == 'is_in_backlog' ? 'Remove Backlog' : "Send to Backlog"}}</button>
+                                            </span>
+
                                         </div>
                                     </div>
                                 </div>
