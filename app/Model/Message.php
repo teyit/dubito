@@ -22,8 +22,11 @@ class Message extends Model
         'is_read'
     ];
 
-	
-	public function files(){
+    protected static $logAttributes = ['report_id','external_message_id','sender_id','recepient_id','source','account_name','account_name','account_picture','created_at','updated_at','is_read'];
+
+
+
+    public function files(){
 	    return $this->belongsToMany('App\Model\File','message_files','message_id','file_id')->withTimestamps();
 	}
 

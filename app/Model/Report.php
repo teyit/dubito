@@ -4,14 +4,18 @@ namespace App\Model;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Report extends Model
 {
+    use LogsActivity;
     protected $table = 'reports';
 
 
 
     protected $fillable = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','created_at','updated_at'];
+
+    protected static $logAttributes = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','created_at','updated_at'];
 
 
     public function images(){

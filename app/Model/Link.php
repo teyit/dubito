@@ -8,5 +8,8 @@ class Link extends Model
 {
     protected $table ='links';
 
-    protected $fillable = ['id','link'];
+    protected $fillable = ['id','link','created_at','updated_at'];
+
+    protected static $logAttributes = ['link','created_at','updated_at'];
+
 }

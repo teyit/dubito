@@ -6,6 +6,8 @@ use App\Libraries\Google\GoogleDocument;
 use App\Model\CaseLink;
 use App\Model\Category;
 use App\Model\Evidence;
+use App\Model\Message;
+use App\Model\Report;
 use App\Model\Tag;
 use App\Model\Topic;
 use App\Traits\GoogleCreateDocumentTrait;
@@ -42,6 +44,7 @@ class CaseController extends Controller
         $store = $request->all();
         $case = Cases::create($store);
         $case->save();
+
 
         return redirect('/case/ongoing');
 

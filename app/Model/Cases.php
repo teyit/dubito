@@ -5,16 +5,22 @@ namespace App\Model;
 use App\Traits\GoogleCreateDocumentTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Cases extends Model
 {
 
+    use LogsActivity;
     use GoogleCreateDocumentTrait;
 
 
     protected $table = 'cases';
 
     protected $fillable = ['title','user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
+
+
+    protected static $logAttributes = ['title', 'user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
+
 
     protected $dates = ['created_at', 'updated_at'];
 

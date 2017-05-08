@@ -10,6 +10,9 @@ $(function(){
     // getCategories();
 
     $("#case-form-ajax").on('submit',function(e){
+        var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
+            return $(el).val();
+        }).get();
 
        $.ajaxSetup({
            header:$('meta[name="_token"]').attr('content')
@@ -18,16 +21,28 @@ $(function(){
        $.ajax({
            type:"POST",
            url:'/api/cases',
-           data:$(this).serialize(),
+           data:$(this).serialize()+'&'+$.param({ 'selected_messages': message_list }),
            dataType: 'json',
            success: function(data){
-              if(data == true){
+              if(data){
                  getCases();
                   $.gritter.add({
                       title: 'Success',
                       text: 'Case was added successfuly',
                       class_name: 'color success'
                   });
+
+                  if(message_list){
+                      $.each(message_list,function(index,message_id){
+                          $('#checkbox-label-'+message_id).addClass('hidden');
+                      });
+
+                      $.gritter.add({
+                          title: 'Success',
+                          text: 'This message was assigned as report successfuly',
+                          class_name: 'color success'
+                      });
+                  }
               }
            },
            error: function(data){

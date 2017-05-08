@@ -82,6 +82,7 @@
                         method : "POST",
                         success: function(result){
                             if(result){
+
                                 $.each(message_list,function(index,message_id){
                                     $('#checkbox-label-'+message_id).addClass('hidden');
                                 });
