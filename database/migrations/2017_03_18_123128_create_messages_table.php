@@ -23,6 +23,8 @@ class CreateMessagesTable extends Migration
             $table->string('account_name')->nullable();
             $table->text("text")->nullable();
             $table->integer("case_id")->nullable();
+            $table->boolean("is_review")->default(false);
+
             $table->string("source")->nullable();
             $table->boolean('is_read')->default(0);
             $table->timestamps();

@@ -19,7 +19,9 @@ class Message extends Model
 		'account_picture',
 		'created_at',
 		'updated_at',
-        'is_read'
+        'is_read',
+        'case_id',
+        'review_id'
     ];
 
     protected static $logAttributes = ['report_id','external_message_id','sender_id','recepient_id','source','account_name','account_name','account_picture','created_at','updated_at','is_read'];

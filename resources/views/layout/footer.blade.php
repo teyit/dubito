@@ -37,10 +37,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js"></script>
 
 <script src="{{url('assets/lib/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.3.7/jquery.jscroll.min.js"></script>
 
 @yield('script')
 
+
+
 <script type="text/javascript">
+
+
     $(document).ready(function(){
 
 //

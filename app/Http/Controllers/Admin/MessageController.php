@@ -76,5 +76,16 @@ class MessageController extends Controller
 			return view('message.index',compact('senders','messages','topics','categories'));
 		}
 	}
+	
+	public function review(){
+	    $messageIDS = request()->input('message_ids');
+        foreach ($messageIDS as $index => $messageID) {
+            $message = Message::find($messageID);
+            $message->is_review = true;
+            $message->save();
+        }
+
+        return response()->json(true, 200);
+    }
 
 }

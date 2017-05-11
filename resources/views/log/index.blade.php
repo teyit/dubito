@@ -37,7 +37,7 @@
                                         @endif
 
                                     </td>
-                                    <td>{{$activity->causer->name}}</td>
+                                    <td>{{$activity->causer->name or ''}}</td>
                                     <td>{{$activity->created_at}}</td>
                                 </tr>
                               @endforeach

@@ -12857,12 +12857,12 @@ li.L9 {
   [Gallery]
 */
 .gallery-container .item {
-  width: 50%;
+  width: 25%;
   margin-bottom: 20px;
   padding: 0 10px;
 }
 .latest .gallery-container .item {
-	width: 60%;
+	width: 40%;
 }
 .gallery-container .item .photo {
   background: #ffffff;

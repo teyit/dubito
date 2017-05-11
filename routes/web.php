@@ -38,8 +38,14 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
     Route::resource("categories",'CategoryController');
     Route::resource("messages",'MessageController');
+    Route::put('mark-as-review','MessageController@review');
+
     Route::resource("topics","TopicController");
 
+
+
+    //Reviews
+    Route::resource("reviews","ReviewController");
 
 
     //Reports
