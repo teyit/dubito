@@ -17,12 +17,29 @@
                         <th>Created At</th>
                         <th class="actions"></th>
                     </tr>
+
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Source</th>
+                        <th>Case</th>
+                        <th>Created At</th>
+                        <th class="actions"></th>
+                    </tr>
+                    </tfoot>
+
                     </thead>
                     <tbody>
                     @foreach($reports as $report)
                         <tr>
                             <td>{{$report->id}}</td>
-                            <td>{{$report->source}}</td>
+                            <td>
+                                @if(strpos($report->source,":"))
+                                  {{explode(":",$report->source)[0]}}
+                                @else
+                                    {{$report->source}}
+                                @endif
+                            </td>
                             <td>{{$report->case->title}}</td>
                             <td>{{$report->created_at}}</td>
 

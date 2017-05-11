@@ -14,30 +14,72 @@ var App = (function () {
     } );
 
 
-    $("#report-datatable").dataTable();
+      $('#case-datatable').DataTable( {
+          initComplete: function () {
+              this.api().columns().every( function (col) {
+                  console.log(col);
+                  var except = [4,9]
+                  if(except.indexOf(col) === -1){
+                      var column = this;
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.footer()).empty() )
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex(
+                                  $(this).val()
+                              );
+
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          } );
+
+                      column.data().unique().sort().each( function ( d, j ) {
+
+                          select.append( '<option value="'+d+'">'+d+'</option>' )
+                      } );
+                  }
+
+              } );
+          }
+      } );
+
+
+
+      $('#report-datatable').DataTable( {
+          initComplete: function () {
+              this.api().columns().every( function (col) {
+                  var column = this;
+
+
+                  if(col !== 4){
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.footer()).empty() )
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex(
+                                  $(this).val()
+                              );
+
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          } );
+
+                      column.data().unique().sort().each( function ( d, j ) {
+                          select.append( '<option value="'+d+'">'+d+'</option>' )
+                      } );
+                  }
+              } );
+          }
+      } );
+
+
+
+    // $("#report-datatable").dataTable();
 
     $("#activity-datatable").dataTable();
 
     $("#review-datatable").dataTable();
 
-
-      //Remove search & paging dropdown
-    $("#table2").dataTable({
-      pageLength: 6,
-      dom:  "<'row be-datatable-body'<'col-sm-12'tr>>" +
-            "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
-    });
-
-    //Enable toolbar button functions
-    $("#table3").dataTable({
-      buttons: [
-        'copy', 'excel', 'pdf', 'print'
-      ],
-      "lengthMenu": [[6, 10, 25, 50, -1], [6, 10, 25, 50, "All"]],
-      dom:  "<'row be-datatable-header'<'col-sm-6'l><'col-sm-6 text-right'B>>" +
-            "<'row be-datatable-body'<'col-sm-12'tr>>" +
-            "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
-    });
 
   };
 

@@ -9,7 +9,7 @@
                     <button  data-toggle="modal"  data-target="#case-create" class="btn btn-success">Add Case</button>
                 </div>
                 <div class="panel-body">
-                    <table id="case-datatable" class="table">
+                    <table id="case-datatable" class="table case-datatable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -25,6 +25,22 @@
                                 {{--<th class="actions">Delete</th>--}}
                             </tr>
                         </thead>
+
+                        <tfoot>
+                        <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Topic</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>User</th>
+                        <th>Report Count</th>
+                        <th>Created at</th>
+                        <th>Updated at</th>
+                        <th class="actions"></th>
+                        </tr>
+                        </tfoot>
+
                         <tbody>
                         @foreach($cases as $case)
                             <tr>
