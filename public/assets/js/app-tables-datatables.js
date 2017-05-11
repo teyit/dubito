@@ -18,6 +18,8 @@ var App = (function () {
 
     $("#activity-datatable").dataTable();
 
+    $("#review-datatable").dataTable();
+
 
       //Remove search & paging dropdown
     $("#table2").dataTable({

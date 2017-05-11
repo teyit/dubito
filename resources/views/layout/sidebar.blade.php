@@ -12,7 +12,7 @@
 
                         <li class="{{request()->segment(1) == 'messages' ? "active" : ""}}" ><a  href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
 
-                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}"><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i>Reports</a></li>
+                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}"><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>
 
                         <li class="parent {{request()->segment(1) == 'case' ? 'open' : ''}}">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
@@ -29,6 +29,8 @@
                         <li class="{{request()->segment(1) == 'categories' ? "active" : ""}} "><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i>Categories</a></li>
 
                         <li class="{{request()->segment(1) == 'tags' ? "active" : ""}}"><a  href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i> Tags</a></li>
+
+                        <li class="{{request()->segment(1) == 'reviews' ? "active" : ""}}"><a  href="{{url("/reviews")}}"><i class="icon mdi mdi-comment"></i> Reviews</a></li>
 
                         <li class="{{request()->segment(1) == 'logs' ? "active" : ""}}"><a  href="{{url("/logs")}}"><i class="icon mdi mdi-storage"></i> Logs</a></li>
 

@@ -8,7 +8,7 @@
                         Review List &nbsp;
                     </div>
                     <div class="panel-body">
-                        <table class="table">
+                        <table class="table" id="review-datatable">
                             <thead>
                             <tr>
                                 <th>ID</th>
