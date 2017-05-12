@@ -66,6 +66,9 @@
         .review .timeline-content {
             padding: 12px 15px 12px 14px !important;
         }
+        .review .panel-footer {
+            padding: 10px 10px 5px;
+        }
     </style>
 
 @endsection
