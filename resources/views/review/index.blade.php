@@ -8,7 +8,7 @@
                     </div>
                     <div class="panel-body">
                         @foreach($reviews as $review)
-                        <div class="panel panel-border-color panel-border-color-info">
+                        <div class="panel panel-border-color panel-border-color-info review">
 
                             <div class="timeline-content">
                                 <div class="timeline-avatar"><img src="{{$review->account_picture}}" alt="" class="circle"></div>
@@ -58,7 +58,14 @@
         </div>
     </div>
 
+
 @endsection
 @section('script')
+
+    <style>
+        .review .timeline-content {
+            padding: 12px 15px 12px 14px !important;
+        }
+    </style>
 
 @endsection
