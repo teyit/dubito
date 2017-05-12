@@ -10,6 +10,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 class Cases extends Model
 {
 
+
     use LogsActivity;
     use GoogleCreateDocumentTrait;
 
