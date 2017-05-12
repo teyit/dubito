@@ -3,31 +3,55 @@
     <div class="main-content container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="panel panel-default panel-table">
                     <div class="panel-heading">
                         Review List &nbsp;
                     </div>
                     <div class="panel-body">
-                        <table class="table" id="review-datatable">
-                            <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Account Name</th>
-                                <th>Text</th>
-                                <th>Created At</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($reviews as $review)
-                                <tr>
-                                    <td>{{$review->id}}</td>
-                                    <td>{{$review->account_name}}</td>
-                                    <td>{{$review->text}}</td>
-                                    <td>{{$review->created_at}}</td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
+                        @foreach($reviews as $review)
+                        <div class="panel panel-border-color panel-border-color-info">
+
+                            <div class="timeline-content">
+                                <div class="timeline-avatar"><img src="{{$review->account_picture}}" alt="" class="circle"></div>
+
+                                <div class="timeline-header">
+                                    <!--<span class="timeline-time">4:34 PM</span>-->
+                                    <div><p class="timeline-autor">{{$review->account_name}}</p></div>
+                                    <p class="timeline-activity">
+                                        {{$review->text}}
+                                    </p>
+                                </div>
+                                <div class="timeline-gallery">
+                                </div>
+                            </div>
+
+                            <div class="panel-footer clearfix">
+                                {{\Carbon\Carbon::parse($review->created_at)->diffForHumans()}} / {{explode(":",$review->source)[0]}}
+                                <div class="tools">
+                                </div>
+
+                            </div>
+                       @endforeach
+
+                        {{--<table class="table" id="review-datatable">--}}
+                            {{--<thead>--}}
+                            {{--<tr>--}}
+                                {{--<th>ID</th>--}}
+                                {{--<th>Account Name</th>--}}
+                                {{--<th>Text</th>--}}
+                                {{--<th>Created At</th>--}}
+                            {{--</tr>--}}
+                            {{--</thead>--}}
+                            {{--<tbody>--}}
+                            {{--@foreach($reviews as $review)--}}
+                                {{--<tr>--}}
+                                    {{--<td>{{$review->id}}</td>--}}
+                                    {{--<td>{{$review->account_name}}</td>--}}
+                                    {{--<td>{{$review->text}}</td>--}}
+                                    {{--<td>{{$review->created_at}}</td>--}}
+                                {{--</tr>--}}
+                            {{--@endforeach--}}
+                            {{--</tbody>--}}
+                        {{--</table>--}}
                     </div>
                 </div>
             </div>
