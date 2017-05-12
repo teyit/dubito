@@ -18,7 +18,7 @@ var App = (function () {
           initComplete: function () {
               this.api().columns().every( function (col) {
                   console.log(col);
-                  var except = [4,9]
+                  var except = [4,8]
                   if(except.indexOf(col) === -1){
                       var column = this;
                       var select = $('<select><option value=""></option></select>')

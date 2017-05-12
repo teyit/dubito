@@ -18,7 +18,6 @@
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th>User</th>
-                                <th>Report Count</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -64,7 +63,6 @@
                                         <span class="label label-muted">Pending</span>
 
                                     @endif
-
                                 </td>
                                 <td>{{$case->user->name or 'Not Assigned'}}</td>
                                 <td>{{$case->created_at}}</td>
