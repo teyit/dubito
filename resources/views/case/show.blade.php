@@ -226,12 +226,12 @@
                     <div class="panel panel-border-color panel-border-color-info">
 
                         <div class="timeline-content">
-                            <div class="timeline-avatar"><img src="/assets/img/avatar1.png"
+                            <div class="timeline-avatar"><img src="{{$report->account_picture or "/assets/img/avatar1.png"}}"
                                                               alt="{{$report->account_name}}" class="circle"></div>
                             {{-- <div class="timeline-avatar"><img src="{{$report->account_picture}}" alt="{{$report->account_name}}" class="circle"></div> --}}
                             <div class="timeline-header">
                                 <!--<span class="timeline-time">4:34 PM</span>-->
-                                <div><p class="timeline-autor">Deneme Account Name {{$report->account_name}}</p></div>
+                                <div><p class="timeline-autor">{{$report->account_name}}</p></div>
                                 <p class="timeline-activity">{{$report->text}}</p>
                             </div>
                             <div class="timeline-gallery">
@@ -264,7 +264,7 @@
                         </div>
 
                         <div class="panel-footer clearfix">
-                            {{$report->created_at->diffForHumans()}} / {{$report->source}}
+                            {{$report->created_at->diffForHumans()}} / {{explode(":",$report->source)[0]}}
                             <div class="tools">
 
                                 {{--<button  data-id="{{$report->id}}"  class="btn btn-space btn-success btn-sm report-assign-case"><i class="icon icon-left mdi mdi-cloud-done"></i> Assign to a case</button>--}}

@@ -2,7 +2,7 @@
 @section('content')
     <div class="main-content container-fluid">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-10">
                     <div class="panel-heading">
                         Review List &nbsp;
                     </div>
@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="panel-footer clearfix">
-                                {{\Carbon\Carbon::parse($review->created_at)->diffForHumans()}} / {{explode(":",$review->source)[0]}}
+                                {{$review->created_at->diffForHumans()}} / {{explode(":",$review->source)[0]}}
                                 <div class="tools">
                                 </div>
 
