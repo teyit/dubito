@@ -73,9 +73,11 @@ class ServiceController extends Controller
                 $message->sender_id = $m['sender']['id'];
                 $message->recipient_id = $m['recipient']['id'];
                 $message->external_message_id = $m['message']['mid'];
+
                 if($facebook_user){
+                    $S3_account_picture = Storage::disk('s3')->put($facebook_user['account_picture'],'facebook/'.$m['sender']['id']);
                     $message->account_name = $facebook_user['account_name'];
-                    $message->account_picture = $facebook_user['account_picture'];
+                    $message->account_picture = $S3_account_picture;
                 }else{
                     $message->account_name = 'Facebook User';
                     $message->account_picture = '';
@@ -84,7 +86,7 @@ class ServiceController extends Controller
                 if(isset($m['message']['text'])){
                     $message->text = $m['message']['text'];
                 }
-                $message->save();
+
                 if(isset($m['message']['attachments'])){
                     \Log::info("message");
                     foreach($m['message']['attachments'] as $a){

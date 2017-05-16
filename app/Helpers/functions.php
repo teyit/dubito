@@ -25,7 +25,6 @@ function ConverterFileLink($url){
 
 function clickableLink($s){
     return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
-
 }
 
 

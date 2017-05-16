@@ -83,7 +83,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 Route::any('new-google-document/{title}',['as'=>'new.google.document','uses'=>'ServiceController@newGoogleDocument']);
 
 
-Route::any('/service/messages/facebook', 'ServiceController@facebook');
+Route::any('  ', 'ServiceController@facebook');
 Route::any('/service/messages/twitter', 'ServiceController@twitter');
 
 
