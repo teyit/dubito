@@ -13,7 +13,6 @@
             <div class="pull-right email-filters-right">
                 <div class="btn-group">
                     <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Assign to a case</button>
-                    <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Archive</button>
                     <button id="btn-mark-as-review"  type="button" class="btn btn-default review-assign">Mark as a review</button>
                 </div>
             </div>

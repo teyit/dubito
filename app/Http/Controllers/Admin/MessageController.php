@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
     private function getSenders(){
-        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->get();
+        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->paginate(20);
 
         $senders = $messages->groupBy('sender_id');
 
@@ -29,7 +29,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->paginate(20);
+        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->orderBy('id','DESC')->paginate(30);
 
         $topics = Topic::latest()->get();
 
@@ -47,7 +47,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders();
 
-        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC')->paginate(20);
+        $messages = Message::where('sender_id',$id)->orderBy('created_at','DESC')->paginate(30);
 
         $topics = Topic::latest()->get();
 
