@@ -30,6 +30,7 @@
                                 </div>
 
                             </div>
+                        </div>
                        @endforeach
 
                         {{--<table class="table" id="review-datatable">--}}
