@@ -8,6 +8,8 @@ use Facebook;
 use Illuminate\Http\Request;
 use App\Model\Message;
 use App\Model\MessageFile;
+use Illuminate\Support\Facades\Storage;
+
 class ServiceController extends Controller
 {
 
