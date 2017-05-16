@@ -75,8 +75,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
     Route::resource("logs","LogController");
 
-
-
 });
 
 
