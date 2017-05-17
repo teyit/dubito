@@ -77,7 +77,7 @@ class ServiceController extends Controller
                 $message->external_message_id = $m['message']['mid'];
                 if($facebook_user){
                     $message->account_name = $facebook_user['account_name'];
-                    $message->account_picture = $facebook_user['account_picture']->storeAs('facebook',"test",'s3');
+                    $message->account_picture = Storage::url($facebook_user['account_picture']);
                 }else{
                     $message->account_name = 'Facebook User';
                     $message->account_picture = '';
