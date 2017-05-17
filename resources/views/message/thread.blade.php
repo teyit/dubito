@@ -34,7 +34,9 @@
                 <div class="email-list-detail">
                     <div style="color:#ddd;font-weight:700; font-size:11px; text-align:right;">{{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</div>
                     <div class="thread-messages message-self">
-                        {!! clickableLink($s->text) !!}
+
+                        {{!! clickableLink($s->text) !!}}
+
                         @if(!$s->files->isEmpty())
                             @foreach($s->files as $file)
                                 @if($file->file_type == 'image')
@@ -66,7 +68,7 @@
     <div class="paginate text-center message ">
         {{ $messages->links() }}
     </div>
-        @endif
+    @endif
 
 </div>
 <script>
