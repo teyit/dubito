@@ -11,25 +11,34 @@ use App\Http\Controllers\Controller;
 
 class MessageController extends Controller
 {
-    private function getSenders(){
-        $messages = Message::selectRaw('messages.*')->orderBy('created_at','DESC')->paginate(20);
+    public function showSenders(Request $request){
+        $page = $request->get('page',1);
 
-        $senders = $messages->groupBy('sender_id');
+        $senders = $this->getSenders($page);
 
-        foreach($senders as $key => $s){
-            $s->count = $s->where('is_read',0)->count();
-        }
-        return $senders;
+        return view('message.partials.senders',["senders" => $senders]);
+
+    }
+    private function getSenders($page){
+
+        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads')->groupBy('sender_id')->get()->toArray();
+        $length = 40;
+        
+        $data = array_slice($senders,($page-1) * $length,$length);
+
+        return $data;
+
     }
 
 
 
-    public function index(){
+    public function index(Request $request){
 
+        $page = $request->get('page',1);
 
-        $senders = $this->getSenders();
+        $senders = $this->getSenders($page);
 
-        $messages = Message::where('sender_id',$senders->first()->first()->sender_id)->orderBy('id','DESC')->paginate(30);
+        $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(30);
 
         $topics = Topic::latest()->get();
 
@@ -45,7 +54,9 @@ class MessageController extends Controller
 
 	public function show(Request $request, $id){
 
-        $senders = $this->getSenders();
+        $page = $request->get('page',1);
+
+        $senders = $this->getSenders($page);
 
         $messages = Message::where('sender_id',$id)->orderBy('created_at','DESC')->paginate(30);
 

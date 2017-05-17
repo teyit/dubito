@@ -1,9 +1,10 @@
 @extends('layout.app',['css' => 'be-aside'])
 @section('content')
     <aside class="page-aside">
-        <div class="be-scroller">
+        <div class="">
             <div class="aside-content">
-                <div class="content">
+
+                <div class="content" style="position: absolute;width:100%;height: 136px;z-index:1">
                     <div class="aside-header">
                         <span class="title">Inbox</span>
                         <br>
@@ -22,23 +23,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="aside-nav collapse thread-list">
-                    <ul class="nav">
-                        @foreach($senders as $s)
-                            <li class="sender-item-{{$s->first()->sender_id}}">
-                                <a class="spf-link" href="/messages/{{$s->first()->sender_id}}">
-                                    @if($s->count > 0)
-                                    <span class="thread-count label label-primary">{{$s->count}}</span>
-                                    @endif
-                                    <div class="thread-avatar" style="background-image:url('{{$s->first()->account_picture}}');"></div>
-                                    <span class="thread-name">{{$s->first()->account_name}}
 
-                                    </span>
-
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
+                <div style="height: 100%;padding-top:136px;position: relative" class="aside-nav">
+                    <div style="position: relative;height: 100%;" id="thread-scroller">
+                        <ul id="thread-list" class="nav">
+                            @include("message.partials.senders",["senders" => $senders])
+                        </ul>
+                        <div class="be-loading " style="padding:40px 0px;text-align: center;width:100%;">
+                            <div class="be-spinner">
+                                <svg width="40px" height="40px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                                    <circle fill="none" stroke-width="4" stroke-linecap="round" cx="33" cy="33" r="30" class="circle"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -58,10 +56,31 @@
 
 @section('script')
     <script src="{{asset('assets/js/nprogress.js')}}"></script>
+
     <link rel="stylesheet" href="{{asset('assets/css/nprogress.css')}}" />
     <script src="//ajax.googleapis.com/ajax/libs/spf/2.4.0/spf.js"></script>
     <script>
-        spf.init();
+
+        $(function() {
+            var pageIsLoading = false;
+            var page = 1;
+            $("#thread-scroller").perfectScrollbar();
+            $("#thread-scroller").on('ps-y-reach-end', function () {
+                if(!pageIsLoading){
+                    pageIsLoading = true;
+                    page++;
+                    $(".be-loading").addClass('be-loading-active')
+                 $.get("/threads/?page=" + page, function(data, status){
+                     pageIsLoading = false;
+                     $(".be-loading").removeClass('be-loading-active');
+                     $("#thread-list").append(data);
+                 });
+                }
+            });
+
+        });
+
+        //spf.init();
         $(document).on("spfclick", function() {
             // Show progress bar
             NProgress.start();
@@ -75,33 +94,24 @@
         $(document).on("spfprocess", function() {
             // Set progress bar width to 100%
             NProgress.done();
-            $('.infinite-scroll').jscroll({
-                autoTrigger: true,
-                loadingHtml: '<img class="center-block" src="https://cdnjs.cloudflare.com/ajax/libs/timelinejs/2.25/css/loading.gif" alt="Loading..." />',
-                padding: 0,
-                nextSelector: '.pagination li.active + li a',
-                contentSelector: 'div.infinite-scroll',
-                callback: function() {
-                    $('ul.pagination').remove();
-                }
-            });
         });
 
         $(document).on("spfdone", function() {
             // Finish request and remove progress bar
             NProgress.remove();
         });
-        $("#section-thread").on('thread-change',function(sender_id){
-            console.log(sender_id);
+        $("#section-thread").on('thread-change',function(event,data){
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();
             $(".fancybox").fancybox();
             $(".thread-list nav li").removeClass('active');
-            $(".sender-item-" + sender_id).addClass('active');
-            $(".sender-item-" + sender_id+" .thread-count").hide();
+            $(".sender-item-" + data.sender_id).addClass('active');
+            $(".sender-item-" + data.sender_id+" .thread-count").hide();
         });
-        $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
+        $("#section-thread").trigger('thread-change', {
+            sender_id: '{{$messages[0]->sender_id}}'
+        });
     </script>
 @endsection
 

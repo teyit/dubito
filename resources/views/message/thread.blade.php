@@ -21,7 +21,7 @@
 </div>
 <div class="email-list">
     @foreach($messages as $s)
-        <div class="infinite-scroll">
+        <div class="">
             <div class="email-list-item email-list-item--unread ">
                 <div class="email-list-actions">
                     @if(!$s->report_id)
