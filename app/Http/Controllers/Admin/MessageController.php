@@ -12,19 +12,48 @@ use App\Http\Controllers\Controller;
 class MessageController extends Controller
 {
     public function showSenders(Request $request){
-        $page = $request->get('page',1);
-
-        $senders = $this->getSenders($page);
-
+        $senders = $this->getSenders($request->only('source','page','keyword','size'));
         return view('message.partials.senders',["senders" => $senders]);
 
     }
-    private function getSenders($page){
+    private function getSenders($params){
+        $keyword = false;
+        $source = false;
+        $page = 1;
+        $size = 40;
 
-        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads')->groupBy('sender_id')->get()->toArray();
-        $length = 40;
-        
-        $data = array_slice($senders,($page-1) * $length,$length);
+
+
+        if(isset($params['keyword'])){
+            if(strlen($params['keyword']) > 3){
+                $keyword = $params['keyword'];
+            }
+        }
+        if(isset($params['source'])){
+            $source = $params['source'];
+        }
+        if(isset($params['page'])){
+            $page = intval($params['page']);
+        }
+        if(isset($params['size'])){
+            $size = intval($params['size']);
+        }
+
+
+        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads');
+
+        if($keyword){
+            $senders->where('account_name','LIKE', '%'. $keyword . '%' )->where('text','LIKE', '%'. $keyword . '%' );
+        }
+
+        if($source){
+            $senders->where('source', $source);
+        }
+
+
+        $senders = $senders->groupBy('sender_id')->get()->toArray();
+
+        $data = array_slice($senders,($page-1) * $size,$size);
 
         return $data;
 
@@ -34,9 +63,8 @@ class MessageController extends Controller
 
     public function index(Request $request){
 
-        $page = $request->get('page',1);
 
-        $senders = $this->getSenders($page);
+        $senders = $this->getSenders($request->only('source','page','keyword','size'));
 
         $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(30);
 
@@ -54,9 +82,8 @@ class MessageController extends Controller
 
 	public function show(Request $request, $id){
 
-        $page = $request->get('page',1);
 
-        $senders = $this->getSenders($page);
+        $senders = $this->getSenders($request->only('source','page','keyword','size'));
 
         $messages = Message::where('sender_id',$id)->orderBy('created_at','DESC')->paginate(30);
 
