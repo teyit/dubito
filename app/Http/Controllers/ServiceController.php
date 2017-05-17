@@ -8,6 +8,8 @@ use Facebook;
 use Illuminate\Http\Request;
 use App\Model\Message;
 use App\Model\MessageFile;
+use Illuminate\Support\Facades\Storage;
+
 class ServiceController extends Controller
 {
 
@@ -75,7 +77,7 @@ class ServiceController extends Controller
                 $message->external_message_id = $m['message']['mid'];
                 if($facebook_user){
                     $message->account_name = $facebook_user['account_name'];
-                    $message->account_picture = $facebook_user['account_picture'];
+                    $message->account_picture = $facebook_user['account_picture']->storeAs('facebook',$m['sender']['id'],'s3');
                 }else{
                     $message->account_name = 'Facebook User';
                     $message->account_picture = '';
