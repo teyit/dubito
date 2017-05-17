@@ -24,11 +24,11 @@ function ConverterFileLink($url){
 
 
 function clickableLink($s){
-    if(is_string($s)){
-        return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s);
-    }else{
-        return '';
-    }
+    //TODO fix links.
+    return $s;
+    return preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $s);
+
+
 }
 
 
