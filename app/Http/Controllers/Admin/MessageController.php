@@ -43,7 +43,7 @@ class MessageController extends Controller
         $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads');
 
         if($keyword){
-            $senders->where(function($q){
+            $senders->where(function($q) use($keyword){
                 return $q->where('account_name','LIKE', '%'. $keyword . '%' )->orWhere('text','LIKE', '%'. $keyword . '%' );
             });
         }
