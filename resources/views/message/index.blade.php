@@ -71,6 +71,8 @@
                     page++;
                     $(".be-loading").addClass('be-loading-active')
                  $.get("/threads/?page=" + page, function(data, status){
+                     spf.dispose();
+                     spf.init();
                      pageIsLoading = false;
                      $(".be-loading").removeClass('be-loading-active');
                      $("#thread-list").append(data);
