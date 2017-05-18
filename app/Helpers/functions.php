@@ -40,5 +40,5 @@ function findLinkFromText($s){
 
 
 function moveToS3Link($filePrefix,$fileName,$link){
-    return \Illuminate\Support\Facades\Storage::disk('s3')->put($filePrefix.'/'.$fileName."jpg", file_get_contents($link));
+    return \Illuminate\Support\Facades\Storage::disk('s3')->put($filePrefix.'/'.$fileName.".jpg", file_get_contents($link));
 }
