@@ -97,12 +97,13 @@ class ServiceController extends Controller
                             $message->save();
                         }else{
                             \Log::info("atachment");
+                            moveToS3Link("facebook/files/".date('Y-m-d')."/",$m['message']['mid'],$a['payload']['url']);
 
 
 
                            $rf =  File::create(
                                 ['file_type' => $a['type'],
-                                 'file_url' => $a['payload']['url'],
+                                 'file_url' => Storage::disk('s3')->url("facebook/files/".date('Y-m-d')."/".$m['message']['mid'].'.jpg'),
                             ]);
 
                             $message->files()->attach($rf->id);
