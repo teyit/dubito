@@ -78,7 +78,7 @@ class ServiceController extends Controller
                 if($facebook_user){
                     moveToS3Link("facebook/account/",$m['sender']['id'],$facebook_user['account_picture']);
                     $message->account_name = $facebook_user['account_name'];
-                    $message->account_picture = Storage::disk('s3')->url("facebook/account/".$m['sender'['id'].'.jpg']);
+                    $message->account_picture = Storage::disk('s3')->url("facebook/account/".$m['sender']['id'].'.jpg');
                 }else{
                     $message->account_name = 'Facebook User';
                     $message->account_picture = '';
