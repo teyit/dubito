@@ -82,9 +82,9 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 Route::get('/deneme', function(){
 
-    $aa = \Storage::disk('s3')->url("facebook/account/1352552858142417.jpg");
+    $aa = substr('mid.$cAAC8-30FOc9hEwzFuFa4cd6V4Kyi', -23);
 
-        dd($aa);
+    dd($aa);
 
 
 });
