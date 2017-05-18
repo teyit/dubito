@@ -82,8 +82,9 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 Route::get('/deneme', function(){
 
-   $file = 'http://scontent.xx.fbcdn.net/v/t1.0-1/15965145_1280930285286322_5000450650155918902_n.jpg?oh=2d86934318d2fc71938d9eb0cb1e5703&oe=59619749';
+    $aa = \Storage::disk('s3')->url("facebook/account/1352552858142417.jpg");
 
+        dd($aa);
 
 
 });
