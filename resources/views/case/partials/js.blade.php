@@ -99,8 +99,8 @@
                 pk: 1,
                 source: result,
                 success: function (response, value) {
-                    console.log(value);
                     if (response) {
+                           $('.account-img').attr("src",response.account_picture)
                         //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
                         $.gritter.add({
                             title: 'Success',

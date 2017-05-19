@@ -146,7 +146,7 @@ class CaseController extends Controller
         $case = Cases::find($caseID);
         $case->user_id = $request->input('value');
         $case->save();
-        return response()->json(true,200);
+        return response()->json($case->user,200);
 
     }
 

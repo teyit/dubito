@@ -177,3 +177,13 @@
     list-style-type: none;
 }
 
+.account-avatar{
+    width: 25px;
+    height: 25px;
+    display: block;
+    border-radius: 50px;
+    overflow: hidden;
+    vertical-align: middle;
+    float: left;
+    margin-top: -5px;
+}
