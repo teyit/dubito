@@ -27,8 +27,6 @@ trait GoogleCreateDocumentTrait
 
             if ($domain == 'teyit.org') {
 
-                return response()->json("aaa");
-
                 if ($case->google_document_id) {
                     return $case->google_document_id;
                 }
@@ -37,6 +35,8 @@ trait GoogleCreateDocumentTrait
                 $dubito_folder_id = '0B3svx2NH-juvNW81V2pzajRvRWM';
 
                 $token = User::where('email', 'info@teyit.org')->first()->token;
+
+                $client->setAccessType('offline');
 
                 $client->setAccessToken($token);
 
