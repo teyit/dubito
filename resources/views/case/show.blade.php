@@ -77,7 +77,7 @@
                                     <div class="col-md-6">
                                         <div class="timeline-avatar account-avatar"><img class="account-img" src="{{$case->user->account_picture or "/assets/img/avatar1.png"}}"></div></span><strong style="padding-left:10px;">Assign
                                             User: </strong><a id="assign-user-case" data-title="Assign user to case"
-                                                              data-value="{{$case->user->id}}" data-type="select"
+                                                              data-value="{{$case->user->id or ''}}" data-type="select"
                                                               href="#"
                                                               class="editable editable-click">{{$case->user->name or ''}}</a>
                                         {{--<select name="" id="" class="form-control assign-user-to-case input-xs" style="width:auto;">--}}

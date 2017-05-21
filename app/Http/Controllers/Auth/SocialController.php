@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Http\Request;
+
+use App\Model\Social;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
-use App\Models\Social;
 use App\User;
-use App\Models\Role;
 
 class SocialController extends Controller
 {
@@ -34,12 +33,10 @@ class SocialController extends Controller
 
     }
 
-    public function getSocialHandle($provider )
+    public function getSocialHandle($provider)
     {
 
-        $code = Input::get('code');
-        
-        
+
         if (Input::get('denied') != '') {
 
             return redirect()->to('login')

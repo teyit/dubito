@@ -1,7 +1,8 @@
-<?php namespace App\Models;
+<?php
+
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Social extends Model
 {
@@ -10,7 +11,6 @@ class Social extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Model\User');
     }
-
 }
