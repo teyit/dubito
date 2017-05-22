@@ -25,12 +25,11 @@ class CaseController extends Controller
 
 
     public function index($is_archived){
+
         $topics = Topic::latest()->get();
-
         $is_archived = $is_archived == "backlog" ? 'is_in_backlog' : $is_archived;
-        $cases = Cases::where('is_archived',$is_archived)->get();
+        $cases = Cases::where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();
-
 
         return view("case.index",compact("cases",'topics','categories'));
     }

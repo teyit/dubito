@@ -6,9 +6,9 @@ Route::get("/",function(){
 });
 
 Auth::routes();
+
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
 Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
-
 
 
 

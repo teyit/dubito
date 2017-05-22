@@ -29,6 +29,6 @@ class User extends Authenticatable
 
     public function social()
     {
-        return $this->hasMany('App\Models\Social');
+        return $this->hasMany('App\Model\Social');
     }
 }

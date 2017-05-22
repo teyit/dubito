@@ -29,13 +29,14 @@ class SocialController extends Controller
 
 
 
-        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])->redirect();
+        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
+            ->with(["access_type" => "offline", "prompt" => "consent select_account"])
+            ->redirect();
 
     }
 
     public function getSocialHandle($provider)
     {
-
 
         if (Input::get('denied') != '') {
 
@@ -45,7 +46,10 @@ class SocialController extends Controller
         }
 
 
-        $user = Socialite::driver( $provider)->scopes(['https://www.googleapis.com/auth/drive'])->user();
+        $user = Socialite::driver( $provider)->scopes(['https://www.googleapis.com/auth/drive'])
+            ->scopes(['https://www.googleapis.com/auth/drive'])
+            ->with(["access_type" => "offline", "prompt" => "consent select_account"])
+            ->user();
         
         if(isset($user->token)){
            Session::put('google_oauth_token',$user->token);

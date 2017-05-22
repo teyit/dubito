@@ -34,9 +34,8 @@ trait GoogleCreateDocumentTrait
 
                 $dubito_folder_id = '0B3svx2NH-juvNW81V2pzajRvRWM';
 
-                $token = User::where('email', 'info@teyit.org')->first()->token;
 
-                $client->setAccessType('offline');
+                $token = User::where('email', 'info@teyit.org')->first()->token;
 
                 $client->setAccessToken($token);
 
