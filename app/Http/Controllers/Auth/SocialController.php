@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 
 use App\Model\Social;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Config;
@@ -29,9 +30,10 @@ class SocialController extends Controller
 
 
 
-        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
-            ->with(["access_type" => "offline", "prompt" => "consent select_account"])
+         Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
+            ->with(["access_type" => "offline", "prompt" => "consent"])
             ->redirect();
+
 
     }
 
@@ -68,6 +70,19 @@ class SocialController extends Controller
         }
 
         if (!empty($userCheck)) {
+
+            $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
+
+            $now = \Carbon\Carbon::now();
+            $diffMinute = $now->diffInMinutes($userUpdatedAt);
+
+            if($diffMinute > 60){
+                
+                $updateUser = User::find(Auth::id());
+                $updateUser->token = $user->token;
+                $updateUser->save();
+            }
+
 
             $socialUser = $userCheck;
 

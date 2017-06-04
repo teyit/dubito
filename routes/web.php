@@ -5,6 +5,11 @@ Route::get("/",function(){
     return redirect('/login');
 });
 
+
+Route::get('/deneme', function(){
+    return 'aa';
+});
+
 Auth::routes();
 
 Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses' => 'Auth\SocialController@getSocialRedirect']);
@@ -18,9 +23,7 @@ Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses'
 
 
 
-Route::get('/redirect_url', function(){
 
-});
 
 
 
@@ -82,10 +85,11 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 Route::get('/deneme', function(){
 
-    $aa = substr('mid.$cAAC8-30FOc9hEwzFuFa4cd6V4Kyi', -23);
+    $aa = \Carbon\Carbon::parse('2017-05-22 21:17:45');
+    $now = \Carbon\Carbon::now();
 
-    dd($aa);
-
+    $xx = $now->diffInMinutes($aa);
+    dd($xx);
 
 });
 

@@ -26,6 +26,15 @@ class CaseController extends Controller
 
     public function index($is_archived){
 
+        $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
+        $now = \Carbon\Carbon::now();
+        $diffMinute = $now->diffInMinutes($userUpdatedAt);
+
+        if($diffMinute > 60){
+          return redirect()->route('social.redirect','google');
+        }
+
+
         $topics = Topic::latest()->get();
         $is_archived = $is_archived == "backlog" ? 'is_in_backlog' : $is_archived;
         $cases = Cases::where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
