@@ -30,7 +30,7 @@ class SocialController extends Controller
 
 
 
-         Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
+         return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
             ->with(["access_type" => "offline", "prompt" => "consent"])
             ->redirect();
 

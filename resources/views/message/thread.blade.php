@@ -20,56 +20,71 @@
     </div>
 </div>
 <div class="email-list">
-    @foreach($messages as $s)
-        <div class="">
-            <div class="email-list-item email-list-item--unread ">
-                <div class="email-list-actions">
-                    @if(!$s->report_id)
-                        <div class="be-checkbox">
-                            <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
-                            <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
-                        </div>
-                    @endif
-                </div>
-                <div class="email-list-detail">
-                    <div style="color:#ddd;font-weight:700; font-size:11px; text-align:right;">{{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</div>
-                    <div class="thread-messages message-self">
-
-                        {!! clickableLink($s->text) !!}
-
-                        @if(!$s->files->isEmpty())
-                            @foreach($s->files as $file)
-                                @if($file->file_type == 'image')
-                                    <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
-                                @endif
-                                @if($file->file_type == 'video')
-                                    <video data-src="{{$file->file_url}}" style="width:150px;" src="{{$file->file_url}}"></video>
-                                @endif
-                                @if($file->file_type == 'file')
-                                    <span class="icon mdi mdi-attachment-alt"></span>
-                                    <a target="_blank" href="{{$file->file_url}}">{{$file->file_type}}</a>
-                                @endif
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-                <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
-                    @if(isset($s->report->cases->id))
-                        <a target="_blank" href="{{route("cases.show",$s->report->cases->id)}}">
-                            <button type="button" class="btn btn-default"><i class="icon mdi mdi-case-check"></i> View case</button>
-                        </a>
-                    @endif
-                </div>
-            </div>
+@foreach($messages as $s)
+    <div class="email-list-item email-list-item--unread">
+    <div class="email-list-actions email-list-item--unread">
+        @if($s->report_id)
+            <a target="_blank" href="{{route('cases.show',$s->report->case_id)}}" class=" btn-xl">
+                <span class="mdi mdi-open-in-new"></span>
+            </a>
+        @else
+        <div class="be-checkbox">
+            <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
+            <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
         </div>
-    @endforeach
-
-    @if(isset($messages) and !empty($messages))
-    <div class="paginate text-center message ">
-        {{ $messages->links() }}
+        @endif
+      </div>
+      <div class="email-list-detail">
+        <span class="date pull-right"><i class="icon mdi mdi-attachment-alt"></i> {{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</span>
+        <p class="msg">{{$s->text}}</p>
+        
+         @if(!$s->files->isEmpty())
+         <p class="msg">
+            @foreach($s->files as $file)
+                @if($file->file_type == 'image')
+                    <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
+                @endif
+                @if($file->file_type == 'video')
+                    <video data-src="{{$file->file_url}}" style="width:150px;" src="{{$file->file_url}}"></video>
+                @endif
+                @if($file->file_type == 'file')
+                    <span class="icon mdi mdi-attachment-alt"></span>
+                    <a target="_blank" href="{{$file->file_url}}">{{$file->file_type}}</a>
+                @endif
+            @endforeach
+            </p>
+        @endif
+        
+        <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
+            @if(isset($s->report->cases->id))
+                <a target="_blank" href="{{route("cases.show",$s->report->cases->id)}}">
+                    <button type="button" class="btn btn-default"><i class="icon mdi mdi-case-check"></i> View case</button>
+                </a>
+            @endif
+        </div>
+      </div>
     </div>
-    @endif
+@endforeach
 
+
+</div>
+<div class="pagination">
+        @if(isset($messages) and !empty($messages))
+        <div class="paginate text-center message ">
+            {{ $messages->links() }}
+        </div>
+        @endif
+</div>
+
+<div class="email-compose">
+     <div class="subject">
+      <div class="form-group row">
+        <label class="col-sm-1 control-label">Subject</label>
+        <div class="col-sm-11">
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </div>
 </div>
 <script>
     $(".review-assign").on('click',function () {

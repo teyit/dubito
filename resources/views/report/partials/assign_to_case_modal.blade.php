@@ -39,9 +39,9 @@
         });
 
         $(".email-list-item").hover(function () {
-            $(".view-case-btn-container ",this).removeClass('hidden')
+            //$(".view-case-btn-container ",this).removeClass('hidden')
         },function(){
-            $(".view-case-btn-container ",this).addClass('hidden');
+            //$(".view-case-btn-container ",this).addClass('hidden');
         });
         $(function(){
 
