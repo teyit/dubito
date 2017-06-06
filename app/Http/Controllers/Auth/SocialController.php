@@ -71,7 +71,7 @@ class SocialController extends Controller
 
         if (!empty($userCheck)) {
 
-            $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
+            $userUpdatedAt = \Carbon\Carbon::parse($user->updated_at);
 
             $now = \Carbon\Carbon::now();
             $diffMinute = $now->diffInMinutes($userUpdatedAt);
