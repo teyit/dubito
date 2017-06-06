@@ -70,20 +70,20 @@ class SocialController extends Controller
         }
 
         if (!empty($userCheck)) {
-
-            $userUpdatedAt = \Carbon\Carbon::parse(0);
+            /*
+            $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
 
             $now = \Carbon\Carbon::now();
             $diffMinute = $now->diffInMinutes($userUpdatedAt);
 
             if($diffMinute > 60){
                 
-                $updateUser = User::find(Auth::id());
-                $updateUser->token = $user->token;
-                $updateUser->save();
+               
             }
-
-
+            */
+            $updateUser = User::find(Auth::id());
+            $updateUser->token = $user->token;
+            $updateUser->save();
             $socialUser = $userCheck;
 
         }
