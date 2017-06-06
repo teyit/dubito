@@ -77,14 +77,14 @@ class SocialController extends Controller
             $diffMinute = $now->diffInMinutes($userUpdatedAt);
 
             if($diffMinute > 60){
-                
+                $updateUser = User::find(Auth::id());
+                $updateUser->token = $user->token;
+                $updateUser->save();
+                $socialUser = $userCheck;    
                
             }
             */
-            $updateUser = User::find(Auth::id());
-            $updateUser->token = $user->token;
-            $updateUser->save();
-            $socialUser = $userCheck;
+            
 
         }
         else {
