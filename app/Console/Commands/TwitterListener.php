@@ -43,19 +43,19 @@ class TwitterListener extends Command
     {
         TwitterStreamingApi::userStream()
             ->onEvent(function(array $event) {
-
-                if(isset($event['direct_message'])){
+                if(isset($event['retweeted_status'])){
+                    //this is a retweet
+                }
+                else if(isset($event['direct_message'])){
                     $this->addMessage($event);
-                }else if(isset($event['entities']['user_mentions'])){
-                    echo '<textarea>' . json_encode($event) . '</textarea>';
+                }
+                else if(isset($event['entities']['user_mentions'])){
                     foreach($event['entities']['user_mentions'] as $m){
-                        if($m['screen_name'] == 'teyitorg'){
+                        if($m['screen_name'] == 'teyitorg' && $event['in_reply_to_screen_name'] == 'null'){ //teyit mentioned but not reply.
                             $this->addMention($event);
                         }
                     }
                 }
-
-
             })
             ->startListening();
     }

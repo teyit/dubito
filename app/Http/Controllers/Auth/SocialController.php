@@ -30,7 +30,7 @@ class SocialController extends Controller
 
 
 
-         return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
+        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
             ->with(["access_type" => "offline", "prompt" => "consent"])
             ->redirect();
 
@@ -68,23 +68,22 @@ class SocialController extends Controller
         if (!$user->email) {
             $email = 'missing' . str_random(10);
         }
-
+     
         if (!empty($userCheck)) {
-            /*
-            $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
+
+            $userUpdatedAt = \Carbon\Carbon::parse($userCheck->updated_at);
 
             $now = \Carbon\Carbon::now();
             $diffMinute = $now->diffInMinutes($userUpdatedAt);
 
             if($diffMinute > 60){
-                $updateUser = User::find(Auth::id());
-                $updateUser->token = $user->token;
-                $updateUser->save();
-                $socialUser = $userCheck;    
-               
+
+                $userCheck->token = $user->token;
+                $userCheck->save();
             }
-            */
-            
+
+
+            $socialUser = $userCheck;
 
         }
         else {
