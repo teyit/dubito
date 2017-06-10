@@ -75,18 +75,50 @@
         </div>
         @endif
 </div>
-
-<div class="email-compose">
-     <div class="subject">
-      <div class="form-group row">
-        <label class="col-sm-1 control-label">Subject</label>
-        <div class="col-sm-11">
-          <input type="text" class="form-control">
+<div class="panel panel-default">
+    <div class="panel-body">
+      <form method="post" id="postMessageForm">
+        <div class="form-group xs-pt-10">
+          <textarea id="messageInput" placeholder="" class="form-control"></textarea>
         </div>
-      </div>
+
+        <div class="row xs-pt-15">
+          <div class="col-xs-12">
+            <p class="text-right">
+              <button id="sendMsgBtn" type="button" class="btn btn-space btn-primary">Send</button>
+              <button class="btn btn-space btn-default">Clear</button>
+            </p>
+          </div>
+        </div>
+      </form>
     </div>
 </div>
 <script>
+    $(document).on('click',"#sendMsgBtn",function(){
+        var text = $("#messageInput").val();
+
+        $.ajax({
+            method:"post",
+            url:"/messages/new",
+            data:{
+                _token:$("_token").val(),
+                message_id : '{{$messages->first()->id}}',
+                text : text
+            },
+            success:function(response){
+
+                if(response){
+                    $("#messageInput").val("");
+                    $.gritter.add({
+                        title: 'Success',
+                        text: 'your message has been sent.',
+                        class_name: 'color success'
+                    });
+                }
+
+            }
+        });
+    });
     $(".review-assign").on('click',function () {
 
         var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
