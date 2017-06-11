@@ -1,40 +1,41 @@
 @extends('layout.app',['css' => 'be-aside'])
 @section('content')
     <aside class="page-aside">
-        <div class="">
-            <div class="aside-content">
 
-                <div class="content" style="position: absolute;width:100%;height: 136px;z-index:1">
+            <div class="aside-content" style="height: 100%;position: relative">
+
+                <div class="content" style="position: absolute;width:100%;height: 136px;z-index:1;background:white;">
                     <div class="aside-header">
-                            <div class="email-title">
-                                <span class="icon mdi mdi-inbox"></span> Inbox</span>
-                            </div>
+                        <div class="email-title">
+                            <span class="icon mdi mdi-inbox"></span> Inbox</span>
+                        </div>
 
-                                <div style="margin-top:20px;" class="input-group xs-mb-15">
-                                    <input type="text" class="filter-keyword form-control" placeholder="Search" />
-                                    <div class="input-group-btn">
-                                        <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle">Filter <span class="caret"></span></button>
-                                        <ul role="menu" class="filter-source dropdown-menu">
-                                            <li><a href="#">Tümü</a></li>
-                                            <li class="divider"></li>
-                                            <li><a data-source="facebook:message" href="#">Facebook</a></li>
-                                            <li class="divider"></li>
-                                            <li><a data-source="twitter:message" href="#">Twitter Messages</a></li>
-                                            <li><a data-source="twitter:mention" href="#">Twitter Mentions</a></li>
-                                            <li class="divider"></li>
-                                            <li><a data-source="email" href="#">Email</a></li>
-                                            <li class="divider"></li>
-                                            <li><a data-source="others" href="#">Others</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div style="margin-top:20px;" class="input-group xs-mb-15">
+                            <input type="text" class="filter-keyword form-control" placeholder="Search" />
+                            <div class="input-group-btn">
+                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle">Filter <span class="caret"></span></button>
+                                <ul role="menu" class="filter-source dropdown-menu">
+                                    <li><a href="#">Tümü</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="facebook:message" href="#">Facebook</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="twitter:message" href="#">Twitter Messages</a></li>
+                                    <li><a data-source="twitter:mention" href="#">Twitter Mentions</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="email" href="#">Email</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="others" href="#">Others</a></li>
+                                </ul>
+                            </div>
+                        </div>
 
 
                     </div>
 
                 </div>
-                <div style="height: 100%;padding-top:136px;position: relative" class="aside-nav">
-                    <div style="position: relative;height: 100%;" id="thread-scroller">
+
+                <div style="height: 100%;" class="aside-nav">
+                    <div id="thread-scroller" style="position:relative;padding-top:136px;height:100%;overflow:hidden;">
                         <ul id="thread-list" data-page="1" data-source="" class="nav">
                             @include("message.partials.senders",["senders" => $senders])
                         </ul>
@@ -48,7 +49,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </aside>
     <div id="section-thread" class="main-content container-fluid">
         @include('message.thread',['messages' => $messages])
@@ -71,9 +72,11 @@
     <script>
 
         $(document).on("spfclick", function() {
+            /*
             $("#section-thread").trigger('thread-change', {
                 sender_id: $("#senderMeta").data('sender_id')
             });
+            */
             NProgress.start();
         });
 
@@ -88,9 +91,11 @@
         });
 
         $(document).on("spfdone", function() {
-            $("#section-thread").trigger('thread-change', {
-                sender_id: $("#senderMeta").data('sender_id')
-            });
+            /*
+             $("#section-thread").trigger('thread-change', {
+             sender_id: $("#senderMeta").data('sender_id')
+             });
+             */
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(event,data){ //Read first message on load.
@@ -135,6 +140,7 @@
                     },
                     success: function(result){
                         $(".be-loading").removeClass('be-loading-active');
+                        $('#thread-scroller').perfectScrollbar('update');
                         containerObj.append(result);
                         spf.dispose();
                         spf.init();
@@ -168,6 +174,8 @@
 
 
         $(function() {
+
+
             var inbox = new Inbox({
                 container : '#thread-list'
             });
