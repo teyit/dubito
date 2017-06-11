@@ -48,7 +48,9 @@ class ReportController extends Controller
         $report = Report::create([
            'text' => $text,
             'case_id' => $request->input('case_id'),
-            'source' => $messages->first()->source
+            'source' => $messages->first()->source,
+            'account_name' => $messages->first()->account_name,
+            'account_picture' => $messages->first()->account_picture
         ]);
 
 
