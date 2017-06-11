@@ -231,7 +231,7 @@
                             <div class="timeline-header">
                                 <!--<span class="timeline-time">4:34 PM</span>-->
                                 <div><p class="timeline-autor">{{$report->account_name}}</p></div>
-                                <p class="timeline-activity">{{$report->text}}</p>
+                                <p class="timeline-activity">{!! $report->text !!}</p>
                             </div>
                             <div class="timeline-gallery">
                                 @foreach($report->files as $f)

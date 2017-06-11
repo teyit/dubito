@@ -40,10 +40,9 @@ class ReportController extends Controller
         }
         
 
-        $messages = Message::whereIn('id',$request->get('selected_messages'))->get();
+        $messages = Message::whereIn('id',$request->get('selected_messages'))->orderBy('id','ASC')->get();
 
-
-        $text = $messages->implode('text',"\n");
+        $text = $messages->implode('text','<br /><br />');
 
 
         $report = Report::create([

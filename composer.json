@@ -13,7 +13,8 @@
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "spatie/laravel-activitylog": "^1.15",
-        "spatie/laravel-twitter-streaming-api": "^1.0"
+        "spatie/laravel-twitter-streaming-api": "^1.0",
+        "thujohn/twitter": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

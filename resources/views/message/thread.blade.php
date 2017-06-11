@@ -21,13 +21,16 @@
 </div>
 <div class="email-list">
 @foreach($messages as $s)
-    <div class="email-list-item email-list-item--unread">
+    <div id="message-item-{{$s->id}}" class="email-list-item email-list-item--unread">
     <div class="email-list-actions email-list-item--unread">
         @if($s->report_id)
             <a target="_blank" href="{{route('cases.show',$s->report->case_id)}}" class=" btn-xl">
                 <span class="mdi mdi-open-in-new"></span>
             </a>
         @else
+        <a target="_blank" href="javascript:;" class="hidden case-btn btn-xl">
+            <span class="mdi mdi-open-in-new"></span>
+        </a>
         <div class="be-checkbox">
             <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
             <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
@@ -93,59 +96,4 @@
       </form>
     </div>
 </div>
-<script>
-    $(document).on('click',"#sendMsgBtn",function(){
-        var text = $("#messageInput").val();
 
-        $.ajax({
-            method:"post",
-            url:"/messages/new",
-            data:{
-                _token:$("_token").val(),
-                message_id : '{{$messages->first()->id}}',
-                text : text
-            },
-            success:function(response){
-
-                if(response){
-                    $("#messageInput").val("");
-                    $.gritter.add({
-                        title: 'Success',
-                        text: 'your message has been sent.',
-                        class_name: 'color success'
-                    });
-                }
-
-            }
-        });
-    });
-    $(".review-assign").on('click',function () {
-
-        var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
-            return $(el).val();
-        }).get();
-
-        if(message_list.length < 1){
-            return false;
-        }
-
-        $.ajax({
-            method:"put",
-            url:"/mark-as-review",
-            data:{_token:$("_token").val(),is_review:1,message_ids:message_list},
-            success:function(response){
-
-                if(response){
-                    $.gritter.add({
-                        title: 'Success',
-                        text: 'it was marked as review',
-                        class_name: 'color success'
-                    });
-                }
-
-            }
-        })
-
-    })
-    $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
-</script>

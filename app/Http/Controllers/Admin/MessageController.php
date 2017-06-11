@@ -9,10 +9,17 @@ use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Facebook;
-
+use Twitter;
 class MessageController extends Controller
 {
+    private function sendTwitter($recipient_id,$text){
 
+        $response = Twitter::postDm([
+            'user_id' => 320747205, //TODO FIX
+            'text' => $text
+        ]);
+        return $response->id_str;
+    }
     private function sendFacebook($recipient_id,$text,$attachments = []){
         
         $fb = new Facebook\Facebook([
@@ -59,12 +66,12 @@ class MessageController extends Controller
             ]);
         }
 
-        $recipient_id = $message->sender_id;
-
         $message_id = false;
 
         if($message->source == 'facebook:message'){
-            $message_id =  $this->sendFacebook($recipient_id,$text);
+            $message_id =  $this->sendFacebook($message->sender_id,$text);
+        }else if ($message->source == 'twitter:message'){
+            $message_id =  $this->sendTwitter($message->sender_id,$text);
         }
 
 
@@ -72,10 +79,10 @@ class MessageController extends Controller
             $m = new Message();
             $m->source = 'facebook:message';
             $m->sender_id = '207787009653168';
-            $m->recipient_id = $recipient_id;
+            $m->recipient_id = $message->sender_id;
             $m->external_message_id = $message_id;
             $m->account_name = $request->user()->name;
-            $m->account_picture = $request->account_picture;
+            $m->account_picture = $request->user()->account_picture;
             $m->text = $text;
             $m->save();
             return response()->json([
@@ -83,6 +90,9 @@ class MessageController extends Controller
             ]);
         }
 
+        return response()->json([
+            'status' => false
+        ]);
 
     }
     public function showSenders(Request $request){
@@ -114,7 +124,7 @@ class MessageController extends Controller
         }
 
 
-        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads');
+        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,source,account_name,account_picture,count(CASE is_read WHEN 1 THEN 1 ELSE 0 END) as unreads');
 
         if($keyword){
             $senders->where(function($q) use($keyword){
@@ -126,8 +136,10 @@ class MessageController extends Controller
             $senders->where('source', $source);
         }
 
+        $senders->where('sender_id','!=',765187661996883968);
+        $senders->where('sender_id','!=',207787009653168);
 
-        $senders = $senders->groupBy('sender_id')->get()->toArray();
+        $senders = $senders->groupBy('sender_id','source')->get()->toArray();
 
         $data = array_slice($senders,($page-1) * $size,$size);
 
@@ -159,9 +171,14 @@ class MessageController extends Controller
 	public function show(Request $request, $id){
 
 
-        $senders = $this->getSenders($request->only('source','page','keyword','size'));
+        $senders = $this->getSenders($request->only('page','keyword','size'));
 
-        $messages = Message::where('sender_id',$id)->orderBy('created_at','DESC')->paginate(30);
+        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC');
+
+        if($request->has('source')){
+            $messages->where('source',$request->get('source'));
+        }
+        $messages = $messages->paginate(30);
 
         $topics = Topic::latest()->get();
 
