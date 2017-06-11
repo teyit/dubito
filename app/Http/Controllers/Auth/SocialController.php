@@ -55,6 +55,7 @@ class SocialController extends Controller
         
         if(isset($user->token)){
            Session::put('google_oauth_token',$user->token);
+           Session::put('google_oauth_refresh_token',$user->refreshToken);
         }
         
 
@@ -79,6 +80,7 @@ class SocialController extends Controller
             if($diffMinute > 60){
 
                 $userCheck->token = $user->token;
+                $userCheck->refresh_token = $user->refreshToken;
                 $userCheck->save();
             }
 
@@ -100,6 +102,7 @@ class SocialController extends Controller
                 $newSocialUser->name =$user->name;
                 $newSocialUser->password = bcrypt(str_random(16));
                 $newSocialUser->token = $user->token;
+                $newSocialUser->refresh_token = $user->refreshToken;
                 $newSocialUser->save();
 
                 $socialData = new Social;
