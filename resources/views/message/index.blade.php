@@ -54,12 +54,12 @@
         @include('message.thread',['messages' => $messages])
     </div>
 
+    @include("message.partials._case_modal_form")
+    @include('report.partials.assign_to_case_modal')
 
 
 @endsection
 
-@include("message.partials._case_modal_form")
-@include('report.partials.assign_to_case_modal')
 
 
 
@@ -71,7 +71,9 @@
     <script>
 
         $(document).on("spfclick", function() {
-            // Show progress bar
+            $("#section-thread").trigger('thread-change', {
+                sender_id: $("#senderMeta").data('sender_id')
+            });
             NProgress.start();
         });
 
@@ -86,7 +88,9 @@
         });
 
         $(document).on("spfdone", function() {
-            // Finish request and remove progress bar
+            $("#section-thread").trigger('thread-change', {
+                sender_id: $("#senderMeta").data('sender_id')
+            });
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(event,data){ //Read first message on load.
@@ -97,9 +101,6 @@
             $(".thread-list nav li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
             $(".sender-item-" + data.sender_id+" .thread-count").hide();
-        });
-        $("#section-thread").trigger('thread-change', {
-            sender_id: '{{$messages[0]->sender_id}}'
         });
 
         var Inbox = function(config){
@@ -196,7 +197,7 @@
                 url:"/messages/new",
                 data:{
                     _token:$("_token").val(),
-                    message_id : '{{$messages->first()->id}}',
+                    sender_id : $("#senderMeta").data('sender_id'),
                     text : text
                 },
                 success:function(response){
@@ -245,8 +246,7 @@
                 }
             })
 
-        })
-        $("#section-thread").trigger('thread-change',[{{$messages->first()->sender_id}}]);
+        });
 
 
 

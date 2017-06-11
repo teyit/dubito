@@ -1,7 +1,7 @@
 <div class="email-inbox-header">
     <div class="row">
         <div class="col-md-6">
-            <div class="email-title"><span class="icon mdi mdi-inbox"></span> {{$messages->first()->account_name}}  <span class="new-messages">
+            <div id="senderMeta" class="email-title" data-sender_id="{{$messages->first()->sender_id}}"><span class="icon mdi mdi-inbox"></span> {{$messages->first()->account_name}}  <span class="new-messages">
                     @if($messages->first()->source == 'facebook:message')
                         <span class="label label-primary">Facebook</span>
                     @endif
@@ -96,4 +96,3 @@
       </form>
     </div>
 </div>
-

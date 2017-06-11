@@ -56,10 +56,13 @@ class MessageController extends Controller
     
     }
     public function postNew(Request $request){
-        
-        $message_id = $request->get('message_id');
+
+        $sender_id = $request->get('sender_id');
         $text = $request->get('text');
-        $message = Message::find($message_id);
+
+
+        $message = Message::where('sender_id',$sender_id)->where('source','!=','twitter:mention')->first();
+
         if(!$message){
             return response()->json([
                 'status' => false
@@ -69,22 +72,24 @@ class MessageController extends Controller
         $message_id = false;
 
         if($message->source == 'facebook:message'){
-            $message_id =  $this->sendFacebook($message->sender_id,$text);
+            $message_id =  1; //$this->sendFacebook($message->sender_id,$text);
         }else if ($message->source == 'twitter:message'){
-            $message_id =  $this->sendTwitter($message->sender_id,$text);
+            $message_id =  1; //$this->sendTwitter($message->sender_id,$text);
         }
 
 
         if($message_id){
+
             $m = new Message();
-            $m->source = 'facebook:message';
-            $m->sender_id = '207787009653168';
+            $m->source = $message->source;
+            $m->sender_id = $message->recipient_id;;
             $m->recipient_id = $message->sender_id;
             $m->external_message_id = $message_id;
             $m->account_name = $request->user()->name;
             $m->account_picture = $request->user()->account_picture;
             $m->text = $text;
             $m->save();
+
             return response()->json([
                 'status' => true
             ]);
@@ -154,7 +159,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders($request->only('source','page','keyword','size'));
 
-        $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(30);
+        $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
 
         $topics = Topic::latest()->get();
 
