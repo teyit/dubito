@@ -47,7 +47,9 @@ class TwitterListener extends Command
                     //this is a retweet
                 }
                 else if(isset($event['direct_message'])){
-                    $this->addMessage($event);
+                    if($event['direct_message']['sender_id'] !== '765187661996883968'){
+                        $this->addMessage($event);
+                    }
                 }
                 else if(isset($event['entities']['user_mentions'])){
                     foreach($event['entities']['user_mentions'] as $m){
