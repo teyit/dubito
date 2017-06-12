@@ -33,7 +33,7 @@ class MessageController extends Controller
             // Returns a `Facebook\FacebookResponse` object
             $response = $fb->post('/me/messages', [
                 'recipient' => [
-                    'id' => $recipient_id
+                    'id' => 1672136149469483
                 ],
                 'message' => [
                     'text' => $text
@@ -72,9 +72,9 @@ class MessageController extends Controller
         $message_id = false;
 
         if($message->source == 'facebook:message'){
-            $message_id =  1; //$this->sendFacebook($message->sender_id,$text);
+            $message_id =  $this->sendFacebook($message->sender_id,$text);
         }else if ($message->source == 'twitter:message'){
-            $message_id =  1; //$this->sendTwitter($message->sender_id,$text);
+            $message_id =  $this->sendTwitter($message->sender_id,$text);
         }
 
 
