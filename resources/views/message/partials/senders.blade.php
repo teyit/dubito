@@ -8,6 +8,13 @@
             <span class="thread-name">
                 {{$s->account_name}}
             </span>
+            @if($s->source == 'twitter:message')
+            <span class="mdi mdi-inbox"></span>
+            @elseif($s->source == 'twitter:mention')
+            <span class="mdi mdi-twitter-box"></span>
+            @elseif($s->source == 'facebook:message')
+            <span class="mdi mdi-facebook-box"></span>
+            @endif
         </a>
     </li>
 @endforeach
