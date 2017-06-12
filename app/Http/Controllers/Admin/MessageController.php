@@ -92,7 +92,8 @@ class MessageController extends Controller
             $m->save();
 
             return response()->json([
-                'status' => true
+                'status' => true,
+                'html' => view('message.partials.item',['message' => $m])->render()
             ]);
         }
 

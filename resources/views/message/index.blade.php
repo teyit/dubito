@@ -211,6 +211,7 @@
                 success:function(response){
 
                     if(response){
+                        $(".email-list").append(response.html);
                         $("#messageInput").val("");
                         $.gritter.add({
                             title: 'Success',
