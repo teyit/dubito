@@ -87,6 +87,7 @@ class MessageController extends Controller
             $m->external_message_id = $message_id;
             $m->account_name = $request->user()->name;
             $m->account_picture = $request->user()->account_picture;
+            $m->is_reply = 1;
             $m->text = $text;
             $m->save();
 
@@ -180,12 +181,15 @@ class MessageController extends Controller
 
         $senders = $this->getSenders($request->only('page','keyword','size'));
 
-        $messages = Message::where('sender_id',$id)->orderBy('created_at','ASC');
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','ASC');
+
+
 
         if($request->has('source')){
             $messages->where('source',$request->get('source'));
         }
         $messages = $messages->paginate(30);
+
 
         $topics = Topic::latest()->get();
 

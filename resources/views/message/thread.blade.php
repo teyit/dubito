@@ -25,50 +25,56 @@
 <div class="email-list">
 @foreach($messages as $s)
     <div id="message-item-{{$s->id}}" class="email-list-item email-list-item--unread">
-    <div class="email-list-actions email-list-item--unread">
-        @if($s->report_id)
-            <a target="_blank" href="{{route('cases.show',$s->report->case_id)}}" class=" btn-xl">
+        @if($s->is_reply)
+            <div class="email-list-actions email-list-item--unread">
+
+            </div>
+            <div class="email-list-detail">
+                <span class="date pull-right"><i class="icon mdi mdi-attachment-alt"></i> {{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</span>
+                <p class="msg msg-styled our-message">
+                    <span>{{$s->text}}</span>
+                </p>
+            </div>
+        @else
+        <div class="email-list-actions email-list-item--unread">
+            @if($s->report_id)
+                <a target="_blank" href="{{route('cases.show',$s->report->case_id)}}" class=" btn-xl">
+                    <span class="mdi mdi-open-in-new"></span>
+                </a>
+            @else
+            <a target="_blank" href="javascript:;" class="hidden case-btn btn-xl">
                 <span class="mdi mdi-open-in-new"></span>
             </a>
-        @else
-        <a target="_blank" href="javascript:;" class="hidden case-btn btn-xl">
-            <span class="mdi mdi-open-in-new"></span>
-        </a>
-        <div class="be-checkbox">
-            <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
-            <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
-        </div>
-        @endif
-      </div>
-      <div class="email-list-detail">
-        <span class="date pull-right"><i class="icon mdi mdi-attachment-alt"></i> {{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</span>
-        <p class="msg">{{$s->text}}</p>
-        
-         @if(!$s->files->isEmpty())
-         <p class="msg">
-            @foreach($s->files as $file)
-                @if($file->file_type == 'image')
-                    <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
-                @endif
-                @if($file->file_type == 'video')
-                    <video data-src="{{$file->file_url}}" style="width:150px;" src="{{$file->file_url}}"></video>
-                @endif
-                @if($file->file_type == 'file')
-                    <span class="icon mdi mdi-attachment-alt"></span>
-                    <a target="_blank" href="{{$file->file_url}}">{{$file->file_type}}</a>
-                @endif
-            @endforeach
-            </p>
-        @endif
-        
-        <div class="view-case-btn-container hidden email-list-actions" style="display:table-cell;vertical-align: middle">
-            @if(isset($s->report->cases->id))
-                <a target="_blank" href="{{route("cases.show",$s->report->cases->id)}}">
-                    <button type="button" class="btn btn-default"><i class="icon mdi mdi-case-check"></i> View case</button>
-                </a>
+            <div class="be-checkbox">
+                <input name="thread-messages[]" value="{{$s->id}}"  id="message-{{$s->id}}" type="checkbox">
+                <label id="checkbox-label-{{$s->id}}" for="message-{{$s->id}}"></label>
+            </div>
             @endif
-        </div>
-      </div>
+          </div>
+          <div class="email-list-detail">
+            <span class="date pull-right"><i class="icon mdi mdi-attachment-alt"></i> {{\Carbon\Carbon::parse($s->created_at)->format("d.m.Y")}}</span>
+            <p class="msg msg-styled">
+                <span>{{$s->text}}</span>
+            </p>
+
+             @if(!$s->files->isEmpty())
+             <p class="msg">
+                @foreach($s->files as $file)
+                    @if($file->file_type == 'image')
+                        <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
+                    @endif
+                    @if($file->file_type == 'video')
+                        <video data-src="{{$file->file_url}}" style="width:150px;" src="{{$file->file_url}}"></video>
+                    @endif
+                    @if($file->file_type == 'file')
+                        <span class="icon mdi mdi-attachment-alt"></span>
+                        <a target="_blank" href="{{$file->file_url}}">{{$file->file_type}}</a>
+                    @endif
+                @endforeach
+                </p>
+            @endif
+          </div>
+        @endif
     </div>
 @endforeach
 
