@@ -13110,7 +13110,7 @@ li.L9 {
 
   width: 100%;
   cursor: pointer;
-  position: relative;
+
   background-color: #fafafa;
 }
 .email-list-item.email-list-item--unread {
@@ -13145,6 +13145,8 @@ li.L9 {
   margin: 0 0 3px 0;
 }
 .email-list-item .msg {
+  word-break: break-all;
+  padding : 0px 100px 0px 0px;
   margin: 0;
   color: #737373;
 }
