@@ -20,8 +20,7 @@ class MessageController extends Controller
         ]);
         return $response->id_str;
     }
-    private function sendFacebook($recipient_id,$text,$attachments = []){
-        
+    private function requestFacebook($method,$params){
         $fb = new Facebook\Facebook([
             'app_id' => '213471075795721',
             'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
@@ -31,14 +30,7 @@ class MessageController extends Controller
 
         try {
             // Returns a `Facebook\FacebookResponse` object
-            $response = $fb->post('/me/messages', [
-                'recipient' => [
-                    'id' => 1672136149469483
-                ],
-                'message' => [
-                    'text' => $text
-                ]
-            ],$page_access_token);
+            $response = $fb->post($method, $params,$page_access_token);
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
             exit;
@@ -46,14 +38,33 @@ class MessageController extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-        $result = $response->getDecodedBody();
+        return $response->getDecodedBody();
+
+    }
+    private function sendFacebookMessage($recipient_id,$text,$attachments = []){
+        $result = $this->requestFacebook('/me/messages',[
+            'recipient' => [
+                'id' => 1672136149469483
+            ],
+            'message' => [
+                'text' => $text
+            ]
+        ]);
         if($result['message_id']){
             return $result['message_id'];
         }
 
         return false;
-        
-    
+
+    }
+
+    private function markSeenFacebook($id){
+        return $this->requestFacebook('/me/messages',[
+            'recipient' => [
+                'id' => $id
+            ],
+            'sender_action' => 'mark_seen'
+        ]);
     }
     public function postNew(Request $request){
 
@@ -72,7 +83,7 @@ class MessageController extends Controller
         $message_id = false;
 
         if($message->source == 'facebook:message'){
-            $message_id =  $this->sendFacebook($message->sender_id,$text);
+            $message_id =  $this->sendFacebookMessage($message->sender_id,$text);
         }else if ($message->source == 'twitter:message'){
             $message_id =  $this->sendTwitter($message->sender_id,$text);
         }
@@ -189,14 +200,17 @@ class MessageController extends Controller
         if($request->has('source')){
             $messages->where('source',$request->get('source'));
         }
-        $messages = $messages->paginate(30);
-
 
         $topics = Topic::latest()->get();
 
         $categories = Category::latest()->get();
 
-        Message::where('sender_id', $id)->update(['is_read' => 1]);
+        $messages = $messages->paginate(30);
+
+
+
+        Message::where('sender_id', $id)->orWhere('recipient_id',$id)->update(['is_read' => 1]);
+        $this->markSeenFacebook($id);
 
 
         $currentPage = $request->get('page',false);
