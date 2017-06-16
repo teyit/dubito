@@ -40,16 +40,17 @@ class ReportController extends Controller
         }
         
 
-        $messages = Message::whereIn('id',$request->get('selected_messages'))->get();
+        $messages = Message::whereIn('id',$request->get('selected_messages'))->orderBy('id','ASC')->get();
 
-
-        $text = $messages->implode('text',"\n");
+        $text = $messages->implode('text','<br /><br />');
 
 
         $report = Report::create([
            'text' => $text,
             'case_id' => $request->input('case_id'),
-            'source' => $messages->first()->source
+            'source' => $messages->first()->source,
+            'account_name' => $messages->first()->account_name,
+            'account_picture' => $messages->first()->account_picture
         ]);
 
 

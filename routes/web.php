@@ -42,6 +42,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::resource("categories",'CategoryController');
     Route::resource("messages",'MessageController');
     Route::get("threads",'MessageController@showSenders');
+    Route::post("messages/new",'MessageController@postNew');
     Route::put('mark-as-review','MessageController@review');
 
     Route::resource("topics","TopicController");

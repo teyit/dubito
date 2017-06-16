@@ -1,35 +1,41 @@
 @extends('layout.app',['css' => 'be-aside'])
 @section('content')
     <aside class="page-aside">
-        <div class="">
-            <div class="aside-content">
 
-                <div class="content" style="position: absolute;width:100%;height: 136px;z-index:1">
+            <div class="aside-content" style="height: 100%;position: relative">
+
+                <div class="content" style="position: absolute;width:100%;height: 136px;z-index:1;background:white;">
                     <div class="aside-header">
-                        <span class="title">Inbox</span>
-                        <br>
-                        <div class="btn-group">
-                            <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle">Filter by channel  <span class="caret"></span></button>
-                            <ul role="menu" class="filter-source dropdown-menu">
-                                <li><a href="#">Tümü</a></li>
-                                <li class="divider"></li>
-                                <li><a data-source="facebook:message" href="#">Facebook</a></li>
-                                <li class="divider"></li>
-                                <li><a data-source="twitter:message" href="#">Twitter Messages</a></li>
-                                <li><a data-source="twitter:mention" href="#">Twitter Mentions</a></li>
-                                <li class="divider"></li>
-                                <li><a data-source="email" href="#">Email</a></li>
-                                <li class="divider"></li>
-                                <li><a data-source="others" href="#">Others</a></li>
-                            </ul>
+                        <div class="email-title">
+                            <span class="icon mdi mdi-inbox"></span> Inbox</span>
                         </div>
-                        <div class="btn-group">
-                            <input type="text" class="filter-keyword" placeholder="Ara" />
+
+                        <div style="margin-top:20px;" class="input-group xs-mb-15">
+                            <input type="text" class="filter-keyword form-control" placeholder="Search" />
+                            <div class="input-group-btn">
+                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle">Filter <span class="caret"></span></button>
+                                <ul role="menu" class="filter-source dropdown-menu">
+                                    <li><a href="#">Tümü</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="facebook:message" href="#">Facebook</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="twitter:message" href="#">Twitter Messages</a></li>
+                                    <li><a data-source="twitter:mention" href="#">Twitter Mentions</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="email" href="#">Email</a></li>
+                                    <li class="divider"></li>
+                                    <li><a data-source="others" href="#">Others</a></li>
+                                </ul>
+                            </div>
                         </div>
+
+
                     </div>
+
                 </div>
-                <div style="height: 100%;padding-top:136px;position: relative" class="aside-nav">
-                    <div style="position: relative;height: 100%;" id="thread-scroller">
+
+                <div style="height: 100%;" class="aside-nav">
+                    <div id="thread-scroller" style="position:relative;padding-top:136px;height:100%;overflow:hidden;">
                         <ul id="thread-list" data-page="1" data-source="" class="nav">
                             @include("message.partials.senders",["senders" => $senders])
                         </ul>
@@ -43,18 +49,18 @@
                     </div>
                 </div>
             </div>
-        </div>
+
     </aside>
     <div id="section-thread" class="main-content container-fluid">
         @include('message.thread',['messages' => $messages])
     </div>
 
+    @include("message.partials._case_modal_form")
+    @include('report.partials.assign_to_case_modal')
 
 
 @endsection
 
-@include("message.partials._case_modal_form")
-@include('report.partials.assign_to_case_modal')
 
 
 
@@ -66,7 +72,11 @@
     <script>
 
         $(document).on("spfclick", function() {
-            // Show progress bar
+            /*
+            $("#section-thread").trigger('thread-change', {
+                sender_id: $("#senderMeta").data('sender_id')
+            });
+            */
             NProgress.start();
         });
 
@@ -81,7 +91,11 @@
         });
 
         $(document).on("spfdone", function() {
-            // Finish request and remove progress bar
+            /*
+             $("#section-thread").trigger('thread-change', {
+             sender_id: $("#senderMeta").data('sender_id')
+             });
+             */
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(event,data){ //Read first message on load.
@@ -92,9 +106,6 @@
             $(".thread-list nav li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
             $(".sender-item-" + data.sender_id+" .thread-count").hide();
-        });
-        $("#section-thread").trigger('thread-change', {
-            sender_id: '{{$messages[0]->sender_id}}'
         });
 
         var Inbox = function(config){
@@ -111,23 +122,32 @@
                 keyword : '',
                 source : null
             };
+            var xhr = new window.XMLHttpRequest();
             var update = function(callback){
                 $(".be-loading").addClass('be-loading-active');
-                $.ajax({
+                if(typeof xhr == 'object'){
+                    xhr.abort();
+                }
+                if(state.page == 1){
+                    containerObj.html('');
+                }
+                request = $.ajax({
                     url: "/threads",
                     data : state,
                     dataType : 'html',
+                    xhr : function(){
+                        return xhr;
+                    },
                     success: function(result){
-                        if(state.page == 1){
-                            containerObj.html('');
-                        }
                         $(".be-loading").removeClass('be-loading-active');
+                        $('#thread-scroller').perfectScrollbar('update');
                         containerObj.append(result);
                         spf.dispose();
                         spf.init();
                         typeof callback === 'function' && callback();
                     }
                 });
+
             };
 
             this.loadMore = function(){
@@ -154,6 +174,8 @@
 
 
         $(function() {
+
+
             var inbox = new Inbox({
                 container : '#thread-list'
             });
@@ -174,6 +196,66 @@
 
         });
 
+        /*Thread specific*/
+        $(document).on('click',"#sendMsgBtn",function(){
+            var text = $("#messageInput").val();
+
+            $.ajax({
+                method:"post",
+                url:"/messages/new",
+                data:{
+                    _token:$("_token").val(),
+                    sender_id : $("#senderMeta").data('sender_id'),
+                    text : text
+                },
+                success:function(response){
+
+                    if(response){
+                        $(".email-list").append(response.html);
+                        $("#messageInput").val("");
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'your message has been sent.',
+                            class_name: 'color success'
+                        });
+                    }
+
+                }
+            });
+        });
+        $(document).on('click',".review-assign",function () {
+            var selected_messages = $('.email-list-item .be-checkbox input[type=checkbox]:checked');
+            var message_list = selected_messages.map(function(_, el) {
+                return $(el).val();
+            }).get();
+
+            if(message_list.length < 1){
+                return false;
+            }
+
+            $.ajax({
+                method:"put",
+                url:"/mark-as-review",
+                data:{_token:$("_token").val(),is_review:1,message_ids:message_list},
+                success:function(response){
+                    $.each(message_list,function(index,message_id){
+                        $("#message-item-"+message_id+" .be-checkbox").remove();
+                        $("#message-item-"+message_id+" .case-btn span").removeClass('mdi-open-in-new').addClass('mdi-star-outline');
+                        $("#message-item-"+message_id+" .case-btn").removeClass('hidden');
+                    });
+                    if(response){
+
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'it was marked as review',
+                            class_name: 'color success'
+                        });
+                    }
+
+                }
+            })
+
+        });
 
 
 

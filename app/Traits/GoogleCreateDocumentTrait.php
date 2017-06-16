@@ -35,9 +35,15 @@ trait GoogleCreateDocumentTrait
                 $dubito_folder_id = '0B3svx2NH-juvNW81V2pzajRvRWM';
 
 
-                $token = User::where('email', 'info@teyit.org')->first()->token;
+                $userObj = User::where('email', 'info@teyit.org')->first();
 
-                $client->setAccessToken($token);
+                $client->setAccessToken($userObj->token);
+
+                if ($client->isAccessTokenExpired()) {
+                    $client->refreshToken($userObj->refresh_token);
+                    $userObj->token = $client->getAccessToken();
+                    $userObj->save();
+                }
 
                 $service = new \Google_Service_Drive($client);
 

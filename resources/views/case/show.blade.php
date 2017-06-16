@@ -75,8 +75,7 @@
 
                                 <div class="row" style="padding:0 0 0 20px; margin-bottom:5px;">
                                     <div class="col-md-6">
-                                        <div class="timeline-avatar account-avatar"><img class="account-img" src="{{$case->user->account_picture or "/assets/img/avatar1.png"}}"></div></span><strong style="padding-left:10px;">Assign
-                                            User: </strong><a id="assign-user-case" data-title="Assign user to case"
+                                        <div class="timeline-avatar account-avatar"><img class="account-img" src="{{$case->user->account_picture or "/assets/img/avatar1.png"}}"></div></span>&nbsp;<a id="assign-user-case" data-title="Assign user to case"
                                                               data-value="{{$case->user->id or ''}}" data-type="select"
                                                               href="#"
                                                               class="editable editable-click">{{$case->user->name or ''}}</a>
@@ -232,7 +231,7 @@
                             <div class="timeline-header">
                                 <!--<span class="timeline-time">4:34 PM</span>-->
                                 <div><p class="timeline-autor">{{$report->account_name}}</p></div>
-                                <p class="timeline-activity">{{$report->text}}</p>
+                                <p class="timeline-activity">{!! $report->text !!}</p>
                             </div>
                             <div class="timeline-gallery">
                                 @foreach($report->files as $f)

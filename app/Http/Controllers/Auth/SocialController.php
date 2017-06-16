@@ -30,7 +30,7 @@ class SocialController extends Controller
 
 
 
-         Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
+        return Socialite::driver( $provider )->scopes(['https://www.googleapis.com/auth/drive'])
             ->with(["access_type" => "offline", "prompt" => "consent"])
             ->redirect();
 
@@ -55,6 +55,7 @@ class SocialController extends Controller
         
         if(isset($user->token)){
            Session::put('google_oauth_token',$user->token);
+           Session::put('google_oauth_refresh_token',$user->refreshToken);
         }
         
 
@@ -68,19 +69,19 @@ class SocialController extends Controller
         if (!$user->email) {
             $email = 'missing' . str_random(10);
         }
-
+     
         if (!empty($userCheck)) {
 
-            $userUpdatedAt = \Carbon\Carbon::parse(Auth::user()->updated_at);
+            $userUpdatedAt = \Carbon\Carbon::parse($userCheck->updated_at);
 
             $now = \Carbon\Carbon::now();
             $diffMinute = $now->diffInMinutes($userUpdatedAt);
 
             if($diffMinute > 60){
-                
-                $updateUser = User::find(Auth::id());
-                $updateUser->token = $user->token;
-                $updateUser->save();
+
+                $userCheck->token = $user->token;
+                $userCheck->refresh_token = $user->refreshToken;
+                $userCheck->save();
             }
 
 
@@ -101,6 +102,7 @@ class SocialController extends Controller
                 $newSocialUser->name =$user->name;
                 $newSocialUser->password = bcrypt(str_random(16));
                 $newSocialUser->token = $user->token;
+                $newSocialUser->refresh_token = $user->refreshToken;
                 $newSocialUser->save();
 
                 $socialData = new Social;

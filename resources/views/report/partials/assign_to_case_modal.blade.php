@@ -39,9 +39,9 @@
         });
 
         $(".email-list-item").hover(function () {
-            $(".view-case-btn-container ",this).removeClass('hidden')
+            //$(".view-case-btn-container ",this).removeClass('hidden')
         },function(){
-            $(".view-case-btn-container ",this).addClass('hidden');
+            //$(".view-case-btn-container ",this).addClass('hidden');
         });
         $(function(){
 
@@ -71,6 +71,7 @@
                 $("#report-assign-case-form").on('submit',function(e){
                     $('#report-assign-to-case').modal('hide');
                     var case_id = $("#case_id").val();
+                    var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
                     e.preventDefault();
                     $.ajax({
                         url: "/reports/",
@@ -84,7 +85,8 @@
                             if(result){
 
                                 $.each(message_list,function(index,message_id){
-                                    $('#checkbox-label-'+message_id).addClass('hidden');
+                                    $("#message-item-"+message_id+" .be-checkbox").remove();
+                                    $("#message-item-"+message_id+" .case-btn").removeClass('hidden').attr('href',caseUrl);
                                 });
                                 
                                 $.gritter.add({
