@@ -38,4 +38,13 @@ class Report extends Model
         return $this->belongsToMany('App\Model\Link','report_links','report_id','link_id')->withTimestamps();
     }
 
+
+    public function fileTypeCount()
+    {
+        return $this->belongsToMany('App\Model\File','report_files','report_id','file_id')
+            ->selectRaw('count(*)')
+            ->groupBy('file_type');
+    }
+
+
 }

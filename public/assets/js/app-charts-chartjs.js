@@ -38,24 +38,25 @@ var App = (function () {
 
 		function barChart(){
 			//Set the chart colors
+
+
       var color1 = tinycolor( App.color.success );
 			var color2 = tinycolor( App.color.warning );
 
       //Get the canvas element
 			var ctx = document.getElementById("bar-chart");
-			
-			var data = {
-	      labels: ["January", "February", "March", "April", "May", "June", "July"],
+
+            var totalData = $("#report-topic-h").data("report-topic-total");
+            var topicLabels = $("#report-topic-h").data("report-topic-name");
+
+
+            var data = {
+	      labels: topicLabels.split(','),
 	      datasets: [{
-	        label: "Credit",
-	        borderColor: color1,
-	        backgroundColor: color1.setAlpha(.8),
-	        data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-	      }, {
-	        label: "Debit",
-	        borderColor: color2,
-	        backgroundColor: color2.setAlpha(.5),
-	        data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+	        label: "Topic",
+	        borderColor: "#27ae60",
+	        backgroundColor: "#2ecc71",
+	        data: totalData.split(",")
 	      }]
 	    };
 
@@ -153,32 +154,28 @@ var App = (function () {
 		}
 
 		function pieChart(){
-			//Set the chart colors
-			var color1 = App.color.primary;
-			var color2 = tinycolor( App.color.primary ).lighten( 12 );;
-			var color3 = tinycolor( App.color.primary ).lighten( 22 );;
+
+            var totalData = $("#report-source-h").data("report-source-total");
+            var sourceLabels = $("#report-source-h").data("report-source-name");
+
 
       //Get the canvas element
 			var ctx = document.getElementById("pie-chart");
 			
 			var data = {
-			  labels: [
-			    "Red",
-			    "Blue",
-			    "Yellow"
-			  ],
+			  labels: sourceLabels.split(','),
 			  datasets: [
 			    {
-			      data: [300, 50, 100],
+			      data: totalData.split(','),
 			      backgroundColor: [
-			        color1,
-			        color2,
-			        color3
+                      '#e67e22',
+                      '#3498db',
+                      '#f1c40f'
 			      ],
 			      hoverBackgroundColor: [
-			        color1,
-			        color2,
-			        color3
+                      '#e67e22	',
+                      '#3498db',
+                      '#f1c40f'
 			      ]
 			  	}]
 			};
@@ -187,6 +184,8 @@ var App = (function () {
         type: 'pie',
         data: data
       });
+
+
 		}
 
 		function donutChart(){
@@ -226,13 +225,15 @@ var App = (function () {
       });
 		}
 
-		lineChart();
+		// lineChart();
 		barChart();
-		radarChart();
-		polarChart();
+		// radarChart();
+		// polarChart();
 		pieChart();
-		donutChart();
+		// donutChart();
 	};
 
 	return App;
 })(App || {});
+
+

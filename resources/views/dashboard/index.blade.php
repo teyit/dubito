@@ -2,47 +2,57 @@
 @section("content")
 <div class="main-content container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="widget widget-tile">
-                <div id="spark1" class="chart sparkline"></div>
-                <div class="data-info">
-                    <div class="desc">Messages</div>
-                    <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span data-toggle="counter" data-end="113" class="number">0</span>
-                    </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-divider">
+                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync"></span><span class="icon mdi mdi-close"></span>
+                    </div><span class="title">Report/Resource</span><span class="panel-subtitle">Report is count according to channels</span>
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="widget widget-tile">
-                <div id="spark2" class="chart sparkline"></div>
-                <div class="data-info">
-                    <div class="desc">Reports</div>
-                    <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="80" data-suffix="%" class="number">0</span>
-                    </div>
+                <div class="panel-body">
+                    <canvas id="pie-chart"></canvas>
+                    <input type="hidden"
+                           data-report-source-name="{{implode(",", array_pluck($reportCountbySource,'source'))}}"
+                           data-report-source-total="{{implode(',',array_pluck($reportCountbySource,'total'))}}"
+                           id="report-source-h" />
                 </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="widget widget-tile">
-                <div id="spark3" class="chart sparkline"></div>
-                <div class="data-info">
-                    <div class="desc">Cases</div>
-                    <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="532" class="number">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-3">
-            <div class="widget widget-tile">
-                <div id="spark4" class="chart sparkline"></div>
-                <div class="data-info">
-                    <div class="desc">Topic</div>
-                    <div class="value"><span class="indicator indicator-positive mdi mdi-chevron-up"></span><span data-toggle="counter" data-end="113" class="number">0</span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading panel-heading-divider">
+                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync"></span>
+                            <span class="icon mdi mdi-close"></span></div><span class="title">Report/Topic</span><span class="panel-subtitle">This is report count according to topc</span>
+                </div>
+                <div class="panel-body">
+                    <canvas id="bar-chart"></canvas>
+
+                    <input type="hidden"
+                           data-report-topic-name="{{implode(",", array_pluck($reportTopicCount,'title'))}}"
+                           data-report-topic-total="{{implode(',',array_pluck($reportTopicCount,'total'))}}"
+                           id="report-topic-h" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 </div>
+@endsection
+
+
+@section('script')
+    <script src="{{url("assets/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js")}}" type="text/javascript"></script>
+    <script src="{{url("assets/lib/chartjs/Chart.min.js")}}" type="text/javascript"></script>
+    <script src="{{url("assets/js/app-charts-chartjs.js")}}" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            App.ChartJs();
+        });
+
+    </script>
+
 @endsection
