@@ -13,7 +13,7 @@
             } else {
                 newStatus = 'archived';
             }
-            console.log(status);
+
             $.ajax({
                 method: "post",
                 url: '/caseSendToArchive/{{$case->id}}',

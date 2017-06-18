@@ -13,8 +13,8 @@
                         <div style="margin-top:20px;" class="input-group xs-mb-15">
                             <input type="text" class="filter-keyword form-control" placeholder="Search" />
                             <div class="input-group-btn">
-                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle">Filter <span class="caret"></span></button>
-                                <ul role="menu" class="filter-source dropdown-menu">
+                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle message-filter-dropdown">Filter <span class="caret"></span></button>
+                                <ul role="menu" class="filter-source message-filter-menu dropdown-menu">
                                     <li><a href="#">Tümü</a></li>
                                     <li class="divider"></li>
                                     <li><a data-source="facebook:message" href="#">Facebook</a></li>
@@ -310,6 +310,12 @@
                 }
             })
 
+        });
+
+
+        $('.message-filter-menu a').click(function () {
+            var text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';
+            $('.message-filter-dropdown').html(text);
         });
 
 
