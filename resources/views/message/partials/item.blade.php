@@ -30,6 +30,7 @@
             <p class="msg msg-styled">
                 <span>{{$message->text}}</span>
             </p>
+            @include("message.partials.linkPreview")
 
             @if(!$message->files->isEmpty())
                 <p class="msg">
@@ -46,6 +47,7 @@
                         @endif
                     @endforeach
                 </p>
+
             @endif
         </div>
     @endif

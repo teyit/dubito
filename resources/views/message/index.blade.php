@@ -68,8 +68,39 @@
     <script src="{{asset('assets/js/nprogress.js')}}"></script>
 
     <link rel="stylesheet" href="{{asset('assets/css/nprogress.css')}}" />
-    <script src="//ajax.googleapis.com/ajax/libs/spf/2.4.0/spf.js"></script>
+    <script src=""></script>
+
+    <script src="{{asset('assets/lib/linkify/linkify.min.js')}}"></script>
+    <script src="{{asset('assets/lib/linkify/linkify-jquery.min.js')}}"></script>
+
     <script>
+        function getPreview(item){
+            var link = {
+                image : '',
+                title : '',
+                url : '',
+                domain : ''
+            };
+            return [
+                '<div class="link-styled card">',
+                '<a target="_blank" href="' +link.url+ '">',
+                '<div class="card-img-top" style="background-image:url(' +link.image+ ')"></div>',
+                '<div class="card-block">',
+                '<h4 class="card-title">' +link.title+ '</h4>',
+                '<p class="card-text">' +link.description+ '</p>',
+                '<h6 class="card-subtitle mb-2 text-muted text-right">' +link.domain+ '</h6>',
+                '</div>',
+                '</a>',
+                '</div>'
+            ].join('\n');
+        }
+        function loadPreviewLinks(elem){
+            var text = elem.text();
+            var links = linkify.find(text);
+            for(var index in links){
+                elem.after(getPreview(index));
+            }
+        }
 
         $(document).on("spfclick", function() {
             /*
@@ -102,6 +133,12 @@
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();
+
+            $('.email-list-detail p').each(function(){
+                loadPreviewLinks($(this));
+            })
+
+
             $(".fancybox").fancybox();
             $(".thread-list nav li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
@@ -175,7 +212,9 @@
 
         $(function() {
 
-
+            $('.email-list-detail p').each(function(){
+                loadPreviewLinks($(this));
+            }); //Load preview links.
             var inbox = new Inbox({
                 container : '#thread-list'
             });
@@ -212,6 +251,11 @@
 
                     if(response){
                         $(".email-list").append(response.html);
+
+                        $('.message-item-' + response.id + ' .email-list-detail p').each(function(){
+                            loadPreviewLinks($(this));
+                        }); //Load preview links.
+
                         $("#messageInput").val("");
                         $.gritter.add({
                             title: 'Success',

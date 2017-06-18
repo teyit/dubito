@@ -4,8 +4,12 @@
             <div id="senderMeta" class="email-title" data-sender_id="{{$messages->first()->sender_id}}"
                     ><span class="icon mdi mdi-inbox"></span> {{$messages->first()->account_name}}
                     <span class="new-messages">
-                    @if($messages->first()->source == 'facebook:message')
-                        <span class="label label-primary">Facebook</span>
+                    @if($messages->first()->source == 'twitter:message')
+                        <span class="mdi mdi-inbox"></span><span class="label label-primary">Twitter Message</span>
+                    @elseif($messages->first()->source == 'twitter:mention')
+                        <span class="mdi mdi-twitter-box"></span><span class="label label-primary">Twitter Mention</span>
+                    @elseif($messages->first()->source == 'facebook:message')
+                        <span class="mdi mdi-facebook-box"></span><span class="label label-primary">Facebook</span>
                     @endif
 
                 </span>

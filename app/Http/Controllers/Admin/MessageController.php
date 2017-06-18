@@ -104,6 +104,7 @@ class MessageController extends Controller
 
             return response()->json([
                 'status' => true,
+                'id' => $m->id,
                 'html' => view('message.partials.item',['message' => $m])->render()
             ]);
         }
@@ -205,12 +206,14 @@ class MessageController extends Controller
 
         $categories = Category::latest()->get();
 
-        $messages = $messages->paginate(30);
+        $messages = $messages->paginate(5);
 
 
 
         Message::where('sender_id', $id)->orWhere('recipient_id',$id)->update(['is_read' => 1]);
-        $this->markSeenFacebook($id);
+        //if($messages->first()->source == 'facebook'){
+            //$this->markSeenFacebook($id);
+        //}
 
 
         $currentPage = $request->get('page',false);

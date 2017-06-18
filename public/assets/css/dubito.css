@@ -203,3 +203,36 @@
     color:white;
     background-color: #4c8bf5;
 }
+
+.link-styled{
+    background-color: #f0f0f0;
+    border-radius: 3px;
+    margin:20px 20px 20px 0px;
+    max-width:300px;
+}
+.link-styled a{
+    color: #595858;
+}
+.link-styled .card-img-top{
+    width:100%;
+    height:140px;
+    background-size:cover;
+    background-position: center;
+}
+.link-styled .card-title{
+    font-size:12px;
+    margin:0px 0px 0px 0px;
+    font-weight: bold;
+}
+.link-styled .card-text{
+    font-size:11px;
+    line-height: 13px;
+    margin:5px 0px 0px 0px;
+}
+.link-styled .card-subtitle{
+    margin:5px 0px 0px 0px;
+    font-size:11px;
+}
+.link-styled .card-block{
+    padding:10px;
+}
