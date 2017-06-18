@@ -14,7 +14,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     @include("report.partials._case_modal_form")

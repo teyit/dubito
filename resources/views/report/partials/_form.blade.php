@@ -12,7 +12,17 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Source</label>
             <div class="col-sm-6">
-                <input type="text" name="source" readonly class="form-control" value="other">
+
+                <select name="source" id="" class="form-control">
+                    @foreach(['whatsapp','other'] as $source)
+                      @if($report->source == $source)
+                            <option value="{{$source}}" selected>{{ucfirst($source)}}</option>
+                      @else
+                            <option value="{{array_remove_by_value(['whatsapp','other'],$report->source)[0]}}">{{ucfirst(array_remove_by_value(['whatsapp','other'],$report->source)[0])}}</option>
+                      @endif
+
+                   @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group">
@@ -108,7 +118,10 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Source</label>
             <div class="col-sm-6">
-                <input type="text" name="source" readonly class="form-control" value="other">
+                <select name="source" id="" class="form-control">
+                    <option value="whatsapp">Whatsapp</option>
+                    <option value="other">Other</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

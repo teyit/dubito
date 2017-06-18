@@ -86,12 +86,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 Route::get('/deneme', function(){
 
-    $aa = \Carbon\Carbon::parse('2017-05-22 21:17:45');
-    $now = \Carbon\Carbon::now();
-
-    $xx = $now->diffInMinutes($aa);
-    dd($xx);
-
 });
 
 

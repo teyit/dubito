@@ -46,3 +46,8 @@ function moveToS3Link($filePrefix,$fileName,$link){
 function add_quotes($str) {
     return  '"'.$str.'"';
 }
+
+function array_remove_by_value($array, $value)
+{
+    return array_values(array_diff($array, array($value)));
+}
