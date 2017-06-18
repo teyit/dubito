@@ -77,11 +77,15 @@
     <script>
         function getPreview(item){
             var link = {
-                image : '',
-                title : '',
-                url : '',
-                domain : ''
+                title: 'Gregory’nin katili öldürülen adam mıydı?',
+                description : 'Fransa’da 1984 yılında elleri ve ayakları bağlanmış şekilde cesedi bulunan 4 yaşındaki Gregory Villemin davasıyla ilgili elde edilen yeni DNA örnekleri sonrası üç kişi gözaltına alındı. 70’li yaşlarındaki bir çift ve bir kadın, 33 yıl sonra sorguya alındı.',
+                image : 'http://i.hurimg.com/i/hurriyet/75/620x350/5944f3fb7152d832e4441c9d.jpg',
+                url : 'http://www.hurriyet.com.tr/gregorynin-katili-oldurulen-adam-miydi-40493035',
+                source_url : 'http://www.hurriyet.com.tr/gregorynin-katili-oldurulen-adam-miydi-40493035'
             };
+            var tmp        = document.createElement ('a');
+            tmp.href   = link.url;
+
             return [
                 '<div class="link-styled card">',
                 '<a target="_blank" href="' +link.url+ '">',
@@ -89,11 +93,12 @@
                 '<div class="card-block">',
                 '<h4 class="card-title">' +link.title+ '</h4>',
                 '<p class="card-text">' +link.description+ '</p>',
-                '<h6 class="card-subtitle mb-2 text-muted text-right">' +link.domain+ '</h6>',
+                '<h6 class="card-subtitle mb-2 text-muted text-right">' +tmp.hostname+ '</h6>',
                 '</div>',
                 '</a>',
                 '</div>'
             ].join('\n');
+
         }
         function loadPreviewLinks(elem){
             var text = elem.text();
@@ -109,6 +114,7 @@
                 sender_id: $("#senderMeta").data('sender_id')
             });
             */
+
             NProgress.start();
         });
 
@@ -123,11 +129,14 @@
         });
 
         $(document).on("spfdone", function() {
-            /*
-             $("#section-thread").trigger('thread-change', {
-             sender_id: $("#senderMeta").data('sender_id')
-             });
-             */
+
+            $("#section-thread").trigger('thread-change', {
+                sender_id: $("#senderMeta").data('sender_id')
+            });
+
+            $('.email-list-detail p').each(function(){
+                loadPreviewLinks($(this));
+            })
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(event,data){ //Read first message on load.
@@ -135,9 +144,7 @@
             spf.dispose();
             spf.init();
 
-            $('.email-list-detail p').each(function(){
-                loadPreviewLinks($(this));
-            })
+
 
 
             $(".fancybox").fancybox();
@@ -212,7 +219,7 @@
 
 
         $(function() {
-
+            spf.init();
             $('.email-list-detail p').each(function(){
                 loadPreviewLinks($(this));
             }); //Load preview links.
