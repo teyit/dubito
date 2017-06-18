@@ -66,6 +66,7 @@
 
 @section('script')
     <script src="{{asset('assets/js/nprogress.js')}}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/spf/2.4.0/spf.js"></script>
 
     <link rel="stylesheet" href="{{asset('assets/css/nprogress.css')}}" />
     <script src=""></script>
@@ -250,6 +251,7 @@
                 success:function(response){
 
                     if(response){
+
                         $(".email-list").append(response.html);
 
                         $('.message-item-' + response.id + ' .email-list-detail p').each(function(){
@@ -257,6 +259,8 @@
                         }); //Load preview links.
 
                         $("#messageInput").val("");
+
+
                         $.gritter.add({
                             title: 'Success',
                             text: 'your message has been sent.',
