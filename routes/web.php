@@ -85,7 +85,10 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
 Route::get('/deneme', function(){
-
+//
+//    $dd = array_remove_by_value(['whatsapp','other'],'other');
+//
+//    dd($dd);
 });
 
 
