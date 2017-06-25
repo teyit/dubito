@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Model\Message;
 use App\Model\MessageFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class ServiceController extends Controller
 {
@@ -43,11 +44,17 @@ class ServiceController extends Controller
     public function teyitlink(Request $request){
 
         $body = json_decode($request->getContent());
+
+        \Log::info("SNS Callback Start");
+        \Log::info($body);
+        \Log::info("SNS Callback End");
+
+
         if(!isset($body->Message)){
             return "FAIL";
         }
         $message = json_decode($body->Message);
-        if(!$message->status){
+        if(!isset($message->status)){
             return "CREATE FAIL";
         }
 
