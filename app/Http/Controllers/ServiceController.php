@@ -46,7 +46,7 @@ class ServiceController extends Controller
         $body = json_decode($request->getContent());
 
         \Log::info("SNS Callback Start");
-        \Log::info($body);
+        \Log::info($request->getContent());
         \Log::info("SNS Callback End");
 
 
