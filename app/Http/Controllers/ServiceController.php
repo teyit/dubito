@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Model\Cases;
+use App\Model\Link;
 use App\Model\File;
 use Facebook;
 
@@ -39,7 +40,43 @@ class ServiceController extends Controller
             'account_picture' => $result['profile_pic']
         ];
     }
+    public function teyitlink(Request $request){
 
+        $body = json_decode($request->getContent());
+        if(!isset($body->Message)){
+            return "FAIL";
+        }
+        $message = json_decode($body->Message);
+        if(!$message->status){
+            return "CREATE FAIL";
+        }
+
+        $data = $message->data;
+
+        $link = new Link();
+        if(isset($data->slug)){
+            $link->teyitlink_slug = $data->slug;
+        }
+        if(isset($data->meta_title)){
+            $link->meta_title = $data->meta_title;
+        }
+        if(isset($data->meta_description)){
+            $link->meta_description = $data->meta_description;
+        }
+        if(isset($data->image)){
+            $link->image = $data->image;
+        }
+        if(isset($data->request_url)){
+            $link->link = $data->request_url;
+        }
+
+        if($link->save()){
+            return "OK";
+        }else{
+            return "DB FAIL";
+        }
+
+    }
     public function facebook(Request $request)
     {
         \Log::info('start');

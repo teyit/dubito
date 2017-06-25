@@ -3,11 +3,15 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\TeyitlinkTrait;
 
 class Message extends Model
 {
+    use TeyitlinkTrait;
+
 	protected $table = 'messages';
 
+    protected $teyitlinkColumn = 'text';
 
 	protected $fillable = [
 		'report_id',

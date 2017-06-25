@@ -167,7 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        Aws\Laravel\AwsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -196,7 +196,7 @@ return [
     */
 
     'aliases' => [
-
+        'AWS' => Aws\Laravel\AwsFacade::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -233,6 +233,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'TwitterStreamingApi' => Spatie\LaravelTwitterStreamingApi\TwitterStreamingApiFacade::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
+
 
 
     ],

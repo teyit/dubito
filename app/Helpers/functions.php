@@ -14,11 +14,11 @@ function isUrl($url){
 
 
 function ConverterFileLink($url){
-        if(isUrl($url)){
-            return $url;
-        }
-        return \Illuminate\Support\Facades\Storage::disk('s3')->url($url);
+    if(isUrl($url)){
+        return $url;
     }
+    return \Illuminate\Support\Facades\Storage::disk('s3')->url($url);
+}
 
 
 

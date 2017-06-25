@@ -24,6 +24,7 @@ Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses'
 
 
 
+Route::get('/test','\App\Http\Controllers\Admin\MessageController@test');
 
 
 
@@ -97,6 +98,7 @@ Route::any('new-google-document/{title}',['as'=>'new.google.document','uses'=>'S
 
 Route::any('/service/messages/facebook', 'ServiceController@facebook');
 Route::any('/service/messages/twitter', 'ServiceController@twitter');
+Route::post('/service/teyitlink/callback','ServiceController@teyitlink');
 
 
 
