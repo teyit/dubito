@@ -178,7 +178,7 @@ class MessageController extends Controller
 
     public function index(Request $request){
 
-        dd($matches);
+        
         $senders = $this->getSenders($request->only('source','page','keyword','size'));
 
         $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
