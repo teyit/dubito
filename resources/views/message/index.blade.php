@@ -75,38 +75,6 @@
     <script src="{{asset('assets/lib/linkify/linkify-jquery.min.js')}}"></script>
 
     <script>
-        function getPreview(item){
-            var link = {
-                title: 'Gregory’nin katili öldürülen adam mıydı?',
-                description : 'Fransa’da 1984 yılında elleri ve ayakları bağlanmış şekilde cesedi bulunan 4 yaşındaki Gregory Villemin davasıyla ilgili elde edilen yeni DNA örnekleri sonrası üç kişi gözaltına alındı. 70’li yaşlarındaki bir çift ve bir kadın, 33 yıl sonra sorguya alındı.',
-                image : 'http://i.hurimg.com/i/hurriyet/75/620x350/5944f3fb7152d832e4441c9d.jpg',
-                url : 'http://www.hurriyet.com.tr/gregorynin-katili-oldurulen-adam-miydi-40493035',
-                source_url : 'http://www.hurriyet.com.tr/gregorynin-katili-oldurulen-adam-miydi-40493035'
-            };
-            var tmp        = document.createElement ('a');
-            tmp.href   = link.url;
-
-            return [
-                '<div class="link-styled card">',
-                '<a target="_blank" href="' +link.url+ '">',
-                '<div class="card-img-top" style="background-image:url(' +link.image+ ')"></div>',
-                '<div class="card-block">',
-                '<h4 class="card-title">' +link.title+ '</h4>',
-                '<p class="card-text">' +link.description+ '</p>',
-                '<h6 class="card-subtitle mb-2 text-muted text-right">' +tmp.hostname+ '</h6>',
-                '</div>',
-                '</a>',
-                '</div>'
-            ].join('\n');
-
-        }
-        function loadPreviewLinks(elem){
-            var text = elem.text();
-            var links = linkify.find(text);
-            for(var index in links){
-                elem.after(getPreview(index));
-            }
-        }
 
         $(document).on("spfclick", function() {
             /*
@@ -143,10 +111,7 @@
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();
-
-
-
-
+            
             $(".fancybox").fancybox();
             $(".thread-list nav li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');

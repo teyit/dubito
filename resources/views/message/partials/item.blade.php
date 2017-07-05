@@ -30,7 +30,12 @@
             <p class="msg msg-styled">
                 <span>{{$message->text}}</span>
             </p>
-            @include("message.partials.linkPreview")
+
+            @foreach($message->links as $l)
+                @include('message.partials.linkPreview',$l)
+            @endforeach
+
+
 
             @if(!$message->files->isEmpty())
                 <p class="msg">
