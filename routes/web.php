@@ -16,18 +16,11 @@ Route::get('/social/redirect/{provider}',   ['as' => 'social.redirect',   'uses'
 Route::get('/social/handle/{provider}',     ['as' => 'social.handle',     'uses' => 'Auth\SocialController@getSocialHandle']);
 
 
-
 //Route::get('/', function(){
 //    return redirect('/login');
 //});
 
-
-
-
 Route::get('/test','\App\Http\Controllers\Admin\MessageController@test');
-
-
-
 
 Route::get("preview",function(){
 	$tags = get_meta_tags($_GET['url']);
@@ -83,8 +76,6 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 });
 
-
-
 Route::get('/deneme', function(){
 //
 //    $dd = array_remove_by_value(['whatsapp','other'],'other');
@@ -98,8 +89,7 @@ Route::any('new-google-document/{title}',['as'=>'new.google.document','uses'=>'S
 
 Route::any('/service/messages/facebook', 'ServiceController@facebook');
 Route::any('/service/messages/twitter', 'ServiceController@twitter');
-Route::post('/service/teyitlink/callback','ServiceController@teyitlink');
-
+Route::get('/service/teyitlink/callback','ServiceController@teyitlink');
 
 
 Route::get('/home', 'HomeController@index');

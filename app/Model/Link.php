@@ -12,4 +12,8 @@ class Link extends Model
 
     protected static $logAttributes = ['link','created_at','updated_at'];
 
+
+    public function messages(){
+        return $this->belongsToMany('App\Model\Message','message_links','link_id','message_id')->withTimestamps();
+    }
 }
