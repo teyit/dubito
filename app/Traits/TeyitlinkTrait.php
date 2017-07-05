@@ -11,7 +11,7 @@ trait TeyitlinkTrait
     {
         parent::boot();
 
-        static::updated(function ($object) {
+        static::created(function ($object) {
 
             $sns = AWS::createClient('sns');
             $text = $object->{$object->teyitlinkColumn};
