@@ -102,16 +102,14 @@
                 sender_id: $("#senderMeta").data('sender_id')
             });
 
-            $('.email-list-detail p').each(function(){
-                loadPreviewLinks($(this));
-            })
+
             NProgress.remove();
         });
         $("#section-thread").on('thread-change',function(event,data){ //Read first message on load.
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();
-            
+
             $(".fancybox").fancybox();
             $(".thread-list nav li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
@@ -185,9 +183,7 @@
 
         $(function() {
             spf.init();
-            $('.email-list-detail p').each(function(){
-                loadPreviewLinks($(this));
-            }); //Load preview links.
+
             var inbox = new Inbox({
                 container : '#thread-list'
             });
@@ -226,9 +222,7 @@
 
                         $(".email-list").append(response.html);
 
-                        $('.message-item-' + response.id + ' .email-list-detail p').each(function(){
-                            loadPreviewLinks($(this));
-                        }); //Load preview links.
+
 
                         $("#messageInput").val("");
 
