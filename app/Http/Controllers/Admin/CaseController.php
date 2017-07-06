@@ -66,9 +66,13 @@ class CaseController extends Controller
         ];
     }
 
+
+
     public function show($id){
 
         $case = Cases::with('reports','evidences','user')->find($id);
+
+
 
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');

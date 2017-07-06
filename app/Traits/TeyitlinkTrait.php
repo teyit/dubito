@@ -28,7 +28,7 @@ trait TeyitlinkTrait
 	                        'link' => $link
                         ]),
                     ));
-                
+
             }
         });
     }
