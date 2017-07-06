@@ -87,11 +87,14 @@ class Cases extends Model
                 'query' => [
                     'multi_match' => [
                         'query' => $this->title,
-                        
+
                         'fuzziness' => 10,
                         'fields' => ['doc.title^10','doc.description']
                     ]
                 ]
+            ],
+            'sort' => [
+                '_score'
             ],
             'size' => 100
         ];
