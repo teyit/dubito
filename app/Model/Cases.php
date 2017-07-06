@@ -85,8 +85,11 @@ class Cases extends Model
             'type' => 'rss_item',
             'body' => [
                 'query' => [
-                    'match' => [
-                        'doc.title' => $this->title
+                    'multi_match' => [
+                        'query' => $this->title,
+                        
+                        'fuzziness' => 10,
+                        'fields' => ['doc.title^10','doc.description']
                     ]
                 ]
             ],

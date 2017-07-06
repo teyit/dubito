@@ -8,6 +8,7 @@
             <tr>
                 <th>Title</th>
                 <th>Source</th>
+                <th>Score</th>
                 <th>Created at</th>
                 <th class="actions"></th>
             </tr>
@@ -17,8 +18,8 @@
                 <tr>
                     <td>{{$p['title']}}</td>
                     <td>{{parse_url($p['url'],PHP_URL_HOST)}}</td>
+                    <td>{{$p['score']}}</td>
                     <td>{{date("d-m-Y  H:i",strtotime($p['date']))}}</td>
-
                     <td>
 
                         <button type="button" class="btn btn-space btn-default">
