@@ -13,11 +13,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Topic</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>User</th>
+                                <th style="width:220px;">Title</th>
+                                <th class="filterable">Topic</th>
+                                <th class="filterable">Category</th>
+                                <th class="filterable">Status</th>
+                                <th class="filterable">User</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -30,9 +30,9 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Topic</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                        <th>User</th>
+                        <th >Category</th>
+                        <th >Status</th>
+                        <th >User</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th class="actions"></th>
@@ -43,7 +43,10 @@
                         @foreach($cases as $case)
                             <tr>
                                 <td>{{$case->id}}</td>
-                                <td>{{$case->title}}</td>
+                                <td>
+                                    <a target="_blank" href="{{route('cases.show',$case->id)}}">{{$case->title}}</a>
+
+                                </td>
                                 <td>{{$case->topic->title}}</td>
                                 <td>{{$case->category->title or ""}}</td>
                                 <td>
