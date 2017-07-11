@@ -22,7 +22,7 @@ var App = (function () {
                   if(except.indexOf(col) === -1){
                       var column = this;
                       var select = $('<select><option value=""></option></select>')
-                          .appendTo( $(column.footer()).empty() )
+                          .appendTo( $(column.header()).empty() )
                           .on( 'change', function () {
                               var val = $.fn.dataTable.util.escapeRegex(
                                   $(this).val()
@@ -53,7 +53,7 @@ var App = (function () {
 
                   if(col !== 4){
                       var select = $('<select><option value=""></option></select>')
-                          .appendTo( $(column.footer()).empty() )
+                          .appendTo( $(column.header()).empty() )
                           .on( 'change', function () {
                               var val = $.fn.dataTable.util.escapeRegex(
                                   $(this).val()

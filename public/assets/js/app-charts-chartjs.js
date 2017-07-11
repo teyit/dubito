@@ -39,8 +39,7 @@ var App = (function () {
 		function barChart(){
 			//Set the chart colors
 
-
-      var color1 = tinycolor( App.color.success );
+      	var color1 = tinycolor( App.color.success );
 			var color2 = tinycolor( App.color.warning );
 
       //Get the canvas element
@@ -48,7 +47,6 @@ var App = (function () {
 
             var totalData = $("#report-topic-h").data("report-topic-total");
             var topicLabels = $("#report-topic-h").data("report-topic-name");
-
 
             var data = {
 	      labels: topicLabels.split(','),

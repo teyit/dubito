@@ -5,7 +5,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">Report</label>
             <div class="col-sm-6">
-                <textarea required name="text"  class="form-control">{{$report->text    }}</textarea>
+                <textarea required name="text"  class="form-control">{{$report->text}}</textarea>
             </div>
         </div>
 
