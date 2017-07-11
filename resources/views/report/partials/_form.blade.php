@@ -25,6 +25,14 @@
                 </select>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Phone</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value="{{$report->phone or ''}}" name="phone">
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">
@@ -124,6 +132,14 @@
                 </select>
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Phone</label>
+            <div class="col-sm-6">
+                    <input type="text" class="form-control" value="" name="phone">
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">

@@ -22,6 +22,7 @@ class CreateReportTable extends Migration
             $table->text("text")->nullable();
             $table->integer("case_id")->nullable();
             $table->string("source")->nullable();
+            $table->string("phone")->nullable();
             $table->enum('status',['not_assigned','in_archived','pending'])->default('not_assigned');
             $table->timestamps();
         });
