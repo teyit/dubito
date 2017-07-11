@@ -16,10 +16,9 @@ var App = (function () {
 
       $('#case-datatable').DataTable( {
           initComplete: function () {
-              this.api().columns().every( function (col) {
-                  console.log(col);
-                  var except = [4,8]
-                  if(except.indexOf(col) === -1){
+              this.api().columns('.filterable').every( function (col) {
+
+
                       var column = this;
                       var select = $('<select><option value=""></option></select>')
                           .appendTo( $(column.footer()).empty() )
@@ -34,10 +33,9 @@ var App = (function () {
                           } );
 
                       column.data().unique().sort().each( function ( d, j ) {
-
-                          select.append( '<option value="'+d+'">'+d+'</option>' )
+                          select.append( '<option value="'+d+'">'+ d.substring(0,20)+'</option>' )
                       } );
-                  }
+
 
               } );
           }

@@ -22,7 +22,7 @@ $(function(){
            type:"POST",
            url:'/api/cases',
            data:$(this).serialize()+'&'+$.param({ 'selected_messages': message_list }),
-           dataType: 'json',
+               dataType: 'json',
            success: function(data){
               if(data){
                  getCases();
