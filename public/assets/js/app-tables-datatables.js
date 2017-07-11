@@ -14,40 +14,46 @@ var App = (function () {
     } );
 
 
-      $('#case-datatable').DataTable( {
+      $('#case-datatable').DataTable({
+
           initComplete: function () {
-              this.api().columns('.filterable').every( function (col) {
+              this.api().columns('.filterable').every(function (col) {
 
-
+                  var except = [1, 4, 8];
+                  if (except.indexOf(col) === -1) {
                       var column = this;
                       var select = $('<select><option value=""></option></select>')
-                          .appendTo( $(column.header()).empty() )
-                          .on( 'change', function () {
+                          .appendTo($(column.header()).empty())
+                          .on('change', function () {
                               var val = $.fn.dataTable.util.escapeRegex(
                                   $(this).val()
                               );
 
                               column
-                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .search(val ? '^' + val + '$' : '', true, false)
                                   .draw();
-                          } );
+                          });
 
-                      column.data().unique().sort().each( function ( d, j ) {
-                          select.append( '<option value="'+d+'">'+ d.substring(0,20)+'</option>' )
-                      } );
+                      column.data().unique().sort().each(function (d, j) {
+                          select.append('<option value="' + d + '">' + d.substring(0, 20) + '</option>')
+                      });
+                  }
+
+              });
+          },
+
+          "order": [[ 0, "desc" ]]
+
+          });
 
 
-              } );
-          }
-      } );
 
 
+      $('#report-datatable').DataTable({
 
-      $('#report-datatable').DataTable( {
           initComplete: function () {
               this.api().columns().every( function (col) {
                   var column = this;
-
 
                   if(col !== 4){
                       var select = $('<select><option value=""></option></select>')
@@ -67,8 +73,11 @@ var App = (function () {
                       } );
                   }
               } );
-          }
-      } );
+          },
+          "order": [[ 0, "desc" ]]
+      });
+
+
 
 
 

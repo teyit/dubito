@@ -16,6 +16,16 @@
                             <option value="">Select Case</option>
                         </select>
                     </div>
+
+                    <div class="form-group ">
+                        <label for="case_id">Status</label>
+                        <select class="form-control is_archived" name="is_archived" id="is_archived">
+                            <option value="ongoing">Ongoing</option>
+                            <option value="archived">Archived</option>
+                            <option value="backlog">Backlog</option>
+                        </select>
+                    </div>
+
                     <div class="form-group pull-left">
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>
                     </div>
@@ -71,6 +81,8 @@
                 $("#report-assign-case-form").on('submit',function(e){
                     $('#report-assign-to-case').modal('hide');
                     var case_id = $("#case_id").val();
+                    var is_archived = $("#is_archived").val();
+
                     var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
                     e.preventDefault();
                     $.ajax({
@@ -78,6 +90,7 @@
                         data: {
                             _token:$("#_token").val(),
                             case_id : case_id,
+                            is_archived:is_archived,
                             selected_messages : message_list
                         },
                         method : "POST",

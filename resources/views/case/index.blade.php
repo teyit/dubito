@@ -47,7 +47,7 @@
                                     <a target="_blank" href="{{route('cases.show',$case->id)}}">{{$case->title}}</a>
 
                                 </td>
-                                <td>{{$case->topic->title}}</td>
+                                <td>{{$case->topic->title or ''}}</td>
                                 <td>{{$case->category->title or ""}}</td>
                                 <td>
                                     @if($case->status == 'completed')

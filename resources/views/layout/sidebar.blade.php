@@ -12,14 +12,23 @@
 
                         <li class="{{request()->segment(1) == 'messages' ? "active" : ""}}" ><a  href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i>Messages</a></li>
 
-                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}"><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-comment-alert"></i>Reports</a></li>
+                        <li class="parent {{request()->segment(1) == 'report' ? 'open' : ''}}">
+                            <a href="#"><i class="icon mdi mdi-comment-alert"></i>Reports</a>
+                            <ul class="sub-menu">
+                                <li class="{{request()->is('report/ongoing') ? 'active' : ''}}"><a href="{{url("/report/ongoing")}}">Ongoing</a></li>
+                                <li class="{{request()->is('report/archived') ? 'active' : ''}}"><a href="{{url("/report/archived")}}">Archived</a></li>
+                                <li class="{{request()->is('report/backlog') ?  'active' : ''}}"><a href="{{url("/report/backlog")}}">Backlog</a></li>
+
+                            </ul>
+                        </li>
+
 
                         <li class="parent {{request()->segment(1) == 'case' ? 'open' : ''}}">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
                             <ul class="sub-menu">
-                                <li class="{{request()->segment(2) == 'ongoing' ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
-                                <li class="{{request()->segment(2) == 'archived' ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archived</a></li>
-                                <li class="{{request()->segment(2) == 'backlog' ? 'active' : ''}}"><a href="{{url("/case/backlog")}}">Backlog</a></li>
+                                <li class="{{request()->is('case/ongoing') ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
+                                <li class="{{request()->is('case/archived') ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archived</a></li>
+                                <li class="{{request()->is('case/backlog') ?  'active' : ''}}"><a href="{{url("/case/backlog")}}">Backlog</a></li>
 
                             </ul>
                         </li>

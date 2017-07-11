@@ -18,8 +18,9 @@ class ReportController extends Controller
 {
 
 
-    public function index(){
-        $reports = Report::with('images')->latest()->get();
+    public function index($is_archived){
+
+        $reports = Report::with('images')->where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
         return view('report.index',[
             'reports' => $reports
         ]);
@@ -35,10 +36,10 @@ class ReportController extends Controller
 
 
     public function store(Request $request){
+
         if(!$request->has('selected_messages')){
             return "empty";
         }
-        
 
         $messages = Message::whereIn('id',$request->get('selected_messages'))->orderBy('id','ASC')->get();
 
@@ -50,7 +51,8 @@ class ReportController extends Controller
             'case_id' => $request->input('case_id'),
             'source' => $messages->first()->source,
             'account_name' => $messages->first()->account_name,
-            'account_picture' => $messages->first()->account_picture
+            'account_picture' => $messages->first()->account_picture,
+            'is_archived' => request()->has('is_archived') ? request()->input('is_archived') : 'ongoing'
         ]);
 
 

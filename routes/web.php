@@ -48,6 +48,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
     //Reports
+    Route::get('report/{is_archived}',['as'=>'report.is_archived','uses'=>'ReportController@index']);
     Route::resource("reports","ReportController");
     Route::post("custom-store-reports",['as'=>'custom.store.reports','uses'=>'ReportController@customStore']);
     Route::put("custom-update-reports/{report_id}",['as'=>'custom.update.reports','uses'=>'ReportController@customUpdate']);

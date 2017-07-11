@@ -1,4 +1,4 @@
-<div class="panel panel-default panel-table">
+<div class="panel panel-default panel-table" id="press-datatable">
     <div class="panel panel-default">
         <div class="panel-heading">
             Press results

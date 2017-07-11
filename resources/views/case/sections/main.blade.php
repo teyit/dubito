@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-md-6 text-right">
                             <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
-                            <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title}}</span>
+                            <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title or ''}}</span>
                         </div>
                 </div>
             </div>
