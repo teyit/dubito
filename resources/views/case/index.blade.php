@@ -40,7 +40,9 @@
                         </tfoot>
 
                         <tbody>
+
                         @foreach($cases as $case)
+
                             <tr>
                                 <td>{{$case->id}}</td>
                                 <td>
@@ -63,8 +65,7 @@
                                     @elseif($case->status == 'to_be_tweeted')
                                         <span class="label label-primary">To be Tweeted</span>
                                     @elseif($case->status == 'pending')
-                                        <span class="label label-muted">Pending</span>
-
+                                        <span class="label label-default">Pending</span>
                                     @endif
                                 </td>
                                 <td>{{$case->user->name or 'Not Assigned'}}</td>
