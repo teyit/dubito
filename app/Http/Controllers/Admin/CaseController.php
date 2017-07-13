@@ -25,16 +25,16 @@ class CaseController extends Controller
 
     protected $redirect = 'cases';
     public function press_review($case_id,Request $request){
-        if(!$request->has(['press_id','status','url'])){
+        if(!$request->has(['id','status','url'])){
             return '0';
         }
-        $pr = PressReview::where('case_id',$case_id)->where('press_id',$request->get('press_id'))->first();
+        $pr = PressReview::where('case_id',$case_id)->where('press_id',$request->get('id'))->first();
         if(!$pr){
             $pr = new PressReview();
         }
 
         $pr->case_id = $case_id;
-        $pr->press_id = $request->get('press_id');
+        $pr->press_id = $request->get('id');
         $pr->status = $request->get('status');
         $pr->save();
 
@@ -44,7 +44,8 @@ class CaseController extends Controller
                 return "0";
             }
             $url = $request->get('url');
-            
+            $title = $request->get('title');
+
             $l= $case->whereHas('links', function ($query) use ($url){
                 $query->where('link', $url);
             })->first();
@@ -52,6 +53,7 @@ class CaseController extends Controller
             if(!$l){
                 $link = new Link();
                 $link->link = $url;
+                $link->meta_title = $title;
                 $link->save();
                 $case->links()->attach($link->id);
             }
@@ -63,14 +65,22 @@ class CaseController extends Controller
     public function press($case_id,Request $request){
 
         if($request->has(['text','daterange'])){
+            $pressReviews = PressReview::where('case_id',$case_id)->get()->pluck('press_id')->toArray();
 
             $range = explode("-",$request->get('daterange'));
 
             $from = trim($range[0]);
             $to = trim($range[1]);
 
-            $results = $this->pressQuery($request->get('text'),$from,$to);
-            return view('case.sections.press-results',['results' => $results]);
+            $fullResults = $this->pressQuery($request->get('text'),$from,$to);
+            $finalResults = [];
+            foreach($fullResults as $r){
+                if(!in_array($r['id'],$pressReviews)){
+                    $finalResults[] = $r;
+                }
+            }
+
+            return view('case.sections.press-results',['results' => $finalResults]);
         }
     }
     private function pressQuery($text,$from,$to){

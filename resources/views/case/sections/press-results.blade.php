@@ -18,10 +18,10 @@
             <td>
 
                 <div class="btn-group btn-space">
-                    <button data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="1" type="button" class="press-item btn btn-default">
+                    <button data-title="{{$p['title']}}" data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="1" type="button" class="press-item btn btn-default">
                         <i class="icon mdi mdi-check"></i>
                     </button>
-                    <button data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="0" type="button" class="press-item btn btn-default">
+                    <button data-title="{{$p['title']}}" data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="0" type="button" class="press-item btn btn-default">
                         <i class="icon mdi mdi-close"></i>
                     </button>
                 </div>

@@ -6,7 +6,7 @@
                 <form id="press-list" class="form-inline form-group">
                     <input name="text" type="text" value="{{$case->title}}" class="input-xs form-control">
                     <input type="text" placeholder="" name="daterange"  class="input-xs form-control daterange">
-                    <button type="button" class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
+                    <button id="getPress" type="button" class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
                 </form>
             </div>
         </div>
@@ -32,6 +32,7 @@
             }
         });
     };
+
     $(document).ready(function(){
         var start = moment().subtract(29, 'days');
         var end = moment();
@@ -40,23 +41,17 @@
             startDate: start,
             endDate: end
         });
-        $("#press-list button").on('click', function () {
+        $("#getPress").on('click', function () {
             pressResults();
         });
         $(document).on('click',".press-item", function () {
-            var press_id = $(this).data('id');
-            var url = $(this).data('url');
-            var status = $(this).data('status');
             $.ajax({
                 method:"get",
                 url:"/cases/{{$case->id}}/press_review",
-                data:{
-                    'press_id': press_id,
-                    'url': url,
-                    'status' : status
-                },
+                data:$(this).data(),
                 success:function(response){
-                    $("#press-line-" + press_id).fadeOut();
+                    $("#press-line-" + $(this).data('press_id')).fadeOut();
+                    
                 }
             });
         });
