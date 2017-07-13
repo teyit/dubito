@@ -111,9 +111,12 @@
             spf.init();
 
             $(".fancybox").fancybox();
-            $(".thread-list nav li").removeClass('active');
+            $("#thread-list li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
             $(".sender-item-" + data.sender_id+" .thread-count").hide();
+            $('.msg').linkify({
+                target: "_blank"
+            });
         });
 
         var Inbox = function(config){
@@ -190,6 +193,9 @@
 
             $('#thread-scroller').perfectScrollbar().on('ps-y-reach-end', function () {
                 inbox.loadMore();
+            });
+            $('.msg').linkify({
+                target: "_blank"
             });
 
             $('.filter-keyword').on('keyup',function(){
