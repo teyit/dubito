@@ -45,12 +45,13 @@
             pressResults();
         });
         $(document).on('click',".press-item", function () {
+            var id = $(this).data('id');
             $.ajax({
                 method:"get",
                 url:"/cases/{{$case->id}}/press_review",
                 data:$(this).data(),
                 success:function(response){
-                    $("#press-line-" + $(this).data('id')).fadeOut();
+                    $("#press-line-" +id).fadeOut();
                 }
             });
         });
