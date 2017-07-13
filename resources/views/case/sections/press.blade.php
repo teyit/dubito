@@ -17,8 +17,8 @@
                 <th style="width:440px;">Title</th>
                 <th>Source</th>
                 <th>Score</th>
-                <th>Created at</th>
-                <th class="actions"></th>
+                <th style="width:160px;">Created at</th>
+                <th style="width:120px;" class="actions"></th>
             </tr>
             </thead>
             <tbody>

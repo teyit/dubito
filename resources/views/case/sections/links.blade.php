@@ -9,32 +9,25 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Link</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th class="actions"></th>
+                    <th>Title</th>
+                    <th style="width:180px;">Created At</th>
+                    <th style="width:270px;" class="actions"></th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach($links as $link)
                     <tr>
                         <td>{{$link->id}}</td>
-                        <td id="list-link-{{$link->id}}">{{$link->link}}</td>
+                        <td>{{$link->meta_title}}</td>
                         <td>{{$link->created_at}}</td>
-                        <td>{{$link->updated_at}}</td>
                         <td>
-                            <div class="btn-group btn-space">
-                                <button type="button" data-toggle="dropdown" class="btn btn-default"
-                                        aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span
-                                            class="sr-only">Toggle Dropdown</span>&nbsp;
-                                </button>
-                                <ul role="menu" class="dropdown-menu">
-                                    <li><a class="link-edit-btn" href="javascript:;"
-                                           data-id="{{$link->id}}">Edit</a></li>
-                                    <li><a class="link-delete" data-id="{{$link->id}}"
-                                           href="javascript:;">Delete</a></li>
-                                </ul>
-                            </div>
+
+                                <div class="btn-group xs-mt-5 xs-mb-10">
+                                    <a target="_blank" href="{{$link->teyitlink}}" class="btn btn-default"><span class="mdi mdi-bookmark"></span> Teyitlink</a>
+                                    <a target="_blank" href="{{$link->link}}" class="btn btn-default"><span class="mdi mdi-globe-alt"></span> Orginal</a>
+                                    <a class="link-delete btn btn-danger" data-id="{{$link->id}}" href="javascript:;"><span class="mdi mdi-delete"></span> Delete</a>
+                                </div>
+
                         </td>
                     </tr>
                 @endforeach

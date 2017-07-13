@@ -16,7 +16,9 @@ class Link extends Model
     public function messages(){
         return $this->belongsToMany('App\Model\Message','message_links','link_id','message_id')->withTimestamps();
     }
-
+    public function getTeyitlinkAttribute(){
+        return "http://teyit.link/" . $this->attributes['teyitlink_slug'];
+    }
     protected static function boot()
     {
         parent::boot();
