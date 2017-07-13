@@ -50,8 +50,7 @@
                 url:"/cases/{{$case->id}}/press_review",
                 data:$(this).data(),
                 success:function(response){
-                    $("#press-line-" + $(this).data('press_id')).fadeOut();
-
+                    $("#press-line-" + $(this).data('id')).fadeOut();
                 }
             });
         });
