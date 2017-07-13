@@ -3,46 +3,16 @@
         <div class="panel-heading">
             Press results
             <div class="tools">
-                <div class="form-inline form-group">
-                    <input type="text" value="{{$case->title}}" class="input-xs form-control">
+                <form id="press-list" class="form-inline form-group">
+                    <input name="text" type="text" value="{{$case->title}}" class="input-xs form-control">
                     <input type="text" placeholder="" name="daterange"  class="input-xs form-control daterange">
-                    <button class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
-
-                </div>
+                    <button type="button" class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
+                </form>
             </div>
         </div>
-        <table class="table table-condensed table-striped">
-            <thead>
-            <tr>
-                <th style="width:440px;">Title</th>
-                <th>Source</th>
-                <th>Score</th>
-                <th style="width:160px;">Created at</th>
-                <th style="width:120px;" class="actions"></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($case->press() as $p)
-                <tr>
-                    <td>{{$p['title']}}</td>
-                    <td>{{parse_url($p['url'],PHP_URL_HOST)}}</td>
-                    <td>{{$p['score']}}</td>
-                    <td>{{date("d-m-Y  H:i",strtotime($p['date']))}}</td>
-                    <td>
-                        <div class="btn-group btn-space">
-                            <button type="button" class="btn  btn-default">
-                                <i class="icon mdi mdi-check"></i>
-                            </button>
-                            <button type="button" class="btn  btn-default">
-                                <i class="icon mdi mdi-close"></i>
-                            </button>
-                        </div>
+        <div id="press-results">
 
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        </div>
     </div>
 </div>
 
@@ -54,6 +24,19 @@
 <script>
     $(document).ready(function(){
         $(".daterange").daterangepicker()
+        $("#press-list").on('click', function () {
+            var values = $(this).serialize();
+            $.ajax({
+                method:"get",
+                url:"/cases/press",
+                data:values,
+                success:function(response){
+
+                    $("#press-results").html(response);
+
+                }
+            });
+        });
     })
 </script>
 @endsection

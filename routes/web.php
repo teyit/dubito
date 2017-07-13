@@ -57,7 +57,11 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
     //Cases
+    Route::get('cases/press',['as'=>'case.press','uses'=>'CaseController@press']);
     Route::resource("cases","CaseController");
+
+
+
     Route::post('addCaseTag/{case_id}',['as'=>'case.tag.store','uses'=>'CaseController@addCaseTag']);
     Route::post('addCaseFile/{case_id}',['as'=>'case.file.store','uses'=>'CaseController@addCaseFile']);
     Route::post('removeCaseFile/{case_id}',['as'=>'case.file.remove','uses'=>'CaseController@removeCaseFile']);

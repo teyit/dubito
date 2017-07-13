@@ -23,7 +23,70 @@ class CaseController extends Controller
 
     protected $redirect = 'cases';
 
+    public function press(Request $request){
+        if($request->has(['text','daterange'])){
 
+            $range = explode("-",$request->get('daterange'));
+
+
+            $from = trim($range[0]);
+            $to = trim($range[1]);
+
+            $results = $this->pressQuery($request->get('text'),$from,$to);
+            return view('case.sections.press-results',['results' => $results]);
+        }
+    }
+    private function pressQuery($text,$from,$to){
+        $client = \Elasticsearch\ClientBuilder::create()
+            ->setHosts([
+                'https://search-rss-service-2k5fqi4v7p6k6j44pdese5vagu.eu-central-1.es.amazonaws.com:443'
+            ])
+            ->build();
+
+        $params = [
+            'index' => 'rss_feed',
+            'type' => 'rss_item',
+            'body' => [
+                'query' => [
+                    'bool' => [
+                        'must' => [
+                            [
+                                'multi_match' => [
+                                    'query' => $text,
+                                    'fuzziness' => 10,
+                                    'fields' => ['doc.title^10','doc.description']
+                                ]
+                            ],[
+                                'range' => [
+                                    'doc.date' => [
+                                        'gt' => $from,
+                                        'lt' => $to,
+                                        'format' => 'MM/dd/yyyy'
+                                    ]
+                                ]
+                            ]
+
+                        ]
+                    ]
+                ]
+            ],
+            'sort' => [
+                '_score'
+            ],
+            'size' => 100
+        ];
+
+        $response = $client->search($params);
+        $hits = array_get($response,'hits.hits');
+        $pressResults = [];
+        foreach($hits as $h){
+            $data = $h['_source']['doc'];
+            $data['score'] = $h['_score'];
+            $pressResults[] = $data;
+        }
+        return $pressResults;
+
+    }
     public function index($is_archived){
 
         $topics = Topic::latest()->get();
@@ -70,8 +133,6 @@ class CaseController extends Controller
     public function show($id){
 
         $case = Cases::with('reports','evidences','user')->find($id);
-
-
 
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
