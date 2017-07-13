@@ -4,27 +4,27 @@
         <th style="width:440px;">Title</th>
         <th>Source</th>
         <th>Score</th>
-        <th style="width:160px;">Created at</th>
-        <th style="width:120px;" class="actions"></th>
+        <th style="width:170px;">Created at</th>
+        <th style="width:130px;" class="actions"></th>
     </tr>
     </thead>
     <tbody>
     @foreach($results as $p)
-        <tr>
-            <td>{{$p['title']}}</td>
+        <tr id="press-line-{{$p['id']}}">
+            <td><a href="{{$p['url']}}" target="_blank">{{$p['title']}}</a></td>
             <td>{{parse_url($p['url'],PHP_URL_HOST)}}</td>
             <td>{{$p['score']}}</td>
             <td>{{date("d-m-Y  H:i",strtotime($p['date']))}}</td>
             <td>
+
                 <div class="btn-group btn-space">
-                    <button type="button" class="btn  btn-default">
+                    <button data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="1" type="button" class="press-item btn btn-default">
                         <i class="icon mdi mdi-check"></i>
                     </button>
-                    <button type="button" class="btn  btn-default">
+                    <button data-id="{{$p['id']}}" data-url="{{$p['url']}}" data-status="0" type="button" class="press-item btn btn-default">
                         <i class="icon mdi mdi-close"></i>
                     </button>
                 </div>
-
             </td>
         </tr>
     @endforeach

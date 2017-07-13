@@ -57,7 +57,8 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
     //Cases
-    Route::get('cases/press',['as'=>'case.press','uses'=>'CaseController@press']);
+    Route::get('cases/{case_id}/press',['as'=>'case.press','uses'=>'CaseController@press']);
+    Route::get('cases/{case_id}/press_review',['as'=>'case.press_review','uses'=>'CaseController@press_review']);
     Route::resource("cases","CaseController");
 
 

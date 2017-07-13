@@ -10,9 +10,7 @@
                 </form>
             </div>
         </div>
-        <div id="press-results">
-
-        </div>
+        <div id="press-results"></div>
     </div>
 </div>
 
@@ -22,21 +20,47 @@
 <script src="/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <script src="/assets/lib/daterangepicker/js/daterangepicker.js" type="text/javascript"></script>
 <script>
+    var pressResults = function(){
+        $("#press-results").html('');
+        var values = $("#press-list").serialize();
+        $.ajax({
+            method:"get",
+            url:"/cases/{{$case->id}}/press",
+            data:values,
+            success:function(response){
+                $("#press-results").html(response);
+            }
+        });
+    };
     $(document).ready(function(){
-        $(".daterange").daterangepicker()
-        $("#press-list").on('click', function () {
-            var values = $(this).serialize();
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        $(".daterange").daterangepicker({
+            startDate: start,
+            endDate: end
+        });
+        $("#press-list button").on('click', function () {
+            pressResults();
+        });
+        $(document).on('click',".press-item", function () {
+            var press_id = $(this).data('id');
+            var url = $(this).data('url');
+            var status = $(this).data('status');
             $.ajax({
                 method:"get",
-                url:"/cases/press",
-                data:values,
+                url:"/cases/{{$case->id}}/press_review",
+                data:{
+                    'press_id': press_id,
+                    'url': url,
+                    'status' : status
+                },
                 success:function(response){
-
-                    $("#press-results").html(response);
-
+                    $("#press-line-" + press_id).fadeOut();
                 }
             });
         });
+        pressResults();
     })
 </script>
 @endsection

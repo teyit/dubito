@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Libraries\Google\GoogleDocument;
 use App\Model\CaseLink;
 use App\Model\Category;
+use App\Model\PressReview;
+use App\Model\Link;
 use App\Model\Evidence;
 use App\Model\Message;
 use App\Model\Report;
@@ -22,12 +24,47 @@ class CaseController extends Controller
 
 
     protected $redirect = 'cases';
+    public function press_review($case_id,Request $request){
+        if(!$request->has(['press_id','status','url'])){
+            return '0';
+        }
+        $pr = PressReview::where('case_id',$case_id)->where('press_id',$request->get('press_id'))->first();
+        if(!$pr){
+            $pr = new PressReview();
+        }
 
-    public function press(Request $request){
+        $pr->case_id = $case_id;
+        $pr->press_id = $request->get('press_id');
+        $pr->status = $request->get('status');
+        $pr->save();
+
+        if($pr->status == 1){
+            $case = Cases::with('links')->where('id',$case_id)->first();
+            if(!$case){
+                return "0";
+            }
+            $url = $request->get('url');
+            
+            $l= $case->whereHas('links', function ($query) use ($url){
+                $query->where('link', $url);
+            })->first();
+
+            if(!$l){
+                $link = new Link();
+                $link->link = $url;
+                $link->save();
+                $case->links()->attach($link->id);
+            }
+
+        }
+
+        return '1';
+    }
+    public function press($case_id,Request $request){
+
         if($request->has(['text','daterange'])){
 
             $range = explode("-",$request->get('daterange'));
-
 
             $from = trim($range[0]);
             $to = trim($range[1]);
@@ -82,6 +119,7 @@ class CaseController extends Controller
         foreach($hits as $h){
             $data = $h['_source']['doc'];
             $data['score'] = $h['_score'];
+            $data['id'] = $h['_id'];
             $pressResults[] = $data;
         }
         return $pressResults;
