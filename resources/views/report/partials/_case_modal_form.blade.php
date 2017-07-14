@@ -16,7 +16,7 @@
 
                            <div class="form-group">
                                <label>Select Topic</label>
-                               <select name="topic_id" class="form-control">
+                               <select multiple name="topic_id" class="form-control tags">
                                 @foreach($topics as $topic)
                                        <option value="{{$topic->id}}">{{$topic->title}}</option>
                                 @endforeach

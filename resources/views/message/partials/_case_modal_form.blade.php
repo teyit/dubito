@@ -16,7 +16,7 @@
 
                            <div class="form-group">
                                <label>Select Topic</label>
-                               <select name="topic_id" class="form-control">
+                               <select multiple  name="topic_id" class="form-control autocomplete">
                                    <option value="">Select</option>
                                 @foreach($topics as $topic)
                                        <option value="{{$topic->id}}">{{$topic->title}}</option>
@@ -30,7 +30,7 @@
                                 <div class="col-sm-12">
 
                                 </div>
-                                    <select name="category_id" required class="form-control report-categories-create">
+                                    <select multiple name="category_id" required class="form-control report-categories-create autocomplete ">
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->title}}</option>
                                             @endforeach
@@ -63,3 +63,15 @@
         </div>
     </div>
 </div>
+@section('script')
+@parent
+<script>
+    $(document).ready(function(){
+        $(".autocomplete").select2({
+            tags : true,
+            width: "100%",
+            maximumSelectionLength : 1
+        });
+    });
+</script>
+@stop

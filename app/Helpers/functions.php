@@ -51,3 +51,8 @@ function array_remove_by_value($array, $value)
 {
     return array_values(array_diff($array, array($value)));
 }
+
+function holds_int($str)
+{
+    return preg_match("/^-?[0-9]+$/", $str);
+}
