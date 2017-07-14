@@ -24,15 +24,17 @@ class CaseController extends Controller
     protected $redirect = 'cases';
 
 
+
     public function index($is_archived){
 
         $topics = Topic::latest()->get();
         $is_archived = $is_archived == "backlog" ? 'is_in_backlog' : $is_archived;
         $cases = Cases::where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();
-
         return view("case.index",compact("cases",'topics','categories'));
     }
+
+
 
     public function create(){
         $topics = Topic::latest()->get();
@@ -45,8 +47,6 @@ class CaseController extends Controller
         $store = $request->all();
         $case = Cases::create($store);
         $case->save();
-
-
         return redirect('/case/ongoing');
 
     }
@@ -70,9 +70,6 @@ class CaseController extends Controller
     public function show($id){
 
         $case = Cases::with('reports','evidences','user')->find($id);
-
-
-
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
@@ -137,7 +134,6 @@ class CaseController extends Controller
     public function caseStatusUpdate(Request $request,$caseID){
         $case = Cases::find($caseID);
         $status = $request->input('status');
-
         $case->status = $status;
         $case->save();
 

@@ -18,7 +18,7 @@ class Cases extends Model
 
     protected $table = 'cases';
 
-    protected $fillable = ['title','user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
+    protected $fillable = ['title','is_archived','user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
 
 
     protected static $logAttributes = ['title', 'user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];

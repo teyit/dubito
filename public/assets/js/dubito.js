@@ -24,6 +24,7 @@ $(function(){
            data:$(this).serialize()+'&'+$.param({ 'selected_messages': message_list }),
                dataType: 'json',
            success: function(data){
+
               if(data){
                  getCases();
                   $.gritter.add({

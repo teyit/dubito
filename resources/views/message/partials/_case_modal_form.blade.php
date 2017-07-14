@@ -30,12 +30,23 @@
                                 <div class="col-sm-12">
 
                                 </div>
-                                        <select name="category_id" required class="form-control report-categories-create">
+                                    <select name="category_id" required class="form-control report-categories-create">
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->title}}</option>
                                             @endforeach
                                         </select>
                             </div>
+
+
+                            <div class="form-group ">
+                                <label for="case_id">Status</label>
+                                <select class="form-control is_archived" name="is_archived" id="is_archived">
+                                    <option value="ongoing">Ongoing</option>
+                                    <option value="archived">Archived</option>
+                                    <option value="backlog">Backlog</option>
+                                </select>
+                            </div>
+
 
                             <input type="hidden" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id}}">
 

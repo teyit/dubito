@@ -17,15 +17,6 @@
                         </select>
                     </div>
 
-                    <div class="form-group ">
-                        <label for="case_id">Status</label>
-                        <select class="form-control is_archived" name="is_archived" id="is_archived">
-                            <option value="ongoing">Ongoing</option>
-                            <option value="archived">Archived</option>
-                            <option value="backlog">Backlog</option>
-                        </select>
-                    </div>
-
                     <div class="form-group pull-left">
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>
                     </div>
