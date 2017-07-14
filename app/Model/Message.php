@@ -3,15 +3,31 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Traits\TeyitlinkTrait;
 
 class Message extends Model
 {
-    use TeyitlinkTrait;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($message) {
+
+            preg_match_all('/[a-z]+:\/\/\S+/', $message->text, $matches);
+
+            $urls  = array_unique($matches[0]);
+            foreach($urls as $l){
+
+                $link = new Link();
+                $link->link = $l;
+                $link->save();
+                $message->links()->attach($link->id);
+            }
+        });
+    }
 
 	protected $table = 'messages';
 
-    protected $teyitlinkColumn = 'text';
 
 	protected $fillable = [
 		'report_id',

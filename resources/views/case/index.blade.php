@@ -20,7 +20,7 @@
                                 <th class="filterable">User</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th class="actions"></th>
+                                <th style="width:160px;" class="actions"></th>
                                 {{--<th class="actions">Delete</th>--}}
                             </tr>
                         </thead>

@@ -44,18 +44,10 @@ class ServiceController extends Controller
     public function teyitlink(Request $request){
 
         $body = json_decode($request->getContent());
-        \Log::info("SNS Callback Start");
-        \Log::info($request->getContent());
-        \Log::info("SNS Callback End");
-
-
         if(!isset($body->Message)){
             return "FAIL";
         }
         $message = json_decode($body->Message);
-
-
-
         $result = $message->result;
 
         if(!isset($result->status)){
@@ -64,7 +56,8 @@ class ServiceController extends Controller
 
         $data = $result->data;
 
-        $link = new Link();
+        $link = Link::find($message->payload->id);
+
         if(isset($data->slug)){
             $link->teyitlink_slug = $data->slug;
         }
@@ -77,19 +70,9 @@ class ServiceController extends Controller
         if(isset($data->image)){
             $link->image = $data->image;
         }
-        if(isset($data->request_url)){
-            $link->link = $data->request_url;
-        }
         $link->save();
 
-        if($message->payload->object_type == 'messages'){
-            $message = Message::find($message->payload->object_id);
-            $message->links()->attach($link->id);
-        }
-
         return "OK";
-
-
 
     }
     public function facebook(Request $request)

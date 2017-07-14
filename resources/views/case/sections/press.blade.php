@@ -3,46 +3,14 @@
         <div class="panel-heading">
             Press results
             <div class="tools">
-                <div class="form-inline form-group">
-                    <input type="text" value="{{$case->title}}" class="input-xs form-control">
+                <form id="press-list" class="form-inline form-group">
+                    <input name="text" type="text" value="{{$case->title}}" class="input-xs form-control">
                     <input type="text" placeholder="" name="daterange"  class="input-xs form-control daterange">
-                    <button class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
-
-                </div>
+                    <button id="getPress" type="button" class="btn btn-primary"><i style="color:white;" class="icon icon-left mdi mdi-refresh-alt"></i></button>
+                </form>
             </div>
         </div>
-        <table class="table table-condensed table-striped">
-            <thead>
-            <tr>
-                <th style="width:440px;">Title</th>
-                <th>Source</th>
-                <th>Score</th>
-                <th>Created at</th>
-                <th class="actions"></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($case->press() as $p)
-                <tr>
-                    <td>{{$p['title']}}</td>
-                    <td>{{parse_url($p['url'],PHP_URL_HOST)}}</td>
-                    <td>{{$p['score']}}</td>
-                    <td>{{date("d-m-Y  H:i",strtotime($p['date']))}}</td>
-                    <td>
-                        <div class="btn-group btn-space">
-                            <button type="button" class="btn  btn-default">
-                                <i class="icon mdi mdi-check"></i>
-                            </button>
-                            <button type="button" class="btn  btn-default">
-                                <i class="icon mdi mdi-close"></i>
-                            </button>
-                        </div>
-
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+        <div id="press-results"></div>
     </div>
 </div>
 
@@ -52,8 +20,42 @@
 <script src="/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
 <script src="/assets/lib/daterangepicker/js/daterangepicker.js" type="text/javascript"></script>
 <script>
+    var pressResults = function(){
+        $("#press-results").html('');
+        var values = $("#press-list").serialize();
+        $.ajax({
+            method:"get",
+            url:"/cases/{{$case->id}}/press",
+            data:values,
+            success:function(response){
+                $("#press-results").html(response);
+            }
+        });
+    };
+
     $(document).ready(function(){
-        $(".daterange").daterangepicker()
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+        $(".daterange").daterangepicker({
+            startDate: start,
+            endDate: end
+        });
+        $("#getPress").on('click', function () {
+            pressResults();
+        });
+        $(document).on('click',".press-item", function () {
+            var id = $(this).data('id');
+            $.ajax({
+                method:"get",
+                url:"/cases/{{$case->id}}/press_review",
+                data:$(this).data(),
+                success:function(response){
+                    $("#press-line-" +id).fadeOut();
+                }
+            });
+        });
+        pressResults();
     })
 </script>
 @endsection

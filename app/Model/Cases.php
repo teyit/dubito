@@ -6,7 +6,6 @@ use App\Traits\GoogleCreateDocumentTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Elasticsearch\ClientBuilder;
 
 class Cases extends Model
 {
@@ -73,42 +72,6 @@ class Cases extends Model
         return $this->belongsToMany('App\Model\Link','case_links','case_id','link_id')->withTimestamps();
     }
 
-    public function press(){
-        $client = ClientBuilder::create()
-            ->setHosts([
-                'https://search-rss-service-2k5fqi4v7p6k6j44pdese5vagu.eu-central-1.es.amazonaws.com:443'
-            ])
-            ->build();
 
-        $params = [
-            'index' => 'rss_feed',
-            'type' => 'rss_item',
-            'body' => [
-                'query' => [
-                    'multi_match' => [
-                        'query' => $this->title,
-
-                        'fuzziness' => 10,
-                        'fields' => ['doc.title^10','doc.description']
-                    ]
-                ]
-            ],
-            'sort' => [
-                '_score'
-            ],
-            'size' => 100
-        ];
-
-        $response = $client->search($params);
-        $hits = array_get($response,'hits.hits');
-        $pressResults = [];
-        foreach($hits as $h){
-            $data = $h['_source']['doc'];
-            $data['score'] = $h['_score'];
-            $pressResults[] = $data;
-        }
-        return $pressResults;
-
-    }
 
 }
