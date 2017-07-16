@@ -26,15 +26,7 @@
 <div style="position:relative;overflow: hidden;height:400px;" class="email-list">
 @include('message.partials.items',$messages)
 </div>
-@section('script')
 
-<div class="pagination">
-    @if(isset($messages) and !empty($messages))
-    <div class="paginate text-center message ">
-        {{ $messages->links() }}
-    </div>
-    @endif
-</div>
 <div class="panel panel-default">
     <div class="panel-body">
       <form method="post" id="postMessageForm">
@@ -53,6 +45,8 @@
       </form>
     </div>
 </div>
+@section('script')
+
 @parent
 <script>
     var threadPage = 2;
