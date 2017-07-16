@@ -195,7 +195,14 @@ class MessageController extends Controller
     }
 
 
+    public function showPage(Request $request,$id){
 
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','ASC')->paginate(10);
+        if($messages->isEmpty()){
+        	return 'EMPTY';
+        }
+        return view('message.partials.items',['messages' => $messages]);
+    }
 
 	public function show(Request $request, $id){
 
@@ -214,7 +221,7 @@ class MessageController extends Controller
 
         $categories = Category::latest()->get();
 
-        $messages = $messages->paginate(5);
+        $messages = $messages->paginate(10);
 
 
 

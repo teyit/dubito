@@ -13,7 +13,9 @@
                         <div style="margin-top:20px;" class="input-group xs-mb-15">
                             <input type="text" class="filter-keyword form-control" placeholder="Search" />
                             <div class="input-group-btn">
-                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle message-filter-dropdown">Filter <span class="caret"></span></button>
+                                <button data-toggle="dropdown" type="button" class="btn btn-default btn-md dropdown-toggle message-filter-dropdown">
+                                    Filter <span class="caret"></span>
+                                </button>
                                 <ul role="menu" class="filter-source message-filter-menu dropdown-menu">
                                     <li><a href="#">Tümü</a></li>
                                     <li class="divider"></li>
@@ -119,7 +121,9 @@
             });
         });
 
-        var Inbox = function(config){
+
+
+        var ContactList = function(config){
 
             //Infinite scroll - increment page, append content.
             //Change filter - reset page, reset content, append content.
@@ -170,6 +174,7 @@
                     });
                 }
             };
+
             this.changeKeyword = function(keyword){
                 state.keyword = keyword;
                 state.page = 1;
@@ -187,25 +192,28 @@
         $(function() {
             spf.init();
 
-            var inbox = new Inbox({
+            var contactList = new ContactList({
                 container : '#thread-list'
             });
 
+
+
             $('#thread-scroller').perfectScrollbar().on('ps-y-reach-end', function () {
-                inbox.loadMore();
+                contactList.loadMore();
             });
+
             $('.msg').linkify({
                 target: "_blank"
             });
 
             $('.filter-keyword').on('keyup',function(){
                 var keyword = $(this).val();
-                inbox.changeKeyword(keyword);
+                contactList.changeKeyword(keyword);
             });
 
             $('.filter-source a').on('click',function(){
                 var source = $(this).data('source');
-                inbox.setSource(source);
+                contactList.setSource(source);
             });
 
         });
