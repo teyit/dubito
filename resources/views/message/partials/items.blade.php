@@ -1,4 +1,4 @@
-@foreach($messages as $message)
+@foreach($messages->reverse() as $message)
     <div id="message-item-{{$message->id}}" class="email-list-item email-list-item--unread">
         @if($message->is_reply)
             <div class="email-list-actions email-list-item--unread">
