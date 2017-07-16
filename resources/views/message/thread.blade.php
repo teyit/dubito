@@ -82,6 +82,7 @@
     };
     $(document).ready(function(){
         $('.email-list').perfectScrollbar().on('ps-y-reach-start', function () {
+            console.log("Dynamic threads are loaded");
             loadMoreMessages();
         });
     });
