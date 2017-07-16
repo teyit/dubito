@@ -97,7 +97,6 @@ class ServiceController extends Controller
                 $message = Message::where('external_message_id',$m['message']['mid'])->where('source','facebook:message')->first();
                 if($message){
                     \Log::info("pass");
-
                     return "PASS";
                 }
                 $facebook_user = $this->getFacebookUser($m['sender']['id']);

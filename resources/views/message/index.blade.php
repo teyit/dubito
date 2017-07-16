@@ -53,10 +53,11 @@
             </div>
 
     </aside>
+    @if(!$messages->isEmpty())
     <div id="section-thread" class="main-content container-fluid">
         @include('message.thread',['messages' => $messages])
     </div>
-
+    @endif
     @include("message.partials._case_modal_form")
     @include('report.partials.assign_to_case_modal')
 

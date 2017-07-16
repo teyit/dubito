@@ -9,6 +9,7 @@ use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Facebook;
+use Illuminate\Support\Collection;
 use Twitter;
 use AWS;
 class MessageController extends Controller
@@ -182,14 +183,16 @@ class MessageController extends Controller
 
         
         $senders = $this->getSenders($request->only('source','page','keyword','size'));
+		if($senders){
+			$messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
+		}else{
+			$messages = Collection::make();
+		}
 
-        $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
 
         $topics = Topic::latest()->get();
 
         $categories = Category::latest()->get();
-
-
 
         return view('message.index',compact('senders','messages','topics','categories'));
     }
