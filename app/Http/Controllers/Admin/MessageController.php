@@ -197,7 +197,7 @@ class MessageController extends Controller
 
     public function showPage(Request $request,$id){
 
-        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','ASC')->paginate(10);
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','DESC')->paginate(10);
         if($messages->isEmpty()){
         	return 'EMPTY';
         }
@@ -209,7 +209,7 @@ class MessageController extends Controller
 
         $senders = $this->getSenders($request->only('page','keyword','size'));
 
-        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','ASC');
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','DESC');
 
 
 
