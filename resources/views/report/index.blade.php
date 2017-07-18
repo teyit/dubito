@@ -40,7 +40,7 @@
                                     {{$report->source}}
                                 @endif
                             </td>
-                            <td>{{$report->case->title}}</td>
+                            <td>{{$report->case->title or ''}}</td>
                             <td>{{$report->created_at}}</td>
 
                             <td class="actions">
