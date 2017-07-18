@@ -33,6 +33,9 @@ $(function(){
                       class_name: 'color success'
                   });
 
+                  $('#add-new-case').modal('hide');
+
+
                   if(message_list){
                       $.each(message_list,function(index,message_id){
                           $('#checkbox-label-'+message_id).addClass('hidden');
