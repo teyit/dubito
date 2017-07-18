@@ -39,7 +39,7 @@
                             <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id or ''}}" data-type="select"  href="#"  class="editable editable-click">{{$case->user->name or ''}}</a>
                         </div>
                         <div class="col-md-6 text-right">
-                            <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title}}</span>
+                            <span class="md-mr-20"><span class="mdi mdi-check"></span> {{$case->category->title or ''}}</span>
                             <span class="md-mr-20"><span class="mdi mdi-labels"></span> {{$case->topic->title or ''}}</span>
                         </div>
                 </div>
