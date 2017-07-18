@@ -12,7 +12,6 @@ class Cases extends Model
 
 
     use LogsActivity;
-    use GoogleCreateDocumentTrait;
 
 
     protected $table = 'cases';
