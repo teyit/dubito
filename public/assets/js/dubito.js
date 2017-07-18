@@ -37,6 +37,7 @@ $(function(){
 
 
                   if(message_list){
+
                       $.each(message_list,function(index,message_id){
                           $('#checkbox-label-'+message_id).addClass('hidden');
                       });
