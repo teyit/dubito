@@ -9,9 +9,7 @@
                 @elseif($messages->first()->source == 'facebook:message')
                     <span class="mdi mdi-facebook-box"></span>
                 @endif
-
                 {{$messages->first()->account_name}}
-
             </div>
         </div>
 
@@ -25,20 +23,10 @@
         </div>
     </div>
 </div>
-<div class="email-list">
-@foreach($messages as $message)
-    @include('message.partials.item',$message)
-@endforeach
-
-
+<div style="position:relative;overflow: hidden;height:400px;" class="email-list">
+@include('message.partials.items',$messages)
 </div>
-<div class="pagination">
-    @if(isset($messages) and !empty($messages))
-    <div class="paginate text-center message ">
-        {{ $messages->links() }}
-    </div>
-    @endif
-</div>
+
 <div class="panel panel-default">
     <div class="panel-body">
       <form method="post" id="postMessageForm">
@@ -57,3 +45,40 @@
       </form>
     </div>
 </div>
+@section('script')
+
+@parent
+<script>
+    var threadPage = 2;
+    var threadLoading = false;
+    var loadMoreMessages = function(){
+        if(threadLoading){
+            return false;
+        }
+        threadLoading = true;
+        $.ajax({
+            url: "{{route('messages.show_page',$messages->first()->sender_id)}}",
+            data : {
+                page : threadPage
+            },
+            dataType : 'html',
+            success: function(result){
+                if(result !== 'EMPTY'){
+                    threadPage++;
+                    $(".email-list").prepend(result);
+                }
+                setTimeout(function(){
+                    threadLoading = false;
+                },1000);
+
+            }
+        });
+    };
+    $(document).ready(function(){
+        $('.email-list').perfectScrollbar().on('ps-y-reach-start', function () {
+            console.log("Dynamic threads are loaded");
+            loadMoreMessages();
+        });
+    });
+</script>
+@stop

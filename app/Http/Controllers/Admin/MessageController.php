@@ -9,6 +9,7 @@ use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Facebook;
+use Illuminate\Support\Collection;
 use Twitter;
 use AWS;
 class MessageController extends Controller
@@ -182,27 +183,36 @@ class MessageController extends Controller
 
         
         $senders = $this->getSenders($request->only('source','page','keyword','size'));
+		if($senders){
+			$messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
+		}else{
+			$messages = Collection::make();
+		}
 
-        $messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
 
         $topics = Topic::latest()->get();
 
         $categories = Category::latest()->get();
 
-
-
         return view('message.index',compact('senders','messages','topics','categories'));
     }
 
 
+    public function showPage(Request $request,$id){
 
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','DESC')->paginate(10);
+        if($messages->isEmpty()){
+        	return 'EMPTY';
+        }
+        return view('message.partials.items',['messages' => $messages]);
+    }
 
 	public function show(Request $request, $id){
 
 
         $senders = $this->getSenders($request->only('page','keyword','size'));
 
-        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','ASC');
+        $messages = Message::where('sender_id',$id)->orWhere('recipient_id',$id)->orderBy('created_at','DESC');
 
 
 
@@ -214,7 +224,7 @@ class MessageController extends Controller
 
         $categories = Category::latest()->get();
 
-        $messages = $messages->paginate(5);
+        $messages = $messages->paginate(10);
 
 
 
