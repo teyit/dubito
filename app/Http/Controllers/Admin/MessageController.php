@@ -229,9 +229,11 @@ class MessageController extends Controller
 
 
         Message::where('sender_id', $id)->orWhere('recipient_id',$id)->update(['is_read' => 1]);
-        //if($messages->first()->source == 'facebook'){
-            //$this->markSeenFacebook($id);
-        //}
+
+        
+        if($messages->first()->source == 'facebook'){
+            $this->markSeenFacebook($id);
+        }
 
 
         $currentPage = $request->get('page',false);
