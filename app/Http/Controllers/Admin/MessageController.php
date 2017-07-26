@@ -15,9 +15,7 @@ use AWS;
 class MessageController extends Controller
 {
     public function test(){
-        $message = Message::find(29);
-        $message->text = $message->text . " ";
-        $message->save();
+        $this->markSeenFacebook(1672136149469483);
     }
     private function sendTwitter($recipient_id,$text){
 
@@ -230,8 +228,8 @@ class MessageController extends Controller
 
         Message::where('sender_id', $id)->orWhere('recipient_id',$id)->update(['is_read' => 1]);
 
-        
-        if($messages->first()->source == 'facebook'){
+		
+        if($messages->first()->source == 'facebook:message'){
             $this->markSeenFacebook($id);
         }
 
