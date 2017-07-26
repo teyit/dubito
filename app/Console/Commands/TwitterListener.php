@@ -64,7 +64,6 @@ class TwitterListener extends Command
     private function addMessage($event)
     {
         $dm = $event['direct_message'];
-
         $message = new Message();
         $message->source = 'twitter:message';
         $message->sender_id = $dm['sender']['id'];
@@ -72,18 +71,30 @@ class TwitterListener extends Command
         $message->external_message_id = $dm['id'];
         $message->account_name = $dm['sender']['screen_name'];
         $message->account_picture = $dm['sender']['profile_image_url'];
-        $message->text = $dm['text'];
-        $message->save();
 
+
+        $text = $dm['text'];
+
+
+	    $images = [];
         if(isset($dm['entities']['media'])){
             foreach($dm['entities']['media'] as $a){
+	            if($a['type'] == 'photo'){
+		            $type = 'image';
+	            }else{
+		            $type = $a['type'];
+	            }
                 $rf =  File::create([
-                    'file_type' => $a['type'],
+                    'file_type' => $type,
                     'file_url' => $a['media_url'],
                 ]);
-                $message->files()->attach($rf->id);
+	            $text = str_replace($a['url'],'',$text);
+	            $images[] = $rf->id;
             }
         }
+		$message->text = $text;
+	    $message->save();
+	    $message->files()->attach($images);
 
     }
     private function addMention($event)
@@ -96,18 +107,28 @@ class TwitterListener extends Command
         $message->external_message_id = $event['id'];
         $message->account_name = $event['user']['screen_name'];
         $message->account_picture = $event['user']['profile_image_url'];
-        $message->text = $event['text'];
-        $message->save();
 
-        if(isset($event['entities']['media'])){
-            foreach($event['entities']['media'] as $a){
-                $rf =  File::create([
-                    'file_type' => $a['type'],
-                    'file_url' => $a['media_url'],
-                ]);
-                $message->files()->attach($rf->id);
-            }
-        }
+		$text = $event['text'];
+        $images = [];
+	    if(isset($event['entities']['media'])){
+		    foreach($event['entities']['media'] as $a){
+			    if($a['type'] == 'photo'){
+				    $type = 'image';
+			    }else{
+				    $type = $a['type'];
+			    }
+			    $rf =  File::create([
+				    'file_type' => $type,
+				    'file_url' => $a['media_url'],
+			    ]);
+			    $text = str_replace($a['url'],'',$text);
+			    $images[] = $rf->id;
+		    }
+	    }
+	    $message->text = $text;
+	    $message->save();
+	    $message->files()->attach($images);
+
 
     }
 
