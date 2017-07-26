@@ -10461,8 +10461,6 @@ canvas {
   [Page aside]
 */
 .be-aside .main-content {
-  z-index: -1;
-  position: relative;
   margin-left: 280px;
 }
 @media (max-width: 767px) {
@@ -10477,6 +10475,7 @@ canvas {
   position: fixed;
   top: 0;
   left: 230px;
+  z-index:1;
   border-right: 1px solid #e6e6e6;
   margin-top: 61px;
   padding-bottom: 61px;
