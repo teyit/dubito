@@ -22,7 +22,7 @@
                                     <form action="{{route("evidences.store")}}" method="POST" name="evidence-form-ajax"
                                           id="evidence-form-ajax" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <textarea name="text" required class="form-control"
+                                            <textarea name="text" class="form-control"
                                                       id="evidence-text">{{$evidence->text or ''}}</textarea>
                                         </div>
                                         <div class="form-group pull-left">
