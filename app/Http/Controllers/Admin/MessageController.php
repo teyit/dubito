@@ -180,9 +180,10 @@ class MessageController extends Controller
 
     public function index(Request $request){
 
-        
+        $sender_id = false;
         $senders = $this->getSenders($request->only('source','page','keyword','size'));
 		if($senders){
+			$sender_id = $senders[0]->sender_id;
 			$messages = Message::where('sender_id',$senders[0]->sender_id)->orderBy('id','DESC')->paginate(10);
 		}else{
 			$messages = Collection::make();
@@ -193,7 +194,7 @@ class MessageController extends Controller
 
         $categories = Category::latest()->get();
 
-        return view('message.index',compact('senders','messages','topics','categories'));
+        return view('message.index',compact('senders','messages','topics','categories','sender_id'));
     }
 
 
@@ -248,11 +249,12 @@ class MessageController extends Controller
 			return json_encode([
 				'title' => $pageTitle,
 				'body' => [
-					'section-thread' => view('message.thread',['messages' => $messages])->render()
+					'section-thread' => view('message.thread',['messages' => $messages, 'sender_id' => $id])->render()
 				]
 			]);
 		}else{
-			return view('message.index',compact('senders','messages','topics','categories'));
+        	$sender_id = $id;
+			return view('message.index',compact('senders','messages','topics','categories','sender_id'));
 		}
 	}
 	

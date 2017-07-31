@@ -1,7 +1,7 @@
 <div class="email-inbox-header">
     <div class="row">
         <div class="col-md-6">
-            <div id="senderMeta" class="email-title" data-sender_id="{{$messages->first()->sender_id}}">
+            <div id="senderMeta" class="email-title" data-sender_id="{{$sender_id}}">
                 @if($messages->first()->source == 'twitter:message')
                     <span class="mdi mdi-inbox"></span>
                 @elseif($messages->first()->source == 'twitter:mention')
