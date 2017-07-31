@@ -108,10 +108,12 @@ class MessageController extends Controller
             $m->text = $text;
             $m->save();
 
+            $messages = Message::where('id',$m->id)->get();
+
             return response()->json([
                 'status' => true,
                 'id' => $m->id,
-                'html' => view('message.partials.items',['message' => $m])->render()
+                'html' => view('message.partials.items',['messages' => $messages])->render()
             ]);
         }
 
