@@ -5,7 +5,9 @@
                 <div class="">
                     <div class="row panel-heading panel-heading-divider">
                         <div class="col-md-6" style="padding:0">
-                            {{$case->title}}
+                            <a id="change-title" data-title="change title" data-value="{{$case->title }}" data-type="text"  href="#"  class="editable editable-click">{{$case->title}}</a>
+
+                            {{--{{$case->title}}--}}
                             @if($case->google_document_id)
                                 <a target="_blank" class="btn btn-primary new-google-document" href="https://docs.google.com/document/d/{{$case->google_document_id}}/edit">Go to Analysis</a>
                             @endif

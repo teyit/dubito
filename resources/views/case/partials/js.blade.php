@@ -115,6 +115,27 @@
         });
 
 
+        $('#change-title').editable({
+            type: 'text',
+            title: 'Change Title',
+            url: "{{route('change.title',$case->id)}}",
+            pk: 1,
+            success: function (response, value) {
+                if (response) {
+
+                    //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
+                    $.gritter.add({
+                        title: 'Success',
+                        text: 'User was assigned to case successfuly',
+                        class_name: 'color success'
+                    });
+                }
+
+            }
+        });
+
+
+
         //Evidence form
         $('#evidence-form-ajax').submit(function (e) { // capture submit
             e.preventDefault();

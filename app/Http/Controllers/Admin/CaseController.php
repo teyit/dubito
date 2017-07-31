@@ -263,6 +263,15 @@ class CaseController extends Controller
 
     }
 
+    public function changeTitle(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $case->title = $request->input('value');
+        $case->save();
+        return response()->json($case,200);
+
+    }
+
+
 
     public function caseSendToArchive(Request $request,$caseID){
         $case = Cases::find($caseID);
