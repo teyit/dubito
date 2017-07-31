@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="panel panel-default">
-                                <div class="panel-heading">Add New Comment</div>
+                                <div class="panel-heading">Add New Evidence</div>
                                 <div class="panel-body">
                                     <form action="{{route("evidences.store")}}" method="POST" name="evidence-form-ajax"
                                           id="evidence-form-ajax" enctype="multipart/form-data">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading panel-heading-divider">Comments<span class="panel-subtitle"></span></div>
+                    <div class="panel-heading panel-heading-divider">Evidences<span class="panel-subtitle"></span></div>
                     <div class="panel-body">
 
                         @if(!$case->evidences->isEmpty())

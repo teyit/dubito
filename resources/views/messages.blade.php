@@ -577,7 +577,7 @@
                                             <div class="switch-button switch-button-sm">
                                                 <input type="checkbox" checked="" name="st6" id="st6"><span>
                             <label for="st6"></label></span>
-                                            </div><span class="name">New comments</span>
+                                            </div><span class="name">New evidences</span>
                                         </li>
                                         <li>
                                             <div class="switch-button switch-button-sm">
