@@ -160,7 +160,7 @@ class CaseController extends Controller
         $case->save();
 
 
-        return redirect('/case/ongoing');
+        return redirect('/cases/' . $case->id);
 
     }
 
