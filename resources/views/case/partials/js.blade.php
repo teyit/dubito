@@ -91,7 +91,6 @@
         //Assign user to case
 
         getUsers(function (result) {
-
             $('#assign-user-case').editable({
                 type: 'select',
                 title: 'Select status',
@@ -115,18 +114,48 @@
         });
 
 
+        //category editable
+
+        getCategoriesData(function (result) {
+
+            console.log(result);
+
+            $('#change-category').editable({
+                type: 'select',
+                title: 'Select Category',
+                url: "{{route('change.category',$case->id)}}",
+                pk: 1,
+                source: result,
+                success: function (response, value) {
+                    if (response) {
+                        //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Category was assigned to case successfuly',
+                            class_name: 'color success'
+                        });
+                    }
+
+                }
+            });
+
+        });
+
+
+
         $('#change-title').editable({
             type: 'text',
             title: 'Change Title',
             url: "{{route('change.title',$case->id)}}",
             pk: 1,
+            inputclass: 'case-title-editable',
             success: function (response, value) {
                 if (response) {
 
                     //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
                     $.gritter.add({
                         title: 'Success',
-                        text: 'User was assigned to case successfuly',
+                        text: 'Case title was changed successfuly',
                         class_name: 'color success'
                     });
                 }

@@ -233,5 +233,8 @@
             border-width: 0;
             outline: 0
         }
+        .case-title-editable{
+            width:600px;
+        }
     </style>
 @endsection
