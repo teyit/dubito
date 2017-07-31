@@ -7,8 +7,8 @@
                 @include('case.sections.main',$case)
                 @include('case.sections.images',$case)
                 @include('case.sections.links',$case)
-                @include('case.sections.press',$case)
                 @include('case.sections.reports',$case)
+                @include('case.sections.press',$case)
             </div>
 
 
