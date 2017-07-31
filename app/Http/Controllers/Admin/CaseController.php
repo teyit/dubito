@@ -152,7 +152,9 @@ class CaseController extends Controller
     }
 
     public function store(Request $request){
-        $request['user_id'] = Auth::user()->id;
+
+    	//$request['user_id'] = Auth::user()->id;
+
         $store = $request->all();
         $case = Cases::create($store);
         $case->save();
