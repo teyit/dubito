@@ -20,7 +20,7 @@ class MessageController extends Controller
     private function sendTwitter($recipient_id,$text){
 
         $response = Twitter::postDm([
-            'user_id' => 320747205, //TODO FIX
+            'user_id' => $recipient_id, //TODO FIX
             'text' => $text
         ]);
         return $response->id_str;
@@ -49,7 +49,7 @@ class MessageController extends Controller
     private function sendFacebookMessage($recipient_id,$text,$attachments = []){
         $result = $this->requestFacebook('/me/messages',[
             'recipient' => [
-                'id' => 1672136149469483
+                'id' => $recipient_id
             ],
             'message' => [
                 'text' => $text
@@ -86,6 +86,7 @@ class MessageController extends Controller
         }
 
         $message_id = false;
+
 
         if($message->source == 'facebook:message'){
             $message_id =  $this->sendFacebookMessage($message->sender_id,$text);
