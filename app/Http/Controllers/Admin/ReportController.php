@@ -18,7 +18,7 @@ class ReportController extends Controller
 {
 
 
-    public function index($is_archived){
+    public function index($is_archived="ongoing"){
 
         $reports = Report::with('images')->where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
         return view('report.index',[
@@ -115,7 +115,7 @@ class ReportController extends Controller
         }
 
 
-        return redirect("/reports");
+        return redirect("/report/ongoing");
     }
 
 
