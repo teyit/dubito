@@ -1,4 +1,4 @@
-<div id="report-assign-to-case" tabindex="-1" role="dialog" style="" class="modal fade colored-header colored-header-primary in" style="z-index:999991 !important;">
+<div id="report-assign-to-case"  role="dialog" style="" class="modal fade colored-header colored-header-primary in" style="z-index:999991 !important;">
     <div class="modal-dialog custom-width">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
                     {{ csrf_field() }}
                     <div class="form-group ">
                         <label for="case_id">Cases</label>
-                        <select class="form-control report-cases" name="case_id" id="case_id">
+                        <select class="autocomplete-cases" name="case_id" id="case_id">
                             <option value="">Select Case</option>
                         </select>
                     </div>
@@ -92,7 +92,7 @@
                                     $("#message-item-"+message_id+" .be-checkbox").remove();
                                     $("#message-item-"+message_id+" .case-btn").removeClass('hidden').attr('href',caseUrl);
                                 });
-                                
+
                                 $.gritter.add({
                                     title: 'Success',
                                     text: 'This message was assigned as report successfuly',

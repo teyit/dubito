@@ -67,6 +67,30 @@ $(function(){
         });
     }
 
+    $(".autocomplete-cases").select2({
+        width: "100%",
+        showSearchBox: true,
+        minimumInputLength: 1,
+        ajax: {
+            url: "/api/cases",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term
+                };
+            },
+            processResults: function (data, params) {
+                params.page = params.page || 1;
+                return {
+                    results: data
+                };
+            },
+            cache: true
+        }
+    });
+
+
     //
     // $("#case-form-ajax-edit").on('submit',function(e){
     //
