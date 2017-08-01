@@ -58,7 +58,7 @@ class Cases extends Model
     }
 
     public function evidences(){
-        return $this->hasMany('App\Model\Evidence','case_id','id');
+        return $this->hasMany('App\Model\Evidence','case_id','id')->orderBy('created_at','desc');
     }
 
 
