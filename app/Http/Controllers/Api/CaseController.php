@@ -28,6 +28,7 @@ class CaseController extends Controller
                 return ['id' => $case->id, 'text' => $case->title];
             });
 
+
             return response()->json($caseList,200);
 
       }
