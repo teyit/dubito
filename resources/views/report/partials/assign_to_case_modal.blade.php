@@ -4,9 +4,9 @@
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><span class="mdi mdi-close"></span></button>
                 <h3 class="modal-title">Assign to Case</h3>
-
             </div>
             <div class="modal-body">
+
 
                 <form method="post" action="" id="report-assign-case-form">
                     {{ csrf_field() }}
