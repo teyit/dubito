@@ -13,11 +13,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+
                                 <th style="width:220px;">Title</th>
-                                <th class="filterable">Topic</th>
-                                <th class="filterable">Category</th>
-                                <th class="filterable">Status</th>
                                 <th class="filterable">User</th>
+                                <th class="filterable">Status</th>
+                                <th class="filterable">Category</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th style="width:160px;" class="actions"></th>
@@ -29,10 +29,9 @@
                         <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Topic</th>
-                        <th >Category</th>
-                        <th >Status</th>
                         <th >User</th>
+                        <th >Status</th>
+                        <th >Category</th>
                         <th>Created at</th>
                         <th>Updated at</th>
                         <th class="actions"></th>
@@ -49,8 +48,8 @@
                                     <a target="_blank" href="{{route('cases.show',$case->id)}}">{{$case->title}}</a>
 
                                 </td>
-                                <td>{{$case->topic->title or ''}}</td>
-                                <td>{{$case->category->title or ""}}</td>
+                                <td>{{$case->user->name or 'Not Assigned'}}</td>
+
                                 <td>
                                     @if($case->status == 'completed')
                                         <span class="label label-success">Completed</span>
@@ -68,7 +67,7 @@
                                         <span class="label label-default">Pending</span>
                                     @endif
                                 </td>
-                                <td>{{$case->user->name or 'Not Assigned'}}</td>
+                                <td>{{$case->category->title or ""}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
