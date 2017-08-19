@@ -26,9 +26,10 @@
                         <li class="parent {{request()->segment(1) == 'case' ? 'open' : ''}}">
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
                             <ul class="sub-menu">
-                                <li class="{{request()->is('case/ongoing') ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">Ongoing</a></li>
-                                <li class="{{request()->is('case/archived') ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archived</a></li>
-                                <li class="{{request()->is('case/backlog') ?  'active' : ''}}"><a href="{{url("/case/backlog")}}">Backlog</a></li>
+                                <li class="{{request()->is('case/new') ?  'active' : ''}}"><a href="{{url("/case/new")}}">New</a></li>
+                                <li class="{{request()->is('case/ongoing') ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">News Feed</a></li>
+                                <li class="{{request()->is('case/backlog') ?  'active' : ''}}"><a href="{{url("/case/backlog")}}">Cold Cases</a></li>
+                                <li class="{{request()->is('case/archived') ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archive</a></li>
 
                             </ul>
                         </li>
