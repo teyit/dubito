@@ -37,11 +37,9 @@ class MessageController extends Controller
             // Returns a `Facebook\FacebookResponse` object
             $response = $fb->post($method, $params,$page_access_token);
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
-            echo 'Graph returned an error: ' . $e->getMessage();
-            exit;
+            return true; //Some message types are don't have this functionality.
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
-            echo 'Facebook SDK returned an error: ' . $e->getMessage();
-            exit;
+	        return true;
         }
         return $response->getDecodedBody();
 
