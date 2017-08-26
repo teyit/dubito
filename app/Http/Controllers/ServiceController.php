@@ -143,7 +143,7 @@ class ServiceController extends Controller
                     }
                 }
 
-            }
+
 
         }
         return "OK";
