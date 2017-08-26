@@ -125,7 +125,7 @@ class ServiceController extends Controller
                 if(isset($m['message']['attachments'])){
                     \Log::info("message");
                     foreach($m['message']['attachments'] as $a){
-                        if($a['type'] != 'fallback'){
+                        //if($a['type'] != 'fallback'){
                             \Log::info("atachment");
 
                             moveToS3Link("facebook/files/".date('Y-m-d')."/",substr($m['message']['mid'], -23),$a['payload']['url']);
@@ -138,7 +138,7 @@ class ServiceController extends Controller
                             ]);
 
                             $message->files()->attach($rf->id);
-                        }
+                        //}
 
                     }
                 }
