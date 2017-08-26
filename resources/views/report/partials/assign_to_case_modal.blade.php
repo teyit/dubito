@@ -72,7 +72,7 @@
                 $("#report-assign-case-form").on('submit',function(e){
                     $('#report-assign-to-case').modal('hide');
                     var case_id = $("#case_id").val();
-                    var is_archived = $("#is_archived").val();
+                    var folder = $("#folder").val();
 
                     var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
                     e.preventDefault();
@@ -81,7 +81,7 @@
                         data: {
                             _token:$("#_token").val(),
                             case_id : case_id,
-                            is_archived:is_archived,
+                            folder:folder,
                             selected_messages : message_list
                         },
                         method : "POST",

@@ -18,9 +18,9 @@ class ReportController extends Controller
 {
 
 
-    public function index($is_archived="ongoing"){
+    public function index($folder="ongoing"){
 
-        $reports = Report::with('images')->where('is_archived',$is_archived)->orderBy("created_at","DESC")->get();
+        $reports = Report::with('images')->where('folder',$folder)->orderBy("created_at","DESC")->get();
         return view('report.index',[
             'reports' => $reports
         ]);
@@ -52,7 +52,7 @@ class ReportController extends Controller
             'source' => $messages->first()->source,
             'account_name' => $messages->first()->account_name,
             'account_picture' => $messages->first()->account_picture,
-            'is_archived' => request()->has('is_archived') ? request()->input('is_archived') : 'ongoing'
+            'folder' => request()->has('folder') ? request()->input('folder') : 'ongoing'
         ]);
 
 

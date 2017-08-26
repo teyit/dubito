@@ -13,7 +13,7 @@ class Report extends Model
 
 
 
-    protected $fillable = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','is_archived','phone','created_at','updated_at'];
+    protected $fillable = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','folder','phone','created_at','updated_at'];
 
     protected static $logAttributes = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','status','created_at','updated_at'];
 

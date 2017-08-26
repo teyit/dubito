@@ -16,8 +16,8 @@
 
             $.ajax({
                 method: "post",
-                url: '/caseSendToArchive/{{$case->id}}',
-                data: {_token: $('#_token').val(), is_archived: newStatus},
+                url: '/setFolder/{{$case->id}}',
+                data: {_token: $('#_token').val(), folder: newStatus},
                 success: function (response) {
                     console.log(response);
                     if (response) {
@@ -49,8 +49,8 @@
             console.log(status);
             $.ajax({
                 method: "post",
-                url: '/caseSendToArchive/{{$case->id}}',
-                data: {_token: $('#_token').val(), is_archived: newStatus},
+                url: '/setFolder/{{$case->id}}',
+                data: {_token: $('#_token').val(), folder: newStatus},
                 success: function (response) {
                     console.log(response);
                     if (response) {
@@ -205,17 +205,17 @@
 
         var status = '{{$case->status}}';
         if (status == 'completed') {
-            $('.case-status-dropdown').addClass('btn-success');
+            $('#statusSelector .case-status-dropdown').addClass('btn-success');
         } else if (status == 'cancelled') {
-            $('.case-status-dropdown').addClass('btn-danger');
+            $('#statusSelector .case-status-dropdown').addClass('btn-danger');
         } else if (status == 'in_progress') {
-            $(".case-status-dropdown").addClass('btn-warning');
+            $("#statusSelector .case-status-dropdown").addClass('btn-warning');
         } else if (status == 'to_be_tweeted') {
-            $(".case-status-dropdown").addClass('btn-primary');
+            $("#statusSelector .case-status-dropdown").addClass('btn-primary');
         } else if (status == 'no_analysis') {
-            $(".case-status-dropdown").addClass('btn-no-analysis');
+            $("#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
         } else if (status == 'suspended') {
-            $(".case-status-dropdown").addClass('btn-suspended');
+            $("#statusSelector .case-status-dropdown").addClass('btn-suspended');
         }
 
 
@@ -407,27 +407,23 @@
         status = $(this).attr('id');
 
 
-        $('.case-status-dropdown').removeClass('btn-success');
-        $('.case-status-dropdown').removeClass('btn-danger');
-        $(".case-status-dropdown").removeClass('btn-warning');
-        $(".case-status-dropdown").removeClass('btn-primary');
-        $(".case-status-dropdown").removeClass('btn-no-analysis');
-        $(".case-status-dropdown").removeClass('btn-suspended');
+        $('#statusSelector .case-status-dropdown').removeClass('btn-success btn-danger btn-warning btn-primary btn-no-analysis btn-suspended');
+
 
         if (status == 'completed') {
-            $('.case-status-dropdown').addClass('btn-success');
+            $('#statusSelector .case-status-dropdown').addClass('btn-success');
         } else if (status == 'cancelled') {
-            $('.case-status-dropdown').addClass('btn-danger');
+            $('#statusSelector .case-status-dropdown').addClass('btn-danger');
         } else if (status == 'in_progress') {
-            $(".case-status-dropdown").addClass('btn-warning');
+            $("#statusSelector .case-status-dropdown").addClass('btn-warning');
         } else if (status == 'to_be_tweeted') {
-            $(".case-status-dropdown").addClass('btn-primary');
+            $("#statusSelector .case-status-dropdown").addClass('btn-primary');
         } else if (status == 'no_analysis') {
-            $(".case-status-dropdown").addClass('btn-no-analysis');
+            $(".#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
         } else if (status == 'suspended') {
-            $(".case-status-dropdown").addClass('btn-suspended');
+            $("#statusSelector .case-status-dropdown").addClass('btn-suspended');
         } else if (status == 'pending') {
-            $(".case-status-dropdown").addClass('btn-muted');
+            $("#statusSelector .case-status-dropdown").addClass('btn-muted');
         }
 
 
@@ -439,7 +435,7 @@
                 if (response) {
                     $.gritter.add({
                         title: 'Success',
-                        text: 'Status was update successfuly',
+                        text: 'Status was updated successfuly',
                         class_name: 'color success'
                     });
                 }
@@ -447,7 +443,26 @@
         });
     });
 
+    $('.case-folder-menu a').click(function () {
+        var text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';
+        $('.case-folder-dropdown').html(text);
+        var folder = $(this).attr('id');
 
+        $.ajax({
+            method: "put",
+            url: "{{route("case.folder.update",$case->id)}}",
+            data: {_token: $("#_token").val(), folder: folder},
+            success: function (response) {
+                if (response) {
+                    $.gritter.add({
+                        title: 'Success',
+                        text: 'Folder was updated successfuly',
+                        class_name: 'color success'
+                    });
+                }
+            }
+        });
+    });
 
 
 </script>

@@ -31,7 +31,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
     Route::get('/',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
 
-    Route::get('case/{is_archived}',['as'=>'case.is_archived','uses'=>'CaseController@index']);
+    Route::get('case/{folder}',['as'=>'case.folder','uses'=>'CaseController@index']);
 
     Route::resource("categories",'CategoryController');
     Route::resource("messages",'MessageController');
@@ -49,7 +49,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
 
     //Reports
-    Route::get('report/{is_archived}',['as'=>'report.is_archived','uses'=>'ReportController@index']);
+    Route::get('report/{folder}',['as'=>'report.folder','uses'=>'ReportController@index']);
     Route::resource("reports","ReportController");
     Route::post("custom-store-reports",['as'=>'custom.store.reports','uses'=>'ReportController@customStore']);
     Route::put("custom-update-reports/{report_id}",['as'=>'custom.update.reports','uses'=>'ReportController@customUpdate']);
@@ -72,7 +72,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('change-category/{case_id}',['as'=>'change.category','uses'=>'CaseController@changeCategory']);
 
 
-    Route::post('/caseSendToArchive/{case_id}',['as'=>'case.sendarchive','uses'=>'CaseController@caseSendToArchive']);
+    Route::put('caseFolder/{case_id}',['as'=>'case.folder.update','uses'=>'CaseController@setFolder']);
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
 
 

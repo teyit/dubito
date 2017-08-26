@@ -24,7 +24,7 @@ class CreateReportTable extends Migration
             $table->string("source")->nullable();
             $table->string("phone")->nullable();
             $table->enum('status',['not_assigned','in_archived','pending'])->default('not_assigned');
-            $table->enum('is_archived',['ongoing','archived','is_in_backlog']);
+            $table->enum('folder',['ongoing','archived','is_in_backlog']);
             $table->timestamps();
         });
     }

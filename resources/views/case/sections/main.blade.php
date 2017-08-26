@@ -17,7 +17,7 @@
                             </span>
                         </div>
                         <div class="col-md-6 text-right" style="padding:0">
-                            <div class="btn-group btn-hspace">
+                            <div id="statusSelector" class="btn-group btn-hspace">
                                 <button type="button" data-toggle="dropdown" class="btn btn-primary case-status-dropdown case-status-dropdown">
                                     {{$case->status_label}}
                                     <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
@@ -27,8 +27,16 @@
                                         @endforeach
                                     </ul>
                             </div>
-                            <button data-status="{{$case->is_archived}}" class="btn btn-{{$case->is_archived == 'archived' ? 'danger' : "warning"}} case-is-archived-btn">{{$case->is_archived == 'archived' ? 'Remove Archive' : "Send to Archive"}}</button>
-                            <button data-status="{{$case->is_archived}}" class="btn btn-{{$case->is_archived == 'is_in_backlog' ? 'danger' : "default"}} case-is-backlog-btn">{{$case->is_archived == 'is_in_backlog' ? 'Remove Backlog' : "Send to Backlog"}}</button>
+                            <div id="folderSelector" class="btn-group btn-hspace">
+                                <button type="button" data-toggle="dropdown" class="btn btn-primary case-folder-dropdown">
+                                    {{$case->folderLabels[$case->folder]}}
+                                    <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
+                                <ul role="menu" class="dropdown-menu case-folder-menu">
+                                    @foreach($case->folderLabels as $status=> $label)
+                                        <li><a href="#"  id="{{$status}}">{{$label}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -40,10 +40,10 @@
 
                             <div class="form-group ">
                                 <label for="case_id">Status</label>
-                                <select class="form-control is_archived" name="is_archived" id="is_archived">
-                                    <option value="ongoing">Ongoing</option>
-                                    <option value="archived">Archived</option>
-                                    <option value="backlog">Backlog</option>
+                                <select class="form-control folder" name="folder" id="folder">
+                                    @foreach(\App\Model\Cases::first()->folderLabels as $status=> $label)
+                                    <option value="{{$status}}">{{$label}}</option>
+                                    @endforeach
                                 </select>
                             </div>
 

@@ -27,9 +27,9 @@
                             <a href="#"><i class="icon mdi mdi-case-check"></i>Cases</a>
                             <ul class="sub-menu">
                                 <li class="{{request()->is('case/new') ?  'active' : ''}}"><a href="{{url("/case/new")}}">New</a></li>
-                                <li class="{{request()->is('case/ongoing') ? 'active' : ''}}"><a href="{{url("/case/ongoing")}}">News Feed</a></li>
-                                <li class="{{request()->is('case/backlog') ?  'active' : ''}}"><a href="{{url("/case/backlog")}}">Cold Cases</a></li>
-                                <li class="{{request()->is('case/archived') ? 'active' : ''}}"><a href="{{url("/case/archived")}}">Archive</a></li>
+                                <li class="{{request()->is('case/news_feed') ? 'active' : ''}}"><a href="{{url("/case/news_feed")}}">News Feed</a></li>
+                                <li class="{{request()->is('case/cold_cases') ?  'active' : ''}}"><a href="{{url("/case/cold_cases")}}">Cold Cases</a></li>
+                                <li class="{{request()->is('case/archive') ? 'active' : ''}}"><a href="{{url("/case/archive")}}">Archive</a></li>
 
                             </ul>
                         </li>
