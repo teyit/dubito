@@ -112,7 +112,7 @@
             $(".pagination li a").addClass('spf-link');
             spf.dispose();
             spf.init();
-
+            $('.email-list').perfectScrollbar();
             $(".fancybox").fancybox();
             $("#thread-list li").removeClass('active');
             $(".sender-item-" + data.sender_id).addClass('active');
