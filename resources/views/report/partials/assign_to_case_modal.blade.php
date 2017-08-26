@@ -44,6 +44,48 @@
         },function(){
             //$(".view-case-btn-container ",this).addClass('hidden');
         });
+
+        $("#report-assign-case-form").on('submit',function(e){
+            $('#report-assign-to-case').modal('hide');
+            var case_id = $("#case_id").val();
+            var folder = $("#folder").val();
+
+            var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
+            e.preventDefault();
+
+            var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
+                return $(el).val();
+            }).get();
+            
+            $.ajax({
+                url: "/reports/",
+                data: {
+                    _token:$("#_token").val(),
+                    case_id : case_id,
+                    folder : folder,
+                    selected_messages : message_list
+                },
+                method : "POST",
+                success: function(result){
+                    if(result){
+
+                        $.each(message_list,function(index,message_id){
+                            $("#message-item-"+message_id+" .be-checkbox").remove();
+                            $("#message-item-"+message_id+" .case-btn").removeClass('hidden').attr('href',caseUrl);
+                        });
+
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'This message was assigned as report successfuly',
+                            class_name: 'color success'
+                        });
+                    }
+                }
+            });
+
+        });
+
+
         $(function(){
 
             $(document).on('click',".report-assign-case",function () {
@@ -69,40 +111,7 @@
                 });
 
 
-                $("#report-assign-case-form").on('submit',function(e){
-                    $('#report-assign-to-case').modal('hide');
-                    var case_id = $("#case_id").val();
-                    var folder = $("#folder").val();
 
-                    var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
-                    e.preventDefault();
-                    $.ajax({
-                        url: "/reports/",
-                        data: {
-                            _token:$("#_token").val(),
-                            case_id : case_id,
-                            folder:folder,
-                            selected_messages : message_list
-                        },
-                        method : "POST",
-                        success: function(result){
-                            if(result){
-
-                                $.each(message_list,function(index,message_id){
-                                    $("#message-item-"+message_id+" .be-checkbox").remove();
-                                    $("#message-item-"+message_id+" .case-btn").removeClass('hidden').attr('href',caseUrl);
-                                });
-
-                                $.gritter.add({
-                                    title: 'Success',
-                                    text: 'This message was assigned as report successfuly',
-                                    class_name: 'color success'
-                                });
-                            }
-                        }
-                    });
-
-                });
 
             });
 
