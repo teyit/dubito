@@ -39,6 +39,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post("messages/new",'MessageController@postNew');
     Route::get("messages/{thread_id}/show_page",['as'=>'messages.show_page','uses'=>'MessageController@showPage']);
     Route::put('mark-as-review','MessageController@review');
+	Route::put('remove-as-review','MessageController@removeReview');
 
     Route::resource("topics","TopicController");
 

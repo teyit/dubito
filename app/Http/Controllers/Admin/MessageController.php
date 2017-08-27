@@ -268,5 +268,15 @@ class MessageController extends Controller
 
         return response()->json(true, 200);
     }
+	public function removeReview(){
+		$messageIDS = request()->input('message_ids');
+		foreach ($messageIDS as $index => $messageID) {
+			$message = Message::find($messageID);
+			$message->is_review = false;
+			$message->save();
+		}
+
+		return response()->json(true, 200);
+	}
 
 }

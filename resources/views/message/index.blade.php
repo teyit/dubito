@@ -190,6 +190,24 @@
         };
 
 
+        var getSelectedMessages = function(){
+            var selected_messages = $('.email-list-item .be-checkbox input[type=checkbox]:checked');
+            var message_list = selected_messages.map(function(_, el) {
+                return $(el).val();
+            }).get();
+
+            if(message_list.length < 1){
+                return false;
+            }
+            return message_list;
+        };
+        var clearSelectedMessages = function(){
+            var selected_messages = $('.email-list-item .be-checkbox input[type=checkbox]:checked');
+            selected_messages.each(function(_, el) {
+                $(el).prop('checked',false);
+            });
+        };
+
         $(function() {
             spf.init();
 
@@ -253,25 +271,21 @@
             });
         });
         $(document).on('click',".review-assign",function () {
-            var selected_messages = $('.email-list-item .be-checkbox input[type=checkbox]:checked');
-            var message_list = selected_messages.map(function(_, el) {
-                return $(el).val();
-            }).get();
 
-            if(message_list.length < 1){
-                return false;
-            }
+            var message_list = getSelectedMessages();
 
+            $.each(message_list,function(index,message_id){
+                $("#message-item-"+message_id+" .be-checkbox").addClass('hidden');
+                $("#message-item-"+message_id+" .marked-btn").removeClass('hidden').addClass('review-btn');
+                $("#message-item-"+message_id+" .marked-btn span").addClass('mdi-star-outline');
+                $("#message-item-"+message_id+"").addClass('assigned-as-review');
+            });
             $.ajax({
                 method:"put",
                 url:"/mark-as-review",
                 data:{_token:$("_token").val(),is_review:1,message_ids:message_list},
                 success:function(response){
-                    $.each(message_list,function(index,message_id){
-                        $("#message-item-"+message_id+" .be-checkbox").remove();
-                        $("#message-item-"+message_id+" .case-btn span").removeClass('mdi-open-in-new').addClass('mdi-star-outline');
-                        $("#message-item-"+message_id+" .case-btn").removeClass('hidden');
-                    });
+                    clearSelectedMessages();
                     if(response){
 
                         $.gritter.add({
@@ -283,6 +297,38 @@
 
                 }
             })
+
+        });
+
+        $(document).on('click',".assigned-as-review .review-btn",function () {
+
+            var selected_message = $(this).siblings(".be-checkbox").children("input").val();
+
+            $.ajax({
+                method:"put",
+                url:"/remove-as-review",
+                data:{_token:$("_token").val(),message_ids:[selected_message]},
+                success:function(response){
+
+                    $("#message-item-"+selected_message+" .be-checkbox input").prop('checked',false);
+                    $("#message-item-"+selected_message+" .be-checkbox").removeClass('hidden');
+
+                    $("#message-item-"+selected_message+" .marked-btn").addClass('hidden').removeClass('review-btn');
+                    $("#message-item-"+selected_message+" .marked-btn span").removeClass('mdi-star-outline');
+                    $("#message-item-"+selected_message+"").removeClass('assigned-as-review');
+
+
+                    if(response){
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'this message is not a review anymore.',
+                            class_name: 'color success'
+                        });
+                    }
+
+                }
+            })
+
 
         });
 

@@ -1,5 +1,5 @@
 @foreach($messages->reverse() as $message)
-    <div id="message-item-{{$message->id}}" class="email-list-item email-list-item--unread">
+    <div id="message-item-{{$message->id}}" class="email-list-item email-list-item--unread @if($message->is_review) assigned-as-review @endif">
         @if($message->is_reply)
             <div class="email-list-actions email-list-item--unread">
 
@@ -13,18 +13,22 @@
         @else
             <div class="email-list-actions email-list-item--unread">
                 @if($message->report_id)
-                    <a target="_blank" href="{{route('cases.show',$message->report->case_id)}}" class=" btn-xl">
+                    <a target="_blank" href="{{route('cases.show',$message->report->case_id)}}" class="marked-btn case-btn btn-xl">
                         <span class="mdi mdi-open-in-new"></span>
+                    </a>
+                @elseif($message->is_review)
+                    <a target="_blank" href="javascript:;" class="marked-btn review-btn btn-xl">
+                        <span class="mdi mdi-star-outline"></span>
                     </a>
                 @else
-                    <a target="_blank" href="javascript:;" class="hidden case-btn btn-xl">
-                        <span class="mdi mdi-open-in-new"></span>
+                    <a target="_blank" href="javascript:;" class="btn-xl hidden marked-btn">
+                        <span class="mdi"></span>
                     </a>
-                    <div class="be-checkbox">
-                        <input name="thread-messages[]" value="{{$message->id}}"  id="message-{{$message->id}}" type="checkbox">
-                        <label id="checkbox-label-{{$message->id}}" for="message-{{$message->id}}"></label>
-                    </div>
                 @endif
+                <div class="be-checkbox @if($message->report_id || $message->is_review) hidden @endif ">
+                    <input name="thread-messages[]" value="{{$message->id}}"  id="message-{{$message->id}}" type="checkbox">
+                    <label id="checkbox-label-{{$message->id}}" for="message-{{$message->id}}"></label>
+                </div>
             </div>
             <div class="email-list-detail">
                 <span class="date pull-right"><i class="icon mdi mdi-attachment-alt"></i> {{\Carbon\Carbon::parse($message->created_at)->format("d.m.Y")}}</span>
