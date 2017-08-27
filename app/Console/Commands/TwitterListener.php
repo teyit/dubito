@@ -56,6 +56,9 @@ class TwitterListener extends Command
                         if($m['screen_name'] == 'teyitorg' && $event['in_reply_to_screen_name'] == null){ //teyit mentioned but not reply.
                             $this->addMention($event);
                         }
+	                    if($m['screen_name'] !== 'teyitorg' && $event['in_reply_to_screen_name'] == "teyitorg"){ //teyit mentioned but reply.
+		                    $this->addMention($event);
+	                    }
                     }
                 }
             })
