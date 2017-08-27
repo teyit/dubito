@@ -140,7 +140,11 @@ class CaseController extends Controller
         $topics = Topic::latest()->get();
         $cases = Cases::where('folder',$folder)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();
-        return view("case.index",compact("cases",'topics','categories'));
+	    $statusLabels = [];
+        foreach($cases->first()->statusLabels as $key => $val){
+        	$statusLabels[] = ['value' => $key,'text' => $val];
+	    }
+        return view("case.index",compact("cases",'topics','categories','statusLabels'));
     }
 
     public function create(){
@@ -243,10 +247,15 @@ class CaseController extends Controller
     }
 
 
-    public function caseStatusUpdate(Request $request,$caseID){
+    public function caseStatusUpdate(Request $request,$caseID=false){
+    	if(!$caseID){
+    		$caseID = $request->get('pk');
+    		$value = $request->get('value');
+	    }else{
+    		$value = $request->input('status');
+	    }
         $case = Cases::find($caseID);
-        $status = $request->input('status');
-        $case->status = $status;
+        $case->status = $value;
         $case->save();
 
         return response()->json(true,200);

@@ -75,6 +75,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
 
     Route::put('caseFolder/{case_id}',['as'=>'case.folder.update','uses'=>'CaseController@setFolder']);
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
+	Route::post('caseStatus/',['as'=>'case.status.query','uses'=>'CaseController@caseStatusUpdate']);
 
 
 

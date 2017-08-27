@@ -51,21 +51,7 @@
                                 <td>{{$case->user->name or 'Not Assigned'}}</td>
 
                                 <td>
-                                    @if($case->status == 'completed')
-                                        <span class="label label-success">Completed</span>
-                                    @elseif($case->status == 'in_progress')
-                                        <span class="label label-warning">In Progress</span>
-                                    @elseif($case->status == 'no_analysis')
-                                        <span class="label label-no-analysis">No Analysis</span>
-                                    @elseif($case->status == 'cancelled')
-                                        <span class="label label-danger">Cancelled</span>
-                                    @elseif($case->status == 'suspended')
-                                        <span class="label label-suspended">Suspended</span>
-                                    @elseif($case->status == 'to_be_tweeted')
-                                        <span class="label label-primary">To be Tweeted</span>
-                                    @elseif($case->status == 'pending')
-                                        <span class="label label-default">Pending</span>
-                                    @endif
+                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">{{$case->statusLabels[$case->status]}}</a>
                                 </td>
                                 <td>{{$case->category->title or ""}}</td>
                                 <td>{{$case->created_at}}</td>
@@ -90,6 +76,9 @@
         </div>
     </div>
 </div>
+<script>
+    var caseStatusLabels = {!! json_encode($statusLabels) !!};
+</script>
 @include('case.partials.create_modal')
 @include('case.partials.edit_modal')
 @endsection

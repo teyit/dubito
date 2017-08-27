@@ -13,7 +13,21 @@ var App = (function () {
         "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
     } );
 
+      $('#case-datatable').on( 'draw.dt', function () {
+          $(".case-status-editable").editable({
+              showbuttons:!1,
+              url: '/caseStatus',
+              source:caseStatusLabels,
+          }).on('save',function (e,params) {
 
+              for(var i in caseStatusLabels){
+                  console.log(caseStatusLabels[i].value);
+                  $(this).removeClass('status_' + caseStatusLabels[i].value);
+              }
+              $(this).addClass('status_' + params.newValue);
+
+          });
+      } );
       $('#case-datatable').DataTable({
           "columns": [
               null,
@@ -26,6 +40,7 @@ var App = (function () {
               { "orderable": false }
           ],
           initComplete: function () {
+
               this.api().columns('.filterable').every(function (col) {
 
                   var except = [1, 4, 8];
@@ -43,10 +58,18 @@ var App = (function () {
                                   .draw();
                           });
 
+                      var textList = [];
                       column.data().unique().sort().each(function (d, j) {
                           var html = $.parseHTML(d);
-                          select.append('<option value="' + $(html).text() + '">' + $(html).text() + '</option>')
+                          var text = $(html).text();
+                          if(textList.indexOf(text) < 0){
+                              textList.push(text);
+                          }
                       });
+                      for(var i in textList){
+                          select.append('<option value="' + textList[i] + '">' + textList[i] + '</option>')
+                      }
+
                   }
 
               });

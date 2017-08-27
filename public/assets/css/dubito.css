@@ -65,6 +65,21 @@
     background-color: #FAFAFA;
 }
 
+.case-status-editable{
+    border: 1px solid gray;
+    padding: 3px;
+    border-radius: 4px;
+}
+.case-status-editable:hover{
+    color:white;
+}
+
+.case-status-pending{background: white;color: black;}
+.case-status-in_progress{background:yellow;color:#fff;}
+.case-status-no_analysis{background:darkslategray;color:white;}
+.case-status-no_publish{background:#e67e22;color:#fff}
+.case-status-verified{background:green;color:white;}
+.case-status-no_consideration{background:purple;color:white;}
 
 
 .label-suspended{
@@ -75,7 +90,6 @@
     background:#e67e22;
     color:#fff;
 }
-
 
 .btn-suspended{
     background:#9b59b6;
@@ -100,6 +114,7 @@
     color:#fff;
     border:1px solid #e67e22;
 }
+
 
 .thread-avatar{
     width:32px;
