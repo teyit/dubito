@@ -16,6 +16,9 @@
                                             <a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom">
                                                 <i class="icon mdi mdi-search"></i>
                                             </a>
+                                            <a href="{{ConverterFileLink($file->file_url)}}" download>
+                                                <i class="icon mdi mdi-download"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

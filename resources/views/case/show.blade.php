@@ -78,10 +78,16 @@
                                                                                     class="add-file-to-case"
                                                                                     data-file-id="{{$file->id}}"
                                                                                     href="javascript:;"><i
-                                                                                        class="icon mdi mdi-plus"></i></a><a
+                                                                                        class="icon mdi mdi-plus"></i></a>
+                                                                            <a
                                                                                     href="{{Storage::disk('s3')->url($file->file_url)}}"
                                                                                     class="image-zoom"><i
                                                                                         class="icon mdi mdi-search"></i></a>
+                                                                            <a
+                                                                                    href="{{Storage::disk('s3')->url($file->file_url)}}"
+                                                                                    download><i
+                                                                                        class="icon mdi mdi-download"></i></a>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>

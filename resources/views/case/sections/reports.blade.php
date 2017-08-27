@@ -24,10 +24,15 @@
                                                     <div class="func"><a class="add-file-to-case"
                                                                          data-file-id="{{$f->id}}"
                                                                          href="javascript:;"><i
-                                                                    class="icon mdi mdi-plus"></i></a><a
+                                                                    class="icon mdi mdi-plus"></i></a>
+                                                        <a
                                                                 href="{{$f->file_url}}"
                                                                 class="image-zoom"><i
                                                                     class="icon mdi mdi-search"></i></a>
+                                                        <a
+                                                                href="{{$f->file_url}}"
+                                                                download ><i
+                                                                    class="icon mdi mdi-download"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
