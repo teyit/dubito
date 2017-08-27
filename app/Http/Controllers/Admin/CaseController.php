@@ -294,7 +294,10 @@ class CaseController extends Controller
         $case = Cases::find($caseID);
         $case->folder = $request->input('folder');
         $case->save();
-        return response()->json(true,200);
+        if($request->ajax()){
+            return response()->json(true,200);
+        }
+        return redirect()->back();
     }
 
 

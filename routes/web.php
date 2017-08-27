@@ -72,7 +72,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('change-title/{case_id}',['as'=>'change.title','uses'=>'CaseController@changeTitle']);
     Route::post('change-category/{case_id}',['as'=>'change.category','uses'=>'CaseController@changeCategory']);
 
-
+	Route::get('caseFolder/{case_id}',['as'=>'case.folder.update','uses'=>'CaseController@setFolder']);
     Route::put('caseFolder/{case_id}',['as'=>'case.folder.update','uses'=>'CaseController@setFolder']);
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
 	Route::post('caseStatus/',['as'=>'case.status.query','uses'=>'CaseController@caseStatusUpdate']);

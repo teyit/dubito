@@ -64,6 +64,10 @@
                                         <ul role="menu" class="dropdown-menu">
                                             <li><a class="case-edit-btn" href="javascript:;" data-id="{{$case->id}}" >Edit</a></li>
                                             <li><a class="case-delete" data-id="{{$case->id}}" href="javascript:;">Delete</a></li>
+                                            <li class="divider"></li>
+                                            @foreach($case->folderLabels as $key => $val)
+                                            <li><a data-id="{{$key}}" href="{{route("case.folder.update",$case->id)}}?folder={{$key}}">Send to {{$val}}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </td>
