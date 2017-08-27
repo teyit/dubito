@@ -29,12 +29,12 @@ class Cases extends Model
     ];
 
     public $statusLabels = [
-        'in_progress' => 'In Progress',
-        'no_analysis' => 'No Analysis',
-        'cancelled' => 'Cancelled',
-        'suspended' => 'Suspended',
-        'to_be_tweeted' => 'To be Tweeted',
-        'pending' => 'Pending'
+	    'pending' => 'Pending',
+		'in_progress' => 'In progress',
+		'no_analysis' => 'No Analysis',
+		'no_publish' => 'No Publish',
+		'verified' => 'Verified',
+		'no_consideration' => 'No consideration',
     ];
 
     public function getStatusLabelAttribute(){
