@@ -15,7 +15,16 @@ var App = (function () {
 
 
       $('#case-datatable').DataTable({
-
+          "columns": [
+              null,
+              { "orderable": false },
+              { "orderable": false },
+              { "orderable": false },
+              { "orderable": false },
+              null,
+              null,
+              { "orderable": false }
+          ],
           initComplete: function () {
               this.api().columns('.filterable').every(function (col) {
 
@@ -35,7 +44,8 @@ var App = (function () {
                           });
 
                       column.data().unique().sort().each(function (d, j) {
-                          select.append('<option value="' + d + '">' + d.substring(0, 20) + '</option>')
+                          var html = $.parseHTML(d);
+                          select.append('<option value="' + $(html).text() + '">' + $(html).text() + '</option>')
                       });
                   }
 
