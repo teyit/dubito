@@ -41,42 +41,35 @@ class ReportController extends Controller
             return "empty";
         }
 
-        $messages = Message::whereIn('id',$request->get('selected_messages'))->orderBy('id','ASC')->get();
+        $messages = Message::whereIn('id',$request->get('selected_messages'))->orderBy('is_reply','ASC')->get(); //Not pick a reply.
 
-        $text = $messages->implode('text','<br /><br />');
+        $first = $messages->first();
+
+        $text = $messages->implode('text',' <br /><br />');
 
 
         $report = Report::create([
            'text' => $text,
             'case_id' => $request->input('case_id'),
-            'source' => $messages->first()->source,
-            'account_name' => $messages->first()->account_name,
-            'account_picture' => $messages->first()->account_picture,
+            'source' => $first->source,
+            'account_name' => $first->account_name,
+            'account_picture' => $first->account_picture,
             'folder' => request()->has('folder') ? request()->input('folder') : 'ongoing'
         ]);
 
-
-
-        $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
-
-        
-        
         foreach($messages as $m){
 
             $m->update([
                 'report_id' => $report->id
             ]);
             if(!$m->files->isEmpty()){
-
                 foreach($m->files as $index => $file){
                     $report->files()->attach($file->id);
-
                 }
             }
             if(!$m->links->isEmpty()){
                 foreach($m->links as $index => $link){
                     $report->links()->attach($link->id);
-
                 }
             }
         }

@@ -37,7 +37,9 @@
                 </p>
 
                 @foreach($message->links as $l)
+                    @if(!empty($l->teyitlink_slug))
                     @include('message.partials.linkPreview',$l)
+                    @endif
                 @endforeach
 
 
