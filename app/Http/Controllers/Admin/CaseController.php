@@ -141,7 +141,8 @@ class CaseController extends Controller
         $cases = Cases::where('folder',$folder)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();
 	    $statusLabels = [];
-        foreach($cases->first()->statusLabels as $key => $val){
+
+	    foreach(Cases::first()->statusLabels as $key => $val){
         	$statusLabels[] = ['value' => $key,'text' => $val];
 	    }
         return view("case.index",compact("cases",'topics','categories','statusLabels'));
