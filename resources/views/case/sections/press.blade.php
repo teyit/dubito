@@ -10,7 +10,7 @@
                 </form>
             </div>
         </div>
-        <div id="press-results"></div>
+        <div style="max-height: 400px;overflow: scroll;width: 100%;"  id="press-results"></div>
     </div>
 </div>
 
