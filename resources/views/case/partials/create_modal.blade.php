@@ -34,6 +34,15 @@
 
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label>Folder</label>
+                                <select class="form-control" name="folder" id="">
+                                    <option value="">Select Folder</option>
+                                    @foreach(App\Model\Cases::first()->folderLabels as $key => $value)
+                                        <option value="{{$key}}">{{$value}}</option>
+                                    @endforeach
+                                </select>
+                            </div>                            
                             <div class="form-group pull-right">
                                 <button type="submit" class="btn btn-space btn-primary">Add</button>
                             </div>
