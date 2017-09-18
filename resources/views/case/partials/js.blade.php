@@ -182,9 +182,9 @@
                     $(".account-img",new_activity).attr('src',data.user.picture);
                     $(".activity-username",new_activity).html(data.user.name);
                     $(".activity-text",new_activity).html(data.text);
-
+                    new_activity.removeClass('hidden');
                     new_activity.insertBefore('.list-group-item.disabled');
-
+        
                     $.gritter.add({
                         title: 'Success',
                         text: 'Activity has been added.',

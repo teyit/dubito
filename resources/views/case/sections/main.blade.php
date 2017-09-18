@@ -98,6 +98,12 @@
     <div class="panel-heading">Activities</div>
     <div class="panel-body">
         <div class="list-group">
+            <a href="javascript:;" class="hidden list-group-item activity-item">
+                <span class="badge badge-primary"></span>
+                <img class="account-img" style="width:24px;margin-right:10px;" src="" />
+                <strong class="activity-username"></strong>
+                <span class="activity-text"></span>
+            </a>            
             @foreach($case->activities as $a)
             <a href="javascript:;" class="list-group-item activity-item">
                 <span class="badge badge-primary">{{$a->created_at}}</span>
