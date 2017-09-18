@@ -188,6 +188,7 @@ class CaseController extends Controller
 
         $case = Cases::with('reports','evidences','user','activities')->find($id);
 
+        
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
