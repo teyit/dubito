@@ -77,6 +77,8 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::put('caseStatus/{case_id}',['as'=>'case.status.update','uses'=>'CaseController@caseStatusUpdate']);
 	Route::post('caseStatus/',['as'=>'case.status.query','uses'=>'CaseController@caseStatusUpdate']);
 
+    Route::post('caseActivity/{case_id}',['as'=>'case.activity.add','uses'=>'CaseController@addActivity']);
+
 
 
     Route::resource("tags","TagController");

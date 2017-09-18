@@ -68,6 +68,9 @@ class Cases extends Model
         return $this->hasMany('App\Model\Evidence','case_id','id')->orderBy('created_at','desc');
     }
 
+    public function activities(){
+        return $this->hasMany('App\Model\Activity','case_id','id')->orderBy('created_at','asc');
+    }
 
     public function files(){
         return $this->belongsToMany('App\Model\File','case_files','case_id','file_id')->withTimestamps();

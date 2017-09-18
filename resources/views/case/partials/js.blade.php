@@ -163,7 +163,69 @@
             }
         });
 
+        //Evidence form
+        $('#activity-form-ajax').submit(function (e) { // capture submit
+            e.preventDefault();
+            
+            var input = $("input", this);
+            var text = input.val();
+            input.val('');
+            
+            $.ajax({
+                method: "POST",
+                url: "{{route('case.activity.add',$case->id)}}",
+                data: {_token: $("#_token").val(),text : text},
+                success: function (data) {
+                    var new_activity = $(".activity-item:last").clone();
 
+                    $(".badge-primary",new_activity).html(data.created_at);
+                    $(".account-img",new_activity).attr('src',data.user.picture);
+                    $(".activity-username",new_activity).html(data.user.name);
+                    $(".activity-text",new_activity).html(data.text);
+
+                    new_activity.insertBefore('.list-group-item.disabled');
+
+                    $.gritter.add({
+                        title: 'Success',
+                        text: 'Activity has been added.',
+                        class_name: 'color success'
+                    });
+                }
+            })
+            /*
+            $.ajax({
+                url: $(this).attr('action'),
+                xhr: function () { // custom xhr (is the best)
+                    var xhr = new XMLHttpRequest();
+                    var total = 0;
+                    $.each(document.getElementById('file-1').files, function (i, file) {
+                        total += file.size;
+                    });
+                    xhr.upload.addEventListener("progress", function (evt) {
+
+                        var loaded = (evt.loaded / total).toFixed(2) * 100; // percent
+                        $('#progress').text('Uploading... ' + loaded + '%');
+                    }, false);
+                    return xhr;
+                },
+                type: 'post',
+                processData: false,
+                contentType: false,
+                data: fd,
+                success: function (response) {
+                    if (response) {
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Evidence was added succesfully',
+                            class_name: 'color success'
+                        });
+                    }
+
+                    window.location.reload()
+                }
+            });
+            */
+        });
 
         //Evidence form
         $('#evidence-form-ajax').submit(function (e) { // capture submit

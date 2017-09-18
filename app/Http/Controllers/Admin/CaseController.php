@@ -8,6 +8,7 @@ use App\Model\Category;
 use App\Model\PressReview;
 use App\Model\Link;
 use App\Model\Evidence;
+use App\Model\Activity;
 use App\Model\Message;
 use App\Model\Report;
 use App\Model\Tag;
@@ -185,7 +186,7 @@ class CaseController extends Controller
 
     public function show($id){
 
-        $case = Cases::with('reports','evidences','user')->find($id);
+        $case = Cases::with('reports','evidences','user','activities')->find($id);
 
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
@@ -288,8 +289,6 @@ class CaseController extends Controller
 
     }
 
-
-
     public function setFolder(Request $request,$caseID){
         $case = Cases::find($caseID);
         $case->folder = $request->input('folder');
@@ -299,6 +298,23 @@ class CaseController extends Controller
         }
         return redirect()->back();
     }
+    public function addActivity(Request $request,$caseID){
+        
+        $text = $request->get('text',false);
+        
+        if(!$text){
+            return response()->json(false,400);
+        }
 
+        $activity = new Activity();
+        $activity->case_id = $caseID;
+        $activity->user_id = $request->user()->id;
+        $activity->text = $text;
+        $activity->save();
+        if($request->ajax()){
+            return response()->json($activity->load('user'),200);
+        }
+        return redirect()->back();
+    }
 
 }

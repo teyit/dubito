@@ -60,12 +60,12 @@
         </div>
 
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <form action="{{route('case.tag.store',$case->id)}}" method="post"
-                          class="form-inline select2">
+                    <form action="{{route('case.tag.store',$case->id)}}" method="post" class="form-inline select2">
                         <div class="form-group" style="width:100%;">
                             <select name="tags[]" multiple="multiple" class="form-control tags">
                                 @foreach($allTags as $tag)
@@ -90,6 +90,27 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Activities</div>
+    <div class="panel-body">
+        <div class="list-group">
+            @foreach($case->activities as $a)
+            <a href="javascript:;" class="list-group-item activity-item">
+                <span class="badge badge-primary">{{$a->created_at}}</span>
+                <img class="account-img" style="width:24px;margin-right:10px;" src="{{$a->user->account_picture or "/assets/img/avatar1.png"}}" />
+                <strong class="activity-username">{{$a->user->name or ''}}: </strong>
+                <span class="activity-text">{{$a->text}}</span>
+            </a>
+            @endforeach
+            <span  class="list-group-item disabled">
+                <form id="activity-form-ajax" class="form-inline">
+                    <input style="width:100%" placeholder="Add an activity" type="text" class="form-control">
+                </form>
+            </span>
         </div>
     </div>
 </div>

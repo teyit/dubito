@@ -17,7 +17,7 @@ class User extends Authenticatable
     protected $fillable = [
         'id','name', 'email', 'password','account_picture'
     ];
-
+    protected $appends = ['picture'];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -30,5 +30,11 @@ class User extends Authenticatable
     public function social()
     {
         return $this->hasMany('App\Model\Social');
+    }
+    public function getPictureAttribute(){
+        if($this->account_picture){
+            return $this->account_picture;
+        }
+        return "/assets/img/avatar1.png";
     }
 }
