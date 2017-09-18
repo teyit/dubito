@@ -127,25 +127,27 @@ class ServiceController extends Controller
 		            foreach ($m['message']['attachments'] as $a) {
 
                         
-                        if (!isset($m['message']['text'])) {
-                            if(isset($a['title'])){
-                                $message->text = $a['title'];
-                                $message->save();
-                            }
-                        }
+
 			            //if($a['type'] != 'fallback'){
 			            \Log::info("atachment");
+                        if(isset($a['payload']['url'])){
+    			            moveToS3Link("facebook/files/" . date('Y-m-d') . "/", substr($m['message']['mid'], -23), $a['payload']['url']);
 
-			            moveToS3Link("facebook/files/" . date('Y-m-d') . "/", substr($m['message']['mid'], -23), $a['payload']['url']);
 
+    			            $rf = File::create(
+    				            ['file_type' => $a['type'],
+    					            'file_url' => Storage::disk('s3')->url("facebook/files/" . date('Y-m-d') . "/" . substr($m['message']['mid'], -23) . '.jpg'),
+    				            ]);
 
-			            $rf = File::create(
-				            ['file_type' => $a['type'],
-					            'file_url' => Storage::disk('s3')->url("facebook/files/" . date('Y-m-d') . "/" . substr($m['message']['mid'], -23) . '.jpg'),
-				            ]);
-
-			            $message->files()->attach($rf->id);
-			            //}
+    			            $message->files()->attach($rf->id);
+			            }else{
+                             if (!isset($m['message']['text'])) {
+                                if(isset($a['title'])){
+                                    $message->text = $a['title'];
+                                    $message->save();
+                                }
+                            }
+                        }
 
 		            }
 	            }
