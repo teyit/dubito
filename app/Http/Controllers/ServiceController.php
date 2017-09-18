@@ -125,6 +125,14 @@ class ServiceController extends Controller
 	            if (isset($m['message']['attachments'])) {
 		            \Log::info("message");
 		            foreach ($m['message']['attachments'] as $a) {
+
+                        
+                        if (!isset($m['message']['text'])) {
+                            if(isset($a['title'])){
+                                $message->text = $a['title'];
+                                $message->save();
+                            }
+                        }
 			            //if($a['type'] != 'fallback'){
 			            \Log::info("atachment");
 
