@@ -148,13 +148,11 @@ class CaseController extends Controller
 	    }
         return view("case.index",compact("cases",'topics','categories','statusLabels'));
     }
-
     public function create(){
         $topics = Topic::latest()->get();
         $cases = Cases::latest()->get();
         return view("case.create",compact("cases",'topics'));
     }
-
     public function store(Request $request){
 
     	//$request['user_id'] = Auth::user()->id;
@@ -167,8 +165,6 @@ class CaseController extends Controller
         return redirect('/cases/' . $case->id);
 
     }
-
-
     public function edit($id){
 
         $case = Cases::find($id);
@@ -181,9 +177,6 @@ class CaseController extends Controller
             'topics' => $topics
         ];
     }
-
-
-
     public function show($id){
 
         $case = Cases::with('reports','evidences','user','activities')->find($id);
@@ -195,17 +188,12 @@ class CaseController extends Controller
         $users = User::latest()->get();
         return view('case.show',compact('users','case','selectedTags','allTags','links','evidences'));
     }
-
     public function update($id,Request $request){
 
         $case = Cases::find($id);
         $case->update($request->all());
-        return response()->json('true',200);
+        return response()->json($case,200);
     }
-
-
-
-
     public function destroy($id){
         $case = Cases::find($id);
         $case->delete();
@@ -213,8 +201,6 @@ class CaseController extends Controller
 
 
     }
-
-
     public function addCaseTag(Request $request,$caseID){
 
         $case = Cases::find($caseID);
@@ -227,7 +213,6 @@ class CaseController extends Controller
         return response()->json(true,200);
 
     }
-
     public function addCaseFile(Request $request,$caseID){
         $case = Cases::find($caseID);
         $file = $request->input('file_id');
@@ -239,8 +224,6 @@ class CaseController extends Controller
         return response()->json(false,200);
 
     }
-
-
     public function removeCaseFile(Request $request,$caseID){
         $case = Cases::find($caseID);
         $file = $request->input('file_id');
@@ -248,8 +231,6 @@ class CaseController extends Controller
         return response()->json(true,200);
 
     }
-
-
     public function caseStatusUpdate(Request $request,$caseID=false){
     	if(!$caseID){
     		$caseID = $request->get('pk');
@@ -264,7 +245,6 @@ class CaseController extends Controller
         return response()->json(true,200);
 
     }
-    
     public function assignUserToCase(Request $request,$caseID){
         $case = Cases::find($caseID);
         $case->user_id = $request->input('value');
@@ -272,8 +252,6 @@ class CaseController extends Controller
         return response()->json($case->user,200);
 
     }
-
-
     public function changeTitle(Request $request,$caseID){
         $case = Cases::find($caseID);
         $case->title = $request->input('value');
@@ -281,7 +259,6 @@ class CaseController extends Controller
         return response()->json($case,200);
 
     }
-
     public function changeCategory(Request $request,$caseID){
         $case = Cases::find($caseID);
         $case->category_id = $request->input('value');
@@ -289,7 +266,6 @@ class CaseController extends Controller
         return response()->json($case,200);
 
     }
-
     public function setFolder(Request $request,$caseID){
         $case = Cases::find($caseID);
         $case->folder = $request->input('folder');

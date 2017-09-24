@@ -6,8 +6,6 @@
                 <h3 class="modal-title">Assign to Case</h3>
             </div>
             <div class="modal-body">
-
-
                 <form method="post" action="" id="report-assign-case-form">
                     {{ csrf_field() }}
                     <div class="form-group ">
@@ -16,7 +14,6 @@
                             <option value="">Select Case</option>
                         </select>
                     </div>
-
                     <div class="form-group pull-left">
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>
                     </div>
@@ -38,20 +35,20 @@
         $(".add-new-case").on('click',function(){
             $('#report-assign-to-case').modal('hide');
         });
-
-        $(".email-list-item").hover(function () {
-            //$(".view-case-btn-container ",this).removeClass('hidden')
-        },function(){
-            //$(".view-case-btn-container ",this).addClass('hidden');
+        $("#report-assign-case-form").on('submit',function(e) {
+            e.preventDefault();
+            assignMessages();
         });
-
-        $("#report-assign-case-form").on('submit',function(e){
+        $(window).on('case-created',function(data){
+            $("#case_id").val(data.id);
+            assignMessages();
+        });
+        var assignMessages = function(){
             $('#report-assign-to-case').modal('hide');
             var case_id = $("#case_id").val();
-            var folder = $("#folder").val();
+            //var folder = $("#folder").val();
 
             var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
-            e.preventDefault();
 
             var message_list = $('.email-list-item .be-checkbox input[type=checkbox]:checked').map(function(_, el) {
                 return $(el).val();
@@ -62,7 +59,6 @@
                 data: {
                     _token:$("#_token").val(),
                     case_id : case_id,
-                    folder : folder,
                     selected_messages : message_list
                 },
                 method : "POST",
@@ -73,18 +69,16 @@
                             $("#message-item-"+message_id+" .be-checkbox").remove();
                             $("#message-item-"+message_id+" .case-btn").removeClass('hidden').attr('href',caseUrl);
                         });
-
                         $.gritter.add({
                             title: 'Success',
-                            text: 'This message was assigned as report successfuly',
+                            text: 'Also, selected messages has been attached the case!',
                             class_name: 'color success'
                         });
                     }
                 }
             });
 
-        });
-
+        };
 
         $(function(){
 
@@ -96,7 +90,6 @@
                 if(message_list.length < 1){
                     return false;
                 }
-
                 var $reportCases = $(".report-cases");
                 $.get("/api/cases", function(data){
                     $reportCases.find('option').remove();
@@ -109,9 +102,6 @@
                     show: 'true',
                     keyboard: false
                 });
-
-
-
 
             });
 

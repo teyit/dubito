@@ -29,7 +29,11 @@
                             </div>
                             <div id="folderSelector" class="btn-group btn-hspace">
                                 <button type="button" data-toggle="dropdown" class="btn btn-primary case-folder-dropdown">
+                                    @if($case->folder)
                                     {{$case->folderLabels[$case->folder]}}
+                                    @else
+                                    Select folder
+                                    @endif
                                     <span class="icon-dropdown mdi mdi-chevron-down"></span></button>
                                 <ul role="menu" class="dropdown-menu case-folder-menu">
                                     @foreach($case->folderLabels as $status=> $label)

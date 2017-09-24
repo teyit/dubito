@@ -58,13 +58,11 @@
         @include('message.thread',['messages' => $messages])
     </div>
     @endif
-    @include("message.partials._case_modal_form")
-    @include('report.partials.assign_to_case_modal')
+    @include("case.partials.create_modal")
+    @include('report.partials.case_picker_modal')
 
 
 @endsection
-
-
 
 
 @section('script')
@@ -72,7 +70,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/spf/2.4.0/spf.js"></script>
 
     <link rel="stylesheet" href="{{asset('assets/css/nprogress.css')}}" />
-    <script src=""></script>
+
 
     <script src="{{asset('assets/lib/linkify/linkify.min.js')}}"></script>
     <script src="{{asset('assets/lib/linkify/linkify-jquery.min.js')}}"></script>

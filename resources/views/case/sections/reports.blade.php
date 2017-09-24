@@ -47,7 +47,7 @@
             </div>
 
             <div class="panel-footer clearfix">
-                {{$report->created_at->diffForHumans()}} / {{$report->source}}
+                {{$report->created_at->diffForHumans()}} / <span class="label label-primary">{{$report->source}}</span> @if($report->phone) / {{$report->phone}} @endif
                 <div class="tools">
 
                     {{--<button  data-id="{{$report->id}}"  class="btn btn-space btn-success btn-sm report-assign-case"><i class="icon icon-left mdi mdi-cloud-done"></i> Assign to a case</button>--}}

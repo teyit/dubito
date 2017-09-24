@@ -47,12 +47,13 @@
                         @endforeach
                     </select>
                     <div class="input-group-btn">
-                        <button data-toggle="modal"  data-target="#mod-success"  type="button" class="btn  btn-space btn-success md-trigger">Add New Case</button>
+                        <button data-toggle="modal"  data-target="#add-new-case"  type="button" class="btn  btn-space btn-success md-trigger">Add New Case</button>
                     </div>
                 </div>
             </div>
         </div>
-
+        @if(false)
+        <!--
         <div class="form-group">
             <label class="col-sm-3 control-label">Status</label>
             <div class="col-sm-6">
@@ -71,6 +72,9 @@
                     </select>
             </div>
         </div>
+        -->
+        @endif
+
 
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
@@ -132,7 +136,12 @@
                 </select>
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Name</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" value="" name="account_name">
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">Phone</label>
             <div class="col-sm-6">
@@ -155,7 +164,8 @@
                 </div>
             </div>
         </div>
-
+        @if(false)
+        <!--
         <div class="form-group">
             <label class="col-sm-3 control-label">Status</label>
             <div class="col-sm-6">
@@ -166,6 +176,8 @@
                     </select>
             </div>
         </div>
+        -->
+        @endif
 
 
         <div class="form-group">
@@ -179,7 +191,7 @@
             <label class="col-sm-3 control-label"></label>
             <div class="col-sm-6">
                 <p class="text-right">
-                    <button type="submit" class="btn btn-space btn-primary">Add Report</button>
+                    <button type="submit" class="btn btn-space btn-primary">Assign</button>
                 </p>
             </div>
         </div>

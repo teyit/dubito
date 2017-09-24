@@ -16,7 +16,7 @@
     </div>
     @include('case.partials.create_link_modal')
     @include('case.partials.edit_link_modal')
-    @include('report.partials.assign_to_case_modal')
+    @include('report.partials.case_picker_modal')
 @endsection
 @section("script")
     <script src="{{asset('assets/lib/jquery.magnific-popup/jquery.magnific-popup.min.js')}}" type="text/javascript"></script>

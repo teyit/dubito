@@ -6,7 +6,7 @@
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
                     Case List &nbsp;
-                    <button  data-toggle="modal"  data-target="#case-create" class="btn btn-success">Add Case</button>
+                    <button  data-toggle="modal"  data-target="#add-new-case" class="btn btn-success">Add Case</button>
                 </div>
                 <div class="panel-body">
                     <table id="case-datatable" class="table case-datatable">
@@ -87,8 +87,12 @@
 @include('case.partials.edit_modal')
 @endsection
 @section('script')
+    @parent
     <script>
         $(function(){
+            $(window).on('case-created',function (data) {
+                window.location.reload();
+            });
             $('.case-delete').on('click',function(){
                 var that = $(this);
                 dubitoConfirm(function(result){

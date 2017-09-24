@@ -281,13 +281,16 @@
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b:after {
+
     content: "";
     font-family: "Stroke 7";
     font-size: 25px;
     font-weight: 400;
     line-height: 3.076924rem;
-    color: #878787
+    color: #878787;
+
 }
+
 
 .select2-container--default .select2-selection--multiple {
     min-height: 42px;

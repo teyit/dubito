@@ -94,6 +94,6 @@
         {{--</div>--}}
     </div>
 
-    @include('report.partials.assign_to_case_modal')
+    @include('report.partials.case_picker_modal')
 
 @endsection

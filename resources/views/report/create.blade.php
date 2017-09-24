@@ -16,8 +16,17 @@
         </div>
     </div>
 
-    @include("report.partials._case_modal_form")
+    @include("case.partials.create_modal")
     @include("report.partials._category_modal_form")
-
-
-@endsection
+@stop
+@section('script')
+    @parent
+    <script>
+        $(function() {
+            $(window).on('case-created', function (data) {
+                $(".report-cases option:selected").removeAttr('selected');
+                $(".report-cases").append('<option selected value="'+data.id+'">'+data.title+'</option>');
+            });
+        });
+    </script>
+@stop

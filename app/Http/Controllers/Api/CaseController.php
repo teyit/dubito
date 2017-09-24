@@ -49,42 +49,7 @@ class CaseController extends Controller
         }
 
        $case =  Cases::create($data);
-
-        if(!empty(request()->get('selected_messages'))){
-            $messages = Message::whereIn('id',$request->get('selected_messages'))->get();
-            $text = $messages->implode('text',"\n");
-
-            $report = Report::create([
-                'text' => $text,
-                'case_id' => $case->id,
-                'source' => $messages->first()->source
-            ]);
-
-            $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
-
-            foreach($messages as $m){
-
-                $m->update([
-                    'report_id' => $report->id
-                ]);
-                if(!$m->files->isEmpty()){
-
-                    foreach($m->files as $index => $file){
-                        $report->files()->attach($file->id);
-
-                    }
-                }
-                if(!$m->links->isEmpty()){
-                    foreach($m->links as $index => $link){
-                        $report->links()->attach($link->id);
-
-                    }
-                }
-            }
-        }
-
-
-        return response()->json(true,200);
+       return response()->json($case,200);
 
     }
 }

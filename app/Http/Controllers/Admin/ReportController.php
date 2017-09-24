@@ -85,6 +85,7 @@ class ReportController extends Controller
             'text' => $request->input('text'),
             'case_id' => $request->input('case_id'),
             'source' => $request->input('source'),
+            'account_name' => $request->input('account_name'),
             'status' => $request->input('status'),
             'phone' => $request->input('phone')
         ]);
