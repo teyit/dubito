@@ -136,7 +136,7 @@ class CaseController extends Controller
         return $pressResults;
 
     }
-    public function index($folder){
+    public function index($folder='new'){
 
         $topics = Topic::latest()->get();
         $cases = Cases::where('folder',$folder)->orderBy("created_at","DESC")->get();
