@@ -50,7 +50,7 @@
     <script>
         $(document).ready(function(){
 
-            App.ChartJs();
+            //App.ChartJs();
         });
 
     </script>
