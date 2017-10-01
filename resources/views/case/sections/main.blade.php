@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="">
                     <div class="row panel-heading panel-heading-divider">
-                        <div class="col-md-6" style="padding:0">
+                        <div class="col-md-8" style="padding:0">
                             <a id="change-title" data-title="change title" data-value="{{$case->title }}" data-type="text"  href="#"  class="editable editable-click">{{$case->title}}</a>
 
                             {{--{{$case->title}}--}}
@@ -16,7 +16,7 @@
                                 <span class="mdi mdi-calendar"></span> Updated at: {{$case->updated_at}}
                             </span>
                         </div>
-                        <div class="col-md-6 text-right" style="padding:0">
+                        <div class="col-md-4 text-right" style="padding:0">
                             <div id="statusSelector" class="btn-group btn-hspace">
                                 <button type="button" data-toggle="dropdown" class="btn btn-primary case-status-dropdown case-status-dropdown">
                                     {{$case->status_label}}
@@ -41,6 +41,12 @@
                                     @endforeach
                                 </ul>
                             </div>
+                            <span class="panel-subtitle" style="margin-top:15px;">
+                                <div class="be-checkbox be-checkbox-color has-success inline">
+                                  <input id="checkinsucc" type="checkbox" @if($case->is_published) checked @endif>
+                                  <label for="checkinsucc">Is published?</label>
+                                </div>
+                            </span>
                         </div>
                     </div>
                 </div>

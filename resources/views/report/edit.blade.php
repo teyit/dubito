@@ -17,6 +17,9 @@
     </div>
 @endsection
 
+@include("case.partials.create_modal")
+@include("report.partials._category_modal_form")
+
 @section('script')
 
     <script>

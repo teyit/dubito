@@ -17,9 +17,11 @@
                                 <th style="width:220px;">Title</th>
                                 <th class="filterable">User</th>
                                 <th class="filterable">Status</th>
+                                
                                 <th class="filterable">Category</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
+                                <th>is Published?</th>
                                 <th style="width:160px;" class="actions"></th>
                                 {{--<th class="actions">Delete</th>--}}
                             </tr>
@@ -30,10 +32,11 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th >User</th>
-                        <th >Status</th>
+                        <th >Status</th>    
                         <th >Category</th>
                         <th>Created at</th>
                         <th>Updated at</th>
+                        <th>is Published</th>
                         <th class="actions"></th>
                         </tr>
                         </tfoot>
@@ -53,9 +56,11 @@
                                 <td>
                                     <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">{{$case->statusLabels[$case->status]}}</a>
                                 </td>
+
                                 <td>{{$case->category->title or ""}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
+                                <td>@if($case->is_published) Yes @else No @endif</td>
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
                                 <td class="actions">
                                     <div class="btn-group btn-space">

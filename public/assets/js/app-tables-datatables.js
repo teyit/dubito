@@ -37,6 +37,7 @@ var App = (function () {
               { "orderable": false },
               null,
               null,
+              { "orderable": false },
               { "orderable": false }
           ],
           initComplete: function () {

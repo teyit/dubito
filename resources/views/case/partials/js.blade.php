@@ -2,7 +2,30 @@
 
     $(function () {
 
+        $("#checkinsucc").on('change',function(){
+            var is_published = + $(this).prop('checked');
+            if(is_published == 1){
+                var text = 'Case has been marked as published';
+            }else{
+                var text = 'Case mark has been removed.';
+            }
+            $.ajax({
+                method: "post",
+                url: '/setPublished/{{$case->id}}',
+                data: {_token: $('#_token').val(), is_published: is_published},
+                success: function (response) {
+                    console.log(response);
+                    if (response) {
+                        $.gritter.add({
+                            title: 'Success',
+                            text: text,
+                            class_name: 'color success'
+                        });
+                    }
 
+                }
+            });
+        });
         //Archive case
         $('.case-is-archived-btn').on('click', function () {
             var _this = $(this);

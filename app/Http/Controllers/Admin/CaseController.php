@@ -275,6 +275,15 @@ class CaseController extends Controller
         }
         return redirect()->back();
     }
+    public function setPublished(Request $request,$caseID){
+        $case = Cases::find($caseID);
+        $case->is_published = $request->get('is_published');
+        $case->save();
+        if($request->ajax()){
+            return response()->json(true,200);
+        }
+        return redirect()->back();
+    }    
     public function addActivity(Request $request,$caseID){
         
         $text = $request->get('text',false);
