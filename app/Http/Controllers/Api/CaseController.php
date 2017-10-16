@@ -47,7 +47,8 @@ class CaseController extends Controller
         }else{
             $data = array_merge(request()->all(),['topic_id' => $topic_id,'category_id' => $category_id]);
         }
-
+        unset($data['user_id']);
+        
        $case =  Cases::create($data);
        return response()->json($case,200);
 
