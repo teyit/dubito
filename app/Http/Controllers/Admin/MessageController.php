@@ -151,8 +151,8 @@ class MessageController extends Controller
         }
 
 
-        $senders = \DB::table('messages')->orderBy('created_at','DESC')->selectRaw('sender_id,source,account_name,account_picture,sum(CASE is_read WHEN 1 THEN 0 ELSE 1 END) as unreads');
-
+        $senders = \DB::table('messages')->selectRaw('id,sender_id,source,account_name,account_picture, max(created_at) as created_at,sum(CASE is_read WHEN 1 THEN 0 ELSE 1 END) as unreads');
+        
 
 
         if($keyword){
@@ -164,11 +164,12 @@ class MessageController extends Controller
         if($source){
             $senders->where('source', $source);
         }
+        
 
         $senders->where('sender_id','!=',765187661996883968);
         $senders->where('sender_id','!=',207787009653168);
 
-        $senders = $senders->groupBy('sender_id','recipient_id','source')->orderBy('id','DESC')->get()->toArray();
+        $senders = $senders->orderByRaw('max(created_at) DESC')->groupBy('sender_id','recipient_id','source')->get()->toArray();
 
         $data = array_slice($senders,($page-1) * $size,$size);
 
