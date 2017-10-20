@@ -168,7 +168,7 @@ class MessageController extends Controller
         $senders->where('sender_id','!=',765187661996883968);
         $senders->where('sender_id','!=',207787009653168);
 
-        $senders = $senders->groupBy('sender_id','recipient_id','source')->get()->toArray();
+        $senders = $senders->groupBy('sender_id','recipient_id','source')->orderBy('id','DESC')->get()->toArray();
 
         $data = array_slice($senders,($page-1) * $size,$size);
 
