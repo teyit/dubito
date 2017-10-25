@@ -69,6 +69,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     Route::post('addCaseFile/{case_id}',['as'=>'case.file.store','uses'=>'CaseController@addCaseFile']);
     Route::post('removeCaseFile/{case_id}',['as'=>'case.file.remove','uses'=>'CaseController@removeCaseFile']);
     Route::post('assignUserToCase/{case_id}',['as'=>'case.user.assign','uses'=>'CaseController@assignUserToCase']);
+	Route::post('assignUserToCase/',['as'=>'case.user.assign','uses'=>'CaseController@assignUserToCase']);
     Route::post('change-title/{case_id}',['as'=>'change.title','uses'=>'CaseController@changeTitle']);
     Route::post('change-category/{case_id}',['as'=>'change.category','uses'=>'CaseController@changeCategory']);
 

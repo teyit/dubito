@@ -27,6 +27,28 @@ var App = (function () {
               $(this).addClass('status_' + params.newValue);
 
           });
+          $(".case-user-editable").editable({
+              showbuttons:!1,
+              url: "/assignUserToCase/",
+              source:users,
+              success: function (response, value) {
+                  if (response) {
+                      for(var i in users){
+                          console.log(users[i].name);
+                          $(this).removeClass('status_' + users[i].name);
+                      }
+
+                      //$(this).parent().siblings('td').children('a.area').data('zona', newValue);
+                      $.gritter.add({
+                          title: 'Success',
+                          text: 'User was assigned to case successfuly',
+                          class_name: 'color success'
+                      });
+                  }
+
+              }
+          });
+
       } );
       $('#case-datatable').DataTable({
           "columns": [

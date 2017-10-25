@@ -146,7 +146,8 @@ class CaseController extends Controller
 	    foreach(Cases::first()->statusLabels as $key => $val){
         	$statusLabels[] = ['value' => $key,'text' => $val];
 	    }
-        return view("case.index",compact("cases",'topics','categories','statusLabels'));
+	    $users = User::select('id as value','name as text')->latest()->get();
+        return view("case.index",compact("cases",'topics','categories','statusLabels','users'));
     }
     public function create(){
         $topics = Topic::latest()->get();
@@ -245,7 +246,12 @@ class CaseController extends Controller
         return response()->json(true,200);
 
     }
-    public function assignUserToCase(Request $request,$caseID){
+    public function assignUserToCase(Request $request,$caseID=false){
+    	if($caseID == false){
+    		if($request->get('pk',false)){
+    			$caseID = $request->get('pk');
+		    }
+	    }
         $case = Cases::find($caseID);
         $case->user_id = $request->input('value');
         $case->save();
