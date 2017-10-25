@@ -39,8 +39,11 @@
             e.preventDefault();
             assignMessages();
         });
-        $(window).on('case-created',function(data){
-            $("#case_id").val(data.id);
+        $(window).on('case-created',function(data,extra){
+            $("#case_id").select2('data',{
+                'id' : extra.id,
+                'text' : extra.title
+            });
             assignMessages();
         });
         var assignMessages = function(){
