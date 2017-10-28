@@ -13,7 +13,13 @@
                             <div class="form-group">
                                 <input type="text" required name="title" id="case-title" placeholder="Enter case title.." class="form-control">
                             </div>
-
+                            <!--
+                            <div class="form-group ">
+                                <label for="case_id">Cases</label>
+                                <select class="autocomplete-cases" name="case_id" id="case_id">
+                                    <option value="">Select Case</option>
+                                </select>
+                            </div>-->
                            <div class="form-group">
                                <label>Select Topic</label>
                                <select multiple name="topic_id" class="form-control autocomplete">
@@ -35,7 +41,7 @@
 
 
                             <div class="form-group ">
-                                <label for="case_id">Status</label>
+                                <label for="case_status">Status</label>
                                 <select class="form-control folder" name="folder" id="folder">
                                     @foreach(\App\Model\Cases::first()->folderLabels as $status=> $label)
                                     <option value="{{$status}}">{{$label}}</option>

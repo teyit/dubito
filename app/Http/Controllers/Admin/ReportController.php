@@ -49,8 +49,8 @@ class ReportController extends Controller
 
 
         $report = Report::create([
-           'text' => $text,
-            'case_id' => $request->input('case_id'),
+            'text' => $text,
+            'case_id' => $request->get('case_id'),
             'source' => $first->source,
             'account_name' => $first->account_name,
             'account_picture' => $first->account_picture,
@@ -60,7 +60,8 @@ class ReportController extends Controller
         foreach($messages as $m){
 
             $m->update([
-                'report_id' => $report->id
+                'report_id' => $report->id,
+                'case_id' => $request->get('case_id')
             ]);
             if(!$m->files->isEmpty()){
                 foreach($m->files as $index => $file){

@@ -33,7 +33,7 @@ class Message extends Model
 		'report_id',
 		'external_message_id',
 		'sender_id',
-		'recepient_id',
+		'recipient_id',
 		'source',
 		'account_name',
 		'account_picture',
@@ -44,7 +44,7 @@ class Message extends Model
         'review_id'
     ];
 
-    protected static $logAttributes = ['report_id','external_message_id','sender_id','recepient_id','source','account_name','account_name','account_picture','created_at','updated_at','is_read'];
+    protected static $logAttributes = ['report_id','external_message_id','sender_id','recipient_id','source','account_name','account_name','account_picture','created_at','updated_at','is_read'];
 
 
 

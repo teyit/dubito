@@ -39,16 +39,19 @@
             e.preventDefault();
             assignMessages();
         });
-        $(window).on('case-created',function(data,extra){
+        $(window).on('case-created',function(event,extra){
+            console.log(extra);
             $("#case_id").select2('data',{
                 'id' : extra.id,
                 'text' : extra.title
             });
-            assignMessages();
+            assignMessages(extra.id);
         });
-        var assignMessages = function(){
+        var assignMessages = function(case_id){
             $('#report-assign-to-case').modal('hide');
-            var case_id = $("#case_id").val();
+            if(!case_id){
+                case_id = $("#case_id").val();
+            }
             //var folder = $("#folder").val();
 
             var caseUrl = '{{route("cases.show",'')}}' + '/' + case_id;
