@@ -9,7 +9,7 @@
                 @elseif($messages->first()->source == 'facebook:message')
                     <span class="mdi mdi-facebook-box"></span>
                 @endif
-                {{$messages->first()->account_name}}
+                {{$messages->where('is_reply',0)->first()->account_name}}
             </div>
         </div>
 
