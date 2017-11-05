@@ -97,7 +97,7 @@ var App = (function () {
 
               });
           },
-
+          "bStateSave" : true,
           "order": [[ 0, "desc" ]]
 
           });
@@ -130,6 +130,7 @@ var App = (function () {
                   }
               } );
           },
+          "bStateSave" : true,
           "order": [[ 0, "desc" ]]
       });
 
