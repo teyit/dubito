@@ -21,7 +21,7 @@
                                 <th class="filterable">Category</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th>is Published?</th>
+                                <th>Is published</th>
                                 <th style="width:160px;" class="actions"></th>
                                 {{--<th class="actions">Delete</th>--}}
                             </tr>
@@ -36,7 +36,7 @@
                         <th >Category</th>
                         <th>Created at</th>
                         <th>Updated at</th>
-                        <th>is Published</th>
+                        <th>Is published</th>
                         <th class="actions"></th>
                         </tr>
                         </tfoot>
@@ -64,7 +64,11 @@
                                 <td>{{$case->category->title or ""}}</td>
                                 <td>{{$case->created_at}}</td>
                                 <td>{{$case->updated_at}}</td>
-                                <td>@if($case->is_published) Yes @else No @endif</td>
+                                <td>
+                                    <a data-title="Is published" data-value="{{$case->is_published}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-published-editable case-published-{{$case->is_published}}">
+                                        @if($case->is_published == 1) Yes @else No @endif</td>
+                                    </a>
+
                                 {{--<td class="actions"><a class="case-edit-btn" data-id="{{$case->id}}" href="javascript:;" class="icon"><i class="mdi mdi-edit"></i></a></td>--}}
                                 <td class="actions">
                                     <div class="btn-group btn-space">

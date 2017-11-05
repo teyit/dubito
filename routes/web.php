@@ -81,6 +81,7 @@ Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
     
     Route::post('caseActivity/{case_id}',['as'=>'case.activity.add','uses'=>'CaseController@addActivity']);
     Route::post('setPublished/{case_id}',['as'=>'case.published.set','uses'=>'CaseController@setPublished']);
+	Route::post('setPublished/',['as'=>'case.published.set','uses'=>'CaseController@setPublished']);
 
 
 

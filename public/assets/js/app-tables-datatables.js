@@ -13,6 +13,7 @@ var App = (function () {
         "<'row be-datatable-footer'<'col-sm-5'i><'col-sm-7'p>>"
     } );
 
+
       $('#case-datatable').on( 'draw.dt', function () {
           $(".case-status-editable").editable({
               showbuttons:!1,
@@ -26,6 +27,23 @@ var App = (function () {
               }
               $(this).addClass('status_' + params.newValue);
 
+          });
+          //url: '/setPublished/{{$case->id}}',
+          $(".case-published-editable").editable({
+              showbuttons:!1,
+              url: '/setPublished',
+              source: [
+                  {value: "1", text: 'Yes'},
+                  {value: "0", text: 'No'}
+              ]
+          }).on('save',function (e,params) {
+              /*
+              for(var i in caseStatusLabels){
+                  console.log(caseStatusLabels[i].value);
+                  $(this).removeClass('status_' + caseStatusLabels[i].value);
+              }
+              $(this).addClass('status_' + params.newValue);
+                */
           });
           $(".case-user-editable").editable({
               showbuttons:!1,

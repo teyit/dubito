@@ -281,9 +281,16 @@ class CaseController extends Controller
         }
         return redirect()->back();
     }
-    public function setPublished(Request $request,$caseID){
+    public function setPublished(Request $request,$caseID=false){
+    	$value = $request->get('is_published');;
+	    if($caseID == false){
+		    if($request->get('pk',false)){
+			    $caseID = $request->get('pk');
+			    $value = $request->get('value');
+		    }
+	    }
         $case = Cases::find($caseID);
-        $case->is_published = $request->get('is_published');
+        $case->is_published = $value;
         $case->save();
         if($request->ajax()){
             return response()->json(true,200);
