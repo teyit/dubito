@@ -23,12 +23,10 @@ function ConverterFileLink($url){
 
 
 
-function clickableLink($s){
-    //TODO fix links.
-    return $s;
-    return preg_replace('@(https?://([-\w\.]+)+(:\d+)?(/([\w/_\.]*(\?\S+)?)?)?)@', '<a href="$1">$1</a>', $s);
-
-
+function clickableLink($string){
+	$url = '~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i';
+	$string = preg_replace($url, '<a href="$0" target="_blank" title="$0">$0</a>', $string);
+	return $string;
 }
 
 
