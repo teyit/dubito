@@ -1,5 +1,8 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Images</div>
+    <div class="panel-heading">
+        Images &nbsp;
+        <button data-toggle="modal"  data-target="#case-link-create" class="btn btn-success btn-sm btn-link-modal">Add Image</button>
+    </div>
     <div class="panel-body">
         <div class="gallery-container">
             @foreach($case->files as $file)

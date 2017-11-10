@@ -2,14 +2,15 @@
 @section('content')
     <div class="main-content container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 @include('case.sections.main',$case)
                 @include('case.sections.images',$case)
                 @include('case.sections.links',$case)
                 @include('case.sections.reports',$case)
                 @include('case.sections.press',$case)
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
+                @include('case.sections.activities',$case)
                 @include('case.sections.evidence',$case)
             </div>
         </div>
