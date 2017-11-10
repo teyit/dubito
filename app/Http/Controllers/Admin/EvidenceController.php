@@ -16,7 +16,6 @@ class EvidenceController extends Controller
       $case_id = $request->input('case_id');
 
        $evidence =  Evidence::create($request->all());
-       dd($evidence);
         if($request->hasFile('file')){
             $files = $request->file('file');
 
