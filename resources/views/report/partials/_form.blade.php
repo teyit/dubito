@@ -52,29 +52,7 @@
                 </div>
             </div>
         </div>
-        @if(false)
-        <!--
-        <div class="form-group">
-            <label class="col-sm-3 control-label">Status</label>
-            <div class="col-sm-6">
-                    <select name="status" required class="form-control report-cases">
-
-                        @foreach(['pending','not_assigned','in_archived'] as $status)
-                            @if($report->status == $status)
-                                <option value="{{$status}}" selected>{{$status}}</option>
-                            @else
-                                <option value="{{$status}}">{{$status}}</option>
-
-                            @endif
-                        @endforeach
-
-
-                    </select>
-            </div>
-        </div>
-        -->
-        @endif
-
+       
 
         <div class="form-group">
             <label class="col-sm-3 control-label">Report Files</label>
