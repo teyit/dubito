@@ -21,8 +21,17 @@
 @include("report.partials._category_modal_form")
 
 @section('script')
-
+    <script src="/assets/lib/datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script>
+        $(function() {
+            $(".datetimepicker").datetimepicker({
+                autoclose:!0,
+                componentIcon:".mdi.mdi-calendar",
+                navIcons:{
+                    rightIcon:"mdi mdi-chevron-right",
+                    leftIcon:"mdi mdi-chevron-left"
+                }
+            });
 
         $('.remove-file-from-report').on('click',function(){
             var file_id =  $(this).data('file-id');
@@ -43,6 +52,7 @@
                 }
 
             });
+        });
         });
 
     </script>

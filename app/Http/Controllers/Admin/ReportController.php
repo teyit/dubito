@@ -48,6 +48,7 @@ class ReportController extends Controller
         $text = $messages->implode('text',' <br /><br />');
 
 
+
         $report = Report::create([
             'text' => $text,
             'case_id' => $request->get('case_id'),
@@ -82,7 +83,18 @@ class ReportController extends Controller
     
     public function customStore(Request $request){
 
+        $created_at = $request->get('created_at',false);
+        if($created_at){
+            $created_at = new \Carbon\Carbon($created_at);
+        }else{
+            $created_at = \Carbon\Carbon::now();
+        }
+
+        
+
         $report = Report::create([
+            'created_at' => $created_at,
+            'updated_at' => $created_at,
             'text' => $request->input('text'),
             'case_id' => $request->input('case_id'),
             'source' => $request->input('source'),

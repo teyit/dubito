@@ -1,4 +1,4 @@
-@if(isset($is_edit) and  $is_edit == true)
+@if(isset($is_edit) and  $is_edit == true)  
     <form action="{{ route('custom.update.reports',$report->id)}}" method="post" style="border-radius: 0px;" enctype="multipart/form-data" class="form-horizontal group-border-dashed">
         {{csrf_field()}}
         <input type="hidden" name="_method" value="PUT">
@@ -71,29 +71,29 @@
         </div>
     </form>
 
-  @if(!$report->files->isEmpty())
-    <div class="panel-heading">Report Files</div>
-    <hr>
-    <div class="panel-body">
-        <div class="gallery-container">
-            @foreach($report->files as $file)
-                <div class="item">
-                    <div class="photo">
-                        <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
-                            <div class="over">
-                                <div class="info-wrapper">
-                                    <div class="info">
-                                        <div class="func"><a class="remove-file-from-report" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+      @if(!$report->files->isEmpty())
+        <div class="panel-heading">Report Files</div>
+        <hr>
+        <div class="panel-body">
+            <div class="gallery-container">
+                @foreach($report->files as $file)
+                    <div class="item">
+                        <div class="photo">
+                            <div class="img"><img src="{{ConverterFileLink($file->file_url)}}" alt="Gallery Image">
+                                <div class="over">
+                                    <div class="info-wrapper">
+                                        <div class="info">
+                                            <div class="func"><a class="remove-file-from-report" data-file-id="{{$file->id}}" href="javascript:;"><i class="icon mdi mdi-delete"></i></a><a href="{{ConverterFileLink($file->file_url)}}" class="image-zoom"><i class="icon mdi mdi-search"></i></a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
-  @endif
+      @endif
 
 
     @else
@@ -126,7 +126,12 @@
                     <input type="text" class="form-control" value="" name="phone">
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Date</label>
+            <div class="col-sm-6">
+                <input type="text" name="created_at" value="{{$report->created_at or ''}}" class="form-control datetimepicker">
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">
