@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use App\Model\Message;
 use App\Model\File;
+use Illuminate\Support\Facades\Log;
 use TwitterStreamingApi;
 
 class TwitterListener extends Command
@@ -43,6 +44,7 @@ class TwitterListener extends Command
     {
         TwitterStreamingApi::userStream()
             ->onEvent(function(array $event) {
+                \Log::info($event);
                 if(isset($event['retweeted_status'])){
                     //this is a retweet
                 }
@@ -51,6 +53,7 @@ class TwitterListener extends Command
                         $this->addMessage($event);
                     }
                 }
+
                 else if(isset($event['entities']['user_mentions'])){
                     foreach($event['entities']['user_mentions'] as $m){
                         if($m['screen_name'] == 'teyitorg' && $event['in_reply_to_screen_name'] == null){ //teyit mentioned but not reply.
