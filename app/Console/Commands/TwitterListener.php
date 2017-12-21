@@ -56,8 +56,10 @@ class TwitterListener extends Command
 
                 else if(isset($event['entities']['user_mentions'])){
                     foreach($event['entities']['user_mentions'] as $m){
-                        if($m['screen_name'] == 'teyitorg' && $event['in_reply_to_screen_name'] == null){ //teyit mentioned but not reply.
-                            $this->addMention($event);
+                        if($m['screen_name'] == 'teyitorg'){ //teyit mentioned but not reply.
+                            if( ($event['in_reply_to_screen_name'] == null) || ($event['in_reply_to_screen_name'] == 'teyitorg')){
+                                $this->addMention($event);    
+                            }
                         }
 	                    if($m['screen_name'] !== 'teyitorg' && $event['in_reply_to_screen_name'] == "teyitorg"){ //teyit mentioned but reply.
 		                    $this->addMention($event);
