@@ -102,6 +102,7 @@ class ReportController extends Controller
             'phone' => $request->input('phone')
         ]);
 
+        $case = Cases::find($request->input('case_id'));
 
         $filePrefix = date("Y/m/d") . '/'."report-".$report->id;
         if($request->hasFile('report_files')){
@@ -116,6 +117,10 @@ class ReportController extends Controller
 
                 if(!$report->files->contains($file->id)){
                     $report->files()->attach($file->id);
+                }
+                
+                if(!$case->files->contains($file)){
+                   $case->files()->attach($file->id);
                 }
             }
         }
@@ -174,6 +179,10 @@ class ReportController extends Controller
 
                 if(!$report->files->contains($file->id)){
                     $report->files()->attach($file->id);
+                }
+
+                if(!$case->files->contains($file)){
+                    $case->files()->attach($file->id);
                 }
             }
         }

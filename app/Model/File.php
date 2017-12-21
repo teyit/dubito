@@ -14,5 +14,8 @@ class File extends Model
     protected $fillable = ['id','file_url','file_type'];
 
     protected static $logAttributes = ['file_url','file_type'];
-
+    public function getFileUrlAttribute($attr){
+    	
+    	return $attr;
+    }
 }

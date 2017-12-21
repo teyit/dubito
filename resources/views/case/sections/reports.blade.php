@@ -17,7 +17,7 @@
                         <div class="gallery-container">
                             <div class="item">
                                 <div class="photo">
-                                    <div class="img"><img src="{{$f->file_url}}" alt="Gallery Image">
+                                    <div class="img"><img src="{{ConverterFileLink($f->file_url)}}" alt="Gallery Image">
                                         <div class="over">
                                             <div class="info-wrapper">
                                                 <div class="info">
@@ -26,11 +26,11 @@
                                                                          href="javascript:;"><i
                                                                     class="icon mdi mdi-plus"></i></a>
                                                         <a
-                                                                href="{{$f->file_url}}"
+                                                                href="{{ConverterFileLink($f->file_url)}}"
                                                                 class="image-zoom"><i
                                                                     class="icon mdi mdi-search"></i></a>
                                                         <a
-                                                                href="{{$f->file_url}}"
+                                                                href="{{ConverterFileLink($f->file_url)}}"
                                                                 download ><i
                                                                     class="icon mdi mdi-download"></i></a>
                                                     </div>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{--<img src="{{$f->file_url}}" alt="Thumbnail" class="gallery-thumbnail">--}}
+                        {{--<img src="{{ConverterFileLink($f->file_url)}}" alt="Thumbnail" class="gallery-thumbnail">--}}
                     @endforeach
                 </div>
             </div>
