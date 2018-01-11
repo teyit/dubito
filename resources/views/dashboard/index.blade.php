@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <iframe src="http://reports.teyit.link/public/dashboard/36b92a0d-75b3-468d-8578-ef364b4e2b0e" frameborder="0" width="100%" height="800" callowtransparency></iframe>
+                <iframe src="https://reports.teyit.link/public/dashboard/36b92a0d-75b3-468d-8578-ef364b4e2b0e" frameborder="0" width="100%" height="800" callowtransparency></iframe>
             </div>
         </div>
     </div>
