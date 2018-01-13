@@ -9,11 +9,11 @@
                 <span class="activity-text"></span>
             </a>            
             @foreach($case->activities as $a)
-            <a href="javascript:;" class="list-group-item activity-item">
+            <a href="javascript:;" data-id="{{$a->id}}" class="list-group-item activity-item ">
                 <span class="badge badge-primary">{{$a->created_at}}</span>
                 <img class="account-img" style="width:24px;margin-right:10px;" src="{{$a->user->account_picture or "/assets/img/avatar1.png"}}" />
                 <strong class="activity-username">{{$a->user->name or ''}}: </strong>
-                <span class="activity-text">{{$a->text}}</span>
+                <span class="activity-text edit-activity-{{$a->id}}">{{$a->text}}</span>
             </a>
             @endforeach
             <span  class="list-group-item disabled">

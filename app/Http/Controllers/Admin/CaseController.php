@@ -317,4 +317,24 @@ class CaseController extends Controller
         return redirect()->back();
     }
 
+
+    public function updateActivity(Request $request,$caseID,$activityID){
+
+        $text = $request->get('value',false);
+
+        if(!$text){
+            return response()->json(false,400);
+        }
+
+        $activity = Activity::find($activityID);
+        $activity->case_id = $caseID;
+        $activity->user_id = $request->user()->id;
+        $activity->text = $text;
+        $activity->save();
+        if($request->ajax()){
+            return response()->json($activity->load('user'),200);
+        }
+        return redirect()->back();
+    }
+
 }
