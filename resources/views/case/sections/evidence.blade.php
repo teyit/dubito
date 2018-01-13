@@ -38,7 +38,8 @@
                             @foreach($case->evidences as $evidence)
                                 <li class="latest">
                                     <span class="timeline-autor">{{$evidence->user->name or "Deleted User"}}</span> - <span
-                                            style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d.m.Y")}}</span>
+                                            style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d.m.Y")}}</span> &nbsp;
+                                    <span style="font-size:18px;"><a class="delete-evidence" data-case-id="{{$case->id}}" data-id="{{$evidence->id}}" style="color:#ea4335;" href="javascript:;" ><i class="icon mdi mdi-delete"></i></a></span>
                                     <div class="user-timeline-description">
                                         <div class="evidence-text">
                                             {{$evidence->text or ''}}

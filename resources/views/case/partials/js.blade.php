@@ -232,8 +232,11 @@
 
                 }
             });
-
         @endforeach
+
+
+
+
 
 
         //Evidence form
@@ -272,6 +275,28 @@
                     window.location.reload()
                 }
             });
+        });
+
+        $(".delete-evidence").on('click',function(){
+            const evidenceID = $(this).attr('data-id');
+            const caseID = $(this).attr('data-case-id');
+
+            $.ajax({
+                method:"DELETE",
+                url:"/evidences/"+evidenceID,
+                data:{ case_id:caseID,_token: $("#_token").val()},
+                success:function(response){
+                    if(response){
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Evidence has been deleted',
+                            class_name: 'color success'
+                        });
+                    }
+                    window.location.reload()
+                }
+            })
+
         });
 
         var status = '{{$case->status}}';

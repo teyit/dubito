@@ -20,7 +20,6 @@ class EvidenceController extends Controller
             $files = $request->file('file');
 
 
-
             $filePrefix = date("Y/m/d") . '/'."files";
 
             foreach ($files as $index => $file) {
@@ -38,5 +37,21 @@ class EvidenceController extends Controller
         }
 
          return response()->json(true,200);
+    }
+
+
+    public function destroy($id){
+
+        $evidence = Evidence::find($id);
+
+        if($evidence->files->contains($id)){
+            $evidence->files()->detach();
+        }
+
+        $evidence->delete();
+
+
+        
+        return response()->json(true,200);
     }
 }
