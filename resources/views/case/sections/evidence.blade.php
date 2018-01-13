@@ -40,7 +40,9 @@
                                     <span class="timeline-autor">{{$evidence->user->name or "Deleted User"}}</span> - <span
                                             style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d.m.Y")}}</span>
                                     <div class="user-timeline-description">
-                                        {{$evidence->text or ''}}
+                                        <div class="evidence-text">
+                                            {{$evidence->text or ''}}
+                                        </div>
                                         @if(!$evidence->links->isEmpty())
                                         @foreach($evidence->links as $l)
                                             @include("message.partials.linkPreview",$l)
