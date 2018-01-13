@@ -51,7 +51,8 @@
                                         @endif
                                     </div>
                                     <div class="gallery-container evidence-gallery-container">
-                                        @foreach($evidence->files as $file)
+                                        @foreach($evidence->files as $key => $file)
+                                            @if($file->file_type != "text")
                                             <div class="item">
                                                 <div class="photo">
                                                     <div class="img"><img class="img-responsive" src="{{Storage::disk('s3')->url($file->file_url)}}" alt="Gallery Image">
@@ -68,6 +69,9 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @else
+                                                &nbsp;&nbsp;<a style="font-size:14px;" href="{{Storage::disk('s3')->url($file->file_url)}}" download>File-{{$key+1}} <i class="icon mdi mdi-download"></i></a>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </li>
