@@ -117,7 +117,7 @@
             $('#assign-user-case').editable({
                 type: 'select',
                 title: 'Select status',
-                url: "{{route('case.user.assign',$case->id)}}",
+                url: "{{url("/assignUserToCase/$case->id")}}",
                 pk: 1,
                 source: result,
                 success: function (response, value) {

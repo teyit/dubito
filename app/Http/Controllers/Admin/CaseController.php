@@ -296,7 +296,8 @@ class CaseController extends Controller
             return response()->json(true,200);
         }
         return redirect()->back();
-    }    
+    }
+
     public function addActivity(Request $request,$caseID){
         
         $text = $request->get('text',false);
