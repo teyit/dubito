@@ -18,7 +18,9 @@
                 @foreach($links as $link)
                     <tr>
                         <td>{{$link->id}}</td>
-                        <td>{{$link->meta_title}}</td>
+                        <td><p style="word-wrap: break-word; width:400px; ">
+                                {{$link->meta_title}}
+                            </p></td>
                         <td>{{$link->created_at}}</td>
                         <td>
 

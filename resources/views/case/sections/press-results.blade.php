@@ -3,7 +3,6 @@
     <tr>
         <th style="width:440px;">Title</th>
         <th>Source</th>
-        <th>Score</th>
         <th style="width:170px;">Created at</th>
         <th style="width:130px;" class="actions"></th>
     </tr>
@@ -13,7 +12,6 @@
         <tr id="press-line-{{$p['id']}}">
             <td><a href="{{$p['url']}}" target="_blank">{{$p['title']}}</a></td>
             <td>{{parse_url($p['url'],PHP_URL_HOST)}}</td>
-            <td>{{$p['score']}}</td>
             <td>{{date("d-m-Y  H:i",strtotime($p['date']))}}</td>
             <td>
 
