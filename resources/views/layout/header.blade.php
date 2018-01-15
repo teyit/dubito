@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/daterangepicker/css/daterangepicker.css')}}"/>
     <script src="{{url("assets/lib/jquery/jquery.min.js")}}" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
     <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
 </head>

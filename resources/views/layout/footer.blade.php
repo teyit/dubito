@@ -39,7 +39,6 @@
 
 <script src="{{url('assets/lib/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js')}}"></script>
 
-
 @yield('script')
 
 
@@ -48,6 +47,8 @@
 
 
     $(document).ready(function(){
+
+        App.dashboardAutocomplete()
         App.init();
         App.dataTables();
 
@@ -60,6 +61,35 @@
 
     });
 </script>
+
+<style>
+
+    .ui-autocomplete  {
+        width:734px !important;
+        padding:10px !important;
+    }
+
+    .ui-autocomplete li a {
+        overflow: hidden;
+        display: block;
+    }
+    .ui-autocomplete li a img {
+        float: left;
+        margin-right: 10px;
+        height: 40px;
+    }
+    .ui-autocomplete li a .username {
+        display: block;
+        font-size: 16px;
+        line-height: 17px;
+    }
+    .ui-autocomplete li a .email {
+        display: block;
+        font-size: 12px;
+        color: #999;
+    }
+</style>
+
 
 
 

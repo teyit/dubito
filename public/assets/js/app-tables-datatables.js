@@ -1,7 +1,36 @@
 var App = (function () {
   'use strict';
 
-  App.dataTables = function( ){
+    App.dashboardAutocomplete = function(){
+
+      var $search = $('.search-input');
+
+      $search.autocomplete({
+          source:'/api/search',
+          focus: function(event, ui){
+              $search.val(ui.item.text);
+          },
+          select: function(event, ui){
+              window.location.replace(ui.item.url)
+          },
+          minLength: 3
+      });
+
+      $search.data('ui-autocomplete')._renderItem = function( ul, item ){
+
+          var $li = $('<li>');
+
+          $li.html('<a href="#">' +
+              '<span class="username">' + item.text + '</span>' +
+              '<span class="email">' + item.category + '</span>' +
+              '</a>');
+
+          return $li.appendTo(ul);
+
+      };
+  };
+
+  App.dataTables = function(){
 
 
 
