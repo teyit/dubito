@@ -13,7 +13,8 @@ var App = (function () {
           select: function(event, ui){
               window.location.replace(ui.item.url)
           },
-          minLength: 3
+          minLength: 3,
+          max:10,
       });
 
       $search.data('ui-autocomplete')._renderItem = function( ul, item ){

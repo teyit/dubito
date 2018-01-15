@@ -88,6 +88,8 @@
         font-size: 12px;
         color: #999;
     }
+    .ui-autocomplete { height: 350px; overflow-y: scroll; overflow-x: hidden;}
+
 </style>
 
 
