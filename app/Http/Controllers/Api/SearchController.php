@@ -22,7 +22,7 @@ class SearchController extends Controller
             foreach($cases as $case){
                 $result["id"] = $case['id'];
                 $result["text"] = $case['title'];
-                $result["category"] = "case";
+                $result["category"] = "Case";
                 $result["url"] = "/cases/".$case["id"];
                 $results[] = $result;
             }

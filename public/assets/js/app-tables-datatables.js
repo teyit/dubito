@@ -22,8 +22,8 @@ var App = (function () {
           var $li = $('<li>');
 
           $li.html('<a href="#">' +
-              '<span class="username">' + item.text + '</span>' +
-              '<span class="email">' + item.category + '</span>' +
+              '<span class="text">' + item.text + '</span>' +
+              '<span class="category">' + item.category + '</span>' +
               '</a>');
 
           return $li.appendTo(ul);

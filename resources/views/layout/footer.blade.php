@@ -78,17 +78,17 @@
         margin-right: 10px;
         height: 40px;
     }
-    .ui-autocomplete li a .username {
+    .ui-autocomplete li a .text {
         display: block;
         font-size: 16px;
         line-height: 17px;
     }
-    .ui-autocomplete li a .email {
+    .ui-autocomplete li a .category {
         display: block;
-        font-size: 12px;
+        font-size: 14px;
         color: #999;
     }
-    .ui-autocomplete { height: 350px; overflow-y: scroll; overflow-x: hidden;}
+    .ui-autocomplete { height: 300px; overflow-y: scroll; overflow-x: hidden;}
 
 </style>
 
