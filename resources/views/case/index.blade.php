@@ -58,7 +58,7 @@
                                         <a data-title="Assign user" data-value="" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-user-editable case-user_id">Assign user</a>
                                 @endif
                                 <td>
-                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">{{$case->statusLabels[$case->status]}}</a>
+                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">{{$case->statusLabels[$case->status] or ""}}</a>
                                 </td>
 
                                 <td>{{$case->category->title or ""}}</td>
