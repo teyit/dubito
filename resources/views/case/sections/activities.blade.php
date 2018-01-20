@@ -1,7 +1,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">Activities</div>
     <div class="panel-body">
-        <div class="list-group">
+        <div class="list-group activity-list">
             <a href="javascript:;" class="hidden list-group-item activity-item">
                 <span class="badge badge-primary"></span>
                 <img class="account-img" style="width:24px;margin-right:10px;" src="" />

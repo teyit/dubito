@@ -200,7 +200,8 @@
                 data: {_token: $("#_token").val(),text : text},
                 success: function (data) {
                     var new_activity = $(".activity-item:last").clone()
-                    new_activity.attr("data-id",data.id);
+                    const lastID = new_activity.attr("data-id");
+                    new_activity.attr("data-id",(parseInt(lastID)+1));
                     $(".badge-primary",new_activity).html(data.created_at);
                     $(".account-img",new_activity).attr('src',data.user.picture);
                     $(".activity-username",new_activity).html(data.user.name);
@@ -209,6 +210,9 @@
 
                     new_activity.removeClass('hidden');
                     new_activity.insertBefore('.list-group-item.disabled');
+
+
+                    $('.activity-list').last().find(".activity-text").removeClass("edit-activity-"+lastID).addClass("edit-activity-"+(parseInt(lastID)+1));
         
                     $.gritter.add({
                         title: 'Success',
@@ -299,20 +303,6 @@
 
         });
 
-        var status = '{{$case->status}}';
-        if (status == 'completed') {
-            $('#statusSelector .case-status-dropdown').addClass('btn-success');
-        } else if (status == 'cancelled') {
-            $('#statusSelector .case-status-dropdown').addClass('btn-danger');
-        } else if (status == 'in_progress') {
-            $("#statusSelector .case-status-dropdown").addClass('btn-warning');
-        } else if (status == 'to_be_tweeted') {
-            $("#statusSelector .case-status-dropdown").addClass('btn-primary');
-        } else if (status == 'no_analysis') {
-            $("#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
-        } else if (status == 'suspended') {
-            $("#statusSelector .case-status-dropdown").addClass('btn-suspended');
-        }
 
 
         //Add file to case
@@ -497,11 +487,29 @@
 
     //Case status
 
-    $('.case-status-menu a').click(function () {
-        text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';
-        $('.case-status-dropdown').html(text);
-        status = $(this).attr('id');
+    var status = '{{$case->status}}';
+    if (status == 'completed') {
+        $('#statusSelector .case-status-dropdown').addClass('btn-success');
+    } else if (status == 'cancelled') {
+        $('#statusSelector .case-status-dropdown').addClass('btn-danger');
+    } else if (status == 'in_progress') {
+        $("#statusSelector .case-status-dropdown").addClass('btn-warning');
+    } else if (status == 'to_be_tweeted') {
+        $("#statusSelector .case-status-dropdown").addClass('btn-primary');
+    } else if (status == 'no_analysis') {
+        $("#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
+    } else if (status == 'suspended') {
+        $("#statusSelector .case-status-dropdown").addClass('btn-suspended');
+    }
 
+
+    $('.case-status-menu a').click(function () {
+
+        text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';
+
+        $('.case-status-dropdown').html(text);
+
+         status = $(this).attr('id');
 
         $('#statusSelector .case-status-dropdown').removeClass('btn-success btn-danger btn-warning btn-primary btn-no-analysis btn-suspended');
 
@@ -514,8 +522,8 @@
             $("#statusSelector .case-status-dropdown").addClass('btn-warning');
         } else if (status == 'to_be_tweeted') {
             $("#statusSelector .case-status-dropdown").addClass('btn-primary');
-        } else if (status == 'no_analysis') {
-            $(".#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
+        } else if (status == "no_analysis") {
+            $("#statusSelector .case-status-dropdown").addClass('btn-no-analysis');
         } else if (status == 'suspended') {
             $("#statusSelector .case-status-dropdown").addClass('btn-suspended');
         } else if (status == 'pending') {

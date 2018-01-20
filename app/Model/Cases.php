@@ -32,9 +32,7 @@ class Cases extends Model
 	    'pending' => 'Pending',
 		'in_progress' => 'In progress',
 		'no_analysis' => 'No Analysis',
-		'no_publish' => 'No Publish',
 		'verified' => 'Verified',
-		'no_consideration' => 'No consideration',
     ];
 
     public function getStatusLabelAttribute(){
