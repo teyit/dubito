@@ -8,42 +8,6 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading panel-heading-divider">
-                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync"></span><span class="icon mdi mdi-close"></span>
-                    </div><span class="title">Report/Resource</span><span class="panel-subtitle">Report is count according to channels</span>
-                </div>
-                <div class="panel-body">
-                    <canvas id="pie-chart"></canvas>
-                    <input type="hidden"
-                           data-report-source-name="{{implode(",", array_pluck($reportCountbySource,'source'))}}"
-                           data-report-source-total="{{implode(',',array_pluck($reportCountbySource,'total'))}}"
-                           id="report-source-h" />
-                </div>
-        </div>
-    </div>
-
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading panel-heading-divider">
-                    <div class="tools"><span class="icon mdi mdi-chevron-down"></span><span class="icon mdi mdi-refresh-sync"></span>
-                            <span class="icon mdi mdi-close"></span></div><span class="title">Report/Topic</span><span class="panel-subtitle">This is report count according to topc</span>
-                </div>
-                <div class="panel-body">
-                    <canvas id="bar-chart"></canvas>
-
-                    <input type="hidden"
-                           data-report-topic-name="{{implode(",", array_pluck($reportTopicCount,'title'))}}"
-                           data-report-topic-total="{{implode(',',array_pluck($reportTopicCount,'total'))}}"
-                           id="report-topic-h" />
-                </div>
-            </div>
-        </div>
-
-
-    </div>
 
 </div>
 @endsection

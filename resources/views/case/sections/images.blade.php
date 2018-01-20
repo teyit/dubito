@@ -1,7 +1,12 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         Images &nbsp;
-        <button data-toggle="modal"  data-target="#case-link-create" class="btn btn-success btn-sm btn-link-modal">Add Image</button>
+        <input type="file" name="file[]" id="file-1"
+               data-multiple-caption="{count} files selected" multiple
+               class="inputfile evidence-file">
+        <label for="file-1" class="btn-default"> <i
+                    class="mdi mdi-attachment"></i><span>Add Images</span></label>
+
     </div>
     <div class="panel-body">
         <div class="gallery-container">
