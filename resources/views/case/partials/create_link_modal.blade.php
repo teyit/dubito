@@ -11,7 +11,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Link</label>
-                        <input type="text" name="link" value="" required placeholder="Enter link" id="edit-case-title" class="form-control">
+                        <input type="url" name="link" value="" required placeholder="Enter link" id="edit-case-title" class="form-control">
                         <input type="hidden" name="case_id" value="{{$case->id}}">
                     </div>
                     <div class="form-group pull-right">

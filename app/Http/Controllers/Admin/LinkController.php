@@ -5,19 +5,51 @@ namespace App\Http\Controllers\Admin;
 use App\Model\CaseLink;
 use App\Model\Cases;
 use App\Model\Link;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class LinkController extends Controller
 {
 
+    
+    public function RequestTeyitLink($url){
+        $post = ['request_url' => $url];
+        $ch = curl_init('http://teyit.link/new');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        curl_exec($ch);
+        $redir = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+
+        curl_close($ch);
+
+        return explode("/",$redir);
+
+    }
+
+
+
+    
+
     public function store(Request $request){
-        $link = Link::create($request->all());
+
+        $teyitLink = $this->RequestTeyitLink($request->get("link"));
+
+        $data = $request->all();
+
+        $data["meta_title"] = explode("/",request("link"))[2];
+        $data["teyitlink_slug"] = $teyitLink[3];
+
+        $link = Link::create($data);
 
         $case_id = $request->input('case_id');
 
+
         if(isset($case_id)){
             $case = Cases::find($case_id);
+
             $case->links()->attach($link->id);
         }
         return redirect('cases/'.$case_id);
