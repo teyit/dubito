@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Libraries\Google\GoogleDocument;
 use App\Model\CaseLink;
 use App\Model\Category;
+use App\Model\File;
 use App\Model\PressReview;
 use App\Model\Link;
 use App\Model\Evidence;
@@ -223,7 +224,29 @@ class CaseController extends Controller
             return response()->json(true,200);
         }
         return response()->json(false,200);
+    }
 
+    public function addCaseImage(Request $request, $caseID){
+        $case = Cases::find($caseID);
+
+        if($request->hasFile('file')){
+            $files = $request->file('file');
+            $filePrefix = date("Y/m/d") . '/'."files";
+
+            foreach ($files as $index => $file) {
+
+                $file =  File::create([
+                    'file_url' =>$file->storeAs($filePrefix,$file->getClientOriginalName(),'s3'),
+                    'file_type' => explode('/',$file->getMimeType())[0]
+                ]);
+
+                if(!$case->files->contains($file)){
+                    $case->files()->attach($file);
+                }
+            }
+        }
+
+        return redirect("/cases/".$caseID);
     }
     public function removeCaseFile(Request $request,$caseID){
         $case = Cases::find($caseID);
