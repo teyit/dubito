@@ -15,11 +15,14 @@ class LinkController extends Controller
 
     
     public function RequestTeyitLink($url){
-        $post = ['request_url' => $url];
-        $ch = curl_init('http://teyit.link/new');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
+        $ch = curl_init();
+
+        curl_setopt_array($ch, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => 'http://teyit.link/add?request_url='.$url,
+            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+        ));
+
         curl_exec($ch);
         $redir = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
 
@@ -36,6 +39,7 @@ class LinkController extends Controller
     public function store(Request $request){
 
         $teyitLink = $this->RequestTeyitLink($request->get("link"));
+
 
         $data = $request->all();
 
