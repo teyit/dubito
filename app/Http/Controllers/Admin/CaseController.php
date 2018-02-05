@@ -229,8 +229,8 @@ class CaseController extends Controller
     public function addCaseImage(Request $request, $caseID){
         $case = Cases::find($caseID);
 
-        if($request->hasFile('file')){
-            $files = $request->file('file');
+        if($request->hasFile('case_file')){
+            $files = $request->file('case_file');
             $filePrefix = date("Y/m/d") . '/'."files";
 
             foreach ($files as $index => $file) {
