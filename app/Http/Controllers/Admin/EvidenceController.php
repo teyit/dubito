@@ -18,14 +18,14 @@ class EvidenceController extends Controller
        $evidence =  Evidence::create($request->all());
         if($request->hasFile('file')){
             $files = $request->file('file');
-             dd($files);
+
 
             $filePrefix = date("Y/m/d") . '/'."files";
 
             foreach ($files as $index => $file) {
 
                 $file =  File::create([
-                    'file_url' =>$file->storeAs($filePrefix,str_slug($file->getClientOriginalName()),'s3'),
+                    'file_url' =>$file->storeAs($filePrefix,$file->getClientOriginalName(),'s3'),
                     'file_type' => explode('/',$file->getMimeType())[0]
                 ]);
 
