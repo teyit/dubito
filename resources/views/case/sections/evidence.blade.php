@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="gallery-container evidence-gallery-container">
                                         @foreach($evidence->files as $key => $file)
-                                            @if($file->file_type != "text")
+                                            @if($file->file_type == "image")
                                             <div class="item">
                                                 <div class="photo">
                                                     <div class="img"><img class="img-responsive" src="{{Storage::disk('s3')->url($file->file_url)}}" alt="Gallery Image">
