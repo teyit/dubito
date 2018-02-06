@@ -22,6 +22,7 @@ Route::group(['namespace'=>'Api'],function(){
     Route::resource("cases","CaseController");
     Route::resource("categories","CategoryController");
     Route::resource("users","UserController");
+    Route::resource("roles","RoleController");
     Route::get("search","SearchController@search");
 });
 

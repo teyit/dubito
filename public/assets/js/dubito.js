@@ -83,6 +83,15 @@ function getUsers(callback){
     });
 }
 
+
+function getRoles(callback){
+    $.get("/api/roles/", function(data){
+        callback(data);
+    });
+}
+
+
+
 function getCategoriesData(callback){
     $.get("/api/categories?editable=true", function(data){
         callback(data);

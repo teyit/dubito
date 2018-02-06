@@ -48,6 +48,10 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
     //Reviews
     Route::resource("reviews","ReviewController");
 
+    //User
+    Route::resource("users","UserController");
+    Route::post('assignRoleToUser/{user_id}',['as'=>'user.role.assign','uses'=>'UserController@assignRoleToUser']);
+
 
     //Reports
     Route::get('report/{folder}',['as'=>'report.folder','uses'=>'ReportController@index']);
@@ -98,10 +102,9 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
 });
 
 Route::get('/deneme', function(){
-//
-//    $dd = array_remove_by_value(['whatsapp','other'],'other');
-//
-//    dd($dd);
+
+    dd(bcrypt("123"));
+
 });
 
 
