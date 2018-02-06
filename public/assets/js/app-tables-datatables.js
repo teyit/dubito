@@ -187,9 +187,6 @@ var App = (function () {
       });
 
 
-
-
-
     // $("#report-datatable").dataTable();
 
     $("#activity-datatable").dataTable();
