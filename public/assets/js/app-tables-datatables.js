@@ -99,6 +99,9 @@ var App = (function () {
           });
 
       } );
+
+      $('#user-datatable').DataTable({});
+
       $('#case-datatable').DataTable({
           "columns": [
               null,
