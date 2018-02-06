@@ -51,6 +51,8 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
     //User
     Route::resource("users","UserController");
     Route::post('assignRoleToUser/{user_id}',['as'=>'user.role.assign','uses'=>'UserController@assignRoleToUser']);
+    Route::post('assignStatusToUser/{user_id}',['as'=>'user.status.assign','uses'=>'UserController@assignStatusToUser']);
+
 
 
     //Reports

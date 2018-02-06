@@ -16,6 +16,7 @@
                                 <th>Name</th>
                                 <th >Email</th>
                                 <th >Role</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -28,6 +29,7 @@
                                 <th>Name</th>
                                 <th >Email</th>
                                 <th >Role</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th class="actions"></th>
@@ -48,6 +50,15 @@
                                         @else
                                             <a data-title="Assign user" data-value="" data-pk="{{$user->id}}"  data-type="select" href="#" class="editable editable-click user-role-editable user-role_id">Assign Role</a>
                                     @endif
+                                    </td>
+
+                                    <td>
+                                        @if($user->status != "")
+                                            <a data-title="Assign status" data-value="{{$user->status}}" data-pk="{{$user->id}}"  data-type="select" href="#" class="editable editable-click user-status-editable user-status-{{$user->status }}">{{$user->status}}</a>
+                                        @else
+                                            <a data-title="Assign status" data-value="" data-pk="{{$user->id}}"  data-type="select" href="#" class="editable editable-click user-status-editable user-status">Assign Status</a>
+                                        @endif
+                                    </td>
 
                                     <td>{{$user->created_at}}</td>
                                     <td>{{$user->updated_at}}</td>
@@ -118,6 +129,36 @@
                 }
             });
 
+        });
+
+        const status = [
+            {
+                "value":"active",
+                "text":"Active"
+            },
+            {   "value":"passive",
+                "text":"Passive"
+            }
+        ];
+
+        $('.user-status-editable').editable({
+            type: 'select',
+            title: 'Select status',
+            url: "{{url("/assignStatusToUser/$user->id")}}",
+            pk: 1,
+            source: status,
+            success: function (response, value) {
+                console.log(response,value);
+                if (response) {
+
+                    $.gritter.add({
+                        title: 'Success',
+                        text: 'Status was assigned to user successfuly',
+                        class_name: 'color success'
+                    });
+                }
+
+            }
         });
 
 

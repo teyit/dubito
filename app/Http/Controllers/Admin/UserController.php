@@ -75,13 +75,19 @@ class UserController extends Controller
     }
 
 
+    public function assignStatusToUser(Request $request,$userID=false){
+
+        $user = User::find(request()->get("pk"));
+        $user->status = $request->input('value');
+        $user->save();
+        return response()->json($user->user,200);
+
+    }
+
     public function assignRoleToUser(Request $request,$userID=false){
 
-        if($userID == false){
-            if($request->get('pk',false)){
-                $userID = $request->get('pk');
-            }
-        }
+
+        return request()->get("pk");
 
         $user = User::find(request()->get("pk"));
         $user->role_id = $request->input('value');
