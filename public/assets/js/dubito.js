@@ -91,7 +91,6 @@ function getRoles(callback){
 }
 
 
-
 function getCategoriesData(callback){
     $.get("/api/categories?editable=true", function(data){
         callback(data);

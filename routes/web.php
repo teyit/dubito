@@ -103,7 +103,6 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
 
 Route::get('/deneme', function(){
 
-    dd(bcrypt("123"));
 
 });
 
