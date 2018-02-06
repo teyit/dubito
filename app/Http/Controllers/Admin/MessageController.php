@@ -14,6 +14,12 @@ use Twitter;
 use AWS;
 class MessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
+
+
     public function test(){
         $this->markSeenFacebook(1672136149469483);
     }

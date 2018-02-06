@@ -139,6 +139,10 @@ class CaseController extends Controller
     }
     public function index($folder='new'){
 
+        if(request()->user()->hasRole("Writer") && !in_array($folder,['cold_cases','news_feed'])){
+            return redirect()->route("admin.dashboard");
+        }
+
         $topics = Topic::latest()->get();
         $cases = Cases::where('folder',$folder)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();

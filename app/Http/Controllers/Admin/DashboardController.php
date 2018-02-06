@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin,Writer');
+    }
+
     public function index(){
 
         $reportCountbySource = Message::select('source')

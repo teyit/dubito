@@ -27,7 +27,7 @@ Route::get("preview",function(){
 	dd($tags);
 });
 
-Route::group(['namespace' => 'Admin','middleware'=>'auth'], function () {
+Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
 
     Route::get('/',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
 

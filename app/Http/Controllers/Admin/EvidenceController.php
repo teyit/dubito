@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class EvidenceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
+
+
     public function store(Request $request){
 
       $case_id = $request->input('case_id');

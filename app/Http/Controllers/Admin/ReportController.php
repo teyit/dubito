@@ -16,6 +16,10 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
 
 
     public function index($folder="ongoing"){

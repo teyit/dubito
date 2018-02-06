@@ -8,6 +8,13 @@ use App\Http\Controllers\Controller;
 
 class TagController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
+    
+    
     public function index(){
         $tags = Tag::latest()->get();
         return view('tag.index',compact('tags'));

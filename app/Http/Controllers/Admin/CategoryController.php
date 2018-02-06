@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Middleware\CheckRole;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:Admin');
+    }
 
     public function index(){
-
         $categories = Category::all();
         return view("category.index",compact("categories"));
     }
 
      public function create(){
+
      $categories = Category::all();
     return view("category.create",compact("categories"));
     }
