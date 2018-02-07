@@ -139,7 +139,7 @@ class CaseController extends Controller
     }
     public function index($folder='new'){
 
-        if(request()->user()->hasRole("Writer") && !in_array($folder,['cold_cases','news_feed'])){
+        if(request()->user()->hasRole("Writer") && !in_array($folder,['cold_cases','news_feed','archive'])){
             return redirect()->route("admin.dashboard");
         }
 

@@ -6,7 +6,6 @@
                     <ul class="sidebar-elements">
                         <li class="divider">Menu</li>
 
-
                         <li class="{{request()->segment(1) == '' ? "active" : ""}}"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
                         @if(request()->user()->hasRole("Admin"))
@@ -24,10 +23,7 @@
                                 @endif
                                 <li class="{{request()->is('case/news_feed') ? 'active' : ''}}"><a href="{{url("/case/news_feed")}}">News Feed</a></li>
                                 <li class="{{request()->is('case/cold_cases') ?  'active' : ''}}"><a href="{{url("/case/cold_cases")}}">Cold Cases</a></li>
-                                @if(request()->user()->hasRole("Admin"))
                                 <li class="{{request()->is('case/archive') ? 'active' : ''}}"><a href="{{url("/case/archive")}}">Archive</a></li>
-                                @endif
-
                             </ul>
                         </li>
 
