@@ -2,10 +2,10 @@
     <div class="panel-heading">
         <form action="{{route("case.image.store",$case->id)}}" method="post" enctype="multipart/form-data">
         Images &nbsp;
-            <input type="file" name="case_file[]" id="file-1"
+            <input type="file" name="case_file[]" id="file-2"
                    data-multiple-caption="{count} files selected" multiple
                    class="inputfile">
-            <label for="file-1" class="btn-default"> <i
+            <label for="file-2" class="btn-default"> <i
                         class="mdi mdi-attachment"></i><span>Add Images</span></label>
             <button class="btn btn-success" type="submit">Save</button>
 
