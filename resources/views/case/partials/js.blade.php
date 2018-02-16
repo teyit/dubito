@@ -115,9 +115,13 @@
 
         $('#tag-input').editable({
             inputclass: 'input-large',
+            pk: 1,
+
+            type: "select2",
             select2: {
-                tags: ['html', 'javascript', 'css', 'ajax','serafettin','memet'],
-                tokenSeparators: [",", " "]
+                debug:true,
+                tags : true,
+                data : ["html","haha","zaa"]
             }
         });
 
@@ -149,7 +153,7 @@
 
         getCategoriesData(function (result) {
 
-            console.log(result);
+
 
             $('#change-category').editable({
                 type: 'select',

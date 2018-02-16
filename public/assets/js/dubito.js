@@ -4,7 +4,6 @@ $(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    console.log("autıcomplete");
 
     $(".autocomplete").select2({
         tags : true,

@@ -42,7 +42,7 @@
                         <ol class="breadcrumb page-head-nav">
                             <li>User: <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id or ''}}" data-type="select"  href="#"  class="editable editable-click">{{$case->user->name or ''}}</a></li>
                             <li>Category: <a id="change-category" data-title="Change Category " data-value="{{$case->category->title or ''}}" data-type="select"  href="#"  class="editable editable-click">{{$case->category->title or ''}}</a></li>
-                            <li>Tags: <a href="#" id="tag-input" data-type="select2" data-pk="1" data-title="Enter tags">html,ahmet,mehmet,niyazi</a></li>
+                            <li>Tags: <a href="#" id="tag-input">{{implode(",",$selectedTags)}}</a></li>
                             <li>Created at: {{$case->created_at->format("d-m-Y h:i")}}</li>
                             <li>Updated at: {{$case->updated_at->format("d-m-Y h:i")}}</li>
                         </ol>
