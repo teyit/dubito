@@ -1,6 +1,6 @@
 <div class="panel panel-default">
-    <div class="panel-heading">Activities</div>
-    <div class="panel-body">
+    <div class="panel-heading panel-heading-divider">Activities</div>
+    <div class="panel-body" style="padding:0px;">
         <div class="list-group activity-list">
             <a href="javascript:;" class="hidden list-group-item activity-item">
                 <span class="badge badge-primary"></span>
@@ -16,7 +16,7 @@
                 <span class="activity-text edit-activity-{{$a->id}}">{{$a->text}}</span>
             </a>
             @endforeach
-            <span  class="list-group-item disabled">
+            <span  class="list-group-item disabled" style="background-color:white;">
                 <form id="activity-form-ajax" class="form-inline">
                     <input style="width:100%" placeholder="Add an activity" type="text" class="form-control">
                 </form>
