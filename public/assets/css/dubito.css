@@ -66,16 +66,17 @@
 }
 
 .case-status-editable{
-    border: 1px solid gray;
-    padding: 3px;
+    border: 0px !important;
+    padding: 5px;
+    min-width: 100px !important;
     border-radius: 4px;
 }
 .case-status-editable:hover{
-    color:white;
+    color:white !important;
 }
 
-.case-status-pending{background: white;color: black;}
-.case-status-in_progress{background:yellow;color:#fff;}
+.case-status-pending{background: #FF9800;color: white;}
+.case-status-in_progress{background:#ff5722;color:white;}
 .case-status-no_analysis{background:darkslategray;color:white;}
 .case-status-no_publish{background:#e67e22;color:#fff}
 .case-status-verified{background:green;color:white;}

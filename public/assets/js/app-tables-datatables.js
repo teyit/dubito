@@ -48,15 +48,15 @@ var App = (function () {
       $('#case-datatable').on( 'draw.dt', function () {
           $(".case-status-editable").editable({
               showbuttons:!1,
+              highlight:false,
               url: '/caseStatus',
               source:caseStatusLabels,
           }).on('save',function (e,params) {
-
               for(var i in caseStatusLabels){
-                  console.log(caseStatusLabels[i].value);
-                  $(this).removeClass('status_' + caseStatusLabels[i].value);
+                  $(this).removeClass('case-status-' + caseStatusLabels[i].value);
               }
-              $(this).addClass('status_' + params.newValue);
+              console.log(params.newValue);
+              $(this).addClass('case-status-' + params.newValue);
 
           });
           //url: '/setPublished/{{$case->id}}',
@@ -110,7 +110,6 @@ var App = (function () {
               { "orderable": false },
               { "orderable": false },
               null,
-              null,
               { "orderable": false },
               { "orderable": false }
           ],
@@ -118,8 +117,8 @@ var App = (function () {
 
               this.api().columns('.filterable').every(function (col) {
 
-                  var except = [1, 4, 8];
-                  if (except.indexOf(col) === -1) {
+                  var except = [2,3,4];
+                  if (except.indexOf(col) !== -1) {
                       var column = this;
                       var select = $('<select><option value=""></option></select>')
                           .appendTo($(column.header()).empty())
