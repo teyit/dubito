@@ -2,13 +2,12 @@
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Evidences</div>
+                <div class="panel-heading panel-heading-divider">Evidences</div>
                 <div class="panel-body">
                     <form action="{{route("evidences.store")}}" method="POST" name="evidence-form-ajax"
                           id="evidence-form-ajax" enctype="multipart/form-data">
                         <div class="form-group">
-                                    <textarea name="text" class="form-control"
-                                              id="evidence-text">{{$evidence->text or ''}}</textarea>
+                            <textarea placeholder="Add an evidence" name="text" class="form-control" id="evidence-text">{{$evidence->text or ''}}</textarea>
                         </div>
                         <div class="form-group pull-left">
                             <ul class="evidence-file-name">
@@ -30,16 +29,21 @@
                             <button data-case-id="{{$case->id}}" class="btn btn-success">Save</button>
                         </div>
                     </form>
-                    <div class="clearfix"></div>
+                    <div style="margin:0px 0px;" class="clearfix"></div>
 
                     @if(!$case->evidences->isEmpty())
                         <ul class="user-timeline">
 
                             @foreach($case->evidences as $evidence)
                                 <li class="latest">
-                                    <span class="timeline-autor">{{$evidence->user->name or "Deleted User"}}</span> - <span
-                                            style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d.m.Y")}}</span> &nbsp;
-                                    <span style="font-size:18px;"><a class="delete-evidence" data-case-id="{{$case->id}}" data-id="{{$evidence->id}}" style="color:#ea4335;" href="javascript:;" ><i class="icon mdi mdi-delete"></i></a></span>
+                                    <div style="float:left">
+                                        <span class="timeline-autor">{{$evidence->user->name or "Deleted User"}}</span>
+                                    </div>
+                                    <div style="float:right;">
+                                        <span style="color:#8c8c8c;padding-left:5px;">{{\Carbon\Carbon::parse($evidence->created_at)->format("d-m-Y H:i")}}</span> &nbsp;
+                                        <span style="font-size:18px;"><a class="delete-evidence" data-case-id="{{$case->id}}" data-id="{{$evidence->id}}" style="color:#ea4335;" href="javascript:;" ><i class="icon mdi mdi-delete"></i></a></span>
+                                    </div>
+                                    <div style="clear:both"></div>
                                     <div class="user-timeline-description">
                                         <div class="evidence-text">
                                             {{$evidence->text or ''}}

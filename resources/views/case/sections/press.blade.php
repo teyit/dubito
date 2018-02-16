@@ -1,6 +1,6 @@
 <div class="panel panel-default panel-table" id="press-datatable">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading panel-heading-divider">
             Press results
             <div class="tools">
                 <form id="press-list" class="form-inline form-group">

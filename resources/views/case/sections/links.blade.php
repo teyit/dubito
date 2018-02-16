@@ -1,10 +1,12 @@
 <div class="panel panel-default panel-table">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading panel-heading-divider">
             Links &nbsp;
             <button data-toggle="modal"  data-target="#case-link-create" class="btn btn-success btn-sm btn-link-modal">Add Link</button>
         </div>
+        <div class="panel-body">
         @if(!$links->isEmpty())
+
             <table class="table table-condensed table-striped">
                 <thead>
                 <tr>
@@ -40,5 +42,6 @@
                 There are no links in this case
             </div>
         @endif
+    </div>
     </div>
 </div>

@@ -5,10 +5,11 @@
             <div class="panel-heading">
                 <div class="page-head">
 
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <h2 class="page-head-title"><a id="change-title" data-title="change title" data-value="{{$case->title }}" data-type="text"  href="#"  class="editable editable-click">{{$case->title}}</a></h2>
                     </div>
-                    <div class="col-md-3" style="padding: 10px 0px 0px 0px;text-align: right;">
+                    <div class="col-md-4 " style="padding: 10px 0px 0px 0px;">
+                        <div style="float:right">
                         <div id="statusSelector" class="btn-group btn-hspace">
                             <button type="button" data-toggle="dropdown" class="btn btn-primary case-status-dropdown case-status-dropdown">
                                 {{$case->status_label}}
@@ -37,12 +38,13 @@
                             <input type="checkbox" @if($case->is_published) checked @endif name="checkinsucc" id="checkinsucc"><span>
                         <label for="checkinsucc"></label></span>
                         </div>
+                        </div>
                     </div>
                     <div class="col-md-12" style="margin-top:10px">
                         <ol class="breadcrumb page-head-nav">
                             <li>User: <a id="assign-user-case" data-title="Assign user to case" data-value="{{$case->user->id or ''}}" data-type="select"  href="#"  class="editable editable-click">{{$case->user->name or ''}}</a></li>
                             <li>Category: <a id="change-category" data-title="Change Category " data-value="{{$case->category->title or ''}}" data-type="select"  href="#"  class="editable editable-click">{{$case->category->title or ''}}</a></li>
-                            <li>Tags: <a href="#" id="tag-input">{{implode(",",$selectedTags)}}</a></li>
+                            <li>Tags: <a href="#" id="tag-input">{{implode(",",$selectedTags    )}}</a></li>
                             <li>Created at: {{$case->created_at->format("d-m-Y h:i")}}</li>
                             <li>Updated at: {{$case->updated_at->format("d-m-Y h:i")}}</li>
                         </ol>
