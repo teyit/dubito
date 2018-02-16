@@ -10486,6 +10486,9 @@ canvas {
   margin-top: 61px;
   padding-bottom: 61px;
 }
+.be-collapsible-sidebar-collapsed .page-aside{
+  left:60px !important;
+}
 .page-aside .be-scroller {
   position: relative;
   height: 100%;
