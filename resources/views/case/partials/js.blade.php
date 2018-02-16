@@ -113,6 +113,14 @@
 
         //Assign user to case
 
+        $('#tag-input').editable({
+            inputclass: 'input-large',
+            select2: {
+                tags: ['html', 'javascript', 'css', 'ajax','serafettin','memet'],
+                tokenSeparators: [",", " "]
+            }
+        });
+
         getUsers(function (result) {
             $('#assign-user-case').editable({
                 type: 'select',

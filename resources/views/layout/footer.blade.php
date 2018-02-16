@@ -15,7 +15,7 @@
 <script src="{{url("assets/lib/jqvmap/jquery.vmap.min.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/lib/jqvmap/maps/jquery.vmap.world.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/app-dashboard.js")}}" type="text/javascript"></script>
-<script src="{{url('assets/lib/select2/js/select2.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/select2/js/select2.full.js')}}" type="text/javascript"></script>
 <script src="{{url("assets/js/dubito.js")}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 

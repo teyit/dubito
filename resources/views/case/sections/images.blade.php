@@ -6,7 +6,7 @@
                    data-multiple-caption="{count} files selected" multiple
                    class="inputfile">
             <label for="file-2" class="btn-default"> <i
-                        class="mdi mdi-attachment"></i><span>Add Images</span></label>
+                        class="mdi mdi-attachment"></i><span>Add Image</span></label>
             <button class="btn btn-success" type="submit">Save</button>
 
         </form>

@@ -5008,7 +5008,9 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand {
   float: left;
   padding: 16px 15px;
-  font-size: 15px;
+  font-size: 25px;
+  font-weight:bold;
+  color:#4285f4 !important;
   line-height: 18px;
   height: 50px;
 }
@@ -10406,7 +10408,7 @@ canvas {
   [Page head]
 */
 .page-head {
-  padding: 20px 25px 10px;
+
   position: relative;
 }
 .page-head-title {
@@ -10673,9 +10675,9 @@ canvas {
 */
 .switch-button {
   display: inline-block;
-  border-radius: 50px;
+  border-radius: 20px;
   background-color: #b3b3b3;
-  width: 60px;
+  width: 80px;
   height: 27px;
   padding: 4px;
   position: relative;
@@ -10699,7 +10701,7 @@ canvas {
 }
 .switch-button label:before {
   position: absolute;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   z-index: 0;
   content: "OFF";
@@ -10729,7 +10731,7 @@ canvas {
 }
 .switch-button input[type="checkbox"]:checked + span label:before {
   position: absolute;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   z-index: 0;
   content: "ON";
@@ -10739,16 +10741,15 @@ canvas {
   padding-left: 10px;
 }
 .switch-button.switch-button-yesno label:before {
-  content: "NO";
+  content: "Draft";
 }
 .switch-button.switch-button-yesno input[type="checkbox"]:checked + span label:before {
-  content: "YES";
+  content: "Public";
 }
 .switch-button.switch-button-xs {
   height: 20px;
-  width: 53px;
   line-height: 16px;
-  width: 50px;
+  width: 75px;
 }
 .switch-button.switch-button-xs label {
   height: 12px;
@@ -10771,9 +10772,9 @@ canvas {
 }
 .switch-button.switch-button-lg {
   height: 30px;
-  width: 63px;
+  width: 75px;
   line-height: 26px;
-  width: 65px;
+
 }
 .switch-button.switch-button-lg label {
   height: 22px;

@@ -1,9 +1,11 @@
 @extends('layout.app')
 @section('content')
+
+
     <div class="main-content container-fluid">
+        @include("case.sections.main",$case)
         <div class="row">
             <div class="col-md-6">
-                @include('case.sections.main',$case)
                 @include('case.sections.images',$case)
                 @include('case.sections.links',$case)
                 @include('case.sections.reports',$case)
@@ -22,5 +24,6 @@
 @section("script")
     <script src="{{asset('assets/lib/jquery.magnific-popup/jquery.magnific-popup.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/lib/masonry/masonry.pkgd.min.js')}}" type="text/javascript"></script>
+
     @include('case.partials.js')
 @endsection

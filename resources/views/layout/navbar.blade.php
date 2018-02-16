@@ -1,6 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a href="{{url("/")}}" class="navbar-brand">Dubito</a>
+        <div class="navbar-header"><a href="{{url("/")}}" class="navbar-brand">dubito</a>
         </div>
         <div class="be-right-navbar be-right-navbar-flex">
             <div class="search-container">
