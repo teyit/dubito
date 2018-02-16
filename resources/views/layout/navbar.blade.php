@@ -1,6 +1,8 @@
 <nav class="navbar navbar-default navbar-fixed-top be-top-header">
     <div class="container-fluid">
-        <div class="navbar-header"><a href="{{url("/")}}" class="navbar-brand">
+        <div class="navbar-header">
+            <a href="#" class="be-toggle-left-sidebar"><span class="icon mdi mdi-menu"></span></a>
+            <a href="{{url("/")}}" class="navbar-brand">
                 <img style="width:100%;margin:15px 0px;" src="/assets/img/dubito.png" />
             </a>
         </div>
