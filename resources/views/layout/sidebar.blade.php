@@ -9,9 +9,9 @@
                         <li class="{{request()->segment(1) == '' ? "active" : ""}}"><a href="{{url("/")}}"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
                         </li>
                         @if(request()->user()->hasRole("Admin"))
-                        <li class="{{request()->segment(1) == 'messages' ? "active" : ""}}" ><a  href="{{url("/messages/")}}"><i class="icon mdi mdi-local-post-office"></i><span>Messages</span></a></li>
+                        <li class="{{request()->segment(1) == 'messages' ? "active" : ""}}" ><a  href="{{url("/messages/")}}"><i class="icon mdi mdi-inbox"></i><span>Messages</span></a></li>
 
-                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}" ><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-local-post-office"></i><span>Reports</span></a></li>
+                        <li class="{{request()->segment(1) == 'reports' ? "active" : ""}}" ><a  href="{{url("/reports/")}}"><i class="icon mdi mdi-accounts-alt"></i><span>Reports</span></a></li>
                         @endif
 
                      
@@ -33,7 +33,7 @@
                         -->
                         <li class="{{request()->segment(1) == 'categories' ? "active" : ""}} "><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i><span>Categories</span></a></li>
 
-                        <li class="{{request()->segment(1) == 'tags' ? "active" : ""}}"><a  href="{{url("/tags")}}"><i class="icon mdi mdi-tag"></i><span>Tags</span></a></li>
+                        <li class="{{request()->segment(1) == 'tags' ? "active" : ""}}"><a  href="{{url("/tags")}}"><i class="icon mdi mdi-label-alt"></i><span>Tags</span></a></li>
                         <!--
                         <li class="{{request()->segment(1) == 'reviews' ? "active" : ""}}"><a  href="{{url("/reviews")}}"><i class="icon mdi mdi-comment"></i> Reviews</a></li>
 
