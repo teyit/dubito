@@ -27,6 +27,7 @@ class SearchController extends Controller
                     $result["text"] = $case['title'];
                     $result["category"] = "Case";
                     $result["url"] = "/cases/".$case["id"];
+                    $result["folder"] = $case["folder"];
                     $results[] = $result;
                 }
                 return $results;

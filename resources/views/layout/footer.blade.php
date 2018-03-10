@@ -82,12 +82,23 @@
         display: block;
         font-size: 16px;
         line-height: 17px;
+        float:left;
     }
     .ui-autocomplete li a .category {
         display: block;
         font-size: 14px;
         color: #999;
+        float:right
     }
+
+    .ui-autocomplete li a .folder {
+        display: block;
+        font-size: 12px;
+        color: #999;
+        float:right;
+        padding:0 5px;
+    }
+
     .ui-autocomplete { height: 300px; overflow-y: scroll; overflow-x: hidden;}
 
 </style>
