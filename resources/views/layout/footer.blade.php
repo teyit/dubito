@@ -53,7 +53,7 @@
         App.dataTables();
 
 
-        $(".select2").select2({
+        $(".report-case-select2").select2({
             width: '100%'
         });
 
