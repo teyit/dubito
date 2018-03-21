@@ -24,7 +24,7 @@ var App = (function () {
           $li.html('<a href="#">' +
               '<span class="text">' + item.text + '</span>' +
               '<span class="category">' + item.category + '</span>' +
-              '<span class="folder">' + item.folder +" | " + '</span>' +
+              '<span class="folder">' + item.folder +   " | " + '</span>' +
               '</a>');
 
           return $li.appendTo(ul);

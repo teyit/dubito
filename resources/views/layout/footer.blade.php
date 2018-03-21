@@ -53,6 +53,16 @@
         App.dataTables();
 
 
+        $(".select2").select2({
+            width: '100%'
+        });
+
+        $('b[role="presentation"]').hide();
+
+        $('.select2-arrow').append('<i class="fa fa-angle-down"></i>');
+
+
+
 
         $(window).on('load',function(){
             App.pageGallery();
@@ -100,6 +110,30 @@
     }
 
     .ui-autocomplete { height: 300px; overflow-y: scroll; overflow-x: hidden;}
+
+
+    .select2-container--default .select2-selection--single{
+        padding:6px;
+        height: 48px;
+        width: 100%;
+        font-size: 1.5em;
+        position: relative;
+    }
+
+    .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+        border-color: transparent transparent #fff transparent !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-color: #fff transparent transparent transparent !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 35px;
+        font-size: 15px;
+    }
+
+
 
 </style>
 

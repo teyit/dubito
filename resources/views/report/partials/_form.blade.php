@@ -136,7 +136,7 @@
             <label class="col-sm-3 control-label">Case</label>
             <div class="col-sm-6">
                 <div class="input-group xs-mb-16">
-                    <select name="case_id" required class="form-control report-cases">
+                    <select name="case_id" required class="select2 form-control report-cases">
                         @foreach($cases as $case)
                         <option value="{{$case->id}}">{{$case->title}}</option>
                         @endforeach
