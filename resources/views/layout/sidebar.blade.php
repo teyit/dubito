@@ -19,7 +19,7 @@
                             <a href="#"><i class="icon mdi mdi-case-check"></i><span>Cases</span></a>
                             <ul class="sub-menu">
                                 @if(request()->user()->hasRole("Admin"))
-                                <li class="{{request()->is('case/new') ?  'active' : ''}}"><a href="{{url("/case/new")}}">New</a></li>
+                                <!--<li class="{{request()->is('case/new') ?  'active' : ''}}"><a href="{{url("/case/new")}}">New</a></li>-->
                                 @endif
                                 <li class="{{request()->is('case/news_feed') ? 'active' : ''}}"><a href="{{url("/case/news_feed")}}">News Feed</a></li>
                                 <li class="{{request()->is('case/cold_cases') ?  'active' : ''}}"><a href="{{url("/case/cold_cases")}}">Cold Cases</a></li>
