@@ -19,24 +19,15 @@ class SearchController extends Controller
 
             $term = request()->get('term');
 
-//           $cases = Cases::where('title', 'LIKE', '%'.$term.'%')->get()->toArray();
-
-            $cases = Cases::join('case_tags', 'case_tags.case_id','=','cases.id')
-            ->select("cases.title as case_title", "cases.id as case_id")
-            ->join('tags','tags.id','=','case_tags.tag_id')
-            ->where('cases.title', 'LIKE', '%' . $term . '%')
-            ->orWhere('tags.title','LIKE', '%' . $term . '%')
-            ->orderBy('cases.created_at', 'desc')
-            ->groupBy('cases.id')
-            ->with('tags')
-            ->get()->toArray();
+           $cases = Cases::where('title', 'LIKE', '%'.$term.'%')->get()->toArray();
 
             if(! empty($cases)){
                 foreach($cases as $case){
-                    $result["id"] = $case['case_id'];
-                    $result["text"] = $case['case_title'];
+                    $result["id"] = $case['id'];
+                    $result["text"] = $case['title'];
                     $result["category"] = "Case";
-                    $result["url"] = "/cases/".$case["case_id"];
+                    $result["url"] = "/cases/".$case["id"];
+                    $result["folder"] = $case["folder"];
                     $results[] = $result;
                 }
                 return $results;

@@ -53,6 +53,16 @@
         App.dataTables();
 
 
+        $(".report-case-select2").select2({
+            width: '100%'
+        });
+
+        $('b[role="presentation"]').hide();
+
+        $('.select2-arrow').append('<i class="fa fa-angle-down"></i>');
+
+
+
 
         $(window).on('load',function(){
             App.pageGallery();
@@ -82,13 +92,48 @@
         display: block;
         font-size: 16px;
         line-height: 17px;
+        float:left;
     }
     .ui-autocomplete li a .category {
         display: block;
         font-size: 14px;
         color: #999;
+        float:right
     }
+
+    .ui-autocomplete li a .folder {
+        display: block;
+        font-size: 12px;
+        color: #999;
+        float:right;
+        padding:0 5px;
+    }
+
     .ui-autocomplete { height: 300px; overflow-y: scroll; overflow-x: hidden;}
+
+
+    .select2-container--default .select2-selection--single{
+        padding:6px;
+        height: 48px;
+        width: 100%;
+        font-size: 1.5em;
+        position: relative;
+    }
+
+    .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+        border-color: transparent transparent #fff transparent !important;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+        border-color: #fff transparent transparent transparent !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #444;
+        line-height: 35px;
+        font-size: 15px;
+    }
+
+
 
 </style>
 
