@@ -144,6 +144,7 @@ class CaseController extends Controller
         }
 
         $topics = Topic::latest()->get();
+        $tags = Tag::latest()->get();
         $cases = Cases::where('folder',$folder)->orderBy("created_at","DESC")->get();
         $categories = Category::latest()->get();
 	    $statusLabels = [];
@@ -152,7 +153,7 @@ class CaseController extends Controller
         	$statusLabels[] = ['value' => $key,'text' => $val];
 	    }
 	    $users = User::select('id as value','name as text')->latest()->get();
-        return view("case.index",compact("cases",'topics','categories','statusLabels','users'));
+        return view("case.index",compact("cases",'topics','categories','statusLabels','users','tags'));
     }
     public function create(){
         $topics = Topic::latest()->get();
@@ -186,13 +187,13 @@ class CaseController extends Controller
     public function show($id){
 
         $case = Cases::with('reports','evidences','user','activities')->find($id);
+        $tags = Tag::latest()->get();
 
-        
         $links = $case->links()->get();
         $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
         $allTags  = Tag::latest()->get();
         $users = User::latest()->get();
-        return view('case.show',compact('users','case','selectedTags','allTags','links','evidences'));
+        return view('case.show',compact('users','case','selectedTags','allTags','links','evidences','tags'));
     }
     public function update($id,Request $request){
 

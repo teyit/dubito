@@ -12,6 +12,10 @@ $(function(){
     });
 
 
+    $(".tag").select2({
+        tags : true,
+        width: "100%"
+    });
 
 
     $(".autocomplete-cases").select2({

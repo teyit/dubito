@@ -6,7 +6,7 @@ use App\Model\Cases;
 use App\Model\Category;
 use App\Model\Message;
 use App\Model\Report;
-use App\Model\Topic;
+use App\Model\Tag;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -37,19 +37,30 @@ class CaseController extends Controller
     }
 
     public function store(Request $request){
-        $topic_id = request()->input('topic_id');
+        $tags = request()->input('tags',[]);
+
+
         $category_id = request()->input('category_id');
 
-        if(strlen($topic_id ) > 1 and strlen($category_id) > 1){
-            $topic = Topic::firstOrCreate(['title' => $topic_id]);
+        if(strlen($category_id) > 1){
             $category = Category::firstOrCreate(['title' =>$category_id ]);
-            $data = array_merge(request()->all(),['topic_id' => $topic->id,'category_id' => $category->id]);
+            $data = array_merge(request()->all(),['category_id' => $category->id]);
         }else{
-            $data = array_merge(request()->all(),['topic_id' => $topic_id,'category_id' => $category_id]);
+            $data = array_merge(request()->all(),['category_id' => $category_id]);
         }
         unset($data['user_id']);
         
        $case =  Cases::create($data);
+
+
+        if(!is_array($tags)){
+            $tags = [];
+        }
+
+
+        $case->tags()->sync($tags);
+
+
        return response()->json($case,200);
 
     }
