@@ -18,6 +18,7 @@ $(function(){
     });
 
 
+
     $(".autocomplete-cases").select2({
         width: "100%",
         showSearchBox: true,
