@@ -22,7 +22,6 @@ class Cases extends Model
     protected static $logAttributes = ['title', 'user_id','topic_id','description','category_id','created_at','updated_at','google_document_id'];
 
     public $folderLabels = [
-	    'new' => 'New',
 	    'news_feed' => 'News Feed',
 	    'cold_cases' => 'Cold Cases',
 	    'archive' => 'Archive'

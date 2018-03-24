@@ -137,7 +137,7 @@ class CaseController extends Controller
         return $pressResults;
 
     }
-    public function index($folder='new'){
+    public function index($folder='archive'){
 
         if(request()->user()->hasRole("Writer") && !in_array($folder,['cold_cases','news_feed','archive'])){
             return redirect()->route("admin.dashboard");

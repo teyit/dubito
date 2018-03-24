@@ -11,7 +11,24 @@ class Report extends Model
     use LogsActivity;
     protected $table = 'reports';
 
+    protected static function boot()
+    {
+        parent::boot();
 
+        static::created(function ($report) {
+
+            preg_match_all('/[a-z]+:\/\/\S+/', $report->text, $matches);
+
+            $urls  = array_unique($matches[0]);
+            foreach($urls as $l){
+
+                $link = new Link();
+                $link->link = $l;
+                $link->save();
+                $report->links()->attach($link->id);
+            }
+        });
+    }
 
     protected $fillable = ['text','case_id','source','external_message_id','external_user_id','account_name','account_picture','folder','phone','created_at','updated_at'];
 
