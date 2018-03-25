@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Model\Category;
 use App\Model\Message;
 use App\Model\MessageFile;
+use App\Model\Tag;
 use App\Model\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -199,9 +200,11 @@ class MessageController extends Controller
 
         $topics = Topic::latest()->get();
 
+        $tags = Tag::latest()->get();
+
         $categories = Category::latest()->get();
 
-        return view('message.index',compact('senders','messages','topics','categories','sender_id'));
+        return view('message.index',compact('senders','messages','topics','categories','sender_id','tags'));
     }
 
 
@@ -241,7 +244,7 @@ class MessageController extends Controller
         if($messages->first()->source == 'facebook:message'){
             $this->markSeenFacebook($id);
         }
-
+        $tags = Tag::latest()->get();
 
         $currentPage = $request->get('page',false);
 
@@ -261,7 +264,7 @@ class MessageController extends Controller
 			]);
 		}else{
         	$sender_id = $id;
-			return view('message.index',compact('senders','messages','topics','categories','sender_id'));
+			return view('message.index',compact('senders','messages','topics','categories','sender_id','tags'));
 		}
 	}
 	

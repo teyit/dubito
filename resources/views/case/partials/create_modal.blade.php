@@ -13,17 +13,18 @@
                             <div class="form-group">
                                 <input type="text" required name="title" id="case-title" placeholder="Enter case title.." class="form-control">
                             </div>
+
                             <!--
                             <div class="form-group ">
                                 <label for="case_id">Cases</label>
                                 <input class="autocomplete-cases" name="case_id" id="case_id" />
                             </div>-->
+
                            <div class="form-group">
-                               <label>Select Topic</label>
-                               <select multiple name="topic_id" class="form-control autocomplete">
-                                <option value="">Select</option>
-                                @foreach($topics as $topic)
-                                       <option value="{{$topic->id}}">{{$topic->title}}</option>
+                               <label>Select Tag</label>
+                               <select name="tags[]" multiple="multiple" class="form-control tag">
+                                @foreach($tags as $tag)
+                                       <option value="{{$tag->id}}">{{$tag->title}}</option>
                                 @endforeach
                                </select>
                            </div>
