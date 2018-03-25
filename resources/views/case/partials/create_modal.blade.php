@@ -16,9 +16,7 @@
                             <!--
                             <div class="form-group ">
                                 <label for="case_id">Cases</label>
-                                <select class="autocomplete-cases" name="case_id" id="case_id">
-                                    <option value="">Select Case</option>
-                                </select>
+                                <input class="autocomplete-cases" name="case_id" id="case_id" />
                             </div>-->
                            <div class="form-group">
                                <label>Select Topic</label>
@@ -29,6 +27,7 @@
                                 @endforeach
                                </select>
                            </div>
+                           
 
                             <div class="form-group">
                                 <label class="control-label">Category</label>

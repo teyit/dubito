@@ -4,20 +4,19 @@ $(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-
+    
     $(".autocomplete").select2({
-        tags : true,
         width: "100%",
         maximumSelectionLength : 1
     });
+    
 
 
 
-
+    
     $(".autocomplete-cases").select2({
         width: "100%",
         showSearchBox: true,
-        minimumInputLength: 1,
         ajax: {
             url: "/api/cases",
             dataType: 'json',
@@ -27,16 +26,20 @@ $(function(){
                     q: params.term
                 };
             },
-            processResults: function (data, params) {
+            results: function (data, params) {
+                console.log("ZAAA");
                 params.page = params.page || 1;
+                data.map(function(d){
+                    d.text = d.title;
+                })
                 return {
                     results: data
                 };
-            },
-            cache: true
+            }
         }
 
     });
+    
 
 
     $("#category-form-ajax").on('submit',function(e){

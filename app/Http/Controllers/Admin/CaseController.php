@@ -167,7 +167,6 @@ class CaseController extends Controller
         $case = Cases::create($store);
         $case->save();
 
-
         return redirect('/cases/' . $case->id);
 
     }
@@ -189,8 +188,11 @@ class CaseController extends Controller
 
         
         $links = $case->links()->get();
-        $selectedTags= array_pluck($case->tags()->get()->toArray(),'id');
+        $selectedTags= array_pluck($case->tags()->get()->toArray(),'title');
         $allTags  = Tag::latest()->get();
+        foreach($allTags as $key => $val){
+            $allTags[$key]['text'] = $val->title;
+        }
         $users = User::latest()->get();
         return view('case.show',compact('users','case','selectedTags','allTags','links','evidences'));
     }
@@ -210,12 +212,14 @@ class CaseController extends Controller
     public function addCaseTag(Request $request,$caseID){
 
         $case = Cases::find($caseID);
-        $tags = $request->input('tags');
+        $tags = $request->input('value');
         if(!is_array($tags)){
             $tags = [];
         }
-
+        
         $case->tags()->sync($tags);
+
+        
         return response()->json(true,200);
 
     }

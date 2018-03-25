@@ -112,18 +112,20 @@
 
 
         //Assign user to case
-
+        var tagList = {!! json_encode($allTags) !!};
+        
         $('#tag-input').editable({
-            inputclass: 'input-large',
-            pk: 1,
-
-            type: "select2",
+            source: tagList,
+            url: "{{route("case.tag.store",$case->id)}}",
             select2: {
-                debug:true,
-                tags : true,
-                data : ["html","haha","zaa"]
-            }
-        });
+                multiple:true,
+                placeholder: 'Select country',
+                allowClear: true
+            } 
+        });      
+
+
+   
 
         getUsers(function (result) {
             $('#assign-user-case').editable({

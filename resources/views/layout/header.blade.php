@@ -19,9 +19,10 @@
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/jqvmap/jqvmap.min.css")}}"/>
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/datetimepicker/css/bootstrap-datetimepicker.min.css")}}"/>
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
-    <link rel="stylesheet" href="{{url("assets/css/dubito.css")}}" type="text/css"/>
+    
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/datatables/css/dataTables.bootstrap.min.css")}}"/>
-    <link rel="stylesheet" href="{{url('assets/lib/select2/css/select2.min.css')}}">
+    <!--<link rel="stylesheet" href="{{url('assets/lib/select2/css/select2.min.css')}}">-->
+    <link rel="stylesheet" href="http://vitalets.github.io/x-editable/assets/select2/select2.css" />
     <link rel="stylesheet" href="{{url('assets/lib/jquery.gritter/css/jquery.gritter.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/datatables/css/dataTables.bootstrap.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/jquery.magnific-popup/magnific-popup.css')}}"/>
@@ -32,6 +33,6 @@
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/daterangepicker/css/daterangepicker.css')}}"/>
     <script src="{{url("assets/lib/jquery/jquery.min.js")}}" type="text/javascript"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
+<link rel="stylesheet" href="{{url("assets/css/dubito.css")}}" type="text/css"/>
     <input type="text" name="_token" id="_token" value="{{csrf_token()}}">
 </head>

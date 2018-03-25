@@ -10,9 +10,7 @@
                     {{ csrf_field() }}
                     <div class="form-group ">
                         <label for="case_id">Cases</label>
-                        <select class="autocomplete-cases" name="case_id" id="case_id">
-                            <option value="">Select Case</option>
-                        </select>
+                        <input class="autocomplete-cases" name="case_id" id="case_id" />
                     </div>
                     <div class="form-group pull-left">
                         <p class="text-success success-message" style="display: none;">Report has been created.</p>

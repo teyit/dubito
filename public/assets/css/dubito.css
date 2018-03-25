@@ -383,3 +383,13 @@
     word-wrap: break-word;
     width:600px;
 }
+
+.select2-container-multi .select2-choices .select2-search-field input {
+    width: inherit !important;
+}
+
+.select2-choices {
+    border:0px !important;
+    background-color:none !important;
+    background-image:none !important;
+}

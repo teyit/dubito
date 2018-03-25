@@ -15,7 +15,9 @@
 <script src="{{url("assets/lib/jqvmap/jquery.vmap.min.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/lib/jqvmap/maps/jquery.vmap.world.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/app-dashboard.js")}}" type="text/javascript"></script>
-<script src="{{url('assets/lib/select2/js/select2.full.js')}}" type="text/javascript"></script>
+<!--<script src="{{url('assets/lib/select2/js/select2.full.js')}}" type="text/javascript"></script>-->
+<script src="https://vitalets.github.io/x-editable/assets/select2/select2.js"></script>
+
 <script src="{{url("assets/js/dubito.js")}}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
@@ -31,13 +33,13 @@
 
 <script src="{{url('assets/lib/jquery.gritter/js/jquery.gritter.js')}}"></script>
 <script src="{{url('assets/js/app-tables-datatables.js')}}" type="text/javascript"></script>
-<script src="{{url("assets/lib/jquery.magnific-popup/jquery.magnific-popup.min.js")}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/jquery.magnific-popup/jquery.magnific-popup.min.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/js/app-page-gallery.js')}}" type="text/javascript"></script>
 <script src="{{url('assets/lib/masonry/masonry.pkgd.min.js')}}" type="text/javascript"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.js"></script>
 
-<script src="{{url('assets/lib/x-editable/bootstrap3-editable/js/bootstrap-editable.min.js')}}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
 @yield('script')
 
