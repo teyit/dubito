@@ -21,8 +21,7 @@
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
     
     <link rel="stylesheet" type="text/css" href="{{url("assets/lib/datatables/css/dataTables.bootstrap.min.css")}}"/>
-    <!--<link rel="stylesheet" href="{{url('assets/lib/select2/css/select2.min.css')}}">-->
-    <link rel="stylesheet" href="http://vitalets.github.io/x-editable/assets/select2/select2.css" />
+    <link rel="stylesheet" href="{{url('assets/lib/select2/css/select2-3.4.4.min.css')}}" />  
     <link rel="stylesheet" href="{{url('assets/lib/jquery.gritter/css/jquery.gritter.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/datatables/css/dataTables.bootstrap.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/lib/jquery.magnific-popup/magnific-popup.css')}}"/>
