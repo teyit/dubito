@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label class="control-label">Category</label>
-                                <select multiple name="category_id" required class="form-control report-categories-create autocomplete ">
+                                <select name="category_id" required class="form-control report-categories-create autocomplete ">
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->title}}</option>
                                     @endforeach

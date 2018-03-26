@@ -34,24 +34,22 @@ class CaseController extends Controller
     public function store(Request $request){
         $tags = request()->input('tags',[]);
 
-
         $category_id = request()->input('category_id');
+        $category = Category::find($category_id);
 
-        if(strlen($category_id) > 1){
-            $category = Category::firstOrCreate(['title' =>$category_id ]);
-            $data = array_merge(request()->all(),['category_id' => $category->id]);
-        }else{
-            $data = array_merge(request()->all(),['category_id' => $category_id]);
+        $data = request()->all();
+        if($category){
+            $data['category_id'] = $category->id;
         }
+        
         unset($data['user_id']);
         
-       $case =  Cases::create($data);
+        $case =  Cases::create($data);
 
 
         if(!is_array($tags)){
             $tags = [];
         }
-
 
         $case->tags()->sync($tags);
 

@@ -33,9 +33,10 @@ class ReportController extends Controller
 
     public function create(){
       $topics = Topic::latest()->get();
+      $tags = Topic::latest()->get();
       $cases = Cases::latest()->get();
       $categories = Category::latest()->get();
-      return view("report.create",compact('topics','cases','categories'));
+      return view("report.create",compact('topics','cases','categories','tags'));
     }
 
 
