@@ -31,7 +31,6 @@ $(function(){
                 };
             },
             results: function (data, params) {
-                console.log("ZAAA");
                 params.page = params.page || 1;
                 data.map(function(d){
                     d.text = d.title;
