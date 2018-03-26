@@ -12,9 +12,7 @@ $(function(){
     
 
 
-    $(".tag").select2({
-        width: "100%"
-    });
+    $(".tag").select2();
 
 
     

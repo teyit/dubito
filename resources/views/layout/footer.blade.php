@@ -15,7 +15,7 @@
 <script src="{{url("assets/lib/jqvmap/jquery.vmap.min.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/lib/jqvmap/maps/jquery.vmap.world.js")}}" type="text/javascript"></script>
 <script src="{{url("assets/js/app-dashboard.js")}}" type="text/javascript"></script>
-<script src="{{url('assets/lib/select2/js/select2-3.4.4.min.js')}}" type="text/javascript"></script>
+<script src="{{url('assets/lib/select2/js/select2-3.4.5.js')}}" type="text/javascript"></script>
 
 
 
