@@ -18,15 +18,10 @@ class CaseController extends Controller
         if(isset($q)) {
 
             if(empty($q)){
-                $caseList = $cases->map(function($case){
-                    return ['id' => $case->id, 'text' => $case->title];
-                });
                 return response()->json($caseList,200);
             }
 
-            $caseList = Cases::where('title', 'LIKE', '%'.$q.'%')->get()->map(function($case){
-                return ['id' => $case->id, 'text' => $case->title];
-            });
+            $caseList = Cases::where('title', 'LIKE', '%'.$q.'%')->get();
 
 
             return response()->json($caseList,200);

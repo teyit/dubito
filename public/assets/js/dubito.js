@@ -25,9 +25,9 @@ $(function(){
             url: "/api/cases",
             dataType: 'json',
             delay: 250,
-            data: function (params) {
+            data: function (term, page) {
                 return {
-                    q: params.term
+                    q: term, // search term
                 };
             },
             results: function (data, params) {
