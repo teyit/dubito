@@ -396,3 +396,7 @@
 .select2-drop{
     box-shadow: none !important;
 }
+
+.select2-input{
+    min-width:100px !important;
+}

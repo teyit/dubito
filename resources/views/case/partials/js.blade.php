@@ -119,7 +119,7 @@
             url: "{{route("case.tag.store",$case->id)}}",
             select2: {
                 multiple:true,
-                placeholder: 'Select country',
+                placeholder: 'Select tags',
                 allowClear: true
             } 
         });      
