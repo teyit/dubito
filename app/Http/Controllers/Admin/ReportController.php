@@ -8,6 +8,7 @@ use App\Model\File;
 use App\Model\Message;
 use App\Model\Report;
 use App\Model\Topic;
+use App\Model\Tag;
 
 use App\Model\ReportFile;
 use Illuminate\Http\Request;
@@ -142,9 +143,10 @@ class ReportController extends Controller
         $cases = Cases::latest()->get();
         $categories = Category::latest()->get();
         $report = Report::find($id);
+        $tags = Tag::latest()->get();
 
         $is_edit = true;
-        return view("report.edit",compact('report','topics','cases','categories','is_edit'));
+        return view("report.edit",compact('report','topics','cases','categories','is_edit','tags'));
     }
 
     public function show($id){
