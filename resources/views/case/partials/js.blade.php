@@ -214,9 +214,9 @@
                 data: {_token: $("#_token").val(),text : text},
                 success: function (data) {
                     var new_activity = $(".activity-item:last").clone()
-                    const lastID = new_activity.attr("data-id");
+                    const lastID = data.id;
                     const caseID = "{{$case->id}}";
-                    new_activity.attr("data-id",(parseInt(lastID)+1));
+                    new_activity.attr("data-id",(parseInt(lastID)));
                     new_activity.attr("data-case-id",parseInt(caseID));
                     $(".badge-primary",new_activity).html(data.created_at);
                     $(".account-img",new_activity).attr('src',data.user.picture);
