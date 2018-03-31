@@ -353,12 +353,16 @@ class CaseController extends Controller
     public function updateActivity(Request $request,$caseID,$activityID){
 
         $text = $request->get('value',false);
-
-        if(!$text){
-            return response()->json(false,400);
-        }
+        
 
         $activity = Activity::find($activityID);
+
+        if(!$text){
+                $activity->delete();
+                return response()->json("delete",200);
+        }
+
+
         $activity->case_id = $caseID;
         $activity->user_id = $request->user()->id;
         $activity->text = $text;

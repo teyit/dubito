@@ -215,7 +215,9 @@
                 success: function (data) {
                     var new_activity = $(".activity-item:last").clone()
                     const lastID = new_activity.attr("data-id");
+                    const caseID = "{{$case->id}}";
                     new_activity.attr("data-id",(parseInt(lastID)+1));
+                    new_activity.attr("data-case-id",parseInt(caseID));
                     $(".badge-primary",new_activity).html(data.created_at);
                     $(".account-img",new_activity).attr('src',data.user.picture);
                     $(".activity-username",new_activity).html(data.user.name);
@@ -226,8 +228,10 @@
                     new_activity.insertBefore('.list-group-item.disabled');
 
 
-                    $('.activity-list').last().find(".activity-text").removeClass("edit-activity-"+lastID).addClass("edit-activity-"+(parseInt(lastID)+1));
-        
+                    $('.activity-list').last().find(".activity-text").addClass("edit-activity-editable");
+
+
+
                     $.gritter.add({
                         title: 'Success',
                         text: 'Activity has been added.',
@@ -238,19 +242,51 @@
         });
 
 
-        @foreach($case->activities as $a)
 
-            $('.edit-activity-{{$a->id}}').editable({
+        $(document).on("click", ".activity-item",function(){
+
+            const text = $(this).find(".edit-activity-editable");
+
+            const ID = $(this).attr("data-id");
+
+            const caseID = $(this).attr("data-case-id")
+
+            $(text).editable({
                 type: 'textarea',
                 title: 'Edit Activity',
-                url: "{{route('case.activity.update',[$case->id,$a->id])}}",
+                url: "/caseActivity/"+caseID+"/"+ID,
                 pk: 1,
                 source:"",
                 success: function (response, value) {
-
+                    if(response == "delete"){
+                        $(this).closest('a').remove();
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Activity has been deleted.',
+                            class_name: 'color success'
+                        });
+                    }
                 }
             });
-        @endforeach
+        });
+
+
+
+
+
+        {{--@foreach($case->activities as $a)--}}
+
+            {{--$('.edit-activity-{{$a->id}}').editable({--}}
+                {{--type: 'textarea',--}}
+                {{--title: 'Edit Activity',--}}
+                {{--url: "{{route('case.activity.update',[$case->id,$a->id])}}",--}}
+                {{--pk: 1,--}}
+                {{--source:"",--}}
+                {{--success: function (response, value) {--}}
+
+                {{--}--}}
+            {{--});--}}
+        {{--@endforeach--}}
 
 
 
