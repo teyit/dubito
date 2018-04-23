@@ -13,14 +13,15 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <link rel='stylesheet' id='cb-font-stylesheet-css'  href='//fonts.googleapis.com/css?family=Roboto%3A400%2C700%7COpen+Sans%3A400%2C700%2C400italic&#038;subset=latin%2Clatin-ext&#038;ver=3.1.2' type='text/css' media='all' />
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
     
 <link rel="stylesheet" href="{{url("assets/css/dubito.css")}}" type="text/css"/>
 </head>
-<body>
+<body style="font-family: 'Open Sans', sans-serif;background-color:#FFFFFF">
 <div class="">
     <div class="">
         @yield("content")
     </div>
 </div>
+</body>

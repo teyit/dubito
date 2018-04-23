@@ -34,10 +34,16 @@
                                 @endforeach
                             </ul>
                         </div>
+                        <button data-toggle="modal"  data-target="#published-link-create" class="btn btn-success btn-sm btn-link-modal" style="line-height: 28px;">@if($case->is_published)Set Publish Link @else Publish @endif</button>
+                        @if($case->is_published)
                         <div class="switch-button switch-button-yesno switch-button-lg">
+                           
                             <input type="checkbox" @if($case->is_published) checked @endif name="checkinsucc" id="checkinsucc"><span>
+                            
                         <label for="checkinsucc"></label></span>
+
                         </div>
+                        @endif
                         </div>
                     </div>
                     <div class="col-md-12" style="margin-top:10px">

@@ -33,14 +33,17 @@
 
                             <tr>
                                 <td>
-                                    <span>{{$case->title}}</span>
-
+                                @if($case->is_published === 1 && $case->published_link )
+                                <a target="_blank" href="{{$case->published_link}}">{{$case->title}}</a>
+                                @else
+                                <span >{{$case->title}}</span>
+                                @endif
                                 </td>
                                 <td>
                                     @if($case->user)
                                     <span>{{$case->user->name}}</span>
                                     @else
-                                        <span>Kişi Atanmadı</span>
+                                        <span style="color:#999999"><i>Kişi Atanmadı</i></span>
                                 @endif
                                 @if($case->status==="verified")
                                 <td style="min-width: 100px">
