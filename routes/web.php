@@ -27,6 +27,8 @@ Route::get("preview",function(){
 	dd($tags);
 });
 
+Route::get('public/{news_feed}',['as'=>'case.folder','uses'=>'PublicCaseController@index']);
+
 Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
 
     Route::get('/',['as'=>"admin.dashboard",'uses'=>'DashboardController@index']);
