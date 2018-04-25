@@ -15,7 +15,8 @@
     <![endif]-->
     <link rel='stylesheet' id='cb-font-stylesheet-css'  href='//fonts.googleapis.com/css?family=Roboto%3A400%2C700%7COpen+Sans%3A400%2C700%2C400italic&#038;subset=latin%2Clatin-ext&#038;ver=3.1.2' type='text/css' media='all' />
     <link rel="stylesheet" href="{{url("assets/css/style.css")}}" type="text/css"/>
-    
+    <script src="/assets/lib/jquery/jquery.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="{{url("assets/css/dubito.css")}}" type="text/css"/>
 </head>
 <body style="font-family: 'Open Sans', sans-serif;background-color:#FFFFFF">

@@ -561,8 +561,11 @@
 
          status = $(this).attr('id');
 
+        if(status == "no_analysis"){
+            $('#no-analysis-reason').modal('show');
+            return false
+        }
         $('#statusSelector .case-status-dropdown').removeClass('btn-success btn-danger btn-warning btn-primary btn-no-analysis btn-suspended');
-
 
         if (status == 'completed') {
             $('#statusSelector .case-status-dropdown').addClass('btn-success');
@@ -596,12 +599,14 @@
             }
         });
     });
-
+    $('.no-analysis-default').click(function () {
+        //console.log($("#no_analysis_reason")[0])
+        $("#no_analysis_reason")[0].value= ($(this).text())
+    });
     $('.case-folder-menu a').click(function () {
         var text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';
         $('.case-folder-dropdown').html(text);
         var folder = $(this).attr('id');
-
         $.ajax({
             method: "put",
             url: "{{route("case.folder.update",$case->id)}}",

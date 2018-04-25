@@ -55,7 +55,8 @@
                                 </td>
                                 @elseif($case->status==="no_analysis")
                                 <td style="min-width: 100px">
-                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">Sonuçlanamadı</a>
+                                    <a href="#" data-toggle="popover" title="Sebep" data-content="{{$case->no_analysis_reason}}" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">Sonuçlanamadı<b>(?)</b></a>
+                                    <a href="#" data-toggle="popover" title="Sebep" data-content="{{$case->no_analysis_reason}}"></a>
                                 </td>
                                 @else
                                 <td style="min-width: 100px">
@@ -73,5 +74,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('[data-toggle="popover"]').popover();   
+        });
+    </script>
 </div>
 @endsection

@@ -345,6 +345,22 @@ class CaseController extends Controller
         }
         return redirect()->back();
     }
+    public function setNoAnalysis(Request $request,$caseID=false){
+    	$value = $request->get('reason');;
+	    if($caseID == false){
+		    if($request->get('pk',false)){
+			    $caseID = $request->get('pk');
+		    }
+	    }
+        $case = Cases::find($caseID);
+        $case->status = 'no_analysis';
+        $case->no_analysis_reason = $value;
+        $case->save();
+        if($request->ajax()){
+            return response()->json(true,200);
+        }
+        return redirect()->back();
+    }
     public function addActivity(Request $request,$caseID){
         
         $text = $request->get('text',false);
