@@ -63,7 +63,7 @@
                                 </td>
                                 @endif
                                 <td>{{$case->category->title or ""}}</td>
-                                <td>{{$case->created_at}}</td>
+                                <td>{{$case->created_at->format("d-m-Y h:i")}}</td>
                                 
                             </tr>
                         @endforeach
