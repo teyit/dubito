@@ -33,11 +33,8 @@
 
                             <tr>
                                 <td>
-                                @if($case->is_published === 1 && $case->published_link )
-                                <a target="_blank" href="{{$case->published_link}}">{{$case->title}}</a>
-                                @else
+                               
                                 <span >{{$case->title}}</span>
-                                @endif
                                 </td>
                                 <td>
                                     @if($case->user)
@@ -46,6 +43,8 @@
                                         <span style="color:#999999"><i>Kişi Atanmadı</i></span>
                                 @endif
                                 @if($case->status==="verified")
+                                
+                                @if($case->is_published === 1 && $case->published_link )
                                 <td style="min-width: 100px;display:flex;align-items:center">
                                     <a target="_blank" data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="{{$case->published_link}}" class="editable editable-click case-status-editable case-status-{{$case->status}}">
                                         <div style="display:flex;align-items:center">    
@@ -53,7 +52,15 @@
                                             <i style="margin-top:4px;font-size:18px;margin-left:4px" class="material-icons">&#xE895;</i>
                                         </div>
                                     </a>
-                                </td>
+                                    </td>
+                                    @else
+                                    <td style="min-width: 100px">
+                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">
+                                            <span>Sonuçlandı</span>
+                                    </a>
+                                    </td>
+                                    @endif
+                                
                                 @elseif($case->status==="in_progress")
                                 <td style="min-width: 100px">
                                     <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">İnceleniyor</a>
