@@ -19,6 +19,7 @@
     </div>
     @include('case.partials.create_link_modal')
     @include('case.partials.publish_link_modal',$case)
+    @include('case.partials.no_analysis_modal',$case)
     @include('case.partials.edit_link_modal')
     @include('report.partials.case_picker_modal')
 @endsection
