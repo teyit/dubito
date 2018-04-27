@@ -412,7 +412,8 @@ class CaseController extends Controller
 
         $topics = Topic::latest()->get();
         $tags = Tag::latest()->get();
-        $cases = Cases::where('status','!=',"pending")->where('folder',"news_feed")->orWhere('status',"verified")->orderBy("created_at","DESC")->get();
+        $cases = Cases::where('status','!=',"pending")->where('folder',"news_feed")->orWhere('status',"verified")->orderBy("created_at","DESC")->paginate(20);
+
         $categories = Category::latest()->get();
         $statusLabels = [];
 

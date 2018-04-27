@@ -86,7 +86,11 @@
                         @endforeach
                         </tbody>
                     </table>
+
+                    {{$cases->links()}}
                 </div>
+
+                
             </div>
         </div>
     </div>
