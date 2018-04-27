@@ -403,5 +403,24 @@ class CaseController extends Controller
         }
         return redirect()->back();
     }
+    public function feed($folder='pending'){
+        
+
+        if( !in_array($folder,['cold_cases','news_feed','archive'])){
+            return redirect()->route("admin.dashboard");
+        }
+
+        $topics = Topic::latest()->get();
+        $tags = Tag::latest()->get();
+        $cases = Cases::where('status','!=',"pending")->where('folder',"news_feed")->orWhere('status',"verified")->orderBy("created_at","DESC")->get();
+        $categories = Category::latest()->get();
+        $statusLabels = [];
+
+        foreach(Cases::first()->statusLabels as $key => $val){
+            $statusLabels[] = ['value' => $key,'text' => $val];
+        }
+        $users = User::select('id as value','name as text')->latest()->get();
+        return view("publicCase.index",compact("cases",'topics','categories','statusLabels','users','tags'));
+    }
 
 }
