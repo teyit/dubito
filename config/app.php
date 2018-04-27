@@ -180,6 +180,7 @@ return [
         Spatie\LaravelTwitterStreamingApi\TwitterStreamingApiServiceProvider::class,
         Spatie\Activitylog\ActivitylogServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
 
     ],
