@@ -48,29 +48,29 @@
                                 <td style="min-width: 100px;display:flex;align-items:center">
                                     <a target="_blank" data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="{{$case->published_link}}" class="editable editable-click case-status-editable case-status-{{$case->status}}">
                                         <div style="display:flex;align-items:center">    
-                                            <span>Sonuçlandı</span>
-                                            <i style="margin-top:4px;font-size:18px;margin-left:4px" class="material-icons">&#xE895;</i>
+                                            <span style="color:white !important">Sonuçlandı</span>
+                                            <i style="color:white !important;margin-top:4px;font-size:18px;margin-left:4px" class="material-icons">&#xE895;</i>
                                         </div>
                                     </a>
                                     </td>
                                     @else
                                     <td style="min-width: 100px">
                                     <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">
-                                            <span>Sonuçlandı</span>
+                                            <span style="color:white !important">Sonuçlandı</span>
                                     </a>
                                     </td>
                                     @endif
                                 
                                 @elseif($case->status==="in_progress")
                                 <td style="min-width: 100px">
-                                    <a data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">İnceleniyor</a>
+                                    <a  style="color:white !important"  data-title="Select status" data-value="{{$case->status}}" data-pk="{{$case->id}}"  data-type="select" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">İnceleniyor</a>
                                 </td>
                                 @elseif($case->status==="no_analysis")
                                 <td style="min-width: 100px;display:flex;align-items:center">
                                     <ahref="#" data-toggle="popover" title="Sebep" data-content="{{$case->no_analysis_reason}}" href="#" class="editable editable-click case-status-editable case-status-{{$case->status}}">
                                         <div style="display:flex;align-items:center">    
-                                            <span>Sonuçlanamadı</span>
-                                            <i style="margin-top:6px;font-size:18px;margin-left:4px" class="material-icons">&#xE8FD;</i>
+                                            <span  style="color:white !important">Sonuçlanamadı</span>
+                                            <i style="color:white !important;margin-top:6px;font-size:18px;margin-left:4px" class="material-icons">&#xE8FD;</i>
                                         </div>
                                     </a>
                                 </td>
