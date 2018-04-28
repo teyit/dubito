@@ -11,7 +11,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label>Reason</label>
-                        <input type="text" name="reason" value="{{$case->no_analysis_reason}}" required placeholder="Enter reason" id="no_analysis_reason" class="form-control">
+                        <input type="text" name="reason" value="{{$case->no_analysis_reason}}" placeholder="Enter reason (leave blank if you don't want it to be listed on public)" id="no_analysis_reason" class="form-control">
                         <input type="hidden" name="case_id" value="{{$case->id}}">
                         <div style="display:flex;margin-top:8px">
                         <span class="no-analysis-default">Yeterli delil yok</span>
