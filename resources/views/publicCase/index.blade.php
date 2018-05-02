@@ -1,6 +1,16 @@
 @extends('layout.publicCases')
 @section('content')
 <div class="main-content container-fluid"  style="padding:0">
+<div class="search-container" style="padding-top:16px;padding-bottom:16px">
+                <form class="input-group input-group-sm">
+
+                    <input  id="q" type="text" name="search" value="{{ app('request')->input('search') }}
+" placeholder="Analizlerde Ara..." class="form-control search-input"><span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary" style="padding-left:32px;padding-right:32px">Ara</button></span>
+                  <span class="input-group-btn" style="margin-left:8px">
+                  <button style="margin-left:8px" type="button" class="btn btn-primary" onClick="window.location.reload()">Güncelle</button></span>
+                  </form>
+            </div>
     <div class="row">
         <div class="col-sm-12" style="padding:0">
             <div class="panel panel-default panel-table">
@@ -86,7 +96,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <div style="margin-left:20px;">{{$cases->links()}}</div>
+                    <div style="margin-left:20px;">{{$cases->appends($_GET)->links()}}</div>
                 </div>
             </div>
         </div>

@@ -412,8 +412,28 @@ class CaseController extends Controller
 
         $topics = Topic::latest()->get();
         $tags = Tag::latest()->get();
-        $cases = Cases::where('status','!=',"pending")->where('status','!=',"no_analysis")->where('folder',"news_feed")->orWhere('status',"verified")->orWhereRaw('LENGTH(no_analysis_reason) > 0 AND status="no_analysis"')->orderBy("created_at","DESC")->paginate(20);
+        if(request()->has('search')){
+        $term = request()->get('search');
+        $cases = Cases::where('title', 'LIKE', '%'.$term.'%')
+            ->where('status','!=',"pending")
+            ->where('status','!=',"no_analysis")
+            ->where('folder',"news_feed")
 
+            ->orWhere('status',"verified")
+            ->where('title', 'LIKE', '%'.$term.'%')
+
+            ->orWhereRaw('LENGTH(no_analysis_reason) > 0 AND status="no_analysis"')
+            ->where('title', 'LIKE', '%'.$term.'%')
+            ->paginate(20);
+        }else{
+            $cases = Cases::where('status','!=',"pending")
+            ->where('status','!=',"no_analysis")
+            ->where('folder',"news_feed")
+            ->orWhere('status',"verified")
+            ->orWhereRaw('LENGTH(no_analysis_reason) > 0 AND status="no_analysis"')
+            ->orderBy("created_at","DESC")
+            ->paginate(20);
+        }
         $categories = Category::latest()->get();
         $statusLabels = [];
 
