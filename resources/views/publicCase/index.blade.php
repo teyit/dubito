@@ -5,7 +5,7 @@
                 <form class="input-group input-group-sm">
 
                     <input  id="q" type="text" name="search" value="{{ app('request')->input('search') }}
-" placeholder="Analizlerde Ara..." class="form-control search-input"><span class="input-group-btn">
+" placeholder="İddia Ara..." class="form-control search-input"><span class="input-group-btn">
                   <button type="submit" class="btn btn-primary" style="padding-left:32px;padding-right:32px">Ara</button></span>
                   <span class="input-group-btn" style="margin-left:8px">
                   <button style="margin-left:8px" type="button" class="btn btn-primary" onClick="window.location.reload()">Güncelle</button></span>
