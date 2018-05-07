@@ -414,10 +414,8 @@ class CaseController extends Controller
         $tags = Tag::latest()->get();
         if(request()->has('search')){
         $term = request()->get('search');
-        $cases = Cases::where('title', 'LIKE', '%'.$term.'%')
-            ->where('status','!=',"pending")
-            ->where('status','!=',"no_analysis")
-            ->where('folder',"news_feed")
+        $cases = Cases::whereRaw('status="in_progress" AND folder="news_feed"')
+            ->where('title', 'LIKE', '%'.$term.'%')
 
             ->orWhere('status',"verified")
             ->where('title', 'LIKE', '%'.$term.'%')
@@ -426,10 +424,8 @@ class CaseController extends Controller
             ->where('title', 'LIKE', '%'.$term.'%')
             ->paginate(20);
         }else{
-            $cases = Cases::where('status','!=',"pending")
-            ->where('status','!=',"no_analysis")
-            ->where('folder',"news_feed")
-            ->orWhere('status',"verified")
+            $cases = Cases::whereRaw('status="in_progress" AND folder="news_feed"')
+            ->orWhereRaw('status="verified" AND LENGTH(published_link) > 0')
             ->orWhereRaw('LENGTH(no_analysis_reason) > 0 AND status="no_analysis"')
             ->orderBy("created_at","DESC")
             ->paginate(20);
