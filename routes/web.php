@@ -94,6 +94,7 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
     Route::post('setPublished/',['as'=>'case.published.set','uses'=>'CaseController@setPublished']);
     Route::post('cases/setPublishedLink/{case_id}',['as'=>'case.published.set','uses'=>'CaseController@setPublishedLink']);
     Route::post('cases/setNoAnalysis/{case_id}',['as'=>'case.noAnalysis.set','uses'=>'CaseController@setNoAnalysis']);
+    Route::get('tag/{folder}',['as'=>'tag','uses'=>'TagController@feed']);
 
 
 

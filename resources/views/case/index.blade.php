@@ -5,7 +5,7 @@
         <div class="col-sm-12">
             <div class="panel panel-default panel-table">
                 <div class="panel-heading">
-                    Case List &nbsp;
+                    Case List &nbsp; {{ collect(request()->segments())->last() }}
                     <button  data-toggle="modal"  data-target="#add-new-case" class="btn btn-success">Add Case</button>
                 </div>
                 <div class="panel-body">

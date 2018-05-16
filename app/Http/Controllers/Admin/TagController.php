@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Tag;
+use App\Model\Topic;
+use App\Model\Cases;
+use App\Model\Category;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class TagController extends Controller
@@ -46,5 +51,24 @@ class TagController extends Controller
         $tag->delete();
         return response()->json('true',200);
 
+    }
+    public function feed($tag='KHK'){
+        
+/*
+        if( !in_array($folder,['cold_cases','news_feed','archive'])){
+            return redirect()->route("admin.dashboard");
+        }*/
+
+        $topics = Topic::latest()->get();
+        $tags = Tag::latest()->get();
+        $cases = Cases::whereRaw('id IN (SELECT case_tags.case_id from tags inner join case_tags on tag_id=tags.id where tags.title="'. $tag .'")')->get();
+        $categories = Category::latest()->get();
+        $statusLabels = [];
+
+        foreach(Cases::first()->statusLabels as $key => $val){
+            $statusLabels[] = ['value' => $key,'text' => $val];
+        }
+        $users = User::select('id as value','name as text')->latest()->get();
+        return view("case.index",compact("cases",'topics','categories','statusLabels','users','tags'));
     }
 }
