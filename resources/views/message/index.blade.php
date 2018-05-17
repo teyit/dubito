@@ -60,6 +60,7 @@
     @endif
     @include("case.partials.create_modal")
     @include('report.partials.case_picker_modal')
+    @include('message.partials.message_picker_modal')
 
 
 @endsection
@@ -329,7 +330,6 @@
 
 
         });
-
 
         $('.message-filter-menu a').click(function () {
             var text = $(this).text() + ' <span class="icon-dropdown mdi mdi-chevron-down"></span>';

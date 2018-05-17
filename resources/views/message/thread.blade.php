@@ -18,6 +18,7 @@
                 <div class="btn-group">
                     <button id="btn-save-report" type="button" class="report-assign-case btn btn-default">Assign to a case</button>
                     <button id="btn-mark-as-review"  type="button" class="btn btn-default review-assign">Mark as a review</button>
+
                 </div>
             </div>
         </div>
@@ -35,8 +36,13 @@
         </div>
 
         <div class="row xs-pt-15">
-          <div class="col-xs-12">
+        <div class="col-xs-6">
+        <button id="btn-save-template"  type="button" class="btn btn-default btn btn-space">Save as Template</button>
+            <button id="btn-template"  type="button" class="btn btn-default btn btn-space">Fill with Template</button>
+            </div>
+          <div class="col-xs-6">
             <p class="text-right">
+           
               <button id="sendMsgBtn" type="button" class="btn btn-space btn-primary">Send</button>
               <button type="reset" class="btn btn-space btn-default">Clear</button>
             </p>
@@ -78,6 +84,43 @@
         $('.email-list').perfectScrollbar().on('ps-y-reach-start', function () {
             console.log("Dynamic threads are loaded");
             loadMoreMessages();
+        });
+        $("#btn-template").on('click',function(){
+            $('#fill-with-template').modal('show');
+        });
+        $("#btn-save-template").on('click',function(){
+            console.log($("#messageInput").val())
+            $.ajax({
+                url: "/api/messageTemplates/",
+                data: {
+                    _token:$("#_token").val(),
+                    text :$("#messageInput").val()
+                },
+                method : "POST",
+                success: function(result){
+                    if(result){
+
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Message saved as template!',
+                            class_name: 'color success'
+                        });
+                    }
+                },
+                error: function(){
+
+                        $.gritter.add({
+                            title: 'Error',
+                            text: 'Message already saved',
+                            class_name: 'color warning'
+                        });
+                }
+            });
+        });
+        
+        $(window).on('template-choose',function(event,extra){
+            console.log(extra);
+            $("#messageInput").val(extra)
         });
     });
 </script>

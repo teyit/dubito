@@ -40,7 +40,30 @@ $(function(){
         }
 
     });
-    
+    $(".autocomplete-templates").select2({
+        width: "100%",
+        showSearchBox: true,
+        ajax: {
+            url: "/api/messageTemplates",
+            dataType: 'json',
+            delay: 250,
+            data: function (term, page) {
+                return {
+                    q: term, // search term
+                };
+            },
+            results: function (data, params) {
+                params.page = params.page || 1;
+                data.map(function(d){
+                    d.id = d.text;
+                })
+                return {
+                    results: data
+                };
+            }
+        }
+
+    });
 
 
     $("#category-form-ajax").on('submit',function(e){

@@ -23,6 +23,9 @@ Route::group(['namespace'=>'Api'],function(){
     Route::resource("categories","CategoryController");
     Route::resource("users","UserController");
     Route::resource("roles","RoleController");
+    Route::resource("messageTemplates","MessageTemplateController");
+    Route::delete("messageTemplates","MessageTemplateController@destroy");
+
     Route::get("search","SearchController@search");
 });
 
