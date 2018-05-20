@@ -269,6 +269,42 @@
                 }
             });
         });
+        $(document).on('click',"#btn-template",function(){
+            $('#fill-with-template').modal('show');
+        });
+        $(document).on('click',"#btn-save-template",function(){
+            console.log($("#messageInput").val())
+            $.ajax({
+                url: "/api/messageTemplates/",
+                data: {
+                    _token:$("#_token").val(),
+                    text :$("#messageInput").val()
+                },
+                method : "POST",
+                success: function(result){
+                    if(result){
+
+                        $.gritter.add({
+                            title: 'Success',
+                            text: 'Message saved as template!',
+                            class_name: 'color success'
+                        });
+                    }
+                },
+                error: function(){
+
+                        $.gritter.add({
+                            title: 'Error',
+                            text: 'Message already saved',
+                            class_name: 'color warning'
+                        });
+                }
+            });
+        });
+        $(window).on('template-choose',function(event,extra){
+            console.log(extra);
+            $("#messageInput").val(extra)
+        });
         $(document).on('click',".review-assign",function () {
 
             var message_list = getSelectedMessages();

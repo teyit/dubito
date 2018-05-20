@@ -85,43 +85,6 @@
             console.log("Dynamic threads are loaded");
             loadMoreMessages();
         });
-        $("#btn-template").on('click',function(){
-            $('#fill-with-template').modal('show');
-        });
-        $("#btn-save-template").on('click',function(){
-            console.log($("#messageInput").val())
-            $.ajax({
-                url: "/api/messageTemplates/",
-                data: {
-                    _token:$("#_token").val(),
-                    text :$("#messageInput").val()
-                },
-                method : "POST",
-                success: function(result){
-                    if(result){
-
-                        $.gritter.add({
-                            title: 'Success',
-                            text: 'Message saved as template!',
-                            class_name: 'color success'
-                        });
-                    }
-                },
-                error: function(){
-
-                        $.gritter.add({
-                            title: 'Error',
-                            text: 'Message already saved',
-                            class_name: 'color warning'
-                        });
-                }
-            });
-        });
-        
-        $(window).on('template-choose',function(event,extra){
-            console.log(extra);
-            $("#messageInput").val(extra)
-        });
     });
 </script>
 @stop
