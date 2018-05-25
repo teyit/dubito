@@ -17,7 +17,12 @@
 
             <ul class="nav navbar-nav navbar-right be-user-nav">
 
-                <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><img src="{{url("assets/img/avatar.png")}}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">
+                @if (!empty(Auth::user()->account_picture))
+                <img src="{{ Auth::user()->account_picture}}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                @else
+                <img src="{{url("assets/img/avatar.png")}}" alt="Avatar"><span class="user-name">Túpac Amaru</span></a>
+                @endif
                     <ul role="menu" class="dropdown-menu">
                         <li>
                             <div class="user-info">
