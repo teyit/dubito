@@ -11,6 +11,11 @@
                     <!--<span class="timeline-time">4:34 PM</span>-->
                     <div><p class="timeline-autor">{{$report->account_name or "no name  "}}</p></div>
                     <p class="timeline-activity">{!! clickableLink($report->text) !!}</p>
+                    @if(!$report->links->isEmpty())
+                    @foreach($report->links as $l)
+                        @include("message.partials.linkPreview",$l)
+                    @endforeach
+                    @endif
                 </div>
                 <div class="timeline-gallery">
                     @foreach($report->files as $f)
