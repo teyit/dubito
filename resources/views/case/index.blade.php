@@ -21,6 +21,7 @@
                                 <th class="filterable">Category</th>
                                 <th>Created at</th>
                                 <th>Is published</th>
+                                <th style="width:100px;">Report Count</th>
                                 <th style="width:160px;" class="actions"></th>
                             </tr>
                         </thead>
@@ -34,7 +35,8 @@
                         <th >Category</th>
                         <th>Created at</th>
                         <th>Is published</th>
-                        <th class="actions"></th>
+                        <th>Report Count</th>
+                        <th class="actions">Report</th>
                         </tr>
                         </tfoot>
 
@@ -66,9 +68,13 @@
                                         @if($case->is_published == 1) Yes @else No @endif</td>
                                     </a>
 
-                                <td class="actions">
+                                <td>
+                                        {{$case->reports->count()}}
+                                </td>
+                                <td class="actions" >
+                                       
                                     <div class="btn-group btn-space">
-                                        <a href="{{route('cases.show',$case->id)}}" class="btn btn-default">{{$case->reports->count()}} Reports</a>
+                                        <a href="{{route('cases.show',$case->id)}}" class="btn btn-default">Open</a>
                                         <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
                                         <ul role="menu" class="dropdown-menu">
                                             <li><a class="case-edit-btn" href="javascript:;" data-id="{{$case->id}}" >Edit</a></li>

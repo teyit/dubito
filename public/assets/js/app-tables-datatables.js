@@ -112,7 +112,8 @@ var App = (function () {
               { "orderable": false },
               null,
               { "orderable": false },
-              { "orderable": false }
+              null,
+              { "orderable": false },
           ],
           initComplete: function () {
 
@@ -149,7 +150,6 @@ var App = (function () {
 
               });
           },
-          "bStateSave" : true,
           "order": [[ 0, "desc" ]]
 
           });
