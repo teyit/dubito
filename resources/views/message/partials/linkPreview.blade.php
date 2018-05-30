@@ -10,4 +10,6 @@
     @if($l->archiveis_link)
         <a target="_blank" href="http://archive.is/{{$l->archiveis_link}}" class="btn btn-default"><span class="mdi mdi-bookmark"></span> archive.is</a>
     @endif
+    <a target="_blank" href="{{$l->link}}" class="btn btn-default"><span class="mdi mdi-globe-alt"></span> Original</a>
+
 </div>
