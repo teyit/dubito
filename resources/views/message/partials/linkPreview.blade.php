@@ -7,4 +7,7 @@
             <h6 class="card-subtitle mb-2 text-muted text-right">{{parse_url($l->link,PHP_URL_HOST)}}</h6>
         </div>
     </a>
+    @if($l->archiveis_link)
+        <a target="_blank" href="http://archive.is/{{$l->archiveis_link}}" class="btn btn-default"><span class="mdi mdi-bookmark"></span> archive.is</a>
+    @endif
 </div>

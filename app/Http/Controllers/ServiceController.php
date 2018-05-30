@@ -41,6 +41,26 @@ class ServiceController extends Controller
             'account_picture' => $result['profile_pic']
         ];
     }
+    public function RequestArchieveIsLink($url){
+        $ch = curl_init();
+
+        curl_setopt_array($ch, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_POST =>  1,
+            CURLOPT_HTTPHEADER=> array('Content-Type: application/x-www-form-urlencoded'),
+            CURLOPT_POSTFIELDS => "url=".$url,
+            CURLOPT_URL => 'http://archive.is/submit/',
+            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
+        ));
+
+        curl_exec($ch);
+        $redir = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
+
+        curl_close($ch);
+
+        return explode("/",$redir);
+
+    }
     public function teyitlink(Request $request){
 
         $body = json_decode($request->getContent());
@@ -69,6 +89,10 @@ class ServiceController extends Controller
         }
         if(isset($data->image)){
             $link->image = $data->image;
+        }
+        $archiveIsLink = $this->RequestArchieveIsLink($link->link);
+        if(count($archiveIsLink)>=4){
+            $link->archiveis_link = $archiveIsLink[3];
         }
         $link->save();
 

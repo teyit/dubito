@@ -27,8 +27,13 @@
                         <td>
 
                                 <div class="btn-group xs-mt-5 xs-mb-10">
+                                @if($link->teyitlink_slug)
                                     <a target="_blank" href="{{$link->teyitlink}}" class="btn btn-default"><span class="mdi mdi-bookmark"></span> Teyitlink</a>
-                                    <a target="_blank" href="{{$link->link}}" class="btn btn-default"><span class="mdi mdi-globe-alt"></span> Orginal</a>
+                                @endif   
+                                    @if($link->archiveis_link)
+                                        <a target="_blank" href="http://archive.is/{{$link->archiveis_link}}" class="btn btn-default"><span class="mdi mdi-bookmark"></span> archive.is</a>
+                                    @endif
+                                    <a target="_blank" href="{{$link->link}}" class="btn btn-default"><span class="mdi mdi-globe-alt"></span> Original</a>
                                     <a class="link-delete btn btn-danger" data-id="{{$link->id}}" href="javascript:;"><span class="mdi mdi-delete"></span> Delete</a>
                                 </div>
 
