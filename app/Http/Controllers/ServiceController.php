@@ -17,11 +17,12 @@ class ServiceController extends Controller
 
     private function getFacebookUser($user_id){
         $fb = new Facebook\Facebook([
-            'app_id' => '213471075795721',
-            'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
+            'app_id' => env('FB_APP_ID', null),
+            'app_secret' => env('FB_APP_SECRET', null),
             'default_graph_version' => 'v2.2',
         ]);
-        $page_access_token = 'EAADCJpukgwkBAE6nD3fdZBGnqwzqB1L4FMYmHeNmiZAKC9mAzGELxdfDzOZAqaL2GuwZA7W86CT6gPA6ls59iy9YMs4ZBMLHKDPefyh4bV25HP4uXdwrbRTItryqU8iE63ybiDZAImYjwMfjFoFYvOM4GrZAtsHfzNlCZA3En7bixAZDZD';
+
+        $page_access_token = env('FB_PAGE_ACCESS_TOKEN', null);
 
         try {
             // Returns a `Facebook\FacebookResponse` object
@@ -40,26 +41,6 @@ class ServiceController extends Controller
             'account_name' => $result['first_name'] . ' ' . $result['last_name'],
             'account_picture' => $result['profile_pic']
         ];
-    }
-    public function RequestArchieveIsLink($url){
-        $ch = curl_init();
-
-        curl_setopt_array($ch, array(
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_POST =>  1,
-            CURLOPT_HTTPHEADER=> array('Content-Type: application/x-www-form-urlencoded'),
-            CURLOPT_POSTFIELDS => "url=".$url,
-            CURLOPT_URL => 'http://archive.is/submit/',
-            CURLOPT_USERAGENT => 'Codular Sample cURL Request'
-        ));
-
-        curl_exec($ch);
-        $redir = curl_getinfo($ch, CURLINFO_REDIRECT_URL);
-
-        curl_close($ch);
-
-        return explode("/",$redir);
-
     }
     public function teyitlink(Request $request){
 
@@ -90,10 +71,6 @@ class ServiceController extends Controller
         if(isset($data->image)){
             $link->image = $data->image;
         }
-        $archiveIsLink = $this->RequestArchieveIsLink($link->link);
-        if(count($archiveIsLink)>=4){
-            $link->archiveis_link = $archiveIsLink[3];
-        }
         $link->save();
 
         return "OK";
@@ -118,53 +95,53 @@ class ServiceController extends Controller
 
         foreach($request->get('entry') as $e){
             foreach($e['messaging'] as $m) {
-	            $message = Message::where('external_message_id', $m['message']['mid'])->where('source', 'facebook:message')->first();
-	            if ($message) {
-		            \Log::info("pass");
-		            return "PASS";
-	            }
-	            $facebook_user = $this->getFacebookUser($m['sender']['id']);
+                $message = Message::where('external_message_id', $m['message']['mid'])->where('source', 'facebook:message')->first();
+                if ($message) {
+                    \Log::info("pass");
+                    return "PASS";
+                }
+                $facebook_user = $this->getFacebookUser($m['sender']['id']);
 
-	            \Log::info("facebook user-", $facebook_user);
+                \Log::info("facebook user-", $facebook_user);
 
 
-	            $message = new Message();
-	            $message->source = 'facebook:message';
-	            $message->sender_id = $m['sender']['id'];
-	            $message->recipient_id = $m['recipient']['id'];
-	            $message->external_message_id = $m['message']['mid'];
-	            if ($facebook_user) {
-		            moveToS3Link("facebook/account/", $m['sender']['id'], $facebook_user['account_picture']);
-		            $message->account_name = $facebook_user['account_name'];
-		            $message->account_picture = Storage::disk('s3')->url("facebook/account/" . $m['sender']['id'] . '.jpg');
-	            } else {
-		            $message->account_name = 'Facebook User';
-		            $message->account_picture = '';
-	            }
+                $message = new Message();
+                $message->source = 'facebook:message';
+                $message->sender_id = $m['sender']['id'];
+                $message->recipient_id = $m['recipient']['id'];
+                $message->external_message_id = $m['message']['mid'];
+                if ($facebook_user) {
+                    moveToS3Link("facebook/account/", $m['sender']['id'], $facebook_user['account_picture']);
+                    $message->account_name = $facebook_user['account_name'];
+                    $message->account_picture = Storage::disk('s3')->url("facebook/account/" . $m['sender']['id'] . '.jpg');
+                } else {
+                    $message->account_name = 'Facebook User';
+                    $message->account_picture = '';
+                }
 
-	            if (isset($m['message']['text'])) {
-		            $message->text = $m['message']['text'];
-	            }
-	            $message->save();
-	            if (isset($m['message']['attachments'])) {
-		            \Log::info("message");
-		            foreach ($m['message']['attachments'] as $a) {
+                if (isset($m['message']['text'])) {
+                    $message->text = $m['message']['text'];
+                }
+                $message->save();
+                if (isset($m['message']['attachments'])) {
+                    \Log::info("message");
+                    foreach ($m['message']['attachments'] as $a) {
 
                         
 
-			            //if($a['type'] != 'fallback'){
-			            \Log::info("atachment");
+                        //if($a['type'] != 'fallback'){
+                        \Log::info("atachment");
                         if(isset($a['payload']['url'])){
-    			            moveToS3Link("facebook/files/" . date('Y-m-d') . "/", substr($m['message']['mid'], -23), $a['payload']['url']);
+                            moveToS3Link("facebook/files/" . date('Y-m-d') . "/", substr($m['message']['mid'], -23), $a['payload']['url']);
 
 
-    			            $rf = File::create(
-    				            ['file_type' => $a['type'],
-    					            'file_url' => Storage::disk('s3')->url("facebook/files/" . date('Y-m-d') . "/" . substr($m['message']['mid'], -23) . '.jpg'),
-    				            ]);
+                            $rf = File::create(
+                                ['file_type' => $a['type'],
+                                    'file_url' => Storage::disk('s3')->url("facebook/files/" . date('Y-m-d') . "/" . substr($m['message']['mid'], -23) . '.jpg'),
+                                ]);
 
-    			            $message->files()->attach($rf->id);
-			            }else{
+                            $message->files()->attach($rf->id);
+                        }else{
                              if (!isset($m['message']['text'])) {
                                 if(isset($a['title'])){
                                     $message->text = $a['title'];
@@ -173,8 +150,8 @@ class ServiceController extends Controller
                             }
                         }
 
-		            }
-	            }
+                    }
+                }
             }
 
         }
