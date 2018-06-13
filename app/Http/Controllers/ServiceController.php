@@ -17,11 +17,11 @@ class ServiceController extends Controller
 
     private function getFacebookUser($user_id){
         $fb = new Facebook\Facebook([
-            'app_id' => '2088892184731575',
-            'app_secret' => '40fda2c5206507fd06cdd17411afe896',
+            'app_id' => '213471075795721',
+            'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
             'default_graph_version' => 'v2.2',
         ]);
-        $page_access_token = 'EAAdr1hylH7cBALiYZBrm7nmTIaT8yeVUgAx9eutKxFdLumWpA2ykVnp880RZCqqvsDtwVoSjN2IGPaAy0RKNf5K5GkX00tD0LXpZCWZAlp94X5yrCeyf1VRT26LUZCTkNT35jZCSPu7dEWdEkDOOUacdxtwQ9ODIV2j6xo2c9lkgZDZD';
+        $page_access_token = 'EAADCJpukgwkBAE6nD3fdZBGnqwzqB1L4FMYmHeNmiZAKC9mAzGELxdfDzOZAqaL2GuwZA7W86CT6gPA6ls59iy9YMs4ZBMLHKDPefyh4bV25HP4uXdwrbRTItryqU8iE63ybiDZAImYjwMfjFoFYvOM4GrZAtsHfzNlCZA3En7bixAZDZD';
 
         try {
             // Returns a `Facebook\FacebookResponse` object
