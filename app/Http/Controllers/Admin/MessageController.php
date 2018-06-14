@@ -34,11 +34,11 @@ class MessageController extends Controller
     }
     private function requestFacebook($method,$params){
         $fb = new Facebook\Facebook([
-            'app_id' => '213471075795721',
-            'app_secret' => 'e9040fd795bf94e0053fc2de26f7fdba',
+            'app_id' => env('FB_APP_ID', null),
+            'app_secret' => env('FB_APP_SECRET', null),
             'default_graph_version' => 'v2.6',
         ]);
-        $page_access_token = 'EAADCJpukgwkBAE6nD3fdZBGnqwzqB1L4FMYmHeNmiZAKC9mAzGELxdfDzOZAqaL2GuwZA7W86CT6gPA6ls59iy9YMs4ZBMLHKDPefyh4bV25HP4uXdwrbRTItryqU8iE63ybiDZAImYjwMfjFoFYvOM4GrZAtsHfzNlCZA3En7bixAZDZD';
+        $page_access_token = env('FB_PAGE_ACCESS_TOKEN', null);
 
         try {
             // Returns a `Facebook\FacebookResponse` object
