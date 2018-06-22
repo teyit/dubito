@@ -32,10 +32,17 @@
                     leftIcon:"mdi mdi-chevron-left"
                 }
             });
-            $(window).on('case-created', function (data) {
-                $(".report-cases option:selected").removeAttr('selected');
-                $(".report-cases").append('<option selected value="'+data.id+'">'+data.title+'</option>');
-            });
+            $(window).on('case-created', function (dat,data) {
+                console.log("choose:")
+              //  $(".rep-cases option:selected").removeAttr('selected');
+              //  $(".rep-cases").append('<option selected value="'+data.id+'">'+data.title+'</option>');
+                console.log("choose:",data)
+
+                var newOption = new Option(data.title, data.id, false, false);
+                $('#rep-cases').append(newOption).trigger('change');
+                $('#rep-cases').val(data.id); // Select the option with a value of '1'
+                $('#rep-cases').trigger('change'); // Notify any JS components that the value changed
+                });
         });
     </script>
 @stop

@@ -74,7 +74,7 @@
                 header:$('meta[name="_token"]').attr('content')
             })
             e.preventDefault();
-
+            const dt = $(this).serialize();
             $.ajax({
                 type:"POST",
                 url:'/api/cases',
@@ -89,6 +89,7 @@
                             $.each(data, function(index, cases) {
                                 $reportCases.append('<option value="' + cases.id + '">' + cases.title + '</option>');
                             });
+                           // $(window).trigger('case-created',data);
                         });
                         $.gritter.add({
                             title: 'Success',
