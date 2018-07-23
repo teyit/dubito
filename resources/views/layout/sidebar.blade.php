@@ -27,13 +27,14 @@
                             </ul>
                         </li>
 
-                    @if(request()->user()->hasRole("Admin"))
                         <!--
                         <li class="{{request()->segment(1) == 'topics' ? "active" : ""}}"><a  href="{{url("/topics/")}}"><i class="icon mdi mdi-labels"></i>Topics</a></li>
                         -->
                         <li class="{{request()->segment(1) == 'categories' ? "active" : ""}} "><a href="{{url("/categories/")}}"><i class="icon mdi mdi-format-list-bulleted"></i><span>Categories</span></a></li>
 
                         <li class="{{request()->segment(1) == 'tags' ? "active" : ""}}"><a  href="{{url("/tags")}}"><i class="icon mdi mdi-label-alt"></i><span>Tags</span></a></li>
+                        @if(request()->user()->hasRole("Admin"))
+
                         <!--
                         <li class="{{request()->segment(1) == 'reviews' ? "active" : ""}}"><a  href="{{url("/reviews")}}"><i class="icon mdi mdi-comment"></i> Reviews</a></li>
 
