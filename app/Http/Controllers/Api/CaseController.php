@@ -46,6 +46,16 @@ class CaseController extends Controller
         
         $case =  Cases::create($data);
 
+        $id = ($case->id) % 3;
+        if($id == 0){
+            $case->user_id = 31;
+        }else  if($id == 1){
+            $case->user_id = 29;
+        }else  if($id == 2){
+            $case->user_id = 40;
+        }
+       
+        $case->save();
 
         if(!is_array($tags)){
             $tags = [];
