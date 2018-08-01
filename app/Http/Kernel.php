@@ -39,7 +39,14 @@ class Kernel extends HttpKernel
 
         'api' => [
             'throttle:60,1',
+            \App\Http\Middleware\EncryptCookies::class,
             'bindings',
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+             \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \Barryvdh\Cors\HandleCors::class,
         ],
     ];
 
