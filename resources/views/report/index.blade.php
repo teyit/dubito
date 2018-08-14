@@ -6,6 +6,10 @@
         <div class="panel panel-default panel-table">
             <div class="panel-heading">Reports
                 &nbsp; <a href="/reports/create" class="btn btn-success"> Add Report</a>
+                @if(Request::path() === 'reports')
+                    &nbsp; <a href="/allreports" class="btn btn-success"> Show All</a>
+                @endif
+
             </div>
             <div class="panel-body">
                 <table id="report-datatable" class="table">

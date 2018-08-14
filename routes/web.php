@@ -60,6 +60,8 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
     //Reports
     Route::get('report/{folder}',['as'=>'report.folder','uses'=>'ReportController@index']);
     Route::resource("reports","ReportController");
+    Route::get('allreports',['uses'=>'ReportController@showAll']);
+
     Route::post("custom-store-reports",['as'=>'custom.store.reports','uses'=>'ReportController@customStore']);
     Route::put("custom-update-reports/{report_id}",['as'=>'custom.update.reports','uses'=>'ReportController@customUpdate']);
     Route::post('removeReportFile/{case_id}',['as'=>'report.file.remove','uses'=>'ReportController@removeReportFile']);

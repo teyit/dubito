@@ -25,12 +25,18 @@ class ReportController extends Controller
 
     public function index($folder="ongoing"){
 
-        $reports = Report::with('images')->where('folder',$folder)->orderBy("created_at","DESC")->get();
+        $reports = Report::with('images')->where('folder',$folder)->orderBy("created_at","DESC")->limit(500)->get();
         return view('report.index',[
             'reports' => $reports
         ]);
     }
+    public function showAll($folder="ongoing"){
 
+        $reports = Report::with('images')->where('folder',"ongoing")->orderBy("created_at","DESC")->get();
+        return view('report.index',[
+            'reports' => $reports
+        ]);
+    }
 
     public function create(){
       $topics = Topic::latest()->get();
