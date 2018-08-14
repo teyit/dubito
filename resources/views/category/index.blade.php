@@ -31,7 +31,7 @@
                                 <td>{{$category->updated_at}}</td>
                                 <td class="actions">
                                     <div class="btn-group btn-space">
-                                        <button type="button" class="btn btn-default">View Reports</button>
+                                        <button type="button" class="btn btn-default" onClick="window.location.href = '/category/{{$category->title}}';">View Cases</button>
                                         <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle" aria-expanded="false"><span class="mdi mdi-chevron-down"></span><span class="sr-only">Toggle Dropdown</span>&nbsp;</button>
                                         <ul role="menu" class="dropdown-menu">
                                             <li><a class="category-edit-btn" href="javascript:;" data-id="{{$category->id}}" >Edit</a></li>

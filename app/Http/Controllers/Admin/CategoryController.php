@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
+use App\Model\Tag;
+use App\Model\Topic;
+use App\Model\Cases;
+use App\User;
 use App\Http\Middleware\CheckRole;
 use App\Model\Category;
 use Illuminate\Http\Request;
@@ -57,4 +60,24 @@ class CategoryController extends Controller
         return response()->json('true',200);
 
     }
+
+    public function feed($category='KHK'){
+        
+        /*
+                if( !in_array($folder,['cold_cases','news_feed','archive'])){
+                    return redirect()->route("admin.dashboard");
+                }*/
+        
+                $topics = Topic::latest()->get();
+                $tags = Tag::latest()->get();
+                $cases = Cases::whereRaw('category_id IN (SELECT id from categories where title="'. $category .'")')->get();
+                $categories = Category::latest()->get();
+                $statusLabels = [];
+        
+                foreach(Cases::first()->statusLabels as $key => $val){
+                    $statusLabels[] = ['value' => $key,'text' => $val];
+                }
+                $users = User::select('id as value','name as text')->latest()->get();
+                return view("case.index",compact("cases",'topics','categories','statusLabels','users','tags'));
+            }
 }
