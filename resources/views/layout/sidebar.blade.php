@@ -40,7 +40,11 @@
 
                         <li class="{{request()->segment(1) == 'logs' ? "active" : ""}}"><a  href="{{url("/logs")}}"><i class="icon mdi mdi-storage"></i> Logs</a></li>
                         -->
+                        <li class="{{request()->segment(1) == 'mailList' ? "active" : ""}}"><a  href="{{url("/mailList")}}"><i class="icon mdi mdi-email"></i><span>Mail List</span></a></li>
+
                         <li class="{{request()->segment(1) == 'users' ? "active" : ""}}"><a  href="{{url("/users")}}"><i class="icon mdi mdi-account-add"></i><span>Users</span></a></li>
+                    
+
 
                     @endif
 

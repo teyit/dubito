@@ -20,12 +20,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Cases;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\teyitInProgress;
+use Notification;
+use App\Notifications\caseAssigned;
+use App\Model\LinkMailList;
 
 class CaseController extends Controller
 {
 
 
     protected $redirect = 'cases';
+
     public function press_review($case_id,Request $request){
         if(!$request->has(['id','status','url'])){
             return '0';
@@ -275,6 +281,12 @@ class CaseController extends Controller
         $case->status = $value;
         $case->save();
 
+        if($value == "in_progress"){
+            $caseTitle= $case->title;
+            //$emails = array("cancitoglu@gmail.com", "scan.citoglu@tedu.edu.tr");
+            $emails = LinkMailList::all("email");
+            Mail::bcc($emails)->send(new teyitInProgress($caseTitle));
+        }
         return response()->json(true,200);
 
     }

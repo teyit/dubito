@@ -55,7 +55,8 @@ Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
     Route::post('assignRoleToUser/{user_id}',['as'=>'user.role.assign','uses'=>'UserController@assignRoleToUser']);
     Route::post('assignStatusToUser/{user_id}',['as'=>'user.status.assign','uses'=>'UserController@assignStatusToUser']);
 
-
+//
+Route::resource("mailList","MailListController");
 
     //Reports
     Route::get('report/{folder}',['as'=>'report.folder','uses'=>'ReportController@index']);
