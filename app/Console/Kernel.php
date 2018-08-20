@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\TwitterListener::class
+        Commands\TwitterDmChecker::class,
+        Commands\TwitterMentionChecker::class
     ];
 
     /**
@@ -24,8 +25,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('listen:twitterDM')
+                  ->everyMinute();
+        $schedule->command('listen:twitterMention')
+                  ->everyMinute();
     }
 
     /**
