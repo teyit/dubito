@@ -69,7 +69,11 @@ class TwitterDmChecker extends Command
         {   
     
             $dm = $event ->{'message_create'};
-            $message = Message::firstOrNew(["source"=>'twitter:message',"external_message_id"=>$event->{'id'}]);
+            $message = Message::where(["source"=>'twitter:message',"external_message_id"=>$event->{'id'}]);
+            if ($message) {
+                return;
+            }
+            $message = new Message();
             $message->source = 'twitter:message';
             $message->sender_id = $dm->{"sender_id"};
             $message->recipient_id = $dm->{"target"}->{'recipient_id'};

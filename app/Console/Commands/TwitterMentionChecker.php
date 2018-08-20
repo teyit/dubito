@@ -63,8 +63,11 @@ class TwitterMentionChecker extends Command
     }
         private function addMention($event)
     {
-
-        $message = Message::firstOrNew(["source"=>'twitter:mention',"external_message_id"=>$event->{'id'}]);
+        $message = Message::where(["source"=>'twitter:mention',"external_message_id"=>$event->{'id'}]);
+        if ($message) {
+            return;
+        }
+        $message = new Message();
         $message->source = 'twitter:mention';
         $message->sender_id = $event->{'user'}->{'id'};
         $message->recipient_id = $event->{'entities'}->{'user_mentions'}[0] ->{'id'};
