@@ -44,6 +44,7 @@ class TwitterDmChecker extends Command
             $response = Twitter::get("direct_messages/events/list.json",[
                 'count' => "50", 
             ]);
+            
             $events = ($response->{"events"});
             $receivedOnly=[];
             $newUsers = [];
@@ -69,10 +70,10 @@ class TwitterDmChecker extends Command
         {   
     
             $dm = $event ->{'message_create'};
-            $message = Message::where(["source"=>'twitter:message',"external_message_id"=>$event->{'id'}]);
-            if ($message) {
+             $message = Message::where(["source"=>'twitter:message',"external_message_id"=>$event->{'id'}])->first();
+            if ($message !== null) {
                 return;
-            }
+            } 
             $message = new Message();
             $message->source = 'twitter:message';
             $message->sender_id = $dm->{"sender_id"};
