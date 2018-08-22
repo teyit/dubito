@@ -172,8 +172,8 @@ class ServiceController extends Controller
                                     $message->save();
                                 }
                             }
-                            if(isset($a['URL'])){
-                                $message->text .= "  " . $a['URL'];  
+                            if(isset($a['url'])){
+                                $message->text .= "  " . $a['url'];  
                                 $message->save();
                             }
                         }
