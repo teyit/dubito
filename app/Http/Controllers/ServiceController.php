@@ -168,7 +168,11 @@ class ServiceController extends Controller
 			            }else{
                              if (!isset($m['message']['text'])) {
                                 if(isset($a['title'])){
-                                    $message->text = $a['title'];
+                                    if(isset($a['URL'])){
+                                        $message->text = $a['title'] . "  ". $a['URL'];
+                                    }else{
+                                        $message->text = $a['title'];
+                                    }
                                     $message->save();
                                 }
                             }
