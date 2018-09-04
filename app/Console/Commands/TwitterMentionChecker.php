@@ -52,8 +52,11 @@ class TwitterMentionChecker extends Command
                         if( $event->{'in_reply_to_screen_name'} == null || ($event->{'in_reply_to_screen_name'} === 'teyitorg')){
                         $this -> addMention($event);
                         }
-                    }
+                    }else 
                     if($mention ->{"screen_name"} !== 'teyitorg' && $event->{'in_reply_to_screen_name'} == "teyitorg"){ //teyit mentioned but reply.
+                        $this->addMention($event);
+                    } else
+                    if($mention ->{"screen_name"} !== 'teyitorg'){ //teyit mentioned but reply.
                         $this->addMention($event);
                     }
             }
