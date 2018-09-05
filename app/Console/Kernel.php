@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('listen:twitterDM')
-                  ->everyMinute();
+                  ->everyTenMinutes();
         $schedule->command('listen:twitterMention')
-                  ->everyMinute();
+                  ->everyTenMinutes();
     }
 
     /**
