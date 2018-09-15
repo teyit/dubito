@@ -47,7 +47,9 @@
                 @if(!$message->files->isEmpty())
                     <p class="msg">
                         @foreach($message->files as $file)
-                            @if($file->file_type == 'image')
+                            @if($file->file_type == 'image' && strpos($file->file_url, 'ton.twitter.com') !== false)
+                                <a class="fancybox"   href="http://api.dubito.cancit.com/dmimage?url={{$file->file_url}}"> <img data-src="http://api.dubito.cancit.com/dmimage?url={{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="http://api.dubito.cancit.com/dmimage?url={{$file->file_url}}" /></a>
+                            @elseif($file->file_type == 'image')
                                 <a class="fancybox"   href="{{$file->file_url}}"> <img data-src="{{$file->file_url}}" class="img-rounded xs-mr-10 img-thumbnail" style="width:150px;" src="{{$file->file_url}}" /></a>
                             @endif
                             @if($file->file_type == 'video')
