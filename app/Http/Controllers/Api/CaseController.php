@@ -46,13 +46,17 @@ class CaseController extends Controller
         
         $case =  Cases::create($data);
 
-        $id = ($case->id) % 3;
+        $id = ($case->id) % 5;
         if($id == 0){
             $case->user_id = 31;
         }else  if($id == 1){
             $case->user_id = 29;
         }else  if($id == 2){
             $case->user_id = 40;
+        }else  if($id == 3){
+            $case->user_id = 47;
+        }else  if($id == 4){
+            $case->user_id = 48;
         }
        
         $case->save();

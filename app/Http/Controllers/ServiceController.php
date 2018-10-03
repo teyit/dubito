@@ -19,7 +19,7 @@ class ServiceController extends Controller
         $fb = new Facebook\Facebook([
             'app_id' => env('FB_APP_ID', null),
             'app_secret' => env('FB_APP_SECRET', null),
-            'default_graph_version' => 'v2.2',
+            'default_graph_version' => 'v2.8',
         ]);
 
         $page_access_token = env('FB_PAGE_ACCESS_TOKEN', null);
@@ -29,9 +29,11 @@ class ServiceController extends Controller
             $response = $fb->get('/' . $user_id . '?fields=first_name,last_name,profile_pic', $page_access_token);
         } catch(Facebook\Exceptions\FacebookResponseException $e) {
             echo 'Graph returned an error: ' . $e->getMessage();
+             \Log::info('Graph returned an error: ' . $e->getMessage());
             exit;
         } catch(Facebook\Exceptions\FacebookSDKException $e) {
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            Log::info('Facebook SDK returned an error: ' . $e->getMessage());
             exit;
         }
 
