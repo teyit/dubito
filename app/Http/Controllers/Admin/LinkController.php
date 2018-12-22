@@ -19,7 +19,7 @@ class LinkController extends Controller
 
         curl_setopt_array($ch, array(
             CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => 'http://teyit.link/add?request_url='.$url,
+            CURLOPT_URL => 'http://old.teyit.link/add?request_url='.$url,
             CURLOPT_USERAGENT => 'Codular Sample cURL Request'
         ));
 
