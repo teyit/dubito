@@ -80,7 +80,7 @@
             </div>
 
             <div class="row">
-
+... <!-- {{ config('app.env')}} -->
             </div>
         </div>
 @endsection
