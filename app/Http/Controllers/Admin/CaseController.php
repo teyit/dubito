@@ -452,4 +452,19 @@ class CaseController extends Controller
         return view("publicCase.index",compact("cases",'topics','categories','statusLabels','users','tags'));
     }
 
+
+    public function evidences($case_id) {
+        $case = Cases::whereId($case_id)->first();
+        if (!$case) {
+            return response()->json(['id' => $case_id, 'result' => 'Not found!'], 404);
+        }
+
+        $evidences = [];
+        foreach ($case->evidences()->get() as $evidence) {
+            $evidences[] = $evidence->toArray();
+        }
+
+        return response()->json(['evidences' => $evidences]);
+    }
+
 }

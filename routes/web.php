@@ -28,6 +28,7 @@ Route::get("preview",function(){
 });
 
 Route::get('public/{news_feed}',['as'=>'case.public','uses'=>'Admin\CaseController@feed']);
+Route::get('public/evidences/{case_id}',['as'=>'case.public','uses'=>'Admin\CaseController@evidences']);
 
 Route::group(['namespace' => 'Admin','middleware'=>['auth']], function () {
 
