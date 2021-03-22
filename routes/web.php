@@ -27,6 +27,7 @@ Route::get("preview",function(){
 	dd($tags);
 });
 
+Route::get('public/evidences',['as'=>'case.public','uses'=>'Admin\CaseController@evidences_list']);
 Route::get('public/{news_feed}',['as'=>'case.public','uses'=>'Admin\CaseController@feed']);
 Route::get('public/evidences/{case_id}',['as'=>'case.public','uses'=>'Admin\CaseController@evidences']);
 

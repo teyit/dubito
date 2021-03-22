@@ -464,7 +464,23 @@ class CaseController extends Controller
             $evidences[] = $evidence->toArray();
         }
 
-        return response()->json(['evidences' => $evidences]);
+        $links = [];
+        foreach ($case->links()->get() as $link) {
+            $links[] = $link->toArray();
+        }
+
+        return response()->json(['evidences' => $evidences, 'links' => $links]);
+    }
+
+
+    public function evidences_list() {
+        $cases = Cases::orderBy('id', 'desc')->take(20)->get();
+        if (!$cases) {
+            return response()->json(['id' => $case_id, 'result' => 'Not found!'], 404);
+        }
+        
+
+        return response()->json(['cases' => $cases]);
     }
 
 }
